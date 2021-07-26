@@ -5,11 +5,12 @@ jest.mock( 'axios' );
 beforeEach( () => {
     jest.resetModules();
     jest.clearAllMocks();
-    setup();
 } );
 
 it( 'fail sign up', async() => {
     expect.assertions( 5 );
+
+    const DI = setup();
 
     axios
         .useDefaultMocks()
@@ -21,7 +22,7 @@ it( 'fail sign up', async() => {
 
     history.pushState( {}, '', 'http://client.example.com/signup/' );
 
-    await app.start();
+    await app.start( DI );
 
     const formData = {
         name: '',

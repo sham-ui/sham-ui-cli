@@ -1,10 +1,11 @@
-import { inject } from 'sham-ui-macro/babel.macro';
+import { inject } from 'sham-ui-macro/inject.macro';
 import axios from 'axios';
 
 export class API {
     @inject session;
 
-    constructor( { baseURL, onUnauthorized } ) {
+    constructor( DI, { baseURL, onUnauthorized } ) {
+        this.DI = DI;
         this.axios = axios.create( {
             baseURL,
             withCredentials: true

@@ -1,5 +1,5 @@
 $cube-background-color: #1D2939;
-@import "~sham-ui-cube-animation/style.scss";
+@import "../../../node_modules/sham-ui-cube-animation/style";
 
 .page-loading-indicator {
   display: flex;

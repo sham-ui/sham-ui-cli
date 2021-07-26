@@ -1,14 +1,12 @@
-import { DI } from 'sham-ui';
+import { createDI } from 'sham-ui';
 import * as directives from 'sham-ui-directives';
-import hrefto from 'sham-ui-router/href-to';
+import hrefto from 'sham-ui-router/lib/href-to';
 import RoutesLoginPage  from '../../../../../src/components/routes/login/page.sfc';
 import renderer, { compile } from 'sham-ui-test-helpers';
 
-afterEach( () => {
-    DI.bind( 'router', null );
-} );
 
 it( 'renders correctly', () => {
+    const DI = createDI();
     DI.bind( 'title', {
         change() {}
     } );
@@ -21,6 +19,7 @@ it( 'renders correctly', () => {
     } );
 
     const meta = renderer( RoutesLoginPage, {
+        DI,
         directives: {
             ...directives,
             hrefto
@@ -30,6 +29,7 @@ it( 'renders correctly', () => {
 } );
 
 it( 'display errors', async() => {
+    const DI = createDI();
     DI.bind( 'title', {
         change() {}
     } );
@@ -47,6 +47,7 @@ it( 'display errors', async() => {
     } );
 
     const meta = renderer( RoutesLoginPage, {
+        DI,
         directives: {
             ...directives,
             hrefto

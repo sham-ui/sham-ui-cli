@@ -5,7 +5,6 @@ jest.mock( 'axios' );
 beforeEach( () => {
     jest.resetModules();
     jest.clearAllMocks();
-    setup();
 } );
 
 it( 'authenticated member can\'t visit login page', async() => {
@@ -13,8 +12,10 @@ it( 'authenticated member can\'t visit login page', async() => {
 
     axios.useDefaultMocks();
 
+    const DI = setup();
+
     history.pushState( {}, '', 'http://client.example.com/login/' );
-    await app.start();
+    await app.start( DI );
     app.checkBody();
     expect( window.location.href ).toBe( 'http://client.example.com/' );
 } );

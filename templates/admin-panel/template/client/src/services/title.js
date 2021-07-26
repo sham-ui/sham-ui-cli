@@ -1,8 +1,5 @@
-import { DI } from 'sham-ui';
-
-
 export default class Title {
-    constructor() {
+    constructor( DI ) {
         DI.bind( 'title', this );
     }
 
@@ -11,6 +8,6 @@ export default class Title {
      * @param {string} newTitle
      */
     change( newTitle ) {
-        document.title = `{{logoText}} | ${newTitle}`;
+        document.title = `PA | ${newTitle}`;
     }
 }

@@ -21,14 +21,14 @@
                     <td class="actions">
                         <button
                             data-test-update-button=\{{member.ID}}
-                            :onclick=\{{this.selectMember.bind( this, member )}}
+                            :onclick=\{{this$.selectMember.bind( this, member )}}
                         >
                             Edit
                         </button>
                         <button
                             data-test-delete-button=\{{member.ID}}
                             class="btn-danger"
-                            :onclick=\{{this.confirmDelete.bind( this, member )}}
+                            :onclick=\{{this$.confirmDelete.bind( this, member )}}
                         >
                             Delete
                         </button>
@@ -43,62 +43,59 @@
             title="Delete member"
             text=\{{"Are you sure you want to delete member with email \"" + member.Email + "\"?" }}
             isDanger=\{{true}}
-            onOk=\{{::this.deleteMember}}
-            onClose=\{{::this._closeDeleteModal}}
+            onOk=\{{this$.deleteMember}}
+            onClose=\{{this$._closeDeleteModal}}
         />
     {% endif %}
 </template>
 <script>
-    import { mergeWithTemplate, inject, options } from 'sham-ui-macro/babel.macro';
+    function MembersTable( options, update ) {
+        const showErrors = $();
+        const refresh = $();
+        const onSelectMember = $();
+        const deleteModalVisible = $();
+        const member = $();
 
-    @mergeWithTemplate
-    class MembersTable extends Template {
+        const state = options( {
+            [ $.members ]: [],
+            [ showErrors ]() {},
+            [ refresh ]() {},
+            [ onSelectMember ]() {},
+            [ deleteModalVisible ]: false
+        } );
 
-        /** @type Store */
-        @inject store;
+        this$.selectMember = member => {
+            state[ showErrors ]( [] );
+            state[ onSelectMember ]( member );
+        };
 
-        @options members = [];
-        @options showErrors() {}
-        @options refresh() {}
-        @options onSelectMember() {}
-
-        @options deleteModalVisible = false;
-
-        selectMember( member ) {
-            this.options.showErrors( [] );
-            this.options.onSelectMember( member );
-        }
-
-        confirmDelete( member ) {
-            this.options.showErrors( [] );
-            this.update( {
-                member,
-                deleteModalVisible: true
+        this$.confirmDelete = selectedMember => {
+            state[ showErrors ]( [] );
+            update( {
+                [ member ]: selectedMember,
+                [ deleteModalVisible ]: true
             } );
-        }
+        };
 
-        _closeDeleteModal() {
-            this.update( {
-                member: null,
-                deleteModalVisible: false
-            } );
-        }
+        const _closeDeleteModal = $();
+        this[ _closeDeleteModal ] = () => update( {
+            [ member ]: null,
+            [ deleteModalVisible ]: false
+        } );
 
-        deleteMember() {
-            this.store.api.request( {
-                url: `admin/members/${this.options.member.ID}`,
+        this$.deleteMember = () => {
+            this.DI.resolve( 'store' ).api.request( {
+                url: `admin/members/${state[ member ].ID}`,
                 method: 'delete'
             } ).then(
-                () => this.options.refresh(),
-                ::this._deleteMemberFail
+                state[ refresh ],
+                ( { Messages = [ 'Fail delete member' ] } ) => {
+                    state[ showErrors ]( Messages );
+                    this[ _closeDeleteModal ]();
+                }
             );
-        }
-
-        _deleteMemberFail( { Messages = [ 'Fail delete member' ] } ) {
-            this.options.showErrors( Messages );
-            this._closeDeleteModal();
-        }
+        };
     }
 
-    export default MembersTable;
+    export default Component( Template, MembersTable );
 </script>

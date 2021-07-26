@@ -5,7 +5,6 @@ jest.mock( 'axios' );
 beforeEach( () => {
     jest.resetModules();
     jest.clearAllMocks();
-    setup();
     window.matchMedia = jest.fn().mockImplementation(
         () => ( {
             addListener: jest.fn(),
@@ -26,7 +25,10 @@ it( 'logout', async() => {
         .use( 'post', '/logout', '' );
 
     axios.useDefaultMocks();
-    await app.start();
+
+    const DI = setup();
+
+    await app.start( DI );
 
     axios.use( 'get', '/validsession', {}, 401 );
     app.click( '.icon-logout' );

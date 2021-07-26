@@ -5,16 +5,16 @@ jest.mock( 'axios' );
 beforeEach( () => {
     jest.resetModules();
     jest.clearAllMocks();
-    setup();
 } );
 
 it( 'fail edit password', async() => {
     expect.assertions( 1 );
 
     axios.useDefaultMocks();
+    const DI = setup();
 
     history.pushState( {}, '', 'http://client.example.com/settings/' );
-    await app.start();
+    await app.start( DI );
     app.click( '.panel.settings p:nth-of-type(3) .icon-pencil' );
 
     const formData = {
@@ -32,6 +32,7 @@ it( 'fail edit password', async() => {
     await app.form.submit();
 
     app.click( '[data-test-modal] [data-test-ok-button]' );
+
     await app.waitRendering();
 
     app.checkBody();

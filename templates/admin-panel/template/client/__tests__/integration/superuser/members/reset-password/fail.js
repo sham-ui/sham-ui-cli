@@ -5,12 +5,12 @@ jest.mock( 'axios' );
 beforeEach( () => {
     jest.resetModules();
     jest.clearAllMocks();
-    setup();
 } );
 
 it( 'fail reset member password', async() => {
     expect.assertions( 1 );
 
+    const DI = setup();
     axios
         .useDefaultMocks()
         .use( 'get', '/validsession', {
@@ -33,7 +33,7 @@ it( 'fail reset member password', async() => {
         }, 400 );
 
     history.pushState( {}, '', 'http://client.example.com/members' );
-    await app.start();
+    await app.start( DI );
 
     app.click( '[data-test-update-button="2"]' );
     await app.waitRendering();

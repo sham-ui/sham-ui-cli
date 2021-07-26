@@ -2,7 +2,6 @@
 
 exports[`display errors 1`] = `
 Object {
-  "Constructor": "RoutesSettingsFormName",
   "Options": Object {
     "ID": "component",
     "directives": Object {
@@ -17,39 +16,38 @@ Object {
       "onsubmit": [Function],
       "ref": [Function],
     },
-    "onUpdateSuccess": [Function],
+    "onUpdateSuccess": "",
     "value": "",
   },
   "html": "
 <form class=\\"form-layout\\">
-  <!--header-->
+  <!--0-->
   <ul class=\\"errors-panel\\">
     <li>Update member name fail</li>
   </ul>
-  <!--if-->
-  <!--ErrorsPanel-->
+  <!--0-->
+  <!--1-->
   <div class=\\"form-group\\">
     <label>Name:</label>
     <input name=\\"name\\" type=\\"text\\" autofocus=\\"\\">
   </div>
-  <!--default-->
-  <!--default-->
+  <!--0-->
+  <!--2-->
   <button type=\\"submit\\">
-    <!--if-->Update
-    <!--submit-->
+    <!--3-->Update
+    <!--4-->
   </button>
-  <!--footer-->
+  <!--5-->
 </form>
-<!--FormContainer-->
-<!--if-->
-<!--FormWithConfirmModal-->
+<!--0-->
+<!--1-->
+<!--0-->
 ",
 }
 `;
 
 exports[`renders correctly 1`] = `
 Object {
-  "Constructor": "RoutesSettingsFormName",
   "Options": Object {
     "ID": "component",
     "directives": Object {
@@ -64,29 +62,29 @@ Object {
       "onsubmit": [Function],
       "ref": [Function],
     },
-    "onUpdateSuccess": [Function],
+    "onUpdateSuccess": "",
     "value": "",
   },
   "html": "
 <form class=\\"form-layout\\">
-  <!--header-->
-  <!--if-->
-  <!--ErrorsPanel-->
+  <!--0-->
+  <!--0-->
+  <!--1-->
   <div class=\\"form-group\\">
     <label>Name:</label>
     <input name=\\"name\\" type=\\"text\\" autofocus=\\"\\">
   </div>
-  <!--default-->
-  <!--default-->
+  <!--0-->
+  <!--2-->
   <button type=\\"submit\\">
-    <!--if-->Update
-    <!--submit-->
+    <!--3-->Update
+    <!--4-->
   </button>
-  <!--footer-->
+  <!--5-->
 </form>
-<!--FormContainer-->
-<!--if-->
-<!--FormWithConfirmModal-->
+<!--0-->
+<!--1-->
+<!--0-->
 ",
 }
 `;

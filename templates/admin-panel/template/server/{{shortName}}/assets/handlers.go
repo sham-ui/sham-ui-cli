@@ -1,13 +1,19 @@
 package assets
 
 import (
+	"embed"
+	"errors"
 	"github.com/NYTimes/gziphandler"
 	log "github.com/sirupsen/logrus"
+	"io/fs"
 	"net/http"
 	"{{shortName}}/core/sessions"
 	"path/filepath"
 	"strings"
 )
+
+//go:embed files/*
+var Assets embed.FS
 
 type Handler struct {
 	sessionStore *sessions.Store
@@ -32,23 +38,33 @@ func (h Handler) ServeHTTP(w http.ResponseWriter, r *http.Request) {
 		path = path[1:]
 	}
 
+	fsys, err := fs.Sub(Assets, "files")
+	if nil != err {
+		http.Error(w, err.Error(), http.StatusBadRequest)
+		return
+	}
+
 	// check whether a file exists at the given path
 	cannonicalName := strings.Replace(path, "\\", "/", -1)
-	if _, ok := _bindata[cannonicalName]; !ok {
+	file, err := fsys.Open(cannonicalName)
+	if nil != file {
+		defer file.Close()
+	}
+	if errors.Is(err, fs.ErrNotExist) {
 
 		// file does not exist, serve index.html
-		w.Header().Set("Content-Type", "text/html")
-		f, err := Asset("index.html")
+		w.Header().Set("Content-Type", "text/html; charset=UTF-8")
+		content, err := Assets.ReadFile("files/index.html")
 		if nil != err {
 			log.Errorf("can't get asset index.html: %s", err)
 			http.Error(w, err.Error(), http.StatusInternalServerError)
 			return
 		}
-		_, err = w.Write(f)
+		_, err = w.Write(content)
 		if nil != err {
 			log.Errorf("can't write index.html asset: %s", err)
 		}
-	} else if strings.HasPrefix(cannonicalName, "dist/su_") {
+	} else if strings.HasPrefix(cannonicalName, "su_") {
 		session, err := h.sessionStore.GetSession(r)
 		if nil != err {
 			log.Errorf("can't get session: %s", err)
@@ -58,14 +74,14 @@ func (h Handler) ServeHTTP(w http.ResponseWriter, r *http.Request) {
 		if nil == session {
 			http.Error(w, "Unauthorized", http.StatusUnauthorized)
 		} else if session.IsSuperuser {
-			http.FileServer(AssetFile()).ServeHTTP(w, r)
+			http.FileServer(http.FS(fsys)).ServeHTTP(w, r)
 		} else {
 			http.Error(w, "Forbidden", http.StatusForbidden)
 		}
 	} else {
 
 		// otherwise, use http.FileServer to serve the static dir
-		http.FileServer(AssetFile()).ServeHTTP(w, r)
+		http.FileServer(http.FS(fsys)).ServeHTTP(w, r)
 	}
 }
 

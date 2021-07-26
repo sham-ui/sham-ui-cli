@@ -1,0 +1,27 @@
+<template>
+    {% import Page from '{{srcComponentRelativePath}}/Page.sfc' %}
+
+    <Page>
+        {% block 'header' %}
+            \{{pageTitle}}
+        {% endblock %}
+
+        {% block 'body' %}
+
+        {% endblock %}
+    </Page>
+</template>
+
+<script>
+    function {{classifiedName}}( options, update, didMount ) {
+        const pageTitle = $();
+
+        const state = options( {
+            [ pageTitle ]: '{{title}}'
+        } );
+
+        didMount( () => this.DI.resolve( 'title' ).change( state[ pageTitle ] ) );
+    }
+
+    export default Component( Template, {{classifiedName}} );
+</script>

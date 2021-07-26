@@ -5,18 +5,18 @@ jest.mock( 'axios' );
 beforeEach( () => {
     jest.resetModules();
     jest.clearAllMocks();
-    setup();
 } );
 
 it( 'success edit name', async() => {
     expect.assertions( 6 );
 
     axios.useDefaultMocks();
+    const DI = setup();
 
     history.pushState( {}, '', 'http://client.example.com/settings/' );
     await app.start();
     app.click( '.panel.settings p:nth-of-type(1) .icon-pencil' );
-    app.checkBody();
+    app.checkBody( DI );
 
     const formData = {
         newName: 'Johny Smithy'
@@ -34,9 +34,11 @@ it( 'success edit name', async() => {
     app.form.fill( 'name', formData.newName );
     await app.form.submit();
 
+    await app.waitRendering();
     app.checkBody();
 
     app.click( '[data-test-modal] [data-test-ok-button]' );
+
     await app.waitRendering();
 
     expect( axios.mocks.put ).toHaveBeenCalledTimes( 1 );

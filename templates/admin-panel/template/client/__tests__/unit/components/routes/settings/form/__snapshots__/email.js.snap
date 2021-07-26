@@ -2,7 +2,6 @@
 
 exports[`display errors 1`] = `
 Object {
-  "Constructor": "RoutesSettingsFormEmail",
   "Options": Object {
     "ID": "component",
     "directives": Object {
@@ -22,12 +21,12 @@ Object {
   },
   "html": "
 <form class=\\"form-layout\\">
-  <!--header-->
+  <!--0-->
   <ul class=\\"errors-panel\\">
     <li>Update email fail</li>
   </ul>
-  <!--if-->
-  <!--ErrorsPanel-->
+  <!--0-->
+  <!--1-->
   <div class=\\"form-group\\">
     <label>Enter your email:</label>
     <input name=\\"email1\\" type=\\"text\\" autofocus=\\"\\">
@@ -36,24 +35,23 @@ Object {
     <label>Confirm your email:</label>
     <input name=\\"email2\\" type=\\"text\\">
   </div>
-  <!--default-->
-  <!--default-->
+  <!--0-->
+  <!--2-->
   <button type=\\"submit\\">
-    <!--if-->Update
-    <!--submit-->
+    <!--3-->Update
+    <!--4-->
   </button>
-  <!--footer-->
+  <!--5-->
 </form>
-<!--FormContainer-->
-<!--if-->
-<!--FormWithConfirmModal-->
+<!--0-->
+<!--1-->
+<!--0-->
 ",
 }
 `;
 
 exports[`renders correctly 1`] = `
 Object {
-  "Constructor": "RoutesSettingsFormEmail",
   "Options": Object {
     "ID": "component",
     "directives": Object {
@@ -73,9 +71,9 @@ Object {
   },
   "html": "
 <form class=\\"form-layout\\">
-  <!--header-->
-  <!--if-->
-  <!--ErrorsPanel-->
+  <!--0-->
+  <!--0-->
+  <!--1-->
   <div class=\\"form-group\\">
     <label>Enter your email:</label>
     <input name=\\"email1\\" type=\\"text\\" autofocus=\\"\\">
@@ -84,17 +82,17 @@ Object {
     <label>Confirm your email:</label>
     <input name=\\"email2\\" type=\\"text\\">
   </div>
-  <!--default-->
-  <!--default-->
+  <!--0-->
+  <!--2-->
   <button type=\\"submit\\">
-    <!--if-->Update
-    <!--submit-->
+    <!--3-->Update
+    <!--4-->
   </button>
-  <!--footer-->
+  <!--5-->
 </form>
-<!--FormContainer-->
-<!--if-->
-<!--FormWithConfirmModal-->
+<!--0-->
+<!--1-->
+<!--0-->
 ",
 }
 `;

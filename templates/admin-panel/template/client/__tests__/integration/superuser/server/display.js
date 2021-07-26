@@ -5,12 +5,12 @@ jest.mock( 'axios' );
 beforeEach( () => {
     jest.resetModules();
     jest.clearAllMocks();
-    setup();
 } );
 
 it( 'display page', async() => {
     expect.assertions( 2 );
 
+    const DI = setup();
     axios
         .useDefaultMocks()
         .use( 'get', '/validsession', {
@@ -34,17 +34,15 @@ it( 'display page', async() => {
             },
             'Files': [ {
                 'Name': 'dist/bundle.css',
-                'Size': 20035,
-                'ModTime': 'Thu, 29 Oct 2020 19:30:25 +0100'
+                'Size': 20035
             }, {
                 'Name': 'dist/bundle.js',
-                'Size': 136980,
-                'ModTime': 'Thu, 29 Oct 2020 19:30:25 +0100'
+                'Size': 136980
             } ]
         } );
 
     history.pushState( {}, '', 'http://client.example.com/server' );
-    await app.start();
+    await app.start( DI );
     app.checkBody();
     expect( window.location.href ).toBe( 'http://client.example.com/server' );
 } );

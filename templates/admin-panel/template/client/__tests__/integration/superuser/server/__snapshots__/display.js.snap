@@ -23,7 +23,7 @@ exports[`display page 1`] = `
           <i class=\\"icon-server menu-item-icon\\"></i><span class=\\"menu-item-label\\">Server information</span>
         </div>
       </a>
-      <!--if-->
+      <!--0-->
     </div>
   </div>
   <div class=\\"header\\">
@@ -56,12 +56,12 @@ exports[`display page 1`] = `
   </div>
   <div class=\\"mainpanel\\">
     <h4 class=\\"page-header\\"> Server information
-      <!--header-->
+      <!--0-->
     </h4>
     <div class=\\"page-body\\">
       <div class=\\"server-info\\">
-        <!--if-->
-        <!--ErrorsPanel-->
+        <!--0-->
+        <!--0-->
         <div class=\\"panel runtime\\">
           <h6>Runtime info</h6>
           <table>
@@ -117,7 +117,7 @@ exports[`display page 1`] = `
             </tbody>
           </table>
         </div>
-        <!--RuntimePanel-->
+        <!--1-->
         <div class=\\"panel files\\">
           <h6>Asset files</h6>
           <table>
@@ -125,34 +125,31 @@ exports[`display page 1`] = `
               <tr>
                 <th>File</th>
                 <th>Size</th>
-                <th>Modification time</th>
               </tr>
             </thead>
             <tbody>
               <tr>
                 <td>dist/bundle.css</td>
                 <td>20.0 kB</td>
-                <td>Thu, 29 Oct 2020 19:30:25 +0100</td>
               </tr>
               <tr>
                 <td>dist/bundle.js</td>
                 <td>137.0 kB</td>
-                <td>Thu, 29 Oct 2020 19:30:25 +0100</td>
               </tr>
             </tbody>
           </table>
         </div>
-        <!--AssetsPanel-->
+        <!--2-->
       </div>
-      <!--body-->
+      <!--1-->
     </div>
-    <!--if-->
-    <!--Page-->
-    <!--ActivePageContainer-->
+    <!--0-->
+    <!--0-->
+    <!--0-->
   </div>
 </div>
-<!--LayoutAuthenticated-->
-<!--if-->
-<!--Layout-->
-<!--if-->"
+<!--0-->
+<!--0-->
+<!--0-->
+<!--0-->"
 `;

@@ -1,5 +1,4 @@
-import { DI } from 'sham-ui';
-import { inject } from 'sham-ui-macro/babel.macro';
+import { inject } from 'sham-ui-macro/inject.macro';
 import { API } from './store/api';
 
 const VALID_SESSION_URL = '/validsession';
@@ -7,7 +6,8 @@ const VALID_SESSION_URL = '/validsession';
 export default class Store {
     @inject session;
 
-    constructor() {
+    constructor( DI ) {
+        this.DI = DI;
         DI.bind( 'store', this );
         this._setupAPI();
     }
@@ -16,7 +16,7 @@ export default class Store {
         const baseURL = PRODUCTION ?
             `${document.location.protocol}//${document.location.host}/api/` :
             'http://localhost:3001/api/';
-        this.api = new API( {
+        this.api = new API( this.DI, {
             baseURL,
             onUnauthorized: ::this._onAPIUnauthorized
         } );

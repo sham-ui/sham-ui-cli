@@ -19,7 +19,7 @@
                     <button
                         data-test-toggle-create-form
                         class="mg-b-30"
-                        :onclick=\{{::this._toggleCreateForm}}
+                        :onclick=\{{this$._toggleCreateForm}}
                     >
                         \{{
                             createFormVisible ?
@@ -29,7 +29,7 @@
                     </button>
                     {% if createFormVisible %}
                         <div class="panel mg-b-30 create-member">
-                            <MembersCreate onCreateSuccess=\{{::this._onCreateMember}} />
+                            <MembersCreate onCreateSuccess=\{{this$._onCreateMember}} />
                         </div>
                     {% endif %}
                 </div>
@@ -39,7 +39,7 @@
                         <div class="panel">
                             <Pagination
                                 dataLoaded=\{{dataLoaded}}
-                                goToPage=\{{::this.loadData}}
+                                goToPage=\{{this$.loadData}}
                                 currentPage=\{{page}}
                                 limit=\{{limit}}
                                 total=\{{total}}
@@ -47,9 +47,9 @@
                                 <MembersTable
                                     members=\{{members}}
                                     selectedMember=\{{selectedMember}}
-                                    onSelectMember=\{{::this._selectMember}}
-                                    showErrors=\{{::this._showErrors}}
-                                    refresh=\{{this.loadData.bind( this, page )}}
+                                    onSelectMember=\{{this$._selectMember}}
+                                    showErrors=\{{this$._showErrors}}
+                                    refresh=\{{this$.loadData.bind( this, page )}}
                                 />
                             </Pagination>
                         </div>
@@ -60,7 +60,7 @@
                             <div class="panel">
                                 <MembersDetail
                                     member=\{{selectedMember}}
-                                    onUpdateSuccess=\{{this.loadData.bind( this, page )}}
+                                    onUpdateSuccess=\{{this$.loadData.bind( this, page )}}
                                 />
                             </div>
                         </div>
@@ -72,94 +72,87 @@
 </template>
 
 <script>
-    import { mergeWithTemplate, inject, options } from 'sham-ui-macro/babel.macro';
+    function RoutesMembersPage( options, update, didMount ) {
+        const pageTitle = $();
+        const dataLoaded = $();
+        const errors = $();
+        const page = $();
+        const limit = $();
+        const total = $();
+        const members = $();
+        const createFormVisible = $();
+        const selectedMember = $();
 
-    @mergeWithTemplate
-    class RoutesMembersPage extends Template {
-        /** @type Store */
-        @inject store;
+        const state = options( {
+            [ pageTitle ]: 'Members',
+            [ dataLoaded ]: false,
+            [ errors ]: [],
+            [ page ]: 1,
+            [ limit ]: 50,
+            [ total ]: 0,
+            [ members ]: [],
+            [ createFormVisible ]: false,
+            [ selectedMember ]: null
+        } );
 
-        /** @type {Title} */
-        @inject title;
+        const loadData = $();
 
-        @options pageTitle = 'Members';
-        @options dataLoaded = false;
-        @options errors = [];
-        @options offset = 0;
-        @options limit = 50;
-        @options total = 0;
-        @options members = [];
+        didMount( () => {
+            this.DI.resolve( 'title' ).change( state[ pageTitle ] );
+            this[ loadData ]( 1 );
+        } );
 
-        @options createFormVisible = false;
-        @options selectedMember = null;
 
-        didMount() {
-            this.title.change( this.options.pageTitle );
-            this.loadData( 1 );
-        }
+        // Page=1 will result into offset 0, page=2 will result into
+        // offset 50 and so on
+        const offsetByPage = ( page, limit ) => ( page - 1 ) * limit;
 
-        offsetByPage( page, limit ) {
-
-            // Page=1 will result into offset 0, page=2 will result into
-            // offset 50 and so on
-            return ( page - 1 ) * limit;
-        }
-
-        loadData( page ) {
-            this.update( {
-                dataLoaded: false,
-                selectedMember: null
+        this[ loadData ] = currentPage => {
+            update( {
+                [ dataLoaded ]: false,
+                [ selectedMember ]: null
             } );
-            this.store.api.request( {
+            this.DI.resolve( 'store' ).api.request( {
                 url: 'admin/members',
                 params: {
-                    offset: this.offsetByPage( page, this.options.limit ),
-                    limit: this.options.limit
+                    offset: offsetByPage( currentPage, state[ limit ] ),
+                    limit: state[ limit ]
                 }
             } ).then(
-                data => this._loadDataSuccess( page, data ),
-                ::this._loadDataFail
+                data => update( {
+                    [ dataLoaded ]: true,
+                    [ errors ]: [],
+                    [ page ]: currentPage,
+                    [ members ]: data.members,
+                    [ limit ]: data.meta.limit,
+                    [ total ]: data.meta.total
+                } ),
+                ( { Messages = [ 'Fail load members list' ] } ) => update( {
+                    [ dataLoaded ]: true,
+                    [ errors ]: Messages
+                } )
             );
-        }
+        };
 
-        _loadDataSuccess( page, { members, meta } ) {
-            this.update( {
-                dataLoaded: true,
-                errors: [],
-                page,
-                members,
-                ...meta // is offset, limit & total
+        this$._toggleCreateForm = () => update( {
+            [ createFormVisible ]: !state[ createFormVisible ]
+        } );
+
+        this$._onCreateMember = () => {
+            update( {
+                [ createFormVisible ]: false
             } );
-        }
+            this[ loadData ]( state[ page ] );
+        };
 
-        _loadDataFail( { Messages = [ 'Fail load members list' ] } ) {
-            this.update( {
-                dataLoaded: true,
-                errors: Messages
-            } );
-        }
+        this$._showErrors = formErrors => update( {
+            [ errors ]: formErrors
+        } );
 
-        _toggleCreateForm() {
-            this.update( {
-                createFormVisible: !this.options.createFormVisible
-            } );
-        }
-
-        _onCreateMember() {
-            this.update( {
-                createFormVisible: false
-            } );
-            this.loadData( this.options.page );
-        }
-
-        _showErrors( errors ) {
-            this.update( { errors } );
-        }
-
-        _selectMember( selectedMember ) {
-            this.update( { selectedMember } );
-        }
+        this$._selectMember = member => update( {
+            [ selectedMember ]: member
+        } );
     }
 
-    export default RoutesMembersPage;
+    export default Component( Template, RoutesMembersPage );
 </script>

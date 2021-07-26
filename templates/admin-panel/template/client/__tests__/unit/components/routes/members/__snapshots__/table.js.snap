@@ -2,7 +2,6 @@
 
 exports[`renders correctly 1`] = `
 Object {
-  "Constructor": "MembersTable",
   "Options": Object {
     "ID": "component",
     "deleteModalVisible": false,
@@ -24,7 +23,7 @@ Object {
   </thead>
   <tbody></tbody>
 </table>
-<!--if-->
+<!--0-->
 ",
 }
 `;

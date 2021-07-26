@@ -5,18 +5,18 @@ jest.mock( 'axios' );
 beforeEach( () => {
     jest.resetModules();
     jest.clearAllMocks();
-    setup();
 } );
 
 it( 'save email without change', async() => {
     expect.assertions( 3 );
 
     axios.useDefaultMocks();
+    const DI = setup();
 
     history.pushState( {}, '', 'http://client.example.com/settings/' );
     await app.start();
     app.click( '.panel.settings p:nth-of-type(2) .icon-pencil' );
-    app.checkBody();
+    app.checkBody( DI );
 
     axios
         .use( 'put', '/members/email', {

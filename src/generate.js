@@ -9,21 +9,27 @@ const renameFiles = require( './metalsmith-plugins/rename-files' );
 
 const classify = require( './utils/classify' );
 
-function scaffold( name, src, dest, fileName, done ) {
+function scaffold( name, src, dest, done ) {
     const opts = getOptions( name, src );
     const metalsmith = Metalsmith( path.join( src, 'template' ) );
 
 
-    const inTestRelativePathChunks = [ '..', '..', 'src', 'components', `${fileName}` ];
+    const inTestRelativePathChunks = [ '..', '..', 'src', 'components', `${name}${opts.testImportExtension}` ];
+    const srcComponentRelativePath = [];
     name.split( '/' ).forEach(
-        () => inTestRelativePathChunks.unshift( '..' )
+        () => {
+            inTestRelativePathChunks.unshift( '..' );
+            srcComponentRelativePath.unshift( '..' );
+        }
     );
+    srcComponentRelativePath.pop();
 
     const data = Object.assign( metalsmith.metadata(), {
         inPlace: true,
         noEscape: true,
         classifiedName: classify( name ),
-        testRelativePath: inTestRelativePathChunks.join( '/' )
+        testRelativePath: inTestRelativePathChunks.join( '/' ),
+        srcComponentRelativePath: srcComponentRelativePath.join( '/' )
     } );
 
     metalsmith.use( promptQuestions( opts.prompts ) )

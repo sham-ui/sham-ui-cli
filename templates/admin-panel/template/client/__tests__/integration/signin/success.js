@@ -1,4 +1,3 @@
-import { DI } from 'sham-ui';
 import setup, { app } from '../helpers';
 import axios from 'axios';
 jest.mock( 'axios' );
@@ -6,11 +5,12 @@ jest.mock( 'axios' );
 beforeEach( () => {
     jest.resetModules();
     jest.clearAllMocks();
-    setup();
 } );
 
 it( 'success login', async() => {
     expect.assertions( 12 );
+
+    const DI = setup();
 
     axios
         .useDefaultMocks()
@@ -22,7 +22,7 @@ it( 'success login', async() => {
 
     history.pushState( {}, '', 'http://client.example.com/login/' );
 
-    await app.start();
+    await app.start( DI );
     app.checkBody();
 
     expect( axios.mocks.get ).toHaveBeenCalledTimes( 2 );

@@ -14,19 +14,15 @@
 </template>
 
 <script>
-    import { mergeWithTemplate, options, inject } from 'sham-ui-macro/babel.macro';
+    function RoutesHomePage( options, update, didMount ) {
+        const pageTitle = $();
 
-    @mergeWithTemplate
-    class RoutesHomePage extends Template {
-        /** @type Title */
-        @inject title;
+        const state = options( {
+            [ pageTitle ]: 'Home'
+        } );
 
-        @options pageTitle = 'Home';
-
-        didMount() {
-            this.title.change( this.options.pageTitle );
-        }
+        didMount( () => this.DI.resolve( 'title' ).change( state[ pageTitle ] ) );
     }
 
-    export default RoutesHomePage;
+    export default Component( Template, RoutesHomePage );
 </script>

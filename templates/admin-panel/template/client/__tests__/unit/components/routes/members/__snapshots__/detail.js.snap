@@ -2,7 +2,6 @@
 
 exports[`renders correctly 1`] = `
 Object {
-  "Constructor": "MembersDetail",
   "Options": Object {
     "ID": "component",
     "directives": Object {
@@ -23,9 +22,9 @@ Object {
   "html": "
 <h6>Member data</h6>
 <form class=\\"form-layout\\">
-  <!--header-->
-  <!--if-->
-  <!--ErrorsPanel-->
+  <!--0-->
+  <!--0-->
+  <!--1-->
   <div class=\\"form-group\\">
     <label>Name:</label>
     <input name=\\"name\\" type=\\"text\\" autofocus=\\"\\">
@@ -40,23 +39,23 @@ Object {
       <input name=\\"is_superuser\\" type=\\"checkbox\\" value=\\"undefined\\"><span>Is Superuser</span>
     </label>
   </div>
-  <!--default-->
-  <!--default-->
+  <!--0-->
+  <!--2-->
   <button type=\\"submit\\">
-    <!--if-->Update
-    <!--submit-->
+    <!--3-->Update
+    <!--4-->
   </button>
-  <!--footer-->
+  <!--5-->
 </form>
-<!--FormContainer-->
-<!--if-->
-<!--FormWithConfirmModal-->
-<!--UpdateDataForm-->
+<!--0-->
+<!--1-->
+<!--0-->
+<!--0-->
 <h6 class=\\"mg-t-30\\">Member password</h6>
 <form class=\\"form-layout\\">
-  <!--header-->
-  <!--if-->
-  <!--ErrorsPanel-->
+  <!--0-->
+  <!--0-->
+  <!--1-->
   <div class=\\"form-group\\">
     <label>Password:</label>
     <input name=\\"pass1\\" type=\\"password\\" autofocus=\\"\\">
@@ -65,18 +64,18 @@ Object {
     <label>Confirm password:</label>
     <input name=\\"pass2\\" type=\\"password\\">
   </div>
-  <!--default-->
-  <!--default-->
+  <!--0-->
+  <!--2-->
   <button type=\\"submit\\">
-    <!--if-->Update
-    <!--submit-->
+    <!--3-->Update
+    <!--4-->
   </button>
-  <!--footer-->
+  <!--5-->
 </form>
-<!--FormContainer-->
-<!--if-->
-<!--FormWithConfirmModal-->
-<!--UpdatePasswordForm-->
+<!--0-->
+<!--1-->
+<!--0-->
+<!--1-->
 ",
 }
 `;

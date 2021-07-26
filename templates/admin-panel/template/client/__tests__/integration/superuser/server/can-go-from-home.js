@@ -6,12 +6,12 @@ jest.mock( 'axios' );
 beforeEach( () => {
     jest.resetModules();
     jest.clearAllMocks();
-    setup();
 } );
 
 it( 'can go from home', async() => {
     expect.assertions( 2 );
 
+    const DI = setup();
     axios
         .useDefaultMocks()
         .use( 'get', '/validsession', {
@@ -35,16 +35,14 @@ it( 'can go from home', async() => {
             },
             'Files': [ {
                 'Name': 'dist/bundle.css',
-                'Size': 20035,
-                'ModTime': 'Thu, 29 Oct 2020 19:30:25 +0100'
+                'Size': 20035
             }, {
                 'Name': 'dist/bundle.js',
-                'Size': 136980,
-                'ModTime': 'Thu, 29 Oct 2020 19:30:25 +0100'
+                'Size': 136980
             } ]
         } );
 
-    await app.start();
+    await app.start( DI );
     app.click( '.sideleft .icon-server' );
     await app.waitRendering();
     app.checkBody();

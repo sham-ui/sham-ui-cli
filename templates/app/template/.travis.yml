@@ -3,4 +3,3 @@ node_js:
   - "15"
 script:
   - yarn test:coverage
-  - yarn size

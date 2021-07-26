@@ -4,32 +4,32 @@ exports[`success login 1`] = `
 "<div class=\\"login-page\\">
   <form class=\\"form\\">
     <div class=\\"logo\\"><span><span>[</span> {{ logoText }} <span>]</span></span></div>
-    <!--Logo-->
-    <!--header-->
-    <!--if-->
-    <!--ErrorsPanel-->
+    <!--0-->
+    <!--0-->
+    <!--0-->
+    <!--1-->
     <div class=\\"form-group\\">
       <input name=\\"email\\" type=\\"text\\" placeholder=\\"Enter your email\\" autofocus=\\"\\">
     </div>
     <div class=\\"form-group\\">
       <input name=\\"password\\" type=\\"password\\" placeholder=\\"Enter your password\\">
     </div>
-    <!--default-->
+    <!--2-->
     <button type=\\"submit\\">
-      <!--if-->Sign In
-      <!--submit-->
+      <!--3-->Sign In
+      <!--4-->
     </button>
     {{#if signupEnabled}}
     <div class=\\"signup-label\\"> Not yet a member? <a href=\\"/signup\\"> Sign Up </a>
     </div>
     {{/if}}
-    <!--footer-->
+    <!--5-->
   </form>
 </div>
-<!--ActivePageContainer-->
-<!--if-->
-<!--Layout-->
-<!--if-->"
+<!--0-->
+<!--0-->
+<!--0-->
+<!--0-->"
 `;
 
 exports[`success login 2`] = `
@@ -45,7 +45,7 @@ exports[`success login 2`] = `
           <i class=\\"icon-home-outline menu-item-icon\\"></i><span class=\\"menu-item-label\\">Dashboard</span>
         </div>
       </a>
-      <!--if-->
+      <!--0-->
     </div>
   </div>
   <div class=\\"header\\">
@@ -78,19 +78,19 @@ exports[`success login 2`] = `
   </div>
   <div class=\\"mainpanel\\">
     <h4 class=\\"page-header\\"> Home
-      <!--header-->
+      <!--0-->
     </h4>
     <div class=\\"page-body\\">
       <div class=\\"panel\\"> Project description </div>
-      <!--body-->
+      <!--1-->
     </div>
-    <!--if-->
-    <!--Page-->
-    <!--ActivePageContainer-->
+    <!--0-->
+    <!--0-->
+    <!--0-->
   </div>
 </div>
-<!--LayoutAuthenticated-->
-<!--if-->
-<!--Layout-->
-<!--if-->"
+<!--0-->
+<!--0-->
+<!--0-->
+<!--0-->"
 `;

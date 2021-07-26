@@ -1,6 +1,8 @@
 package handlers
 
 import (
+	"fmt"
+	"io/fs"
 	"net/http"
 	"os"
 	"{{shortName}}/assets"
@@ -40,8 +42,13 @@ type runtimeInfo struct {
 type fileInfo struct {
 	Name    string `json:"Name"`
 	Size    int64  `string:"Size"`
-	ModTime string `string:"ModTime"`
 }
+
+type fileInfosSortedByName []fileInfo
+
+func (fi fileInfosSortedByName) Len() int           { return len(fi) }
+func (fi fileInfosSortedByName) Less(i, j int) bool { return fi[i].Name < fi[j].Name }
+func (fi fileInfosSortedByName) Swap(i, j int)      { fi[i], fi[j] = fi[j], fi[i] }
 
 func infoHandler(_ *handler.Context, _ interface{}) (interface{}, error) {
 	host, _ := os.Hostname()
@@ -62,20 +69,33 @@ func infoHandler(_ *handler.Context, _ interface{}) (interface{}, error) {
 		Time:         time.Now().Format(time.RFC1123Z),
 	}
 
-	var files []fileInfo
-	names := assets.AssetNames()
-	sort.Strings(names)
-	for _, name := range names {
-		fileInfo := fileInfo{
-			Name: name,
-		}
-		assetInfo, err := assets.AssetInfo(name)
-		if nil == err {
-			fileInfo.Size = assetInfo.Size()
-			fileInfo.ModTime = assetInfo.ModTime().Format(time.RFC1123Z)
-		}
-		files = append(files, fileInfo)
+	var files fileInfosSortedByName
+	fsys, err := fs.Sub(assets.Assets, "files")
+	if nil != err {
+		return nil, fmt.Errorf("can't get fs.sub: %w", err)
 	}
+	err = fs.WalkDir(fsys, ".", func(path string, d fs.DirEntry, err error) error {
+		if nil != err {
+			return err
+		}
+		if d.IsDir() {
+			return nil
+		}
+		info, err := d.Info()
+		if nil != err {
+			return fmt.Errorf("get info: %w", err)
+		}
+		files = append(files, fileInfo{
+			Name:    path,
+			Size:    info.Size(),
+		})
+		return nil
+	})
+	if nil != err {
+		return nil, fmt.Errorf("can't walk to embed fs: %w", err)
+	}
+
+	sort.Sort(files)
 
 	return &info{
 		Host:    host,

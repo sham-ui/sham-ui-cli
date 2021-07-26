@@ -2,9 +2,9 @@
     {% import FormWithConfirmModal from '../../../FormWithConfirmModal.sfc' %}
 
     <FormWithConfirmModal
-        saveData=\{{::this._saveData}}
+        saveData=\{{this$._saveData}}
         onSuccess=\{{onUpdateSuccess}}
-        getErrors=\{{::this._getErrors}}
+        getErrors=\{{this$._getErrors}}
         confirmTitle="Change email"
         confirmText="Are you sure you want to change your email?"
     >
@@ -20,28 +20,19 @@
 </template>
 
 <script>
-    import { inject, options, mergeWithTemplate } from 'sham-ui-macro/babel.macro';
+    function RoutesSettingsFormEmail( options ) {
+        options( {
+            [ $.value ]: '',
+            [ $.onUpdateSuccess ]() {}
+        } );
 
-    @mergeWithTemplate
-    class RoutesSettingsFormEmail extends Template {
+        this$._saveData = formData => this.DI.resolve( 'store' ).updateMemberEmail( {
+            newEmail1: formData.get( 'email1' ).trim(),
+            newEmail2: formData.get( 'email2' ).trim()
+        } );
 
-        /** @type {Store} */
-        @inject store;
-
-        @options value = '';
-        @options onUpdateSuccess() {}
-
-        _saveData( formData ) {
-            return this.store.updateMemberEmail( {
-                newEmail1: formData.get( 'email1' ).trim(),
-                newEmail2: formData.get( 'email2' ).trim()
-            } );
-        }
-
-        _getErrors( { Messages = [ 'Update email fail' ] } ) {
-            return Messages;
-        }
+        this$._getErrors = ( { Messages = [ 'Update email fail' ] } ) => Messages;
     }
 
-    export default RoutesSettingsFormEmail;
+    export default Component( Template, RoutesSettingsFormEmail );
 </script>

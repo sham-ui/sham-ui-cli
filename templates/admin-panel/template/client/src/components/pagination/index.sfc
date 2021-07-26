@@ -4,8 +4,10 @@
     {% import PaginationPages from './pages.sfc' %}
 
     <div class="pagination">
+        {% let pages = this[ $.pages ]( limit, total, currentPage, pageArraySize ) %}
+
         <PaginationPages
-            pages=\{{this.pages( limit, total, currentPage, pageArraySize )}}
+            pages=\{{pages}}
             goToPage=\{{goToPage}}
             currentPage=\{{currentPage}}
         />
@@ -17,7 +19,7 @@
         {% endif %}
 
         <PaginationPages
-            pages=\{{this.pages( limit, total, currentPage, pageArraySize )}}
+            pages=\{{pages}}
             goToPage=\{{goToPage}}
             currentPage=\{{currentPage}}
         />
@@ -25,19 +27,17 @@
 </template>
 
 <script>
-    import { mergeWithTemplate, options } from 'sham-ui-macro/babel.macro';
+    function PaginationIndex( options ) {
+        options( {
+            [ $.dataLoaded ]: true,
+            [ $.currentPage ]: 1,
+            [ $.limit ]: 50,
+            [ $.total ]: 0,
+            [ $.goToPage ]() {},
+            [ $.pageArraySize ]: 3
+        } );
 
-    @mergeWithTemplate
-    class PaginationIndex extends Template {
-        @options dataLoaded = true;
-        @options currentPage = 1;
-        @options limit = 50;
-        @options total = 0;
-        @options goToPage() {}
-
-        @options pageArraySize = 3;
-
-        pages( limit, total, currentPage, pageArraySize ) {
+        this$.pages = ( limit, total, currentPage, pageArraySize ) => {
             const totalPages = Math.ceil( total / limit );
             const pages = [ 1 ];
             for ( let i = 2; i < totalPages && Math.abs( i - currentPage ) < pageArraySize; i++ ) {
@@ -47,8 +47,8 @@
                 pages.push( totalPages );
             }
             return pages;
-        }
+        };
     }
 
-    export default PaginationIndex;
+    export default Component( Template,  PaginationIndex );
 </script>

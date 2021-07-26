@@ -9,12 +9,12 @@ const removeFiles = require( './metalsmith-plugins/remove-files' );
 
 const classify = require( './utils/classify' );
 
-function destroy( name, src, dest, fileName, done ) {
+function destroy( name, src, dest, done ) {
     const opts = getOptions( name, src );
     const metalsmith = Metalsmith( path.join( src, 'template' ) );
 
 
-    const inTestRelativePathChunks = [ '..', '..', 'src', 'components', `${fileName}` ];
+    const inTestRelativePathChunks = [ '..', '..', 'src', 'components', `${name}${opts.testImportExtension}` ];
     name.split( '/' ).forEach(
         () => inTestRelativePathChunks.unshift( '..' )
     );

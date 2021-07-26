@@ -5,12 +5,12 @@ jest.mock( 'axios' );
 beforeEach( () => {
     jest.resetModules();
     jest.clearAllMocks();
-    setup();
 } );
 
 it( 'cancel delete member', async() => {
     expect.assertions( 2 );
 
+    const DI = setup();
     axios
         .useDefaultMocks()
         .use( 'get', '/validsession', {
@@ -29,7 +29,7 @@ it( 'cancel delete member', async() => {
         } );
 
     history.pushState( {}, '', 'http://client.example.com/members' );
-    await app.start();
+    await app.start( DI );
 
     app.click( '[data-test-delete-button="1"]' );
     app.click( '[data-test-modal] [data-test-cancel-button]' );

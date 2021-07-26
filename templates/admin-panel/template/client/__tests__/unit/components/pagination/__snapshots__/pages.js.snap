@@ -2,7 +2,6 @@
 
 exports[`renders correctly 1`] = `
 Object {
-  "Constructor": "PaginationPages",
   "Options": Object {
     "ID": "component",
     "currentPage": 1,

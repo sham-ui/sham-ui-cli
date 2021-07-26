@@ -1,17 +1,16 @@
-import { DI } from 'sham-ui';
+import { createDI } from 'sham-ui';
 import * as directives from 'sham-ui-directives';
-import hrefto from 'sham-ui-router/href-to';
+import hrefto from 'sham-ui-router/lib/href-to';
 // eslint-disable-next-line max-len
 import LayoutAuthenticatedProfile  from '../../../../../src/components/layout/authenticated/profile.sfc';
 import renderer, { compile } from 'sham-ui-test-helpers';
-
-afterEach( () => {
-    DI.resolve( 'session:storage' ).reset();
-    DI.bind( 'router', null );
-} );
+import { storage } from '../../../../../src/storages/session';
 
 it( 'renders correctly', () => {
-    DI.resolve( 'session:storage' ).name = 'Test member';
+    const DI = createDI();
+
+    storage( DI ).name = 'Test member';
+
     DI.bind( 'router', {
         generate: jest.fn().mockReturnValueOnce( '/' ),
         activePageComponent: compile``,
@@ -20,6 +19,7 @@ it( 'renders correctly', () => {
         }
     } );
     const meta = renderer( LayoutAuthenticatedProfile, {
+        DI,
         directives: {
             ...directives,
             hrefto

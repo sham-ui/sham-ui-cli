@@ -2,25 +2,20 @@ restore_deps:
 	cd {{ shortName }}
 	go mod download
 
-get_go_bindata:
-	cd {{ shortName }}
-	go get -u github.com/go-bindata/go-bindata/...
-
-install: restore_deps get_go_bindata
+install: restore_deps
 
 .ONESHELL:
 build_js:
 	cd ../client/
 	yarn build
+	mkdir -p ../server/{{ shortName }}/assets/files
+	cp -r dist/* ../server/{{ shortName }}/assets/files
 
-bind_dist: build_js
-	go-bindata -o {{ shortName }}/assets/bindata.go -pkg assets -fs -prefix "../client" ../client/dist/ ../client/dist/font ../client/index.html ../client/favicon.ico
-
-build_386: bind_dist
+build_386: build_js
 	cd {{ shortName }}
 	env GOOS=linux GOARCH=386 go build -o ../bin/linux_386/{{ shortName }} {{ shortName }}
 
-build_amd64: bind_dist
+build_amd64: build_js
 	cd {{ shortName }}
 	env GOOS=linux GOARCH=amd64 go build -o ../bin/linux_amd64/{{ shortName }} {{ shortName }}
 
@@ -34,4 +29,4 @@ coverage:
 	cd {{ shortName }}
 	go tool cover -html=coverage.out
 
-test: bind_dist run_test coverage
+test: build_js run_test coverage

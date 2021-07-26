@@ -15,13 +15,13 @@
 </template>
 
 <script>
-    import { options, mergeWithTemplate } from 'sham-ui-macro/babel.macro';
     import { useStorage } from '../storages/session';
 
-    @mergeWithTemplate
-    class Page extends Template {
-        @options dataLoaded = true;
+    function Page( options ) {
+        options( {
+            [ $.dataLoaded ]: true
+        } );
     }
 
-    export default useStorage( 'sessionData' )( Page );
+    export default Component( Template, useStorage( $.sessionData ), Page );
 </script>

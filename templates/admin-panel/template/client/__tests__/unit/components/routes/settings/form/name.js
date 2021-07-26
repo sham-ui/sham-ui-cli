@@ -1,11 +1,13 @@
-import { DI } from 'sham-ui';
 import * as directives from 'sham-ui-directives';
 // eslint-disable-next-line max-len
 import RoutesSettingsFormName  from '../../../../../../src/components/routes/settings/form/name.sfc';
 import renderer from 'sham-ui-test-helpers';
+import { createDI } from 'sham-ui';
 
 it( 'renders correctly', () => {
+    const DI = createDI();
     const meta = renderer( RoutesSettingsFormName, {
+        DI,
         directives
     } );
     expect( meta.toJSON() ).toMatchSnapshot();
@@ -14,12 +16,14 @@ it( 'renders correctly', () => {
 it( 'display errors', async() => {
     expect.assertions( 2 );
 
+    const DI = createDI();
     const updateMock = jest.fn();
     DI.bind( 'store', {
         updateMemberName: updateMock.mockReturnValueOnce( Promise.reject( {} ) )
     } );
 
     const meta = renderer( RoutesSettingsFormName, {
+        DI,
         directives: {
             ...directives
         }

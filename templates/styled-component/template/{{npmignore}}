@@ -3,7 +3,16 @@ node_modules
 
 .DS_Store
 .idea
+.babel-plugin-macrosrc.js
+.babelrc
+.browserslistrc
 .eslintrc.js
+.stylelintrc
+.travis.yml
+.size-limit.json
+jest.config.js
+rollup.config.js
+yarn-error.log
 Thumbs.db
 
 /coverage/
@@ -11,6 +20,3 @@ Thumbs.db
 /demo-app/
 /__tests__/
 /__mocks__/
-webpack.config.js
-yarn-error.log
-.travis.yml

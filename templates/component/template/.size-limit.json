@@ -1,0 +1,10 @@
+[
+  {
+    "path": "index.js",
+    "ignore": [
+      "sham-ui",
+      "sham-ui-dynamic-component"
+    ],
+    "limit": "1 KB"
+  }
+]

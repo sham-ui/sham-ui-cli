@@ -2,7 +2,6 @@
 
 exports[`renders correctly 1`] = `
 Object {
-  "Constructor": "RuntimePanel",
   "Options": Object {
     "ID": "component",
     "host": "",

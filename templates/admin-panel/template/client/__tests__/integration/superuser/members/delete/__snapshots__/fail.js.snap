@@ -2,29 +2,29 @@
 
 exports[`fail delete member (500 status code) 1`] = `
 "<h4 class=\\"page-header\\"> Members
-  <!--header-->
+  <!--0-->
 </h4>
 <div class=\\"page-body\\">
   <div class=\\"members-page\\">
     <ul class=\\"errors-panel\\">
       <li>Fail delete member</li>
     </ul>
-    <!--if-->
-    <!--ErrorsPanel-->
+    <!--0-->
+    <!--0-->
     <div class=\\"container\\">
       <button data-test-toggle-create-form=\\"\\" class=\\"mg-b-30\\">Show create new member form</button>
-      <!--if-->
+      <!--1-->
     </div>
     <div class=\\"container\\">
       <div class=\\"members-list\\">
         <div class=\\"panel\\">
           <div class=\\"pagination\\">
             <div class=\\"page-buttons\\">
-              <!--if-->
+              <!--0-->
               <button data-test-pagination-page=\\"1\\" disabled=\\"\\">1</button>
-              <!--if-->
+              <!--1-->
             </div>
-            <!--PaginationPages-->
+            <!--0-->
             <table>
               <thead>
                 <tr>
@@ -48,54 +48,54 @@ exports[`fail delete member (500 status code) 1`] = `
                 </tr>
               </tbody>
             </table>
-            <!--if-->
-            <!--MembersTable-->
-            <!--default-->
-            <!--if-->
+            <!--0-->
+            <!--0-->
+            <!--0-->
+            <!--1-->
             <div class=\\"page-buttons\\">
-              <!--if-->
+              <!--0-->
               <button data-test-pagination-page=\\"1\\" disabled=\\"\\">1</button>
-              <!--if-->
+              <!--1-->
             </div>
-            <!--PaginationPages-->
+            <!--2-->
           </div>
         </div>
       </div>
-      <!--if-->
+      <!--2-->
     </div>
   </div>
-  <!--body-->
+  <!--1-->
 </div>
-<!--if-->
-<!--Page-->
-<!--ActivePageContainer-->"
+<!--0-->
+<!--0-->
+<!--0-->"
 `;
 
 exports[`fail delete member 1`] = `
 "<h4 class=\\"page-header\\"> Members
-  <!--header-->
+  <!--0-->
 </h4>
 <div class=\\"page-body\\">
   <div class=\\"members-page\\">
     <ul class=\\"errors-panel\\">
       <li>Can't delete member</li>
     </ul>
-    <!--if-->
-    <!--ErrorsPanel-->
+    <!--0-->
+    <!--0-->
     <div class=\\"container\\">
       <button data-test-toggle-create-form=\\"\\" class=\\"mg-b-30\\">Show create new member form</button>
-      <!--if-->
+      <!--1-->
     </div>
     <div class=\\"container\\">
       <div class=\\"members-list\\">
         <div class=\\"panel\\">
           <div class=\\"pagination\\">
             <div class=\\"page-buttons\\">
-              <!--if-->
+              <!--0-->
               <button data-test-pagination-page=\\"1\\" disabled=\\"\\">1</button>
-              <!--if-->
+              <!--1-->
             </div>
-            <!--PaginationPages-->
+            <!--0-->
             <table>
               <thead>
                 <tr>
@@ -119,25 +119,25 @@ exports[`fail delete member 1`] = `
                 </tr>
               </tbody>
             </table>
-            <!--if-->
-            <!--MembersTable-->
-            <!--default-->
-            <!--if-->
+            <!--0-->
+            <!--0-->
+            <!--0-->
+            <!--1-->
             <div class=\\"page-buttons\\">
-              <!--if-->
+              <!--0-->
               <button data-test-pagination-page=\\"1\\" disabled=\\"\\">1</button>
-              <!--if-->
+              <!--1-->
             </div>
-            <!--PaginationPages-->
+            <!--2-->
           </div>
         </div>
       </div>
-      <!--if-->
+      <!--2-->
     </div>
   </div>
-  <!--body-->
+  <!--1-->
 </div>
-<!--if-->
-<!--Page-->
-<!--ActivePageContainer-->"
+<!--0-->
+<!--0-->
+<!--0-->"
 `;

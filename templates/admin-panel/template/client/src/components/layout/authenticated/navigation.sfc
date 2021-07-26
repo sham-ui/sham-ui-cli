@@ -1,5 +1,5 @@
 <template>
-    {% import path from 'sham-ui-router/params' %}
+    {% import path from 'sham-ui-router/lib/params' %}
 
     <label class="sidebar-label">Navigation</label>
     <div class="menu">
@@ -27,13 +27,7 @@
 </template>
 
 <script>
-    import { mergeWithTemplate } from 'sham-ui-macro/babel.macro';
     import { useStorage } from '../../../storages/session';
 
-    @mergeWithTemplate
-    class LayoutAuthenticatedNavigation extends Template {
-
-    }
-
-    export default useStorage( 'sessionData' )( LayoutAuthenticatedNavigation );
+    export default Component( Template, useStorage( $.sessionData ) );
 </script>

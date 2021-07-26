@@ -1,14 +1,14 @@
-import { start, DI } from 'sham-ui';
+import { start, createDI } from 'sham-ui';
 import pretty from 'pretty';
 import initializer from '../../src/initializers/main';
-import RoutesMembersPage from '../../src/components/routes/members/page.sfc';
-import RoutesServerInfoPage from '../../src/components/routes/server-info/page.sfc';
-import SettingsPage from '../../src/components/routes/settings/page.sfc';
 
 export const app = {
-    async start( waitRendering = true ) {
-        initializer();
-        start();
+    async start( DI, waitRendering = true ) {
+        if ( !DI ) {
+            DI = createDI();
+        }
+        initializer( DI );
+        start( DI );
         if ( waitRendering ) {
             await this.waitRendering();
         }
@@ -54,23 +54,11 @@ function clearBody() {
     document.querySelector( 'body' ).innerHTML = '';
 }
 
-function resetShamUI() {
-    const store = DI.resolve( 'sham-ui:store' );
-    const app = store.findById( 'app' );
-    if ( undefined !== app ) {
-        app.remove();
-        store.forEach( component => {
-            try {
-                component.remove();
-            } catch ( e ) {
-                // eslint-disable-next-line no-empty
-            }
-        } );
+function resetStorage( DI ) {
+    const storage = DI.resolve( 'session:storage' );
+    if ( storage ) {
+        storage.reset();
     }
-}
-
-function resetStorage() {
-    DI.resolve( 'session:storage' ).reset();
 }
 
 function setupRouter() {
@@ -78,21 +66,14 @@ function setupRouter() {
     history.pushState( {}, '', '' );
 }
 
-function setupLazyPageMocks( ...lazyPages ) {
-    DI.bind(
-        'router:lazy-page',
-        page => lazyPages.find(
-            mock => mock.toString() === page.toString()
-        )
-    );
-}
-
-export default function() {
+export default function( DI ) {
+    if ( !DI ) {
+        DI = createDI();
+    }
     setupRAF();
-    resetShamUI();
     clearBody();
-    resetStorage();
+    resetStorage( DI );
     setupRouter();
-    setupLazyPageMocks( SettingsPage, RoutesMembersPage, RoutesServerInfoPage );
     Object.defineProperty( window, 'CSS', { value: () => ( {} ) } );
+    return DI;
 }

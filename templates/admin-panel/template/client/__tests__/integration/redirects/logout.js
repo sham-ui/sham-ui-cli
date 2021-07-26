@@ -5,16 +5,16 @@ jest.mock( 'axios' );
 beforeEach( () => {
     jest.resetModules();
     jest.clearAllMocks();
-    setup();
 } );
 
 it( 'logout from settings page', async() => {
     expect.assertions( 7 );
 
     axios.useDefaultMocks();
+    const DI = setup();
 
     history.pushState( {}, '', 'http://client.example.com/settings/' );
-    await app.start();
+    await app.start( DI );
     expect( axios.mocks.get ).toHaveBeenCalledTimes( 2 );
 
     app.click( '.panel.settings p:nth-of-type(1) .icon-pencil' );

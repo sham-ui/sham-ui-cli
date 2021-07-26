@@ -5,12 +5,12 @@ jest.mock( 'axios' );
 beforeEach( () => {
     jest.resetModules();
     jest.clearAllMocks();
-    setup();
 } );
 
 it( 'fail create member', async() => {
     expect.assertions( 1 );
 
+    const DI = setup();
     axios
         .useDefaultMocks()
         .use( 'get', '/validsession', {
@@ -31,7 +31,7 @@ it( 'fail create member', async() => {
         }, 500 );
 
     history.pushState( {}, '', 'http://client.example.com/members' );
-    await app.start();
+    await app.start( DI );
 
     app.click( '[data-test-toggle-create-form]' );
     await app.waitRendering();
@@ -49,6 +49,7 @@ it( 'fail create member', async() => {
 it( 'fail create member (500 status code)', async() => {
     expect.assertions( 1 );
 
+    const DI = setup();
     axios
         .useDefaultMocks()
         .use( 'get', '/validsession', {
@@ -66,7 +67,7 @@ it( 'fail create member (500 status code)', async() => {
         .use( 'post', 'admin/members', {}, 500 );
 
     history.pushState( {}, '', 'http://client.example.com/members' );
-    await app.start();
+    await app.start( DI );
 
     app.click( '[data-test-toggle-create-form]' );
     await app.waitRendering();

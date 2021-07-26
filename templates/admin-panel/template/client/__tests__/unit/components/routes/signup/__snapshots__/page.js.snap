@@ -2,7 +2,6 @@
 
 exports[`display errors 1`] = `
 Object {
-  "Constructor": "RoutesSignupPage",
   "Options": Object {
     "ID": "component",
     "directives": Object {
@@ -23,13 +22,13 @@ Object {
 <div class=\\"signup-page\\">
   <form class=\\"form\\">
     <div class=\\"logo\\"><span><span>[</span> {{ logoText }} <span>]</span></span></div>
-    <!--Logo-->
-    <!--header-->
+    <!--0-->
+    <!--0-->
     <ul class=\\"errors-panel\\">
       <li>Signup fail</li>
     </ul>
-    <!--if-->
-    <!--ErrorsPanel-->
+    <!--0-->
+    <!--1-->
     <div class=\\"form-group\\">
       <input name=\\"name\\" type=\\"text\\" placeholder=\\"Enter your username\\" autofocus=\\"\\">
     </div>
@@ -42,14 +41,14 @@ Object {
     <div class=\\"form-group\\">
       <input name=\\"password2\\" type=\\"password\\" placeholder=\\"Confirm your password\\">
     </div>
-    <!--default-->
+    <!--2-->
     <button type=\\"submit\\">
-      <!--if-->Sign Up
-      <!--submit-->
+      <!--3-->Sign Up
+      <!--4-->
     </button>
     <div class=\\"signup-label\\"> Already a member? <a href=\\"/\\"> Sign In </a>
     </div>
-    <!--footer-->
+    <!--5-->
   </form>
 </div>
 ",
@@ -58,7 +57,6 @@ Object {
 
 exports[`renders correctly 1`] = `
 Object {
-  "Constructor": "RoutesSignupPage",
   "Options": Object {
     "ID": "component",
     "directives": Object {
@@ -79,10 +77,10 @@ Object {
 <div class=\\"signup-page\\">
   <form class=\\"form\\">
     <div class=\\"logo\\"><span><span>[</span> {{ logoText }} <span>]</span></span></div>
-    <!--Logo-->
-    <!--header-->
-    <!--if-->
-    <!--ErrorsPanel-->
+    <!--0-->
+    <!--0-->
+    <!--0-->
+    <!--1-->
     <div class=\\"form-group\\">
       <input name=\\"name\\" type=\\"text\\" placeholder=\\"Enter your username\\" autofocus=\\"\\">
     </div>
@@ -95,14 +93,14 @@ Object {
     <div class=\\"form-group\\">
       <input name=\\"password2\\" type=\\"password\\" placeholder=\\"Confirm your password\\">
     </div>
-    <!--default-->
+    <!--2-->
     <button type=\\"submit\\">
-      <!--if-->Sign Up
-      <!--submit-->
+      <!--3-->Sign Up
+      <!--4-->
     </button>
     <div class=\\"signup-label\\"> Already a member? <a href=\\"/\\"> Sign In </a>
     </div>
-    <!--footer-->
+    <!--5-->
   </form>
 </div>
 ",

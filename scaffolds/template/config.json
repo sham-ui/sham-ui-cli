@@ -3,7 +3,8 @@
     "name": {
       "type": "string",
       "required": true,
-      "label": "Widget path"
+      "label": "Component path"
     }
-  }
+  },
+  "testImportExtension": ".sht"
 }

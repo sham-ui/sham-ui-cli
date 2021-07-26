@@ -1,5 +1,4 @@
-import { DI } from 'sham-ui';
-import { inject } from 'sham-ui-macro/babel.macro';
+import { inject } from 'sham-ui-macro/inject.macro';
 import { storage as sessionStorage } from '../storages/session';
 import { storage as appStorage } from '../storages/app';
 
@@ -9,9 +8,10 @@ export default class Session {
     /** @type Store */
     @inject store;
 
-    constructor() {
-        this.app = appStorage;
-        this.data = sessionStorage;
+    constructor( DI ) {
+        this.DI = DI;
+        this.app = appStorage( DI );
+        this.data = sessionStorage( DI );
         DI.bind( 'session', this );
     }
 

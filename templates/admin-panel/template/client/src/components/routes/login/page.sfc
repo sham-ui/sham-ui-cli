@@ -1,14 +1,14 @@
 <template>
-    {% import path from 'sham-ui-router/params' %}
+    {% import path from 'sham-ui-router/lib/params' %}
     {% import FormContainer from '../../FormContainer.sfc' %}
     {% import Logo from '../../Logo.sht' %}
 
     <div class="login-page">
         <FormContainer
             submitText="Sign In"
-            submit=\{{::this._submitForm}}
-            success=\{{::this._loginSuccess}}
-            getErrors=\{{::this._getErrors}}
+            submit=\{{this$._submitForm}}
+            success=\{{this$._loginSuccess}}
+            getErrors=\{{this$._getErrors}}
         >
             {% block 'header' %}
                 <Logo/>
@@ -38,37 +38,26 @@
 </template>
 
 <script>
-    import { inject, mergeWithTemplate } from 'sham-ui-macro/babel.macro';
+    function RoutesLoginPage( options, update, didMount ) {
 
-    @mergeWithTemplate
-    class RoutesLoginPage extends Template {
-        @inject session;
-        @inject router;
+        didMount( () => this.DI.resolve( 'title' ).change( 'Login' ) );
 
-        /** @type Title */
-        @inject title;
-
-        didMount() {
-            this.title.change( 'Login' );
-        }
-
-        _submitForm( formData ) {
-            return this.session.login(
+        this$._submitForm = ( formData ) => {
+            return this.DI.resolve( 'session' ).login(
                 formData.get( 'email' ).trim(),
                 formData.get( 'password' ).trim()
             );
-        }
+        };
 
-        _loginSuccess() {
-            this.router.navigate(
-                this.router.generate( 'home', {} )
+        this$._loginSuccess = () => {
+            const router = this.DI.resolve( 'router' );
+            router.navigate(
+                router.generate( 'home', {} )
             );
-        }
+        };
 
-        _getErrors( { Messages = [ 'Login fail' ] } ) {
-            return Messages;
-        }
+        this$._getErrors = ( { Messages = [ 'Login fail' ] } ) => Messages;
     }
 
-    export default RoutesLoginPage;
+    export default Component( Template, RoutesLoginPage );
 </script>

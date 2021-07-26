@@ -4,30 +4,30 @@ exports[`logout 1`] = `
 "<div class=\\"login-page\\">
   <form class=\\"form\\">
     <div class=\\"logo\\"><span><span>[</span> {{ logoText }} <span>]</span></span></div>
-    <!--Logo-->
-    <!--header-->
-    <!--if-->
-    <!--ErrorsPanel-->
+    <!--0-->
+    <!--0-->
+    <!--0-->
+    <!--1-->
     <div class=\\"form-group\\">
       <input name=\\"email\\" type=\\"text\\" placeholder=\\"Enter your email\\" autofocus=\\"\\">
     </div>
     <div class=\\"form-group\\">
       <input name=\\"password\\" type=\\"password\\" placeholder=\\"Enter your password\\">
     </div>
-    <!--default-->
+    <!--2-->
     <button type=\\"submit\\">
-      <!--if-->Sign In
-      <!--submit-->
+      <!--3-->Sign In
+      <!--4-->
     </button>
     {{#if signupEnabled}}
     <div class=\\"signup-label\\"> Not yet a member? <a href=\\"/signup\\"> Sign Up </a>
     </div>
     {{/if}}
-    <!--footer-->
+    <!--5-->
   </form>
 </div>
-<!--ActivePageContainer-->
-<!--if-->
-<!--Layout-->
-<!--if-->"
+<!--0-->
+<!--0-->
+<!--0-->
+<!--0-->"
 `;

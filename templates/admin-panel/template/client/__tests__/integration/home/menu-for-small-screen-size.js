@@ -5,7 +5,6 @@ jest.mock( 'axios' );
 beforeEach( () => {
     jest.resetModules();
     jest.clearAllMocks();
-    setup();
     window.matchMedia = jest.fn().mockImplementation(
         () => ( {
             addListener: jest.fn(),
@@ -22,6 +21,8 @@ it( 'menu for small screen size', async() => {
     expect.assertions( 3 );
 
     axios.useDefaultMocks();
+    const DI = setup();
+
     window.matchMedia.mockImplementation(
         () => ( {
             addListener: jest.fn(),
@@ -30,7 +31,7 @@ it( 'menu for small screen size', async() => {
     );
 
     // Open
-    await app.start();
+    await app.start( DI );
     app.click( '.icon-menu' );
     await app.waitRendering();
     app.checkBody();

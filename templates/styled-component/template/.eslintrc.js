@@ -15,7 +15,10 @@ module.exports = {
         "sourceType": "module"
     },
     "globals": {
-        "Template": true
+        "Template": true,
+        "$": true,
+        "this$": true,
+        "Component": true
     },
     "plugins": [
         "html",

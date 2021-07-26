@@ -17,7 +17,7 @@
                     title="Name"
                     value=\{{sessionData.name}}
                     form=\{{NameForm}}
-                    onUpdateValue=\{{::this.onUpdateSessionData}}
+                    onUpdateValue=\{{this$.onUpdateSessionData}}
                 />
 
                 <Paragraph
@@ -25,7 +25,7 @@
                     title="Email"
                     value=\{{sessionData.email}}
                     form=\{{EmailForm}}
-                    onUpdateValue=\{{::this.onUpdateSessionData}}
+                    onUpdateValue=\{{this$.onUpdateSessionData}}
                 />
 
                 <Paragraph
@@ -39,27 +39,23 @@
 </template>
 
 <script>
-    import { mergeWithTemplate, inject, options } from 'sham-ui-macro/babel.macro';
     import { useStorage } from '../../../storages/session';
 
-    @mergeWithTemplate
-    class RoutesSettingsPage extends Template {
-        @inject session;
+    function RoutesSettingsPage( options, update, didMount ) {
+        const pageTitle = $();
 
-        /** @type Title */
-        @inject title;
+        const state = options( {
+            [ pageTitle ]: 'Profile settings'
+        } );
 
-        @options pageTitle = 'Profile settings';
+        didMount( () => this.DI.resolve( 'title' ).change( state[ pageTitle ] ) );
 
-        didMount() {
-            this.title.change( this.options.pageTitle );
-        }
-
-        onUpdateSessionData( done ) {
-            this.session.resetSessionValidation();
-            this.session.validateSession().then( done );
-        }
+        this$.onUpdateSessionData = done => {
+            const session = this.DI.resolve( 'session' );
+            session.resetSessionValidation();
+            session.validateSession().then( done );
+        };
     }
 
-    export default useStorage( 'sessionData' )( RoutesSettingsPage );
+    export default Component( Template, useStorage( $.sessionData ), RoutesSettingsPage );
 </script>

@@ -2,7 +2,6 @@
 
 exports[`renders correctly 1`] = `
 Object {
-  "Constructor": "App",
   "Options": Object {
     "ID": "component",
     "appState": Object {
@@ -11,9 +10,9 @@ Object {
     },
   },
   "html": "
-<!--if-->
-<!--WithoutFlushLoader-->
-<!--if-->
+<!--0-->
+<!--0-->
+<!--0-->
 ",
 }
 `;

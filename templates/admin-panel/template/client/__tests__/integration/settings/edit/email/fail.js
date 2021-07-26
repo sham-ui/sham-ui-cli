@@ -5,16 +5,16 @@ jest.mock( 'axios' );
 beforeEach( () => {
     jest.resetModules();
     jest.clearAllMocks();
-    setup();
 } );
 
 it( 'fail edit email', async() => {
     expect.assertions( 1 );
 
     axios.useDefaultMocks();
+    const DI = setup();
 
     history.pushState( {}, '', 'http://client.example.com/settings/' );
-    await app.start();
+    await app.start( DI );
     app.click( '.panel.settings p:nth-of-type(2) .icon-pencil' );
 
     const formData = {

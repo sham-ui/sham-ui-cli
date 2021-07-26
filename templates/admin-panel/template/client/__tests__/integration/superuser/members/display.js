@@ -5,12 +5,12 @@ jest.mock( 'axios' );
 beforeEach( () => {
     jest.resetModules();
     jest.clearAllMocks();
-    setup();
 } );
 
 it( 'display page', async() => {
     expect.assertions( 2 );
 
+    const DI = setup();
     axios
         .useDefaultMocks()
         .use( 'get', '/validsession', {
@@ -31,7 +31,7 @@ it( 'display page', async() => {
         } );
 
     history.pushState( {}, '', 'http://client.example.com/members' );
-    await app.start();
+    await app.start( DI );
     app.checkBody();
     expect( window.location.href ).toBe( 'http://client.example.com/members' );
 } );

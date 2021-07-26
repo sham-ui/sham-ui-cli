@@ -1,11 +1,11 @@
 import setup, { app } from '../../../helpers';
 import axios from 'axios';
 jest.mock( 'axios' );
+const DI = setup();
 
 beforeEach( () => {
     jest.resetModules();
     jest.clearAllMocks();
-    setup();
 } );
 
 it( 'success reset member password', async() => {
@@ -29,7 +29,7 @@ it( 'success reset member password', async() => {
         } );
 
     history.pushState( {}, '', 'http://client.example.com/members' );
-    await app.start();
+    await app.start( DI );
 
     app.click( '[data-test-update-button="2"]' );
     await app.waitRendering();

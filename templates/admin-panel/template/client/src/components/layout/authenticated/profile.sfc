@@ -1,13 +1,13 @@
 <template>
-    {% import path from 'sham-ui-router/params' %}
+    {% import path from 'sham-ui-router/lib/params' %}
 
     <div class="dropdown">
-        <a class="link-profile" :onclick=\{{::this.linkProfileOnClick}}>
+        <a class="link-profile" :onclick=\{{this$.linkProfileOnClick}}>
             <span class="logged-name">
                 \{{sessionData.name}}
             </span>
         </a>
-        <div class="dropdown-menu \{{dropDownVisible ? 'show' : ''}}" :onclick=\{{::this.menuItemOnClick}}>
+        <div class="dropdown-menu \{{dropDownVisible ? 'show' : ''}}" :onclick=\{{this$.menuItemOnClick}}>
             <ul class="user-profile-nav">
                 <li>
                     <a :hrefto=\{{path("settings")}}>
@@ -15,7 +15,7 @@
                     </a>
                 </li>
                 <li>
-                    <a href="#" :onclick=\{{::this.logoutOnClick}}>
+                    <a href="#" :onclick=\{{this$.logoutOnClick}}>
                         <i class="icon-logout"></i> Sign Out
                     </a>
                 </li>
@@ -25,35 +25,36 @@
 </template>
 
 <script>
-    import { inject, options, mergeWithTemplate } from 'sham-ui-macro/babel.macro';
     import { useStorage } from '../../../storages/session';
 
-    @mergeWithTemplate
-    class LayoutAuthenticatedProfile extends Template {
-        @inject session;
+    function LayoutAuthenticatedProfile( options, update ) {
+        const dropDownVisible = $();
 
-        @options dropDownVisible = false;
+        const state = options( {
+            [ dropDownVisible ]: false
+        } );
 
-        linkProfileOnClick() {
-            this.update( {
-                dropDownVisible: !this.options.dropDownVisible
-            } );
-            return false;
-        }
+        this$.linkProfileOnClick = () => update( {
+            [ dropDownVisible ]: !state[ dropDownVisible ]
+        } );
 
-        menuItemOnClick() {
-            if ( this.options.dropDownVisible ) {
-                this.update( {
-                    dropDownVisible: false
+        this$.menuItemOnClick = () => {
+            if ( state[ dropDownVisible ] ) {
+                update( {
+                    [ dropDownVisible ]: false
                 } );
             }
-        }
+        };
 
-        logoutOnClick( e ) {
+        this$.logoutOnClick = ( e ) => {
             e.preventDefault();
-            this.session.logout();
-        }
+            this.DI.resolve( 'session' ).logout();
+        };
     }
 
-    export default useStorage( 'sessionData' )( LayoutAuthenticatedProfile );
+    export default Component(
+        Template,
+        useStorage( $.sessionData ),
+        LayoutAuthenticatedProfile
+    );
 </script>

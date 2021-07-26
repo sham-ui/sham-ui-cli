@@ -1,0 +1,9 @@
+[
+  {
+    "path": "index.js",
+    "ignore": [
+      "sham-ui"
+    ],
+    "limit": "5 KB"
+  }
+]

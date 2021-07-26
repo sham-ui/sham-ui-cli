@@ -5,11 +5,12 @@ jest.mock( 'axios' );
 beforeEach( () => {
     jest.resetModules();
     jest.clearAllMocks();
-    setup();
 } );
 
 it( 'cancel create member', async() => {
     expect.assertions( 2 );
+
+    const DI = setup();
 
     axios
         .useDefaultMocks()
@@ -27,7 +28,7 @@ it( 'cancel create member', async() => {
         } );
 
     history.pushState( {}, '', 'http://client.example.com/members' );
-    await app.start();
+    await app.start( DI );
 
     app.click( '[data-test-toggle-create-form]' );
     await app.waitRendering();

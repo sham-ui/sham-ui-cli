@@ -4,13 +4,13 @@ exports[`fail sign up 1`] = `
 "<div class=\\"signup-page\\">
   <form class=\\"form\\">
     <div class=\\"logo\\"><span><span>[</span> {{ logoText }} <span>]</span></span></div>
-    <!--Logo-->
-    <!--header-->
+    <!--0-->
+    <!--0-->
     <ul class=\\"errors-panel\\">
       <li>Name must not be empty.</li>
     </ul>
-    <!--if-->
-    <!--ErrorsPanel-->
+    <!--0-->
+    <!--1-->
     <div class=\\"form-group\\">
       <input name=\\"name\\" type=\\"text\\" placeholder=\\"Enter your username\\" autofocus=\\"\\">
     </div>
@@ -23,18 +23,18 @@ exports[`fail sign up 1`] = `
     <div class=\\"form-group\\">
       <input name=\\"password2\\" type=\\"password\\" placeholder=\\"Confirm your password\\">
     </div>
-    <!--default-->
+    <!--2-->
     <button type=\\"submit\\">
-      <!--if-->Sign Up
-      <!--submit-->
+      <!--3-->Sign Up
+      <!--4-->
     </button>
     <div class=\\"signup-label\\"> Already a member? <a href=\\"/login\\"> Sign In </a>
     </div>
-    <!--footer-->
+    <!--5-->
   </form>
 </div>
-<!--ActivePageContainer-->
-<!--if-->
-<!--Layout-->
-<!--if-->"
+<!--0-->
+<!--0-->
+<!--0-->
+<!--0-->"
 `;

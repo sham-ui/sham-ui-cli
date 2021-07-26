@@ -1,0 +1,23 @@
+{
+  "presets": [
+    [
+      "@babel/env",
+      {
+        "useBuiltIns": "usage",
+        "corejs": 3,
+        "shippedProposals": true,
+        "exclude": [
+          "web.immediate",
+          "web.dom-collections.iterator",
+          "es.array.iterator",
+          "es.array.reverse"
+        ]
+      }
+    ]
+  ],
+  "plugins": [
+    "@babel/plugin-proposal-class-properties",
+    "@babel/plugin-proposal-function-bind",
+    "macros"
+  ]
+}

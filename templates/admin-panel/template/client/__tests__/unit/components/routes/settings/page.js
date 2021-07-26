@@ -1,22 +1,23 @@
-import { DI } from 'sham-ui';
+import { createDI } from 'sham-ui';
 import * as directives from 'sham-ui-directives';
 import RoutesSettingsPage  from '../../../../../src/components/routes/settings/page.sfc';
+import { storage } from '../../../../../src/storages/session';
+import Session from '../../../../../src/services/session';
 import renderer from 'sham-ui-test-helpers';
 
-afterEach( () => {
-    DI.resolve( 'session:storage' ).reset();
-} );
-
 it( 'renders correctly', () => {
+    const DI = createDI();
     DI.bind( 'title', {
         change() {}
     } );
-    const storage = DI.resolve( 'session:storage' );
-    storage.name = 'Test member';
-    storage.email = 'test@test.com';
-    storage.sessionValidated = true;
+    const session = storage( DI );
+    session.name = 'Test member';
+    session.email = 'test@test.com';
+    session.sessionValidated = true;
+    new Session( DI );
 
     const meta = renderer( RoutesSettingsPage, {
+        DI,
         directives
     } );
     expect( meta.toJSON() ).toMatchSnapshot();

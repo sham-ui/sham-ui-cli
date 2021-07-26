@@ -2,22 +2,22 @@
 
 exports[`fail create member (500 status code) 1`] = `
 "<h4 class=\\"page-header\\"> Members
-  <!--header-->
+  <!--0-->
 </h4>
 <div class=\\"page-body\\">
   <div class=\\"members-page\\">
-    <!--if-->
-    <!--ErrorsPanel-->
+    <!--0-->
+    <!--0-->
     <div class=\\"container\\">
       <button data-test-toggle-create-form=\\"\\" class=\\"mg-b-30\\">Hide create new member form</button>
       <div class=\\"panel mg-b-30 create-member\\">
         <form class=\\"form-layout\\">
-          <!--header-->
+          <!--0-->
           <ul class=\\"errors-panel\\">
             <li>Create member fail</li>
           </ul>
-          <!--if-->
-          <!--ErrorsPanel-->
+          <!--0-->
+          <!--1-->
           <div class=\\"form-group\\">
             <label>Name:</label>
             <input name=\\"name\\" type=\\"text\\" autofocus=\\"\\">
@@ -29,36 +29,37 @@ exports[`fail create member (500 status code) 1`] = `
           <div class=\\"form-group\\">
             <label></label>
             <label class=\\"checkbox\\">
-              <input name=\\"is_superuser\\" type=\\"checkbox\\" value=\\"false\\"><span>Is Superuser</span></label>
+              <input name=\\"is_superuser\\" type=\\"checkbox\\" value=\\"false\\"><span>Is Superuser</span>
+            </label>
           </div>
           <div class=\\"form-group\\">
             <label>Password:</label>
             <input name=\\"pass\\" type=\\"password\\">
           </div>
-          <!--default-->
-          <!--default-->
+          <!--0-->
+          <!--2-->
           <button type=\\"submit\\">
-            <!--if-->Create
-            <!--submit-->
+            <!--3-->Create
+            <!--4-->
           </button>
-          <!--footer-->
+          <!--5-->
         </form>
-        <!--FormContainer-->
-        <!--if-->
-        <!--FormWithConfirmModal-->
+        <!--0-->
+        <!--1-->
+        <!--0-->
       </div>
-      <!--if-->
+      <!--1-->
     </div>
     <div class=\\"container\\">
       <div class=\\"members-list\\">
         <div class=\\"panel\\">
           <div class=\\"pagination\\">
             <div class=\\"page-buttons\\">
-              <!--if-->
+              <!--0-->
               <button data-test-pagination-page=\\"1\\" disabled=\\"\\">1</button>
-              <!--if-->
+              <!--1-->
             </div>
-            <!--PaginationPages-->
+            <!--0-->
             <table>
               <thead>
                 <tr>
@@ -71,47 +72,47 @@ exports[`fail create member (500 status code) 1`] = `
               </thead>
               <tbody></tbody>
             </table>
-            <!--if-->
-            <!--MembersTable-->
-            <!--default-->
-            <!--if-->
+            <!--0-->
+            <!--0-->
+            <!--0-->
+            <!--1-->
             <div class=\\"page-buttons\\">
-              <!--if-->
+              <!--0-->
               <button data-test-pagination-page=\\"1\\" disabled=\\"\\">1</button>
-              <!--if-->
+              <!--1-->
             </div>
-            <!--PaginationPages-->
+            <!--2-->
           </div>
         </div>
       </div>
-      <!--if-->
+      <!--2-->
     </div>
   </div>
-  <!--body-->
+  <!--1-->
 </div>
-<!--if-->
-<!--Page-->
-<!--ActivePageContainer-->"
+<!--0-->
+<!--0-->
+<!--0-->"
 `;
 
 exports[`fail create member 1`] = `
 "<h4 class=\\"page-header\\"> Members
-  <!--header-->
+  <!--0-->
 </h4>
 <div class=\\"page-body\\">
   <div class=\\"members-page\\">
-    <!--if-->
-    <!--ErrorsPanel-->
+    <!--0-->
+    <!--0-->
     <div class=\\"container\\">
       <button data-test-toggle-create-form=\\"\\" class=\\"mg-b-30\\">Hide create new member form</button>
       <div class=\\"panel mg-b-30 create-member\\">
         <form class=\\"form-layout\\">
-          <!--header-->
+          <!--0-->
           <ul class=\\"errors-panel\\">
             <li>Can't create member</li>
           </ul>
-          <!--if-->
-          <!--ErrorsPanel-->
+          <!--0-->
+          <!--1-->
           <div class=\\"form-group\\">
             <label>Name:</label>
             <input name=\\"name\\" type=\\"text\\" autofocus=\\"\\">
@@ -123,36 +124,37 @@ exports[`fail create member 1`] = `
           <div class=\\"form-group\\">
             <label></label>
             <label class=\\"checkbox\\">
-              <input name=\\"is_superuser\\" type=\\"checkbox\\" value=\\"false\\"><span>Is Superuser</span></label>
+              <input name=\\"is_superuser\\" type=\\"checkbox\\" value=\\"false\\"><span>Is Superuser</span>
+            </label>
           </div>
           <div class=\\"form-group\\">
             <label>Password:</label>
             <input name=\\"pass\\" type=\\"password\\">
           </div>
-          <!--default-->
-          <!--default-->
+          <!--0-->
+          <!--2-->
           <button type=\\"submit\\">
-            <!--if-->Create
-            <!--submit-->
+            <!--3-->Create
+            <!--4-->
           </button>
-          <!--footer-->
+          <!--5-->
         </form>
-        <!--FormContainer-->
-        <!--if-->
-        <!--FormWithConfirmModal-->
+        <!--0-->
+        <!--1-->
+        <!--0-->
       </div>
-      <!--if-->
+      <!--1-->
     </div>
     <div class=\\"container\\">
       <div class=\\"members-list\\">
         <div class=\\"panel\\">
           <div class=\\"pagination\\">
             <div class=\\"page-buttons\\">
-              <!--if-->
+              <!--0-->
               <button data-test-pagination-page=\\"1\\" disabled=\\"\\">1</button>
-              <!--if-->
+              <!--1-->
             </div>
-            <!--PaginationPages-->
+            <!--0-->
             <table>
               <thead>
                 <tr>
@@ -165,25 +167,25 @@ exports[`fail create member 1`] = `
               </thead>
               <tbody></tbody>
             </table>
-            <!--if-->
-            <!--MembersTable-->
-            <!--default-->
-            <!--if-->
+            <!--0-->
+            <!--0-->
+            <!--0-->
+            <!--1-->
             <div class=\\"page-buttons\\">
-              <!--if-->
+              <!--0-->
               <button data-test-pagination-page=\\"1\\" disabled=\\"\\">1</button>
-              <!--if-->
+              <!--1-->
             </div>
-            <!--PaginationPages-->
+            <!--2-->
           </div>
         </div>
       </div>
-      <!--if-->
+      <!--2-->
     </div>
   </div>
-  <!--body-->
+  <!--1-->
 </div>
-<!--if-->
-<!--Page-->
-<!--ActivePageContainer-->"
+<!--0-->
+<!--0-->
+<!--0-->"
 `;

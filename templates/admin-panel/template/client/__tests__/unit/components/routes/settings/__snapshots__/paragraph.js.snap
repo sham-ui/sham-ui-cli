@@ -2,7 +2,6 @@
 
 exports[`default onUpdate options 1`] = `
 Object {
-  "Constructor": "RoutesSettingsParagraph",
   "Options": Object {
     "ID": "component",
     "directives": Object {
@@ -31,8 +30,8 @@ Object {
     <i class=\\"icon-pencil\\"></i>
   </a>
   <button data-test-dummy-button=\\"\\">Click me!</button>
-  <!--DynamicComponent-->
-  <!--if-->
+  <!--0-->
+  <!--0-->
 </p>
 ",
 }
@@ -40,7 +39,6 @@ Object {
 
 exports[`default onUpdate options 2`] = `
 Object {
-  "Constructor": "RoutesSettingsParagraph",
   "Options": Object {
     "ID": "component",
     "directives": Object {
@@ -68,7 +66,7 @@ Object {
   <a>
     <i class=\\"icon-pencil\\"></i>
   </a>
-  <!--if-->
+  <!--0-->
 </p>
 ",
 }
@@ -76,7 +74,6 @@ Object {
 
 exports[`renders correctly 1`] = `
 Object {
-  "Constructor": "RoutesSettingsParagraph",
   "Options": Object {
     "ID": "component",
     "directives": Object {
@@ -104,7 +101,7 @@ Object {
   <a>
     <i class=\\"icon-pencil\\"></i>
   </a>
-  <!--if-->
+  <!--0-->
 </p>
 ",
 }

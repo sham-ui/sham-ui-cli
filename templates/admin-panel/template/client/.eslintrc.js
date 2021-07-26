@@ -15,6 +15,9 @@ module.exports = {
         "sourceType": "module"
     },
     "globals": {
+        "Component": true,
+        "$": true,
+        "this$": true,
         "Template": true,
         "PRODUCTION": true
     },

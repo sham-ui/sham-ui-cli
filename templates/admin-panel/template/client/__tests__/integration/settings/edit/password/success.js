@@ -5,16 +5,16 @@ jest.mock( 'axios' );
 beforeEach( () => {
     jest.resetModules();
     jest.clearAllMocks();
-    setup();
 } );
 
 it( 'success edit password', async() => {
     expect.assertions( 6 );
 
     axios.useDefaultMocks();
+    const DI = setup();
 
     history.pushState( {}, '', 'http://client.example.com/settings/' );
-    await app.start();
+    await app.start( DI );
     app.click( '.panel.settings p:nth-of-type(3) .icon-pencil' );
     app.checkBody();
 

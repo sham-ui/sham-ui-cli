@@ -1,14 +1,14 @@
 <template>
-    {% import path from 'sham-ui-router/params' %}
+    {% import path from 'sham-ui-router/lib/params' %}
     {% import FormContainer from '../../FormContainer.sfc' %}
     {% import Logo from '../../Logo.sht' %}
 
     <div class="signup-page">
         <FormContainer
             submitText="Sign Up"
-            submit=\{{::this._submitForm}}
-            success=\{{::this._signUpSuccess}}
-            getErrors=\{{::this._getErrors}}
+            submit=\{{this$._submitForm}}
+            success=\{{this$._signUpSuccess}}
+            getErrors=\{{this$._getErrors}}
         >
             {% block 'header' %}
                 <Logo/>
@@ -42,42 +42,26 @@
 </template>
 
 <script>
-    import { inject, mergeWithTemplate } from 'sham-ui-macro/babel.macro';
+    function RoutesSignupPage( options, update, didMount ) {
+        didMount( () => this.DI.resolve( 'title' ).change( 'Sing Up' ) );
 
-    @mergeWithTemplate
-    class RoutesSignupPage extends Template {
-        /** @type Store */
-        @inject store;
-        @inject router;
-        @inject session;
+        this$._submitForm = formData => this.DI.resolve( 'store' ).signUp( {
+            name: formData.get( 'name' ).trim(),
+            email: formData.get( 'email' ).trim(),
+            password: formData.get( 'password' ),
+            password2: formData.get( 'password2' )
+        } );
 
-        /** @type Title */
-        @inject title;
-
-        didMount() {
-            this.title.change( 'Sing Up' );
-        }
-
-        _submitForm( formData ) {
-            return this.store.signUp( {
-                name: formData.get( 'name' ).trim(),
-                email: formData.get( 'email' ).trim(),
-                password: formData.get( 'password' ),
-                password2: formData.get( 'password2' )
-            } );
-        }
-
-        _signUpSuccess() {
-            this.session.resetSessionValidation();
-            this.router.navigate(
-                this.router.generate( 'home', {} )
+        this$._signUpSuccess = () => {
+            this.DI.resolve( 'session' ).resetSessionValidation();
+            const router = this.DI.resolve( 'router' );
+            router.navigate(
+                router.generate( 'home', {} )
             );
-        }
+        };
 
-        _getErrors( { Messages = [ 'Signup fail' ] } ) {
-            return Messages;
-        }
+        this$._getErrors = ( { Messages = [ 'Signup fail' ] } ) => Messages;
     }
 
-    export default RoutesSignupPage;
+    export default Component( Template, RoutesSignupPage );
 </script>

@@ -18,7 +18,7 @@ function renameFiles( files, metalsmith, done ) {
             const content = files[ file ].contents.toString();
             delete files[ file ];
             files[ res ] = {
-                contents: new Buffer( content )
+                contents: Buffer.from( content )
             };
             next();
         } );

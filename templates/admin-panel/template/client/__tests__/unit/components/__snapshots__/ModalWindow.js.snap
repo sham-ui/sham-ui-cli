@@ -2,11 +2,9 @@
 
 exports[`renders correctly 1`] = `
 Object {
-  "Constructor": "ModalWindow",
   "Options": Object {
     "ID": "component",
     "cancelText": "Cancel",
-    "closeIcon": "×",
     "dataSaving": false,
     "directives": Object {
       "EventListener": [Function],
@@ -29,7 +27,7 @@ Object {
   },
   "html": "
 <div class=\\"modal\\" data-test-modal=\\"\\"><span class=\\"close\\" title=\\"Close Modal\\" data-test-close-button=\\"\\">×</span>
-  <!--if-->
+  <!--0-->
   <div class=\\"modal-content\\">
     <div class=\\"container\\">
       <h4></h4>

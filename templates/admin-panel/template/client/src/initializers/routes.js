@@ -1,4 +1,3 @@
-import { DI } from 'sham-ui';
 import Router from 'sham-ui-router';
 {{#if signupEnabled}}
 import SignupPage from '../components/routes/signup/page.sfc';
@@ -6,8 +5,8 @@ import SignupPage from '../components/routes/signup/page.sfc';
 import LoginPage from '../components/routes/login/page.sfc';
 import HomePage from '../components/routes/home/page.sfc';
 
-export default function() {
-    const router = new Router( document.location.origin + '/' );
+export default function( DI ) {
+    const router = new Router( DI, document.location.origin + '/' );
 
     // Cached home page & login URL
     let homePageURL;
@@ -21,31 +20,19 @@ export default function() {
         .bindLazyPage(
             '/settings',
             'settings',
-            () => import(
-
-                /* webpackChunkName: "settings" */
-                '../components/routes/settings/page.sfc'
-            ),
+            () => import( '../components/routes/settings/page.sfc' ),
             {}
         )
         .bindLazyPage(
             '/members',
             'members/list',
-            () => import(
-
-                /* webpackChunkName: "su_members_list" */
-                '../components/routes/members/page.sfc'
-            ),
+            () => import( '../components/routes/members/page.sfc' ),
             {}
         )
         .bindLazyPage(
             '/server',
             'server-info',
-            () => import(
-
-                /* webpackChunkName: "su_server_info" */
-                '../components/routes/server-info/page.sfc'
-            ),
+            () => import( '../components/routes/server-info/page.sfc' ),
             {}
         )
         .bindPage( '', 'home', HomePage, {} )
@@ -68,7 +55,7 @@ export default function() {
                             // Authenticated member can't visit {{#if signupEnabled}}signup &{{/if}}login page
                             router.navigate( homePageURL );
                         } else {
-                            routerResolve();
+                            routerResolve( DI );
                         }
                     } else if (
                         (
@@ -84,7 +71,7 @@ export default function() {
                     } else {
                         done( isAuthenticated );
                         if ( isAuthenticated ) {
-                            routerResolve();
+                            routerResolve( DI );
                         } else {
 
                             // If non authenticated then redirects to login
@@ -100,7 +87,7 @@ export default function() {
     router.resolve();
 }
 
-function routerResolve() {
+function routerResolve( DI ) {
     const storage = DI.resolve( 'app:storage' );
     storage.routerResolved = true;
     storage.sync();

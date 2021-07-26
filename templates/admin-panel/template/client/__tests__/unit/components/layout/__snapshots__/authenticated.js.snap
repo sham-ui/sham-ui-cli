@@ -2,7 +2,6 @@
 
 exports[`renders correctly 1`] = `
 Object {
-  "Constructor": "LayoutAuthenticated",
   "Options": Object {
     "ID": "component",
     "directives": Object {
@@ -43,7 +42,7 @@ Object {
           <i class=\\"icon-home-outline menu-item-icon\\"></i><span class=\\"menu-item-label\\">Dashboard</span>
         </div>
       </a>
-      <!--if-->
+      <!--0-->
     </div>
   </div>
   <div class=\\"header\\">
@@ -75,7 +74,7 @@ Object {
     </div>
   </div>
   <div class=\\"mainpanel\\">
-    <!--ActivePageContainer-->
+    <!--0-->
   </div>
 </div>
 ",

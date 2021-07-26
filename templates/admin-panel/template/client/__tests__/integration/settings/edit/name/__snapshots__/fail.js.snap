@@ -13,7 +13,7 @@ exports[`fail edit name 1`] = `
           <i class=\\"icon-home-outline menu-item-icon\\"></i><span class=\\"menu-item-label\\">Dashboard</span>
         </div>
       </a>
-      <!--if-->
+      <!--0-->
     </div>
   </div>
   <div class=\\"header\\">
@@ -46,7 +46,7 @@ exports[`fail edit name 1`] = `
   </div>
   <div class=\\"mainpanel\\">
     <h4 class=\\"page-header\\"> Profile settings
-      <!--header-->
+      <!--0-->
     </h4>
     <div class=\\"page-body\\">
       <div class=\\"panel settings\\">
@@ -54,56 +54,56 @@ exports[`fail edit name 1`] = `
         <p class=\\"mg-b-30\\">John Smith<a>
             <i class=\\"icon-pencil\\"></i>
           </a>
-          <form class=\\"form-layout\\">
-            <!--header-->
-            <ul class=\\"errors-panel\\">
-              <li>Name must have more than 0 characters.</li>
-            </ul>
-            <!--if-->
-            <!--ErrorsPanel-->
-            <div class=\\"form-group\\">
-              <label>Name:</label>
-              <input name=\\"name\\" type=\\"text\\" autofocus=\\"\\">
-            </div>
-            <!--default-->
-            <!--default-->
-            <button type=\\"submit\\">
-              <!--if-->Update
-              <!--submit-->
-            </button>
-            <!--footer-->
-          </form>
-          <!--FormContainer-->
-          <!--if-->
-          <!--FormWithConfirmModal-->
-          <!--DynamicComponent-->
-          <!--if-->
+        <form class=\\"form-layout\\">
+          <!--0-->
+          <ul class=\\"errors-panel\\">
+            <li>Name must have more than 0 characters.</li>
+          </ul>
+          <!--0-->
+          <!--1-->
+          <div class=\\"form-group\\">
+            <label>Name:</label>
+            <input name=\\"name\\" type=\\"text\\" autofocus=\\"\\">
+          </div>
+          <!--0-->
+          <!--2-->
+          <button type=\\"submit\\">
+            <!--3-->Update
+            <!--4-->
+          </button>
+          <!--5-->
+        </form>
+        <!--0-->
+        <!--1-->
+        <!--0-->
+        <!--0-->
+        <!--0-->
         </p>
-        <!--Paragraph-->
+        <!--0-->
         <h6>Email</h6>
         <p class=\\"mg-b-30\\">j.smith@example.com<a>
             <i class=\\"icon-pencil\\"></i>
           </a>
-          <!--if-->
+          <!--0-->
         </p>
-        <!--Paragraph-->
+        <!--1-->
         <h6>Password</h6>
         <p class=\\"mg-b-0\\">******<a>
             <i class=\\"icon-pencil\\"></i>
           </a>
-          <!--if-->
+          <!--0-->
         </p>
-        <!--Paragraph-->
+        <!--2-->
       </div>
-      <!--body-->
+      <!--1-->
     </div>
-    <!--if-->
-    <!--Page-->
-    <!--ActivePageContainer-->
+    <!--0-->
+    <!--0-->
+    <!--0-->
   </div>
 </div>
-<!--LayoutAuthenticated-->
-<!--if-->
-<!--Layout-->
-<!--if-->"
+<!--0-->
+<!--0-->
+<!--0-->
+<!--0-->"
 `;

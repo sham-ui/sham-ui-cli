@@ -57,20 +57,17 @@
 </template>
 
 <script>
-    import { mergeWithTemplate, options } from 'sham-ui-macro/babel.macro';
     import { fileSize, duration } from './filters';
 
-    @mergeWithTemplate
-    class RuntimePanel extends Template {
-        constructor() {
-            super( ...arguments );
-            this.filters.fileSize = fileSize;
-            this.filters.duration = duration;
-        }
+    function RuntimePanel( options ) {
+        options( {
+            [ $.host ]: '',
+            [ $.runtime ]: {}
+        } );
 
-        @options host = '';
-        @options runtime = {};
+        this.filters.fileSize = fileSize;
+        this.filters.duration = duration;
     }
 
-    export default RuntimePanel;
+    export default Component( Template, RuntimePanel );
 </script>

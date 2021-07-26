@@ -1,16 +1,15 @@
-import { DI } from 'sham-ui';
+import { createDI } from 'sham-ui';
 import * as directives from 'sham-ui-directives';
-import hrefto from 'sham-ui-router/href-to';
+import hrefto from 'sham-ui-router/lib/href-to';
 import LayoutAuthenticated  from '../../../../src/components/layout/authenticated.sfc';
 import renderer, { compile } from 'sham-ui-test-helpers';
+import { storage } from '../../../../src/storages/session';
 
-afterEach( () => {
-    DI.resolve( 'session:storage' ).reset();
-    DI.bind( 'router', null );
-} );
 
 it( 'renders correctly', () => {
-    DI.resolve( 'session:storage' ).name = 'Test member';
+    const DI = createDI();
+
+    storage( DI ).name = 'Test member';
 
     DI.bind( 'router', {
         generate: jest.fn().mockReturnValue( '/' ),
@@ -22,6 +21,7 @@ it( 'renders correctly', () => {
     } );
 
     const meta = renderer( LayoutAuthenticated, {
+        DI,
         directives: {
             ...directives,
             hrefto

@@ -2,9 +2,9 @@
     {% import FormWithConfirmModal from '../../../FormWithConfirmModal.sfc' %}
 
     <FormWithConfirmModal
-        saveData=\{{::this._saveData}}
+        saveData=\{{this$._saveData}}
         onSuccess=\{{onUpdateSuccess}}
-        getErrors=\{{::this._getErrors}}
+        getErrors=\{{this$._getErrors}}
         confirmTitle="Change member data"
         confirmText="Are you sure you want to change member data?"
     >
@@ -27,33 +27,26 @@
 </template>
 
 <script>
-    import { mergeWithTemplate, options, inject } from 'sham-ui-macro/babel.macro';
+    function UpdateDataForm( options ) {
+        const member = $();
 
-    @mergeWithTemplate
-    class UpdateDataForm extends Template {
+        const state = options( {
+            [ member ]: {},
+            [ $.onUpdateSuccess ]() {}
+        } );
 
-        /** @type {Store} */
-        @inject store;
+        this$._saveData = formData => this.DI.resolve( 'store' ).api.request( {
+            url: `admin/members/${state[ member ].ID}`,
+            method: 'put',
+            data: {
+                name: formData.get( 'name' ).trim(),
+                email: formData.get( 'email' ).trim(),
+                is_superuser:  null !== formData.get( 'is_superuser' )
+            }
+        } );
 
-        @options member = {};
-        @options onUpdateSuccess() {}
-
-        _saveData( formData ) {
-            return this.store.api.request( {
-                url: `admin/members/${this.options.member.ID}`,
-                method: 'put',
-                data: {
-                    name: formData.get( 'name' ).trim(),
-                    email: formData.get( 'email' ).trim(),
-                    is_superuser:  null !== formData.get( 'is_superuser' )
-                }
-            } );
-        }
-
-        _getErrors( { Messages = [ 'Update member data fail' ] } ) {
-            return Messages;
-        }
+        this$._getErrors = ( { Messages = [ 'Update member data fail' ] } ) => Messages;
     }
 
-    export default UpdateDataForm;
+    export default Component( Template, UpdateDataForm );
 </script>

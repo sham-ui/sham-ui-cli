@@ -2,7 +2,6 @@
 
 exports[`cancel save 1`] = `
 Object {
-  "Constructor": "FormWithConfirmModal",
   "Options": Object {
     "ID": "component",
     "confirmCancelErrors": Object {
@@ -30,26 +29,25 @@ Object {
   },
   "html": "
 <form class=\\"form-layout\\">
-  <!--header-->
-  <!--if-->
-  <!--ErrorsPanel-->
-  <!--default-->
-  <!--default-->
+  <!--0-->
+  <!--0-->
+  <!--1-->
+  <!--0-->
+  <!--2-->
   <button type=\\"submit\\">
-    <!--if-->Update
-    <!--submit-->
+    <!--3-->Update
+    <!--4-->
   </button>
-  <!--footer-->
+  <!--5-->
 </form>
-<!--FormContainer-->
-<!--if-->
+<!--0-->
+<!--1-->
 ",
 }
 `;
 
 exports[`fail save 1`] = `
 Object {
-  "Constructor": "FormWithConfirmModal",
   "Options": Object {
     "ID": "component",
     "confirmCancelErrors": Object {
@@ -77,29 +75,28 @@ Object {
   },
   "html": "
 <form class=\\"form-layout\\">
-  <!--header-->
+  <!--0-->
   <ul class=\\"errors-panel\\">
     <li>Error test</li>
   </ul>
-  <!--if-->
-  <!--ErrorsPanel-->
-  <!--default-->
-  <!--default-->
+  <!--0-->
+  <!--1-->
+  <!--0-->
+  <!--2-->
   <button type=\\"submit\\">
-    <!--if-->Update
-    <!--submit-->
+    <!--3-->Update
+    <!--4-->
   </button>
-  <!--footer-->
+  <!--5-->
 </form>
-<!--FormContainer-->
-<!--if-->
+<!--0-->
+<!--1-->
 ",
 }
 `;
 
 exports[`renders correctly 1`] = `
 Object {
-  "Constructor": "FormWithConfirmModal",
   "Options": Object {
     "ID": "component",
     "confirmCancelErrors": Object {
@@ -127,26 +124,25 @@ Object {
   },
   "html": "
 <form class=\\"form-layout\\">
-  <!--header-->
-  <!--if-->
-  <!--ErrorsPanel-->
-  <!--default-->
-  <!--default-->
+  <!--0-->
+  <!--0-->
+  <!--1-->
+  <!--0-->
+  <!--2-->
   <button type=\\"submit\\">
-    <!--if-->Update
-    <!--submit-->
+    <!--3-->Update
+    <!--4-->
   </button>
-  <!--footer-->
+  <!--5-->
 </form>
-<!--FormContainer-->
-<!--if-->
+<!--0-->
+<!--1-->
 ",
 }
 `;
 
 exports[`success save 1`] = `
 Object {
-  "Constructor": "FormWithConfirmModal",
   "Options": Object {
     "ID": "component",
     "confirmCancelErrors": Object {
@@ -174,11 +170,11 @@ Object {
   },
   "html": "
 <form class=\\"form-layout\\">
-  <!--header-->
-  <!--if-->
-  <!--ErrorsPanel-->
-  <!--default-->
-  <!--default-->
+  <!--0-->
+  <!--0-->
+  <!--1-->
+  <!--0-->
+  <!--2-->
   <button type=\\"submit\\" disabled=\\"\\">
     <div class=\\"sk-cube-grid\\">
       <div class=\\"sk-cube sk-cube1\\"></div>
@@ -191,15 +187,15 @@ Object {
       <div class=\\"sk-cube sk-cube8\\"></div>
       <div class=\\"sk-cube sk-cube9\\"></div>
     </div>
-    <!--CubeAnimation-->
-    <!--if-->Update
-    <!--submit-->
+    <!--0-->
+    <!--3-->Update
+    <!--4-->
   </button>
-  <!--footer-->
+  <!--5-->
 </form>
-<!--FormContainer-->
+<!--0-->
 <div class=\\"modal\\" data-test-modal=\\"\\"><span class=\\"close\\" title=\\"Close Modal\\" data-test-close-button=\\"\\">×</span>
-  <!--if-->
+  <!--0-->
   <div class=\\"modal-content\\">
     <div class=\\"container\\">
       <h4></h4>
@@ -211,15 +207,14 @@ Object {
     </div>
   </div>
 </div>
-<!--ModalWindow-->
-<!--if-->
+<!--0-->
+<!--1-->
 ",
 }
 `;
 
 exports[`success save 2`] = `
 Object {
-  "Constructor": "FormWithConfirmModal",
   "Options": Object {
     "ID": "component",
     "confirmCancelErrors": Object {
@@ -259,11 +254,11 @@ Object {
   },
   "html": "
 <form class=\\"form-layout\\">
-  <!--header-->
-  <!--if-->
-  <!--ErrorsPanel-->
-  <!--default-->
-  <!--default-->
+  <!--0-->
+  <!--0-->
+  <!--1-->
+  <!--0-->
+  <!--2-->
   <button type=\\"submit\\" disabled=\\"\\">
     <div class=\\"sk-cube-grid\\">
       <div class=\\"sk-cube sk-cube1\\"></div>
@@ -276,14 +271,14 @@ Object {
       <div class=\\"sk-cube sk-cube8\\"></div>
       <div class=\\"sk-cube sk-cube9\\"></div>
     </div>
-    <!--CubeAnimation-->
-    <!--if-->Update
-    <!--submit-->
+    <!--0-->
+    <!--3-->Update
+    <!--4-->
   </button>
-  <!--footer-->
+  <!--5-->
 </form>
-<!--FormContainer-->
-<!--if-->
+<!--0-->
+<!--1-->
 ",
 }
 `;

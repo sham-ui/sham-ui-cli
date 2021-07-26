@@ -1,3 +1,11 @@
+## 5.0.0-alpha.0
+* Fix close icon in ModalWindow 
+* Add support custom per-project blueprints [#98](https://github.com/sham-ui/sham-ui-cli/issues/98)
+* Fix `Buffer()` deprecation
+* Add more logging in `admin-panel` server
+* Migrate admin-panel server to go1.16 &` go:embeded`
+* Fix icons in admin-panel (UTF-8 encoding for index.html)
+
 ## 4.4.2
 * Fix close icon in ModalWindow 
 

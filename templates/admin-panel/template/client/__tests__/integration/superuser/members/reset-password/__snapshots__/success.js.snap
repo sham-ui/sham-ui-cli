@@ -2,26 +2,26 @@
 
 exports[`success reset member password 1`] = `
 "<h4 class=\\"page-header\\"> Members
-  <!--header-->
+  <!--0-->
 </h4>
 <div class=\\"page-body\\">
   <div class=\\"members-page\\">
-    <!--if-->
-    <!--ErrorsPanel-->
+    <!--0-->
+    <!--0-->
     <div class=\\"container\\">
       <button data-test-toggle-create-form=\\"\\" class=\\"mg-b-30\\">Show create new member form</button>
-      <!--if-->
+      <!--1-->
     </div>
     <div class=\\"container\\">
       <div class=\\"members-list\\">
         <div class=\\"panel\\">
           <div class=\\"pagination\\">
             <div class=\\"page-buttons\\">
-              <!--if-->
+              <!--0-->
               <button data-test-pagination-page=\\"1\\" disabled=\\"\\">1</button>
-              <!--if-->
+              <!--1-->
             </div>
-            <!--PaginationPages-->
+            <!--0-->
             <table>
               <thead>
                 <tr>
@@ -45,16 +45,16 @@ exports[`success reset member password 1`] = `
                 </tr>
               </tbody>
             </table>
-            <!--if-->
-            <!--MembersTable-->
-            <!--default-->
-            <!--if-->
+            <!--0-->
+            <!--0-->
+            <!--0-->
+            <!--1-->
             <div class=\\"page-buttons\\">
-              <!--if-->
+              <!--0-->
               <button data-test-pagination-page=\\"1\\" disabled=\\"\\">1</button>
-              <!--if-->
+              <!--1-->
             </div>
-            <!--PaginationPages-->
+            <!--2-->
           </div>
         </div>
       </div>
@@ -62,9 +62,9 @@ exports[`success reset member password 1`] = `
         <div class=\\"panel\\">
           <h6>Member data</h6>
           <form class=\\"form-layout\\">
-            <!--header-->
-            <!--if-->
-            <!--ErrorsPanel-->
+            <!--0-->
+            <!--0-->
+            <!--1-->
             <div class=\\"form-group\\">
               <label>Name:</label>
               <input name=\\"name\\" type=\\"text\\" autofocus=\\"\\">
@@ -76,25 +76,26 @@ exports[`success reset member password 1`] = `
             <div class=\\"form-group\\">
               <label></label>
               <label class=\\"checkbox\\">
-                <input name=\\"is_superuser\\" type=\\"checkbox\\" value=\\"false\\"><span>Is Superuser</span></label>
+                <input name=\\"is_superuser\\" type=\\"checkbox\\" value=\\"false\\"><span>Is Superuser</span>
+              </label>
             </div>
-            <!--default-->
-            <!--default-->
+            <!--0-->
+            <!--2-->
             <button type=\\"submit\\">
-              <!--if-->Update
-              <!--submit-->
+              <!--3-->Update
+              <!--4-->
             </button>
-            <!--footer-->
+            <!--5-->
           </form>
-          <!--FormContainer-->
-          <!--if-->
-          <!--FormWithConfirmModal-->
-          <!--UpdateDataForm-->
+          <!--0-->
+          <!--1-->
+          <!--0-->
+          <!--0-->
           <h6 class=\\"mg-t-30\\">Member password</h6>
           <form class=\\"form-layout\\">
-            <!--header-->
-            <!--if-->
-            <!--ErrorsPanel-->
+            <!--0-->
+            <!--0-->
+            <!--1-->
             <div class=\\"form-group\\">
               <label>Password:</label>
               <input name=\\"pass1\\" type=\\"password\\" autofocus=\\"\\">
@@ -103,52 +104,52 @@ exports[`success reset member password 1`] = `
               <label>Confirm password:</label>
               <input name=\\"pass2\\" type=\\"password\\">
             </div>
-            <!--default-->
-            <!--default-->
+            <!--0-->
+            <!--2-->
             <button type=\\"submit\\">
-              <!--if-->Update
-              <!--submit-->
+              <!--3-->Update
+              <!--4-->
             </button>
-            <!--footer-->
+            <!--5-->
           </form>
-          <!--FormContainer-->
-          <!--if-->
-          <!--FormWithConfirmModal-->
-          <!--UpdatePasswordForm-->
+          <!--0-->
+          <!--1-->
+          <!--0-->
+          <!--1-->
         </div>
       </div>
-      <!--if-->
+      <!--2-->
     </div>
   </div>
-  <!--body-->
+  <!--1-->
 </div>
-<!--if-->
-<!--Page-->
-<!--ActivePageContainer-->"
+<!--0-->
+<!--0-->
+<!--0-->"
 `;
 
 exports[`success reset member password 2`] = `
 "<h4 class=\\"page-header\\"> Members
-  <!--header-->
+  <!--0-->
 </h4>
 <div class=\\"page-body\\">
   <div class=\\"members-page\\">
-    <!--if-->
-    <!--ErrorsPanel-->
+    <!--0-->
+    <!--0-->
     <div class=\\"container\\">
       <button data-test-toggle-create-form=\\"\\" class=\\"mg-b-30\\">Show create new member form</button>
-      <!--if-->
+      <!--1-->
     </div>
     <div class=\\"container\\">
       <div class=\\"members-list\\">
         <div class=\\"panel\\">
           <div class=\\"pagination\\">
             <div class=\\"page-buttons\\">
-              <!--if-->
+              <!--0-->
               <button data-test-pagination-page=\\"1\\" disabled=\\"\\">1</button>
-              <!--if-->
+              <!--1-->
             </div>
-            <!--PaginationPages-->
+            <!--0-->
             <table>
               <thead>
                 <tr>
@@ -172,25 +173,25 @@ exports[`success reset member password 2`] = `
                 </tr>
               </tbody>
             </table>
-            <!--if-->
-            <!--MembersTable-->
-            <!--default-->
-            <!--if-->
+            <!--0-->
+            <!--0-->
+            <!--0-->
+            <!--1-->
             <div class=\\"page-buttons\\">
-              <!--if-->
+              <!--0-->
               <button data-test-pagination-page=\\"1\\" disabled=\\"\\">1</button>
-              <!--if-->
+              <!--1-->
             </div>
-            <!--PaginationPages-->
+            <!--2-->
           </div>
         </div>
       </div>
-      <!--if-->
+      <!--2-->
     </div>
   </div>
-  <!--body-->
+  <!--1-->
 </div>
-<!--if-->
-<!--Page-->
-<!--ActivePageContainer-->"
+<!--0-->
+<!--0-->
+<!--0-->"
 `;

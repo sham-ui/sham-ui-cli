@@ -28,57 +28,42 @@
 </template>
 
 <script>
-    import { mergeWithTemplate, options, inject } from 'sham-ui-macro/babel.macro';
+    function RoutesServerInfoPage( options, update, didMount ) {
+        const pageTitle = $();
+        const dataLoaded = $();
+        const errors = $();
+        const host = $();
+        const runtime = $();
+        const files = $();
 
-    @mergeWithTemplate
-    class RoutesServerInfoPage extends Template {
+        const state = options( {
+            [ pageTitle ]: 'Server information',
+            [ dataLoaded ]: false,
+            [ errors ]: [],
+            [ host ]: '',
+            [ runtime ]: {},
+            [ files ]: []
+        } );
 
-        /** @type Store */
-        @inject store;
-
-        /** @type Title */
-        @inject title;
-
-        @options pageTitle = 'Server information';
-        @options dataLoaded = false;
-        @options get errors() {
-            return [];
-        }
-        @options host = '';
-        @options runtime = {};
-        @options files = [];
-
-        didMount() {
-            this.title.change( this.options.pageTitle );
-            this._loadData();
-        }
-
-        _loadData() {
-            this.update( {
-                dataLoaded: false
+        didMount( () => {
+            this.DI.resolve( 'title' ).change( state[ pageTitle ] );
+            update( {
+                [ dataLoaded ]: false
             } );
-            this.store.api.request( { url: 'admin/server-info' } ).then(
-                ::this._loadDataSuccess,
-                ::this._loadDataFail
+            this.DI.resolve( 'store' ).api.request( { url: 'admin/server-info' } ).then(
+                info => update( {
+                    [ dataLoaded ]: true,
+                    [ host ]: info.Host,
+                    [ runtime ]: info.Runtime,
+                    [ files ]: info.Files
+                } ),
+                ( { Messages = [ 'Fail load accounting info' ] } ) => update( {
+                    [ dataLoaded ]: true,
+                    [ errors ]: Messages
+                } )
             );
-        }
-
-        _loadDataSuccess( info ) {
-            this.update( {
-                host: info.Host,
-                runtime: info.Runtime,
-                files: info.Files,
-                dataLoaded: true
-            } );
-        }
-
-        _loadDataFail( { Messages = [ 'Fail load accounting info' ] } ) {
-            this.update( {
-                dataLoaded: true,
-                errors: Messages
-            } );
-        }
+        } );
     }
 
-    export default RoutesServerInfoPage;
+    export default Component( Template, RoutesServerInfoPage );
 </script>

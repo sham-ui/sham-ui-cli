@@ -1,12 +1,10 @@
-import { DI } from 'sham-ui';
+import { createDI } from 'sham-ui';
 import LayoutMain  from '../../../../src/components/layout/main.sfc';
 import renderer, { compile } from 'sham-ui-test-helpers';
 
-afterEach( () => {
-    DI.bind( 'router', null );
-} );
-
 it( 'renders correctly', () => {
+    const DI = createDI();
+
     DI.bind( 'router', {
         generate: jest.fn().mockReturnValueOnce( '/' ),
         activePageComponent: compile``,
@@ -15,6 +13,6 @@ it( 'renders correctly', () => {
         }
     } );
 
-    const meta = renderer( LayoutMain, {} );
+    const meta = renderer( LayoutMain, { DI } );
     expect( meta.toJSON() ).toMatchSnapshot();
 } );

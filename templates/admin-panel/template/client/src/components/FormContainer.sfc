@@ -2,7 +2,7 @@
     {% import ErrorsPanel from './ErrorsPanel.sht' %}
     {% import CubeAnimation from 'sham-ui-cube-animation' %}
 
-    <form class=\{{formClass}} :onsubmit=\{{::this._submitForm}} :ref="formNode">
+    <form class=\{{formClass}} :onsubmit=\{{this$._submitForm}} :ref="formNode">
         {% defblock 'header' %}
 
         <ErrorsPanel errors=\{{errors}}/>
@@ -23,45 +23,42 @@
 </template>
 
 <script>
-    import { options, mergeWithTemplate } from 'sham-ui-macro/babel.macro';
+    function FormContainer( options, update ) {
+        const dataSaving = $();
+        const errors = $();
+        const success = $();
+        const getErrors = $();
 
-    @mergeWithTemplate
-    class FormContainer extends Template {
-        @options dataSaving = false;
-        @options formClass = 'form';
-        @options get errors() {
-            return [];
-        }
+        const state = options( {
+            [ dataSaving ]: false,
+            [ errors ]: [],
+            [ $.formClass ]: 'form',
+            [ $.submitText ]: '',
+            [ $.submit ]() {
+                return Promise.resolve();
+            },
+            [ success ]() {},
+            [ getErrors ]() {
+                return [];
+            }
+        } );
 
-        @options submitText = '';
-        @options submit() {
-            return Promise.resolve();
-        }
-        @options success() {}
-        @options getErrors() {
-            return [];
-        }
-
-        _submitForm( e ) {
+        this$._submitForm = ( e ) => {
             e.preventDefault();
             this.update( {
-                dataSaving: true,
-                errors: []
+                [ dataSaving ]: true,
+                [ errors ]: []
             } );
             const formData = new FormData( this.formNode );
             this.options.submit( formData ).then(
-                ( ...args ) => this.options.success( ...args ),
-                ::this._submitFormFail
+                ( ...args ) => state[ success ]( ...args ),
+                error => update( {
+                    [ dataSaving ]: false,
+                    [ errors ]: state[ getErrors ]( error )
+                } )
             );
-        }
-
-        _submitFormFail( error ) {
-            this.update( {
-                dataSaving: false,
-                errors: this.options.getErrors( error )
-            } );
-        }
+        };
     }
 
-    export default FormContainer;
+    export default Component( Template, FormContainer );
 </script>

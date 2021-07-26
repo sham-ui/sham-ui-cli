@@ -6,7 +6,6 @@
                 <tr>
                     <th>File</th>
                     <th>Size</th>
-                    <th>Modification time</th>
                 </tr>
             </thead>
             <tbody>
@@ -14,7 +13,6 @@
                     <tr>
                         <td>\{{file.Name}}</td>
                         <td>\{{file.Size | fileSize}}</td>
-                        <td>\{{file.ModTime}}</td>
                     </tr>
                 {% endfor %}
             </tbody>
@@ -23,18 +21,15 @@
 </template>
 
 <script>
-    import { mergeWithTemplate, options } from 'sham-ui-macro/babel.macro';
     import { fileSize } from './filters';
 
-    @mergeWithTemplate
-    class AssetsPanel extends Template {
-        constructor() {
-            super( ...arguments );
-            this.filters.fileSize = fileSize;
-        }
+    function AssetsPanel( options ) {
+        options( {
+            [ $.files ]: []
+        } );
 
-        @options files = [];
+        this.filters.fileSize = fileSize;
     }
 
-    export default AssetsPanel;
+    export default Component( Template, AssetsPanel );
 </script>

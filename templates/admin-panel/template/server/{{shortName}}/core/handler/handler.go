@@ -36,7 +36,7 @@ func (h *Handler) Handler(w http.ResponseWriter, r *http.Request) {
 	}
 	data, err := h.Interface.ExtractData(ctx)
 	if nil != err {
-		log.Debugf("can't extract data: %s", err)
+		log.Infof("can't extract data: %s", err)
 		ctx.RespondWithError(http.StatusBadRequest)
 		return
 	}
@@ -47,6 +47,7 @@ func (h *Handler) Handler(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 	if !validation.IsValid {
+		log.WithField("errors", validation.Errors).Info("data not valid")
 		ctx.RespondWithError(http.StatusBadRequest, validation.Errors...)
 		return
 	}

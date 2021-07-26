@@ -5,12 +5,12 @@ jest.mock( 'axios' );
 beforeEach( () => {
     jest.resetModules();
     jest.clearAllMocks();
-    setup();
 } );
 
 it( 'can go from home', async() => {
     expect.assertions( 2 );
 
+    const DI = setup();
     axios
         .useDefaultMocks()
         .use( 'get', '/validsession', {
@@ -26,7 +26,7 @@ it( 'can go from home', async() => {
             }
         } );
 
-    await app.start();
+    await app.start( DI );
     app.click( '.sideleft .icon-users' );
     await app.waitRendering();
     app.checkBody();

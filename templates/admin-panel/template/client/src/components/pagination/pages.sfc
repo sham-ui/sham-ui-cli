@@ -1,6 +1,6 @@
 <template>
     <div class="page-buttons">
-        {% for item of this.items( pages ) %}
+        {% for item of pages | pageItems %}
             {% if item.showAsLast %}
                 ...
             {% endif %}
@@ -19,24 +19,21 @@
 </template>
 
 <script>
-    import { mergeWithTemplate, options } from 'sham-ui-macro/babel.macro';
+    function PaginationPages( options ) {
+        options( {
+            [ $.pages ]: [],
+            [ $.currentPage ]: 1,
+            [ $.goToPage ]() {}
+        } );
 
-    @mergeWithTemplate
-    class PaginationPages extends Template {
-        @options pages = [];
-        @options currentPage = 1;
-        @options goToPage() {}
-
-        items( pages ) {
-            return pages.map(
-                ( page, index, enumerable ) => ( {
-                    page,
-                    showAsFirst: ( enumerable[ index + 1 ] || page ) - page > 1,
-                    showAsLast: index > 0 && ( enumerable[ index - 1 ] - page > 1 )
-                } )
-            );
-        }
+        this.filters.pageItems = pages => pages.map(
+            ( page, index, enumerable ) => ( {
+                page,
+                showAsFirst: ( enumerable[ index + 1 ] || page ) - page > 1,
+                showAsLast: index > 0 && ( enumerable[ index - 1 ] - page > 1 )
+            } )
+        );
     }
 
-    export default PaginationPages;
+    export default Component( Template, PaginationPages );
 </script>

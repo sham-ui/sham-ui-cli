@@ -2,7 +2,6 @@
 
 exports[`pages 1`] = `
 Object {
-  "Constructor": "PaginationIndex",
   "Options": Object {
     "ID": "component",
     "currentPage": 1,
@@ -28,31 +27,31 @@ Object {
   "html": "
 <div class=\\"pagination\\">
   <div class=\\"page-buttons\\">
-    <!--if-->
+    <!--0-->
     <button data-test-pagination-page=\\"1\\" disabled=\\"\\">1</button>
-    <!--if-->
-    <!--if-->
+    <!--1-->
+    <!--0-->
     <button data-test-pagination-page=\\"2\\">2</button>
-    <!--if-->
-    <!--if-->
+    <!--1-->
+    <!--0-->
     <button data-test-pagination-page=\\"3\\">3</button>
-    <!--if-->
+    <!--1-->
   </div>
-  <!--PaginationPages-->
-  <!--default-->
-  <!--if-->
+  <!--0-->
+  <!--0-->
+  <!--1-->
   <div class=\\"page-buttons\\">
-    <!--if-->
+    <!--0-->
     <button data-test-pagination-page=\\"1\\" disabled=\\"\\">1</button>
-    <!--if-->
-    <!--if-->
+    <!--1-->
+    <!--0-->
     <button data-test-pagination-page=\\"2\\">2</button>
-    <!--if-->
-    <!--if-->
+    <!--1-->
+    <!--0-->
     <button data-test-pagination-page=\\"3\\">3</button>
-    <!--if-->
+    <!--1-->
   </div>
-  <!--PaginationPages-->
+  <!--2-->
 </div>
 ",
 }
@@ -60,7 +59,6 @@ Object {
 
 exports[`renders correctly 1`] = `
 Object {
-  "Constructor": "PaginationIndex",
   "Options": Object {
     "ID": "component",
     "currentPage": 1,
@@ -85,19 +83,19 @@ Object {
   "html": "
 <div class=\\"pagination\\">
   <div class=\\"page-buttons\\">
-    <!--if-->
+    <!--0-->
     <button data-test-pagination-page=\\"1\\" disabled=\\"\\">1</button>
-    <!--if-->
+    <!--1-->
   </div>
-  <!--PaginationPages-->
-  <!--default-->
-  <!--if-->
+  <!--0-->
+  <!--0-->
+  <!--1-->
   <div class=\\"page-buttons\\">
-    <!--if-->
+    <!--0-->
     <button data-test-pagination-page=\\"1\\" disabled=\\"\\">1</button>
-    <!--if-->
+    <!--1-->
   </div>
-  <!--PaginationPages-->
+  <!--2-->
 </div>
 ",
 }

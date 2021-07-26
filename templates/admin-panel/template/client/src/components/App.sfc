@@ -11,13 +11,7 @@
 </template>
 
 <script>
-    import { mergeWithTemplate } from 'sham-ui-macro/babel.macro';
     import { useStorage } from '../storages/app';
 
-    @mergeWithTemplate
-    class App extends Template {
-
-    }
-
-    export default useStorage( 'appState' )( App );
+    export default Component( Template, useStorage( $.appState ) );
 </script>

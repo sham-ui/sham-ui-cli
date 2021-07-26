@@ -2,7 +2,6 @@
 
 exports[`renders correctly 1`] = `
 Object {
-  "Constructor": "AssetsPanel",
   "Options": Object {
     "ID": "component",
     "files": Array [],
@@ -15,7 +14,6 @@ Object {
       <tr>
         <th>File</th>
         <th>Size</th>
-        <th>Modification time</th>
       </tr>
     </thead>
     <tbody></tbody>

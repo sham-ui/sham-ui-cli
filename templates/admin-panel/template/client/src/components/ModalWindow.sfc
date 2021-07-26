@@ -3,7 +3,7 @@
 
     <div class="modal" data-test-modal>
         {% if !dataSaving %}
-            <span :onclick=\{{::this._closeClick}} class="close" title="Close Modal" data-test-close-button>\{{closeIcon}}</span>
+            <span :onclick=\{{this$._closeClick}} class="close" title="Close Modal" data-test-close-button>&times;</span>
         {% endif %}
         <div class="modal-content">
             <div class="container">
@@ -14,10 +14,10 @@
                     {% if dataSaving %}
                         <CubeAnimation />
                     {% else %}
-                        <button :onclick=\{{::this._okClick}} data-test-ok-button class=\{{isDanger ? "btn-danger" : ""}}>
+                        <button :onclick=\{{this$._okClick}} data-test-ok-button class=\{{isDanger ? "btn-danger" : ""}}>
                             \{{okText}}
                         </button>
-                        <button class="btn-secondary" :onclick=\{{::this._closeClick}} data-test-cancel-button>
+                        <button class="btn-secondary" :onclick=\{{this$._closeClick}} data-test-cancel-button>
                             \{{cancelText}}
                         </button>
                     {% endif %}
@@ -28,38 +28,36 @@
 </template>
 
 <script>
-    import { mergeWithTemplate, options } from 'sham-ui-macro/babel.macro';
+    function ModalWindow( options, update ) {
+        const dataSaving = $();
+        const onOk = $();
+        const onClose = $();
 
-    @mergeWithTemplate
-    class ModalWindow extends Template {
-        @options title = '';
-        @options text = '';
-        @options cancelText = 'Cancel';
-        @options okText = 'Ok';
-        @options isDanger = false;
-        @options dataSaving = false;
+        const state = options( {
+            [ $.title ]: '',
+            [ $.text ]: '',
+            [ $.cancelText ]: 'Cancel',
+            [ $.okText ]: 'Ok',
+            [ $.isDanger ]: false,
+            [ dataSaving ]: false,
+            [ onOk ]() {},
+            [ onClose ]() {}
+        } );
 
-        @options onOk() {}
-        @options onClose() {}
+        const enableSaving = () => update( {
+            [ dataSaving ]: true
+        } );
 
-        @options closeIcon = String.fromCharCode( 0xd7 );
+        this$._okClick = () => {
+            enableSaving();
+            state[ onOk ]();
+        };
 
-        _enableSaving() {
-            this.update( {
-                dataSaving: true
-            } );
-        }
-
-        _okClick() {
-            this._enableSaving();
-            this.options.onOk();
-        }
-
-        _closeClick() {
-            this._enableSaving();
-            this.options.onClose();
-        }
+        this$._closeClick = () => {
+            enableSaving();
+            state[ onClose ]();
+        };
     }
 
-    export default ModalWindow;
+    export default Component( Template, ModalWindow );
 </script>

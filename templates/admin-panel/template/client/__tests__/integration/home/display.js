@@ -5,7 +5,6 @@ jest.mock( 'axios' );
 beforeEach( () => {
     jest.resetModules();
     jest.clearAllMocks();
-    setup();
     window.matchMedia = jest.fn().mockImplementation(
         () => ( {
             addListener: jest.fn(),
@@ -22,7 +21,9 @@ it( 'display', async() => {
     expect.assertions( 2 );
 
     axios.useDefaultMocks();
-    await app.start();
+    const DI = setup();
+
+    await app.start( DI );
     app.checkBody();
     expect( window.location.href ).toBe( 'http://client.example.com/' );
 } );

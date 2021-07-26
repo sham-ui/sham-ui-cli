@@ -2,7 +2,6 @@
 
 exports[`renders correctly 1`] = `
 Object {
-  "Constructor": "FormContainer",
   "Options": Object {
     "ID": "component",
     "dataSaving": false,
@@ -27,15 +26,15 @@ Object {
   },
   "html": "
 <form class=\\"form\\">
-  <!--header-->
-  <!--if-->
-  <!--ErrorsPanel-->
-  <!--default-->
+  <!--0-->
+  <!--0-->
+  <!--1-->
+  <!--2-->
   <button type=\\"submit\\">
-    <!--if-->
-    <!--submit-->
+    <!--3-->
+    <!--4-->
   </button>
-  <!--footer-->
+  <!--5-->
 </form>
 ",
 }
@@ -43,7 +42,6 @@ Object {
 
 exports[`submit fail 1`] = `
 Object {
-  "Constructor": "FormContainer",
   "Options": Object {
     "ID": "component",
     "dataSaving": false,
@@ -85,15 +83,15 @@ Object {
   },
   "html": "
 <form class=\\"form\\">
-  <!--header-->
-  <!--if-->
-  <!--ErrorsPanel-->
-  <!--default-->
+  <!--0-->
+  <!--0-->
+  <!--1-->
+  <!--2-->
   <button type=\\"submit\\">
-    <!--if-->
-    <!--submit-->
+    <!--3-->
+    <!--4-->
   </button>
-  <!--footer-->
+  <!--5-->
 </form>
 ",
 }

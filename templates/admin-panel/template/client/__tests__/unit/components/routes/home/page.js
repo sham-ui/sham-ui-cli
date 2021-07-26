@@ -1,18 +1,17 @@
-import { DI } from 'sham-ui';
+import { createDI } from 'sham-ui';
 import RoutesHomePage  from '../../../../../src/components/routes/home/page.sfc';
+import { storage } from '../../../../../src/storages/session';
 import renderer from 'sham-ui-test-helpers';
 
-afterEach( () => {
-    DI.resolve( 'session:storage' ).reset();
-} );
-
-
 it( 'renders correctly', () => {
+    const DI = createDI();
     DI.bind( 'title', {
         change() {}
     } );
-    DI.resolve( 'session:storage' ).sessionValidated = true;
+    storage( DI ).sessionValidated = true;
 
-    const meta = renderer( RoutesHomePage, {} );
+    const meta = renderer( RoutesHomePage, {
+        DI
+    } );
     expect( meta.toJSON() ).toMatchSnapshot();
 } );

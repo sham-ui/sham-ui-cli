@@ -16,13 +16,12 @@
 </template>
 
 <script>
-    import { mergeWithTemplate, options } from 'sham-ui-macro/babel.macro';
-
-    @mergeWithTemplate
-    class MembersDetail extends Template {
-        @options onUpdateSuccess() {}
-        @options member = {};
+    function MembersDetail( options )  {
+        options( {
+            [ $.onUpdateSuccess ]() {},
+            [ $.member ]: {}
+        } );
     }
 
-    export default MembersDetail;
+    export default Component( Template, MembersDetail );
 </script>

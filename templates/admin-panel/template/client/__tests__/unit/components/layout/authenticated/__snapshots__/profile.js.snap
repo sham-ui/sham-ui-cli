@@ -2,7 +2,6 @@
 
 exports[`renders correctly 1`] = `
 Object {
-  "Constructor": "LayoutAuthenticatedProfile",
   "Options": Object {
     "ID": "component",
     "directives": Object {

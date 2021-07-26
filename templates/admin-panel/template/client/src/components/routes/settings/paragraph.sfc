@@ -4,48 +4,47 @@
     <h6>\{{title}}</h6>
     <p class=\{{paragraphClassName}}>
         \{{value}}
-        <a :onclick=\{{::this.editClick}}>
+        <a :onclick=\{{this$.editClick}}>
             <i class="icon-pencil"></i>
         </a>
+
         {% if editFormVisible %}
             <DynamicComponent
                 component=\{{form}}
                 value=\{{value}}
-                onUpdateSuccess=\{{::this._onUpdateValue}}
+                onUpdateSuccess=\{{this$._onUpdateValue}}
             />
         {% endif %}
     </p>
 </template>
 
 <script>
-    import { mergeWithTemplate, options } from 'sham-ui-macro/babel.macro';
+    function RoutesSettingsParagraph( options, update ) {
+        const editFormVisible = $();
+        const onUpdateValue = $();
 
-    @mergeWithTemplate
-    class RoutesSettingsParagraph extends Template {
-        @options paragraphClassName = 'mg-b-0';
-        @options title = '';
-        @options value = '';
-        @options editFormVisible = false;
-        @options onUpdateValue( toggle ) {
-            toggle();
-        }
-        @options form = null;
+        const state = options( {
+            [ $.paragraphClassName ]: 'mg-b-0',
+            [ $.title ]: '',
+            [ $.value ]: '',
+            [ editFormVisible ]: false,
+            [ onUpdateValue ]( toggle ) {
+                toggle();
+            },
+            [ $.form ]: null
+        } );
 
-        editClick( e ) {
+        this$.editClick = e => {
             e.stopPropagation();
-            this._toggleEdit();
-        }
+            toggleEdit();
+        };
 
-        _toggleEdit() {
-            this.update( {
-                editFormVisible: !this.options.editFormVisible
-            } );
-        }
+        const toggleEdit = () => update( {
+            [ editFormVisible ]: !state[ editFormVisible ]
+        } );
 
-        _onUpdateValue() {
-            this.options.onUpdateValue( ::this._toggleEdit );
-        }
+        this$._onUpdateValue = () => state[ onUpdateValue ]( toggleEdit );
     }
 
-    export default RoutesSettingsParagraph;
+    export default Component( Template, RoutesSettingsParagraph );
 </script>

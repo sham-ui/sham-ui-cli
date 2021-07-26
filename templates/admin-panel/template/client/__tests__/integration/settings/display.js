@@ -5,16 +5,16 @@ jest.mock( 'axios' );
 beforeEach( () => {
     jest.resetModules();
     jest.clearAllMocks();
-    setup();
 } );
 
 it( 'display', async() => {
     expect.assertions( 2 );
 
+    const DI = setup();
     axios.useDefaultMocks();
 
     history.pushState( {}, '', 'http://client.example.com/settings/' );
-    await app.start();
+    await app.start( DI );
     app.checkBody();
     expect( window.location.href ).toBe( 'http://client.example.com/settings/' );
 } );

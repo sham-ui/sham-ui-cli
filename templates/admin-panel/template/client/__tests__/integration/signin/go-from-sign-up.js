@@ -5,11 +5,12 @@ jest.mock( 'axios' );
 beforeEach( () => {
     jest.resetModules();
     jest.clearAllMocks();
-    setup();
 } );
 
 it( 'can go to signup page', async() => {
     expect.assertions( 2 );
+
+    const DI = setup();
 
     axios
         .useDefaultMocks()
@@ -17,7 +18,7 @@ it( 'can go to signup page', async() => {
 
     history.pushState( {}, '', 'http://client.example.com/login/' );
 
-    await app.start();
+    await app.start( DI );
     app.click( '.signup-label a' );
     await app.waitRendering();
 

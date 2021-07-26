@@ -1,14 +1,13 @@
-import { DI } from 'sham-ui';
+import { createDI } from 'sham-ui';
 import Page  from '../../../src/components/Page.sfc';
+import { storage } from '../../../src/storages/session';
 import renderer from 'sham-ui-test-helpers';
 
-afterEach( () => {
-    DI.resolve( 'session:storage' ).reset();
-} );
-
 it( 'renders correctly', () => {
-    DI.resolve( 'session:storage' ).sessionValidated = true;
+    const DI = createDI();
 
-    const meta = renderer( Page, {} );
+    storage( DI ).sessionValidated = true;
+
+    const meta = renderer( Page, { DI } );
     expect( meta.toJSON() ).toMatchSnapshot();
 } );

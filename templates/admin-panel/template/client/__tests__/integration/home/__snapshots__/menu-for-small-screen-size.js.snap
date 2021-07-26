@@ -13,7 +13,7 @@ exports[`menu for small screen size 1`] = `
           <i class=\\"icon-home-outline menu-item-icon\\"></i><span class=\\"menu-item-label\\">Dashboard</span>
         </div>
       </a>
-      <!--if-->
+      <!--0-->
     </div>
   </div>
   <div class=\\"header\\">
@@ -46,21 +46,21 @@ exports[`menu for small screen size 1`] = `
   </div>
   <div class=\\"mainpanel\\">
     <h4 class=\\"page-header\\"> Home
-      <!--header-->
+      <!--0-->
     </h4>
     <div class=\\"page-body\\">
       <div class=\\"panel\\"> Project description </div>
-      <!--body-->
+      <!--1-->
     </div>
-    <!--if-->
-    <!--Page-->
-    <!--ActivePageContainer-->
+    <!--0-->
+    <!--0-->
+    <!--0-->
   </div>
 </div>
-<!--LayoutAuthenticated-->
-<!--if-->
-<!--Layout-->
-<!--if-->"
+<!--0-->
+<!--0-->
+<!--0-->
+<!--0-->"
 `;
 
 exports[`menu for small screen size 2`] = `
@@ -76,7 +76,7 @@ exports[`menu for small screen size 2`] = `
           <i class=\\"icon-home-outline menu-item-icon\\"></i><span class=\\"menu-item-label\\">Dashboard</span>
         </div>
       </a>
-      <!--if-->
+      <!--0-->
     </div>
   </div>
   <div class=\\"header\\">
@@ -109,21 +109,21 @@ exports[`menu for small screen size 2`] = `
   </div>
   <div class=\\"mainpanel\\">
     <h4 class=\\"page-header\\"> Home
-      <!--header-->
+      <!--0-->
     </h4>
     <div class=\\"page-body\\">
       <div class=\\"panel\\"> Project description </div>
-      <!--body-->
+      <!--1-->
     </div>
-    <!--if-->
-    <!--Page-->
-    <!--ActivePageContainer-->
+    <!--0-->
+    <!--0-->
+    <!--0-->
   </div>
 </div>
-<!--LayoutAuthenticated-->
-<!--if-->
-<!--Layout-->
-<!--if-->"
+<!--0-->
+<!--0-->
+<!--0-->
+<!--0-->"
 `;
 
 exports[`menu for small screen size 3`] = `
@@ -139,7 +139,7 @@ exports[`menu for small screen size 3`] = `
           <i class=\\"icon-home-outline menu-item-icon\\"></i><span class=\\"menu-item-label\\">Dashboard</span>
         </div>
       </a>
-      <!--if-->
+      <!--0-->
     </div>
   </div>
   <div class=\\"header\\">
@@ -172,19 +172,19 @@ exports[`menu for small screen size 3`] = `
   </div>
   <div class=\\"mainpanel\\">
     <h4 class=\\"page-header\\"> Home
-      <!--header-->
+      <!--0-->
     </h4>
     <div class=\\"page-body\\">
       <div class=\\"panel\\"> Project description </div>
-      <!--body-->
+      <!--1-->
     </div>
-    <!--if-->
-    <!--Page-->
-    <!--ActivePageContainer-->
+    <!--0-->
+    <!--0-->
+    <!--0-->
   </div>
 </div>
-<!--LayoutAuthenticated-->
-<!--if-->
-<!--Layout-->
-<!--if-->"
+<!--0-->
+<!--0-->
+<!--0-->
+<!--0-->"
 `;

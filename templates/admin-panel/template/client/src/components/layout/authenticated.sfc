@@ -1,12 +1,12 @@
 <template>
-    {% import ActivePageContainer from 'sham-ui-router/active-page-container' %}
+    {% import ActivePageContainer from 'sham-ui-router/lib/active-page-container' %}
     {% import WithoutFlushLoader from 'sham-ui-without-flush-loader' %}
-    {% import path from 'sham-ui-router/params' %}
+    {% import path from 'sham-ui-router/lib/params' %}
     {% import Navigation from './authenticated/navigation.sfc' %}
     {% import Profile from './authenticated/profile.sfc' %}
     {% import PageLoadingIndicator from '../PageLoadingIndicator.sht' %}
 
-    <div class=\{{wrapperClasses}} :onclick=\{{::this.wrapperOnClick}}>
+    <div class=\{{wrapperClasses}} :onclick=\{{this$.wrapperOnClick}}>
         <div class="logo">
             <a :hrefto=\{{path("home")}}>
                 <span>[</span>
@@ -22,7 +22,7 @@
         <div class="header">
             <div class="header-left">
                 <div class="navicon-left">
-                    <a :onclick=\{{::this.navigationButtonOnClick}}>
+                    <a :onclick=\{{this$.navigationButtonOnClick}}>
                         <i class="icon-menu"></i>
                     </a>
                 </div>
@@ -44,60 +44,63 @@
 </template>
 
 <script>
-    import { options, mergeWithTemplate } from 'sham-ui-macro/babel.macro';
-    import { useStorage } from 'sham-ui-router/storage';
+    import { useStorage } from 'sham-ui-router/lib/storage';
 
     const MAX_SCREEN_SIZE = 992;
 
-    @mergeWithTemplate
-    class LayoutAuthenticated extends Template {
-        @options wrapperClasses = '';
-        @options menuCollapsed = false;
-        @options smallScreenSize = false;
+    function LayoutAuthenticated( options, update ) {
+        const wrapperClasses = $();
+        const menuCollapsed = $();
+        const smallScreenSize = $();
 
-        navigationButtonOnClick( e ) {
+        const state = options( {
+            [ wrapperClasses ]: '',
+            [ menuCollapsed ]: false,
+            [ smallScreenSize ]: false
+        } );
+
+        this$.navigationButtonOnClick = ( e ) => {
             e.stopPropagation();
-            let wrapperClasses = '';
-            if ( this.options.smallScreenSize ) {
-                if ( this.options.menuCollapsed ) {
-                    wrapperClasses = 'show-left';
+            let classes = '';
+            if ( state[ smallScreenSize ] ) {
+                if ( state[ menuCollapsed ] ) {
+                    classes = 'show-left';
                 }
             } else {
-                if ( !this.options.menuCollapsed ) {
-                    wrapperClasses = 'collapsed-menu';
+                if ( !state[ menuCollapsed ] ) {
+                    classes = 'collapsed-menu';
                 }
             }
-            this.update( {
-                wrapperClasses,
-                menuCollapsed: !this.options.menuCollapsed
+            update( {
+                [ wrapperClasses ]: classes,
+                [ menuCollapsed ]: !state[ menuCollapsed ]
             } );
-        }
+        };
 
-        wrapperOnClick() {
-            if ( this.options.smallScreenSize && !this.options.menuCollapsed ) {
-                this.update( {
-                    menuCollapsed: true,
-                    wrapperClasses: ''
+        this$.wrapperOnClick = () => {
+            if ( state[ smallScreenSize ] && !state[ menuCollapsed ] ) {
+                update( {
+                    [ menuCollapsed ]: true,
+                    [ wrapperClasses ]: ''
                 } );
             }
-        }
+        };
 
-        render() {
-            super.render( ...arguments );
-            this._screenWidthChange();
-        }
-
-        _screenWidthChange() {
+        const onRender = this.onRender;
+        this.onRender = () => {
+            if ( onRender ) {
+                onRender.call( this );
+            }
 
             // media query change
             const WidthChange = ( mq ) => {
-                const smallScreenSize = !mq.matches;
-                this.update( {
-                    smallScreenSize,
-                    menuCollapsed: (
-                        smallScreenSize &&
-                        smallScreenSize !== this.options.smallScreenSize
-                    ) || this.options.menuCollapsed
+                const smallScreenSizeNow = !mq.matches;
+                update( {
+                    [ smallScreenSize ]: smallScreenSizeNow,
+                    [ menuCollapsed ]: (
+                        smallScreenSizeNow &&
+                        smallScreenSizeNow !== state[ smallScreenSize ]
+                    ) || state[ menuCollapsed ]
                 } );
             };
 
@@ -107,8 +110,8 @@
                 mq.addListener( WidthChange );
                 WidthChange( mq );
             }
-        }
+        };
     }
 
-    export default useStorage( 'routerData' )( LayoutAuthenticated );
+    export default Component( Template, useStorage( $.routerData ), LayoutAuthenticated );
 </script>

@@ -2,7 +2,6 @@
 
 exports[`display errors 1`] = `
 Object {
-  "Constructor": "RoutesServerInfoPage",
   "Options": Object {
     "ID": "component",
     "dataLoaded": true,
@@ -32,15 +31,15 @@ Object {
   },
   "html": "
 <h4 class=\\"page-header\\"> Server information
-  <!--header-->
+  <!--0-->
 </h4>
 <div class=\\"page-body\\">
   <div class=\\"server-info\\">
     <ul class=\\"errors-panel\\">
       <li>Fail load accounting info</li>
     </ul>
-    <!--if-->
-    <!--ErrorsPanel-->
+    <!--0-->
+    <!--0-->
     <div class=\\"panel runtime\\">
       <h6>Runtime info</h6>
       <table>
@@ -96,7 +95,7 @@ Object {
         </tbody>
       </table>
     </div>
-    <!--RuntimePanel-->
+    <!--1-->
     <div class=\\"panel files\\">
       <h6>Asset files</h6>
       <table>
@@ -104,25 +103,23 @@ Object {
           <tr>
             <th>File</th>
             <th>Size</th>
-            <th>Modification time</th>
           </tr>
         </thead>
         <tbody></tbody>
       </table>
     </div>
-    <!--AssetsPanel-->
+    <!--2-->
   </div>
-  <!--body-->
+  <!--1-->
 </div>
-<!--if-->
-<!--Page-->
+<!--0-->
+<!--0-->
 ",
 }
 `;
 
 exports[`renders correctly 1`] = `
 Object {
-  "Constructor": "RoutesServerInfoPage",
   "Options": Object {
     "ID": "component",
     "dataLoaded": false,
@@ -146,10 +143,10 @@ Object {
     "runtime": Object {},
   },
   "html": "
-<!--if-->
-<!--WithoutFlushLoader-->
-<!--if-->
-<!--Page-->
+<!--0-->
+<!--0-->
+<!--0-->
+<!--0-->
 ",
 }
 `;

@@ -1,15 +1,28 @@
 #!/usr/bin/env node
-
+const process = require( 'process' );
+const fs = require( 'fs' );
 const program = require( 'commander' );
 const path = require( 'path' );
 const ora = require( 'ora' );
 const { cyan } = require( 'chalk' );
 const destroy = require( '../src/destroy' );
 
-const VALID_TEMPLATES = [
-    'template',
-    'sfc'
+const innerTemplates = [
+    'sfc',
+    'template'
 ];
+
+const scaffoldsDir = path.join( process.cwd(), 'scaffolds' );
+const appScaffolds =  fs.existsSync( scaffoldsDir ) ?
+    fs.readdirSync( scaffoldsDir, { withFileTypes: true } )
+        .filter( x => x.isDirectory() )
+        .map( x => x.name ):
+    [];
+
+const VALID_TEMPLATES = [].concat(
+    innerTemplates,
+    appScaffolds
+);
 
 program
     .usage( `<${VALID_TEMPLATES.join( '|' )}> [name]` )
@@ -24,7 +37,9 @@ if ( -1 === VALID_TEMPLATES.indexOf( type ) ) {
     return program.help();
 }
 
-const template = path.join( __dirname, '../', 'scaffolds', type );
+const template = appScaffolds.includes( type ) ?
+    path.join( scaffoldsDir, type ) :
+    path.join( __dirname, '../', 'scaffolds', type );
 const name = program.args[ 1 ];
 const to = path.resolve( '.' );
 
@@ -33,11 +48,7 @@ destroyScaffold( template, name, to );
 function destroyScaffold( template, name, to ) {
     const spinner = ora( 'Process scaffold template' );
     spinner.start();
-    const fileName = {
-        'template': `${name}.sht`,
-        'sfc': `${name}.sfc`,
-    }[ type ];
-    destroy( name, template, to, fileName, function( err ) {
+    destroy( name, template, to, function( err ) {
         if ( err ) {
             spinner.fail( `Unexpected error: ${err}` );
         } else {

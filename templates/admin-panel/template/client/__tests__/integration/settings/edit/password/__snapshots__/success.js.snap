@@ -13,7 +13,7 @@ exports[`success edit password 1`] = `
           <i class=\\"icon-home-outline menu-item-icon\\"></i><span class=\\"menu-item-label\\">Dashboard</span>
         </div>
       </a>
-      <!--if-->
+      <!--0-->
     </div>
   </div>
   <div class=\\"header\\">
@@ -46,7 +46,7 @@ exports[`success edit password 1`] = `
   </div>
   <div class=\\"mainpanel\\">
     <h4 class=\\"page-header\\"> Profile settings
-      <!--header-->
+      <!--0-->
     </h4>
     <div class=\\"page-body\\">
       <div class=\\"panel settings\\">
@@ -54,59 +54,59 @@ exports[`success edit password 1`] = `
         <p class=\\"mg-b-30\\">John Smith<a>
             <i class=\\"icon-pencil\\"></i>
           </a>
-          <!--if-->
+          <!--0-->
         </p>
-        <!--Paragraph-->
+        <!--0-->
         <h6>Email</h6>
         <p class=\\"mg-b-30\\">j.smith@example.com<a>
             <i class=\\"icon-pencil\\"></i>
           </a>
-          <!--if-->
+          <!--0-->
         </p>
-        <!--Paragraph-->
+        <!--1-->
         <h6>Password</h6>
         <p class=\\"mg-b-0\\">******<a>
             <i class=\\"icon-pencil\\"></i>
           </a>
-          <form class=\\"form-layout\\">
-            <!--header-->
-            <!--if-->
-            <!--ErrorsPanel-->
-            <div class=\\"form-group\\">
-              <label>Enter your password:</label>
-              <input name=\\"pass1\\" type=\\"password\\" autofocus=\\"\\">
-            </div>
-            <div class=\\"form-group\\">
-              <label>Confirm your password:</label>
-              <input name=\\"pass2\\" type=\\"password\\">
-            </div>
-            <!--default-->
-            <!--default-->
-            <button type=\\"submit\\">
-              <!--if-->Update
-              <!--submit-->
-            </button>
-            <!--footer-->
-          </form>
-          <!--FormContainer-->
-          <!--if-->
-          <!--FormWithConfirmModal-->
-          <!--DynamicComponent-->
-          <!--if-->
+        <form class=\\"form-layout\\">
+          <!--0-->
+          <!--0-->
+          <!--1-->
+          <div class=\\"form-group\\">
+            <label>Enter your password:</label>
+            <input name=\\"pass1\\" type=\\"password\\" autofocus=\\"\\">
+          </div>
+          <div class=\\"form-group\\">
+            <label>Confirm your password:</label>
+            <input name=\\"pass2\\" type=\\"password\\">
+          </div>
+          <!--0-->
+          <!--2-->
+          <button type=\\"submit\\">
+            <!--3-->Update
+            <!--4-->
+          </button>
+          <!--5-->
+        </form>
+        <!--0-->
+        <!--1-->
+        <!--0-->
+        <!--0-->
+        <!--0-->
         </p>
-        <!--Paragraph-->
+        <!--2-->
       </div>
-      <!--body-->
+      <!--1-->
     </div>
-    <!--if-->
-    <!--Page-->
-    <!--ActivePageContainer-->
+    <!--0-->
+    <!--0-->
+    <!--0-->
   </div>
 </div>
-<!--LayoutAuthenticated-->
-<!--if-->
-<!--Layout-->
-<!--if-->"
+<!--0-->
+<!--0-->
+<!--0-->
+<!--0-->"
 `;
 
 exports[`success edit password 2`] = `
@@ -122,7 +122,7 @@ exports[`success edit password 2`] = `
           <i class=\\"icon-home-outline menu-item-icon\\"></i><span class=\\"menu-item-label\\">Dashboard</span>
         </div>
       </a>
-      <!--if-->
+      <!--0-->
     </div>
   </div>
   <div class=\\"header\\">
@@ -155,7 +155,7 @@ exports[`success edit password 2`] = `
   </div>
   <div class=\\"mainpanel\\">
     <h4 class=\\"page-header\\"> Profile settings
-      <!--header-->
+      <!--0-->
     </h4>
     <div class=\\"page-body\\">
       <div class=\\"panel settings\\">
@@ -163,85 +163,85 @@ exports[`success edit password 2`] = `
         <p class=\\"mg-b-30\\">John Smith<a>
             <i class=\\"icon-pencil\\"></i>
           </a>
-          <!--if-->
+          <!--0-->
         </p>
-        <!--Paragraph-->
+        <!--0-->
         <h6>Email</h6>
         <p class=\\"mg-b-30\\">j.smith@example.com<a>
             <i class=\\"icon-pencil\\"></i>
           </a>
-          <!--if-->
+          <!--0-->
         </p>
-        <!--Paragraph-->
+        <!--1-->
         <h6>Password</h6>
         <p class=\\"mg-b-0\\">******<a>
             <i class=\\"icon-pencil\\"></i>
           </a>
-          <form class=\\"form-layout\\">
-            <!--header-->
-            <!--if-->
-            <!--ErrorsPanel-->
-            <div class=\\"form-group\\">
-              <label>Enter your password:</label>
-              <input name=\\"pass1\\" type=\\"password\\" autofocus=\\"\\">
+        <form class=\\"form-layout\\">
+          <!--0-->
+          <!--0-->
+          <!--1-->
+          <div class=\\"form-group\\">
+            <label>Enter your password:</label>
+            <input name=\\"pass1\\" type=\\"password\\" autofocus=\\"\\">
+          </div>
+          <div class=\\"form-group\\">
+            <label>Confirm your password:</label>
+            <input name=\\"pass2\\" type=\\"password\\">
+          </div>
+          <!--0-->
+          <!--2-->
+          <button type=\\"submit\\" disabled=\\"\\">
+            <div class=\\"sk-cube-grid\\">
+              <div class=\\"sk-cube sk-cube1\\"></div>
+              <div class=\\"sk-cube sk-cube2\\"></div>
+              <div class=\\"sk-cube sk-cube3\\"></div>
+              <div class=\\"sk-cube sk-cube4\\"></div>
+              <div class=\\"sk-cube sk-cube5\\"></div>
+              <div class=\\"sk-cube sk-cube6\\"></div>
+              <div class=\\"sk-cube sk-cube7\\"></div>
+              <div class=\\"sk-cube sk-cube8\\"></div>
+              <div class=\\"sk-cube sk-cube9\\"></div>
             </div>
-            <div class=\\"form-group\\">
-              <label>Confirm your password:</label>
-              <input name=\\"pass2\\" type=\\"password\\">
-            </div>
-            <!--default-->
-            <!--default-->
-            <button type=\\"submit\\" disabled=\\"\\">
-              <div class=\\"sk-cube-grid\\">
-                <div class=\\"sk-cube sk-cube1\\"></div>
-                <div class=\\"sk-cube sk-cube2\\"></div>
-                <div class=\\"sk-cube sk-cube3\\"></div>
-                <div class=\\"sk-cube sk-cube4\\"></div>
-                <div class=\\"sk-cube sk-cube5\\"></div>
-                <div class=\\"sk-cube sk-cube6\\"></div>
-                <div class=\\"sk-cube sk-cube7\\"></div>
-                <div class=\\"sk-cube sk-cube8\\"></div>
-                <div class=\\"sk-cube sk-cube9\\"></div>
-              </div>
-              <!--CubeAnimation-->
-              <!--if-->Update
-              <!--submit-->
-            </button>
-            <!--footer-->
-          </form>
-          <!--FormContainer-->
-          <div class=\\"modal\\" data-test-modal=\\"\\"><span class=\\"close\\" title=\\"Close Modal\\" data-test-close-button=\\"\\">×</span>
-            <!--if-->
-            <div class=\\"modal-content\\">
-              <div class=\\"container\\">
-                <h4>Change password</h4>
-                <p class=\\"content\\">Are you sure you want to change your password?</p>
-                <div class=\\"footer\\">
-                  <button data-test-ok-button=\\"\\" class=\\"\\">Ok</button>
-                  <button class=\\"btn-secondary\\" data-test-cancel-button=\\"\\">Cancel</button>
-                </div>
+            <!--0-->
+            <!--3-->Update
+            <!--4-->
+          </button>
+          <!--5-->
+        </form>
+        <!--0-->
+        <div class=\\"modal\\" data-test-modal=\\"\\"><span class=\\"close\\" title=\\"Close Modal\\" data-test-close-button=\\"\\">×</span>
+          <!--0-->
+          <div class=\\"modal-content\\">
+            <div class=\\"container\\">
+              <h4>Change password</h4>
+              <p class=\\"content\\">Are you sure you want to change your password?</p>
+              <div class=\\"footer\\">
+                <button data-test-ok-button=\\"\\" class=\\"\\">Ok</button>
+                <button class=\\"btn-secondary\\" data-test-cancel-button=\\"\\">Cancel</button>
               </div>
             </div>
           </div>
-          <!--ModalWindow-->
-          <!--if-->
-          <!--FormWithConfirmModal-->
-          <!--DynamicComponent-->
-          <!--if-->
+        </div>
+        <!--0-->
+        <!--1-->
+        <!--0-->
+        <!--0-->
+        <!--0-->
         </p>
-        <!--Paragraph-->
+        <!--2-->
       </div>
-      <!--body-->
+      <!--1-->
     </div>
-    <!--if-->
-    <!--Page-->
-    <!--ActivePageContainer-->
+    <!--0-->
+    <!--0-->
+    <!--0-->
   </div>
 </div>
-<!--LayoutAuthenticated-->
-<!--if-->
-<!--Layout-->
-<!--if-->"
+<!--0-->
+<!--0-->
+<!--0-->
+<!--0-->"
 `;
 
 exports[`success edit password 3`] = `
@@ -257,7 +257,7 @@ exports[`success edit password 3`] = `
           <i class=\\"icon-home-outline menu-item-icon\\"></i><span class=\\"menu-item-label\\">Dashboard</span>
         </div>
       </a>
-      <!--if-->
+      <!--0-->
     </div>
   </div>
   <div class=\\"header\\">
@@ -290,7 +290,7 @@ exports[`success edit password 3`] = `
   </div>
   <div class=\\"mainpanel\\">
     <h4 class=\\"page-header\\"> Profile settings
-      <!--header-->
+      <!--0-->
     </h4>
     <div class=\\"page-body\\">
       <div class=\\"panel settings\\">
@@ -298,33 +298,33 @@ exports[`success edit password 3`] = `
         <p class=\\"mg-b-30\\">John Smith<a>
             <i class=\\"icon-pencil\\"></i>
           </a>
-          <!--if-->
+          <!--0-->
         </p>
-        <!--Paragraph-->
+        <!--0-->
         <h6>Email</h6>
         <p class=\\"mg-b-30\\">j.smith@example.com<a>
             <i class=\\"icon-pencil\\"></i>
           </a>
-          <!--if-->
+          <!--0-->
         </p>
-        <!--Paragraph-->
+        <!--1-->
         <h6>Password</h6>
         <p class=\\"mg-b-0\\">******<a>
             <i class=\\"icon-pencil\\"></i>
           </a>
-          <!--if-->
+          <!--0-->
         </p>
-        <!--Paragraph-->
+        <!--2-->
       </div>
-      <!--body-->
+      <!--1-->
     </div>
-    <!--if-->
-    <!--Page-->
-    <!--ActivePageContainer-->
+    <!--0-->
+    <!--0-->
+    <!--0-->
   </div>
 </div>
-<!--LayoutAuthenticated-->
-<!--if-->
-<!--Layout-->
-<!--if-->"
+<!--0-->
+<!--0-->
+<!--0-->
+<!--0-->"
 `;

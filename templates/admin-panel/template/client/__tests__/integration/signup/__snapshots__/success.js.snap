@@ -4,10 +4,10 @@ exports[`success sign up 1`] = `
 "<div class=\\"signup-page\\">
   <form class=\\"form\\">
     <div class=\\"logo\\"><span><span>[</span> {{ logoText }} <span>]</span></span></div>
-    <!--Logo-->
-    <!--header-->
-    <!--if-->
-    <!--ErrorsPanel-->
+    <!--0-->
+    <!--0-->
+    <!--0-->
+    <!--1-->
     <div class=\\"form-group\\">
       <input name=\\"name\\" type=\\"text\\" placeholder=\\"Enter your username\\" autofocus=\\"\\">
     </div>
@@ -20,20 +20,20 @@ exports[`success sign up 1`] = `
     <div class=\\"form-group\\">
       <input name=\\"password2\\" type=\\"password\\" placeholder=\\"Confirm your password\\">
     </div>
-    <!--default-->
+    <!--2-->
     <button type=\\"submit\\">
-      <!--if-->Sign Up
-      <!--submit-->
+      <!--3-->Sign Up
+      <!--4-->
     </button>
     <div class=\\"signup-label\\"> Already a member? <a href=\\"/login\\"> Sign In </a>
     </div>
-    <!--footer-->
+    <!--5-->
   </form>
 </div>
-<!--ActivePageContainer-->
-<!--if-->
-<!--Layout-->
-<!--if-->"
+<!--0-->
+<!--0-->
+<!--0-->
+<!--0-->"
 `;
 
 exports[`success sign up 2`] = `
@@ -49,7 +49,7 @@ exports[`success sign up 2`] = `
           <i class=\\"icon-home-outline menu-item-icon\\"></i><span class=\\"menu-item-label\\">Dashboard</span>
         </div>
       </a>
-      <!--if-->
+      <!--0-->
     </div>
   </div>
   <div class=\\"header\\">
@@ -82,19 +82,19 @@ exports[`success sign up 2`] = `
   </div>
   <div class=\\"mainpanel\\">
     <h4 class=\\"page-header\\"> Home
-      <!--header-->
+      <!--0-->
     </h4>
     <div class=\\"page-body\\">
       <div class=\\"panel\\"> Project description </div>
-      <!--body-->
+      <!--1-->
     </div>
-    <!--if-->
-    <!--Page-->
-    <!--ActivePageContainer-->
+    <!--0-->
+    <!--0-->
+    <!--0-->
   </div>
 </div>
-<!--LayoutAuthenticated-->
-<!--if-->
-<!--Layout-->
-<!--if-->"
+<!--0-->
+<!--0-->
+<!--0-->
+<!--0-->"
 `;

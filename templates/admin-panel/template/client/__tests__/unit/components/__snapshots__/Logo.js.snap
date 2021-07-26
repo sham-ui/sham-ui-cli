@@ -2,7 +2,6 @@
 
 exports[`renders correctly 1`] = `
 Object {
-  "Constructor": "Logo",
   "Options": Object {
     "ID": "component",
   },

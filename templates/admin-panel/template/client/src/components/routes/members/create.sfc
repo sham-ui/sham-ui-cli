@@ -2,9 +2,9 @@
     {% import FormWithConfirmModal from '../../FormWithConfirmModal.sfc' %}
 
     <FormWithConfirmModal
-        saveData=\{{::this._saveData}}
+        saveData=\{{this$._saveData}}
         onSuccess=\{{onCreateSuccess}}
-        getErrors=\{{::this._getErrors}}
+        getErrors=\{{this$._getErrors}}
         submitText="Create"
         confirmTitle="Create new member"
         confirmText="Are you sure you want to create new member?"
@@ -32,33 +32,24 @@
 </template>
 
 <script>
-    import { mergeWithTemplate, options, inject } from 'sham-ui-macro/babel.macro';
+    function MembersCreate( options ) {
+        options( {
+            [ $.onCreateSuccess ]() {}
+        } );
 
-    @mergeWithTemplate
-    class MembersCreate extends Template {
+        this$._saveData = formData => this.DI.resolve( 'store' ).api.request( {
+            url: 'admin/members',
+            method: 'post',
+            data: {
+                name: formData.get( 'name' ).trim(),
+                email: formData.get( 'email' ).trim(),
+                is_superuser: null !== formData.get( 'is_superuser' ),
+                password: formData.get( 'pass' )
+            }
+        } );
 
-        /** @type {Store} */
-        @inject store;
-
-        @options onCreateSuccess() {}
-
-        _saveData( formData ) {
-            return this.store.api.request( {
-                url: 'admin/members',
-                method: 'post',
-                data: {
-                    name: formData.get( 'name' ).trim(),
-                    email: formData.get( 'email' ).trim(),
-                    is_superuser: null !== formData.get( 'is_superuser' ),
-                    password: formData.get( 'pass' )
-                }
-            } );
-        }
-
-        _getErrors( { Messages = [ 'Create member fail' ] } ) {
-            return Messages;
-        }
+        this$._getErrors = ( { Messages = [ 'Create member fail' ] } ) => Messages;
     }
 
-    export default MembersCreate;
+    export default Component( Template, MembersCreate );
 </script>

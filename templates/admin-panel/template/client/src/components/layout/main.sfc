@@ -1,5 +1,5 @@
 <template>
-    {% import ActivePageContainer from 'sham-ui-router/active-page-container' %}
+    {% import ActivePageContainer from 'sham-ui-router/lib/active-page-container' %}
     {% import LayoutAuthenticated from './authenticated.sfc' %}
 
     {% if sessionData.isAuthenticated %}
@@ -10,13 +10,7 @@
 </template>
 
 <script>
-    import { mergeWithTemplate } from 'sham-ui-macro/babel.macro';
     import { useStorage } from '../../storages/session';
 
-    @mergeWithTemplate
-    class LayoutMain extends Template {
-
-    }
-
-    export default useStorage( 'sessionData' )( LayoutMain );
+    export default Component( Template, useStorage( $.sessionData ) );
 </script>

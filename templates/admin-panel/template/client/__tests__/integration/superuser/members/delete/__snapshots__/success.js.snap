@@ -2,26 +2,26 @@
 
 exports[`success delete member 1`] = `
 "<h4 class=\\"page-header\\"> Members
-  <!--header-->
+  <!--0-->
 </h4>
 <div class=\\"page-body\\">
   <div class=\\"members-page\\">
-    <!--if-->
-    <!--ErrorsPanel-->
+    <!--0-->
+    <!--0-->
     <div class=\\"container\\">
       <button data-test-toggle-create-form=\\"\\" class=\\"mg-b-30\\">Show create new member form</button>
-      <!--if-->
+      <!--1-->
     </div>
     <div class=\\"container\\">
       <div class=\\"members-list\\">
         <div class=\\"panel\\">
           <div class=\\"pagination\\">
             <div class=\\"page-buttons\\">
-              <!--if-->
+              <!--0-->
               <button data-test-pagination-page=\\"1\\" disabled=\\"\\">1</button>
-              <!--if-->
+              <!--1-->
             </div>
-            <!--PaginationPages-->
+            <!--0-->
             <table>
               <thead>
                 <tr>
@@ -66,7 +66,7 @@ exports[`success delete member 1`] = `
               </tbody>
             </table>
             <div class=\\"modal\\" data-test-modal=\\"\\"><span class=\\"close\\" title=\\"Close Modal\\" data-test-close-button=\\"\\">×</span>
-              <!--if-->
+              <!--0-->
               <div class=\\"modal-content\\">
                 <div class=\\"container\\">
                   <h4>Delete member</h4>
@@ -78,52 +78,52 @@ exports[`success delete member 1`] = `
                 </div>
               </div>
             </div>
-            <!--ModalWindow-->
-            <!--if-->
-            <!--MembersTable-->
-            <!--default-->
-            <!--if-->
+            <!--0-->
+            <!--0-->
+            <!--0-->
+            <!--0-->
+            <!--1-->
             <div class=\\"page-buttons\\">
-              <!--if-->
+              <!--0-->
               <button data-test-pagination-page=\\"1\\" disabled=\\"\\">1</button>
-              <!--if-->
+              <!--1-->
             </div>
-            <!--PaginationPages-->
+            <!--2-->
           </div>
         </div>
       </div>
-      <!--if-->
+      <!--2-->
     </div>
   </div>
-  <!--body-->
+  <!--1-->
 </div>
-<!--if-->
-<!--Page-->
-<!--ActivePageContainer-->"
+<!--0-->
+<!--0-->
+<!--0-->"
 `;
 
 exports[`success delete member 2`] = `
 "<h4 class=\\"page-header\\"> Members
-  <!--header-->
+  <!--0-->
 </h4>
 <div class=\\"page-body\\">
   <div class=\\"members-page\\">
-    <!--if-->
-    <!--ErrorsPanel-->
+    <!--0-->
+    <!--0-->
     <div class=\\"container\\">
       <button data-test-toggle-create-form=\\"\\" class=\\"mg-b-30\\">Show create new member form</button>
-      <!--if-->
+      <!--1-->
     </div>
     <div class=\\"container\\">
       <div class=\\"members-list\\">
         <div class=\\"panel\\">
           <div class=\\"pagination\\">
             <div class=\\"page-buttons\\">
-              <!--if-->
+              <!--0-->
               <button data-test-pagination-page=\\"1\\" disabled=\\"\\">1</button>
-              <!--if-->
+              <!--1-->
             </div>
-            <!--PaginationPages-->
+            <!--0-->
             <table>
               <thead>
                 <tr>
@@ -157,25 +157,25 @@ exports[`success delete member 2`] = `
                 </tr>
               </tbody>
             </table>
-            <!--if-->
-            <!--MembersTable-->
-            <!--default-->
-            <!--if-->
+            <!--0-->
+            <!--0-->
+            <!--0-->
+            <!--1-->
             <div class=\\"page-buttons\\">
-              <!--if-->
+              <!--0-->
               <button data-test-pagination-page=\\"1\\" disabled=\\"\\">1</button>
-              <!--if-->
+              <!--1-->
             </div>
-            <!--PaginationPages-->
+            <!--2-->
           </div>
         </div>
       </div>
-      <!--if-->
+      <!--2-->
     </div>
   </div>
-  <!--body-->
+  <!--1-->
 </div>
-<!--if-->
-<!--Page-->
-<!--ActivePageContainer-->"
+<!--0-->
+<!--0-->
+<!--0-->"
 `;

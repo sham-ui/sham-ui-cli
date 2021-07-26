@@ -2,7 +2,6 @@
 
 exports[`renders correctly 1`] = `
 Object {
-  "Constructor": "UpdateDataForm",
   "Options": Object {
     "ID": "component",
     "directives": Object {
@@ -22,9 +21,9 @@ Object {
   },
   "html": "
 <form class=\\"form-layout\\">
-  <!--header-->
-  <!--if-->
-  <!--ErrorsPanel-->
+  <!--0-->
+  <!--0-->
+  <!--1-->
   <div class=\\"form-group\\">
     <label>Name:</label>
     <input name=\\"name\\" type=\\"text\\" autofocus=\\"\\">
@@ -39,17 +38,17 @@ Object {
       <input name=\\"is_superuser\\" type=\\"checkbox\\" value=\\"undefined\\"><span>Is Superuser</span>
     </label>
   </div>
-  <!--default-->
-  <!--default-->
+  <!--0-->
+  <!--2-->
   <button type=\\"submit\\">
-    <!--if-->Update
-    <!--submit-->
+    <!--3-->Update
+    <!--4-->
   </button>
-  <!--footer-->
+  <!--5-->
 </form>
-<!--FormContainer-->
-<!--if-->
-<!--FormWithConfirmModal-->
+<!--0-->
+<!--1-->
+<!--0-->
 ",
 }
 `;

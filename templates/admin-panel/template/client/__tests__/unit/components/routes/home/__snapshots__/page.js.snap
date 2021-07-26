@@ -2,21 +2,20 @@
 
 exports[`renders correctly 1`] = `
 Object {
-  "Constructor": "RoutesHomePage",
   "Options": Object {
     "ID": "component",
     "pageTitle": "Home",
   },
   "html": "
 <h4 class=\\"page-header\\"> Home
-  <!--header-->
+  <!--0-->
 </h4>
 <div class=\\"page-body\\">
   <div class=\\"panel\\"> Project description </div>
-  <!--body-->
+  <!--1-->
 </div>
-<!--if-->
-<!--Page-->
+<!--0-->
+<!--0-->
 ",
 }
 `;

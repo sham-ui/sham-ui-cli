@@ -2,7 +2,6 @@
 
 exports[`renders correctly 1`] = `
 Object {
-  "Constructor": "Page",
   "Options": Object {
     "ID": "component",
     "dataLoaded": true,
@@ -16,12 +15,12 @@ Object {
   },
   "html": "
 <h4 class=\\"page-header\\">
-  <!--header-->
+  <!--0-->
 </h4>
 <div class=\\"page-body\\">
-  <!--body-->
+  <!--1-->
 </div>
-<!--if-->
+<!--0-->
 ",
 }
 `;
