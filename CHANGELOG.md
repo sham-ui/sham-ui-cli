@@ -1,3 +1,6 @@
+## 5.0.0-alpha.1
+* Fix submit in `admin-panel` template
+
 ## 5.0.0-alpha.0
 * Fix close icon in ModalWindow 
 * Add support custom per-project blueprints [#98](https://github.com/sham-ui/sham-ui-cli/issues/98)

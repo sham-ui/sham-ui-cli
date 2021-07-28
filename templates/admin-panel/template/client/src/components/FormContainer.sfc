@@ -28,13 +28,14 @@
         const errors = $();
         const success = $();
         const getErrors = $();
+        const submit = $();
 
         const state = options( {
             [ dataSaving ]: false,
             [ errors ]: [],
             [ $.formClass ]: 'form',
             [ $.submitText ]: '',
-            [ $.submit ]() {
+            [ submit ]() {
                 return Promise.resolve();
             },
             [ success ]() {},
@@ -50,7 +51,7 @@
                 [ errors ]: []
             } );
             const formData = new FormData( this.formNode );
-            this.options.submit( formData ).then(
+            state[ submit ]( formData ).then(
                 ( ...args ) => state[ success ]( ...args ),
                 error => update( {
                     [ dataSaving ]: false,
