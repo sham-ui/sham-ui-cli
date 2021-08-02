@@ -24,7 +24,7 @@
     "chalk": "^2.3.0",
     "commander": "^2.12.2",
     "consolidate": "^0.15.0",
-    "handlebars": "^4.6.0",
+    "handlebars": "^4.7.7",
     "inquirer": "~6.5.0",
     "metalsmith": "^2.3.0",
     "minimatch": "^3.0.4",
