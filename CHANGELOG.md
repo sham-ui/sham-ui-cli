@@ -1,3 +1,6 @@
+## 5.0.0-alpha.2
+* Fix title in admin-panel
+
 ## 5.0.0-alpha.1
 * Fix submit in `admin-panel` template
 

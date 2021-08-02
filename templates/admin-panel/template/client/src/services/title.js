@@ -8,6 +8,6 @@ export default class Title {
      * @param {string} newTitle
      */
     change( newTitle ) {
-        document.title = `PA | ${newTitle}`;
+        document.title = `{{ logoText }} | ${newTitle}`;
     }
 }
