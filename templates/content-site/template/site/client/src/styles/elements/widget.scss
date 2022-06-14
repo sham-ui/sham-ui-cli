@@ -1,0 +1,13 @@
+/* ------------------------------
+		  Widget
+------------------------------ */
+.widget{
+	background-color: $white-color;
+	padding: 30px;
+	border-radius: $rd-round;
+	margin-bottom:30px;
+	@include shadow();
+	.title{
+		margin-bottom:20px;
+	}
+}

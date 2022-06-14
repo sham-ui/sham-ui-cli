@@ -1,0 +1,79 @@
+<template>
+    {% import Page from '../../Page.sfc' %}
+    {% import ErrorsPanel from '../../ErrorsPanel.sht' %}
+    {% import Post from './post.sfc' %}
+    {% import NotFound from './not-found.sfc' %}
+
+    <Page dataLoaded=\{{dataLoaded}}>
+        <section class="section pt-55">
+            {% if isNotFound %}
+                <NotFound/>
+            {% else %}
+                {% if errors.length > 0 %}
+                    <ErrorsPanel errors=\{{errors}}/>
+                {% else %}
+                    <Post
+                        title=\{{article.title}}
+                        category=\{{article.category}}
+                        content=\{{article.content}}
+                        tags=\{{article.tags}}
+                        createdAt=\{{article.createdAt}}
+                    />
+                {% endif %}
+            {% endif %}
+        </section>
+    </Page>
+</template>
+
+<script>
+    function ArticlePage( options, update, didMount ) {
+        const article = $();
+        const errors  = $();
+        const isNotFound = $();
+        const dataLoaded = $();
+
+        const state = options( {
+            [ article ]: {},
+            [ errors ]: [],
+            [ isNotFound ]: false,
+            [ dataLoaded ]: false
+        } );
+
+        const DI = this.DI.resolve;
+
+        didMount( () => {
+            if ( !state[ dataLoaded ] ) {
+                this.hydrateReady = DI( 'store' ).articleBySlug(
+                    DI( 'router' ).storage.params.slug
+                ).then(
+                    data => {
+                        DI( 'title' ).change( data.title );
+                        update( {
+                            [ dataLoaded ]: true,
+                            [ article ]: data
+                        } );
+                        if ( IS_SSR ) {
+
+                            // Reduce hydrated data
+                            const hydratedOptions = Object.assign( {}, state );
+                            hydratedOptions[ article ] = {
+                                tags: state[ article ].tags
+                            };
+                            this.hydratedOptions =  hydratedOptions;
+                        }
+                    },
+                    ( { Messages = [ 'Fail load article' ], status } ) => {
+                        DI( 'title' ).change( 'Not found' );
+                        update( {
+                            [ dataLoaded ]: true,
+                            [ errors ]: Messages,
+                            [ isNotFound ]: 404 === status
+                        } );
+                    }
+                );
+            }
+        } );
+    }
+
+    export default Component( Template, ArticlePage );
+</script>

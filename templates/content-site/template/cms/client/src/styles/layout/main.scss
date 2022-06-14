@@ -1,0 +1,40 @@
+@import "logo";
+@import "sideleft";
+@import "header";
+@import "main-panel";
+@import "profile";
+@import "page-body";
+
+@media (max-width: 991px) {
+  .show-left .header,
+  .show-left .mainpanel {
+    transform: translateX(230px);
+  }
+  .show-left .logo,
+  .show-left .sideleft {
+    left: 0;
+    z-index: 2000;
+  }
+  .show-left .menu-item-label {
+    display: block !important;
+    opacity: 1 !important;
+  }
+  .show-left .contentpanel {
+    transform: translateX(230px);
+  }
+}
+
+.show-left {
+  overflow: hidden;
+  &::before {
+    content: '';
+    position: fixed;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    z-index: 2000;
+    background-color: rgba(29, 41, 57, 0.25);
+  }
+}
+

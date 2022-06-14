@@ -1,0 +1,88 @@
+<template>
+    <div class="autocomplete-input" :ref=\{{$.inputContainer}}>
+        <input
+            autocomplete="off"
+            value=\{{query}}
+            :onInputUpdate=\{{$.query}}
+            :onFocusIn=\{{this$._inputOnFocusIn}}
+            :onclick=\{{this$._inputOnFocusIn}}
+        />
+
+        {% if showItems %}
+            <div class="autocomplete-results">
+                {% for item of this$._filterItems( items, query ) %}
+                    <div
+                        class="result-item"
+                        :onclick=\{{this$._selectItem.bind( this, item, query )}}
+                        data-test-item=\{{item.name}}
+                    >
+                        \{{item.name}}
+                    </div>
+                {% endfor %}
+            </div>
+        {% endif %}
+    </div>
+</template>
+
+<script>
+    function SelectTag( options, update, didMount, onRemove ) {
+        const query = $();
+        const showItems = $();
+        const onChange = $();
+
+        const state = options( {
+            [ query ]: '',
+            [ showItems ]: false,
+            [ onChange ]() {}
+        } );
+
+        this$._filterItems = ( items, query ) => {
+            const lowerQuery = query.trim().toLowerCase();
+            const filtered = items.filter(
+                x => x.name.toLowerCase().includes( lowerQuery )
+            );
+            return lowerQuery.length > 0 ?
+                filtered.concat( [
+                    { isNew: true, name: 'Add as new tag' }
+                ] ) :
+                filtered
+            ;
+        };
+
+        this$._selectItem = ( item, q ) => {
+            update( {
+                [ showItems ]: false,
+                [ query ]: ''
+            } );
+            state[ onChange ](
+                item.isNew ?
+                    { name: q } :
+                    item
+            );
+        };
+
+        this$._inputOnFocusIn = () => {
+            update( {
+                [ showItems ]: true
+            } );
+        };
+
+        const documentClickHandler = ( e ) => {
+            if ( this$.inputContainer && !this$.inputContainer.contains( e.target ) ) {
+                update( {
+                    [ showItems ]: false
+                } );
+            }
+        };
+
+        didMount( () => {
+            document.addEventListener( 'click', documentClickHandler, true );
+        } );
+
+        onRemove( () => {
+            document.removeEventListener( 'click', documentClickHandler, true );
+        } );
+    }
+
+    export default Component( Template, SelectTag );
+</script>

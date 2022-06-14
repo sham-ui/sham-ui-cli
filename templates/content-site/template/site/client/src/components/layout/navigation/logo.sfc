@@ -1,0 +1,15 @@
+<template>
+    {% import path from 'sham-ui-router/lib/params' %}
+
+    <div class="logo">
+        <a :hrefto=\{{path('home')}}>
+            <img src="/images/logo-\{{ appState.darkThemeEnabled ? 'white' : 'dark' }}.png" alt="logo"/>
+        </a>
+    </div>
+</template>
+
+<script>
+    import { useStorage } from '../../../storages/app';
+
+    export default Component( Template, useStorage( $.appState ) );
+</script>

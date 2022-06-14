@@ -7,13 +7,8 @@
         <a :onclick=\{{this$.editClick}}>
             <i class="icon-pencil"></i>
         </a>
-
         {% if editFormVisible %}
-            <DynamicComponent
-                component=\{{form}}
-                value=\{{value}}
-                onUpdateSuccess=\{{this$._onUpdateValue}}
-            />
+            {% defblock 'form' this$.dataForForm() %}
         {% endif %}
     </p>
 </template>
@@ -30,8 +25,7 @@
             [ editFormVisible ]: false,
             [ onUpdateValue ]( toggle ) {
                 toggle();
-            },
-            [ $.form ]: null
+            }
         } );
 
         this$.editClick = e => {
@@ -44,6 +38,10 @@
         } );
 
         this$._onUpdateValue = () => state[ onUpdateValue ]( toggleEdit );
+
+        this$.dataForForm = () => ( {
+            [ $.onUpdateSuccess ]: this$._onUpdateValue
+        } );
     }
 
     export default Component( Template, RoutesSettingsParagraph );

@@ -1,0 +1,21 @@
+<template>
+    {% import Page from '\{{srcComponentRelativePath}}/Page.sfc' %}
+
+    <Page dataLoaded=\{{true}}>
+
+    </Page>
+</template>
+
+<script>
+    function \{{classifiedName}}( options, update, didMount ) {
+        const pageTitle = $();
+
+        const state = options( {
+            [ pageTitle ]: '{{title}}'
+        } );
+
+        didMount( () => this.DI.resolve( 'title' ).change( state[ pageTitle ] ) );
+    }
+
+    export default Component( Template, \{{classifiedName}} );
+</script>

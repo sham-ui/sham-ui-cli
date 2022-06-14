@@ -1,0 +1,11 @@
+a {
+  color: #0866C6;
+  background-color: transparent;
+  text-decoration: none;
+  -webkit-text-decoration-skip: objects;
+  transition: all 0.2s ease-in-out;
+  cursor: pointer;
+  &:focus, &:active {
+    outline: none !important;
+  }
+}

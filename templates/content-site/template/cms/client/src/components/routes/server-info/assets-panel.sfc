@@ -1,0 +1,35 @@
+<template>
+    <div class="panel files">
+        <h6>Asset files</h6>
+        <table>
+            <thead>
+                <tr>
+                    <th>File</th>
+                    <th>Size</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for file of files %}
+                    <tr>
+                        <td>\{{file.Name}}</td>
+                        <td>\{{file.Size | fileSize}}</td>
+                    </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+</template>
+
+<script>
+    import { fileSize } from './filters';
+
+    function AssetsPanel( options ) {
+        options( {
+            [ $.files ]: []
+        } );
+
+        this.filters.fileSize = fileSize;
+    }
+
+    export default Component( Template, AssetsPanel );
+</script>

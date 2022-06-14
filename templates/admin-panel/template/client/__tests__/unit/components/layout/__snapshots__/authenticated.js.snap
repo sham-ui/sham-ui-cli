@@ -6,8 +6,11 @@ Object {
     "ID": "component",
     "directives": Object {
       "EventListener": [Function],
+      "UpdateOnEvent": [Function],
       "disabled": [Function],
       "hrefto": [Function],
+      "onChangeUpdate": [Function],
+      "onInputUpdate": [Function],
       "onclick": [Function],
       "oninput": [Function],
       "onload": [Function],
@@ -22,7 +25,7 @@ Object {
       "activePageComponent": null,
       "activePageOptions": null,
       "name": "",
-      "pageLoaded": true,
+      "pageLoaded": false,
       "params": Object {},
       "url": "",
     },
@@ -74,6 +77,7 @@ Object {
     </div>
   </div>
   <div class=\\"mainpanel\\">
+    <!--0-->
     <!--0-->
   </div>
 </div>

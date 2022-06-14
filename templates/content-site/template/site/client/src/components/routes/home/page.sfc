@@ -1,0 +1,23 @@
+<template>
+    {% import ArticlesPage from '../_common/articles/page.sfc' %}
+
+    <ArticlesPage
+        pathName="home.page"
+        getPageTitle=\{{getPageTitle}}
+        loadData=\{{loadData}}
+    />
+</template>
+
+<script>
+    function RoutesHomePage( options ) {
+        options( {
+            [ $.getPageTitle ]: () => 'Home',
+            [ $.loadData ]: ( offset, limit ) => this.DI.resolve( 'store' ).articles(
+                offset,
+                limit
+            )
+        } );
+    }
+
+    export default Component( Template, RoutesHomePage );
+</script>

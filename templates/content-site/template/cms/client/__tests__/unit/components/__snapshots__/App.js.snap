@@ -1,0 +1,18 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`renders correctly 1`] = `
+Object {
+  "Options": Object {
+    "ID": "component",
+    "appState": Object {
+      "routerResolved": false,
+      "tokenLoaded": false,
+    },
+  },
+  "html": "
+<!--0-->
+<!--0-->
+<!--0-->
+",
+}
+`;

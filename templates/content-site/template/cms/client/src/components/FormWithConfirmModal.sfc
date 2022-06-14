@@ -1,0 +1,84 @@
+<template>
+    {% import FormContainer from './FormContainer.sfc' %}
+    {% import ModalWindow from './ModalWindow.sfc' %}
+
+    <FormContainer
+        formClass="form-layout"
+        submitText=\{{submitText}}
+        submit=\{{this$._submitForm}}
+        success=\{{onSuccess}}
+        getErrors=\{{getErrors}}
+    >
+        {% defblock 'default' %}
+    </FormContainer>
+
+    {% if modalVisible %}
+        <ModalWindow
+            title=\{{confirmTitle}}
+            text=\{{confirmText}}
+            onOk=\{{this$._handleOkModal}}
+            onClose=\{{this$._handleCloseModal}}
+        />
+    {% endif %}
+</template>
+
+<script>
+    function FormWithConfirmModal( options, update ) {
+        const saveData = $();
+        const confirmCancelErrors = $();
+        const modalVisible = $();
+
+        const state = options( {
+            [ saveData ]() {
+                return Promise.resolve();
+            },
+            [ $.onSuccess ]() {},
+            [ $.getErrors ]( err ) {
+                return err;
+            },
+            [ confirmCancelErrors ]: {
+                Messages: []
+            },
+            [ $.submitText ]: 'Update',
+            [ $.confirmTitle ]: '',
+            [ $.confirmText ]: '',
+            [ modalVisible ]: false
+        } );
+
+        this$._submitForm = ( formData ) => {
+            return showModal()
+                .then(
+
+                    // Click Ok in confirm modal
+                    () => state[ saveData ]( formData ),
+
+                    // Click Cancel/Close in confirm modal
+                    () => Promise.reject( state[ confirmCancelErrors ] )
+                ).then(
+
+                    // Data saved success
+                    closeModal,
+
+                    // Fail save data (cancel on confirmation or saveData rejected)
+                    ( err ) => {
+                        closeModal();
+                        return Promise.reject( err );
+                    }
+                );
+        };
+
+        const showModal = () => new Promise( ( resolve, reject ) => {
+            this$._handleOkModal = resolve;
+            this$._handleCloseModal = reject;
+            update( {
+                [ modalVisible ]: true
+            } );
+        } );
+
+        const closeModal = () => update( {
+            [ modalVisible ]: false
+        } );
+    }
+
+    export default Component( Template, FormWithConfirmModal );
+</script>

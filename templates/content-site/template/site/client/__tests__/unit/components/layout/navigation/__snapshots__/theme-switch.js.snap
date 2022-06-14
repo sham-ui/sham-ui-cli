@@ -1,0 +1,71 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`renders correctly 1`] = `
+Object {
+  "Options": Object {
+    "ID": "component",
+    "appState": Object {
+      "darkThemeEnabled": false,
+      "routerResolved": false,
+    },
+    "directives": Object {
+      "EventListener": [Function],
+      "UpdateOnEvent": [Function],
+      "disabled": [Function],
+      "onChangeUpdate": [Function],
+      "onInputUpdate": [Function],
+      "onclick": [Function],
+      "oninput": [Function],
+      "onload": [Function],
+      "onresize": [Function],
+      "onscroll": [Function],
+      "onselect": [Function],
+      "onsubmit": [Function],
+      "ref": [Function],
+    },
+  },
+  "html": "
+<div class=\\"theme-switch-wrapper\\">
+  <label class=\\"theme-switch\\" for=\\"checkbox\\">
+    <input type=\\"checkbox\\" id=\\"checkbox\\">
+    <div class=\\"slider round\\"></div>
+  </label>
+</div>
+",
+}
+`;
+
+exports[`toggle theme 1`] = `
+Object {
+  "Options": Object {
+    "ID": "component",
+    "appState": Object {
+      "darkThemeEnabled": false,
+      "routerResolved": false,
+    },
+    "directives": Object {
+      "EventListener": [Function],
+      "UpdateOnEvent": [Function],
+      "disabled": [Function],
+      "onChangeUpdate": [Function],
+      "onInputUpdate": [Function],
+      "onclick": [Function],
+      "oninput": [Function],
+      "onload": [Function],
+      "onresize": [Function],
+      "onscroll": [Function],
+      "onselect": [Function],
+      "onsubmit": [Function],
+      "ref": [Function],
+    },
+  },
+  "html": "
+<div class=\\"theme-switch-wrapper\\">
+  <label class=\\"theme-switch\\" for=\\"checkbox\\">
+    <input type=\\"checkbox\\" id=\\"checkbox\\">
+    <div class=\\"slider round\\"></div>
+  </label>
+</div>
+",
+}
+`;

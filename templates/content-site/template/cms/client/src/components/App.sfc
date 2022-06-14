@@ -1,0 +1,17 @@
+<template>
+    {% import WithoutFlushLoader from 'sham-ui-without-flush-loader' %}
+    {% import Layout from './layout/main.sfc' %}
+    {% import PageLoadingIndicator from './PageLoadingIndicator.sht' %}
+
+    {% if appState.tokenLoaded && appState.routerResolved %}
+        <Layout/>
+    {% else %}
+        <WithoutFlushLoader loadingComponent=\{{PageLoadingIndicator}}/>
+    {% endif %}
+</template>
+
+<script>
+    import { useStorage } from '../storages/app';
+
+    export default Component( Template, useStorage( $.appState ) );
+</script>

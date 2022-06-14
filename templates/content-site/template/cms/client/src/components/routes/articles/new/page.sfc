@@ -1,0 +1,50 @@
+<template>
+    {% import ErrorsPanel from '../../../ErrorsPanel.sht' %}
+    {% import Page from '../../../Page.sfc' %}
+    {% import ArticleForm from '../common/article-form.sfc' %}
+
+    <Page>
+        {% block 'header' %}
+            \{{pageTitle}}
+        {% endblock %}
+
+        {% block 'body' %}
+            <div class="articles-page">
+                <ErrorsPanel errors=\{{errors}} />
+                <div class="panel">
+                    <ArticleForm
+                        save=\{{this$.createArticle}}
+                        onSaveSuccess=\{{this$.onCreateArticle}}
+                    />
+                </div>
+            </div>
+        {% endblock %}
+    </Page>
+</template>
+
+<script>
+    function RoutesArticlesNewPage( options, update, didMount ) {
+        const pageTitle = $();
+        const errors = $();
+
+        const state = options( {
+            [ errors ]: [],
+            [ pageTitle ]: 'Create article'
+        } );
+
+        const fromDI = this.DI.resolve;
+
+        didMount( () => fromDI( 'title' ).change( state[ pageTitle ] ) );
+
+        this$.createArticle = ( data ) => fromDI( 'store' ).createArticle( data );
+
+        this$.onCreateArticle = () => {
+            const router = fromDI( 'router' );
+            router.navigate(
+                router.generate( 'articles/list', {} )
+            );
+        };
+    }
+
+    export default Component( Template, RoutesArticlesNewPage );
+</script>

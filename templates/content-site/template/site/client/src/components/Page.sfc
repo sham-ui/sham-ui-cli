@@ -1,0 +1,22 @@
+<template>
+    {% import WithoutFlushLoader from 'sham-ui-without-flush-loader' %}
+    {% import PageLoadingIndicator from './PageLoadingIndicator.sht' %}
+
+    {% if dataLoaded %}
+        <div data-test-page-body>
+            {% defblock 'default' %}
+        </div>
+    {% else %}
+        <WithoutFlushLoader loadingComponent=\{{PageLoadingIndicator}}/>
+    {% endif %}
+</template>
+
+<script>
+    function Page( options ) {
+        options( {
+            [ $.dataLoaded ]: true
+        } );
+    }
+
+    export default Component( Template, Page );
+</script>

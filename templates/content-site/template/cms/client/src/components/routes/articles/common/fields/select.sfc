@@ -1,0 +1,24 @@
+<template>
+    <select :oninput=\{{this$._onChange}}>
+        {% for item of [ emptyItem ].concat( items ) %}
+            <option value=\{{item.id}} selected=\{{item.id === value}}>\{{item.name}}</option>
+        {% endfor %}
+    </select>
+</template>
+
+<script>
+    function SelectField( options ) {
+        const onChange = $();
+
+        const state = options( {
+            [ $.emptyItem ]: { id: null, name: '- - -' },
+            [ $.items ]: [],
+            [ $.value ]: null,
+            [ onChange ]() {}
+        } );
+
+        this$._onChange = ( e ) => state[ onChange ]( e.target.value );
+    }
+
+    export default Component( Template, SelectField );
+</script>

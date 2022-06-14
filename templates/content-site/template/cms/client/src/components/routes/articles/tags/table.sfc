@@ -1,0 +1,45 @@
+<template>
+    <table>
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>Name</th>
+                <th>Slug</th>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for item of items %}
+                <tr class=\{{selectedItem && selectedItem.id === item.id ? "selected": ""}}>
+                    <td class="text-center">\{{item.id}}</td>
+                    <td>\{{item.name}}</td>
+                    <td>\{{item.slug}}</td>
+                    <td class="actions">
+                        <button
+                            data-test-update-button=\{{item.id}}
+                            :onclick=\{{selectItem.bind( this, item )}}
+                        >
+                            Edit
+                        </button>
+                        <button
+                            data-test-delete-button=\{{item.id}}
+                            class="btn-danger"
+                            :onclick=\{{confirmDelete.bind( this, item )}}
+                        >
+                            Delete
+                        </button>
+                    </td>
+                </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</template>
+<script>
+    function TagsTable( options ) {
+        options( {
+            [ $.items ]: []
+        } );
+    }
+
+    export default Component( Template, TagsTable );
+</script>

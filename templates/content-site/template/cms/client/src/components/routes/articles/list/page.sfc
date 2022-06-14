@@ -1,0 +1,126 @@
+<template>
+    {% import path from 'sham-ui-router/lib/params' %}
+
+    {% import Page from '../../../Page.sfc' %}
+    {% import ErrorsPanel from '../../../ErrorsPanel.sht' %}
+    {% import Pagination from '../../../pagination/index.sfc' %}
+    {% import ArticlesTable from './table.sfc' %}
+
+    <Page dataLoaded=\{{dataLoaded}}>
+        {% block 'header' %}
+            \{{pageTitle}}
+        {% endblock %}
+
+        {% block 'body' %}
+            <div class="articles-page">
+                <ErrorsPanel errors=\{{errors}}/>
+
+                <div class="container mg-b-30">
+                    <a
+                        data-test-toggle-create-form
+                        class="btn"
+                        :hrefto=\{{path("articles/new")}}
+                    >
+                        Create new article
+                    </a>
+                </div>
+
+                <div class="container">
+                    <div class="article-list">
+                        <div class="panel">
+                            <Pagination
+                                dataLoaded=\{{dataLoaded}}
+                                goToPage=\{{this$.loadData}}
+                                currentPage=\{{page}}
+                                limit=\{{limit}}
+                                total=\{{total}}
+                            >
+                                <ArticlesTable
+                                    categories=\{{categories}}
+                                    articles=\{{items}}
+                                    showErrors=\{{this$.setField( $.errors )}}
+                                    refresh=\{{this$.loadData.bind( this, page )}}
+                                />
+                            </Pagination>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        {% endblock %}
+    </Page>
+</template>
+
+<script>
+    import { SetField } from '../../../../mixins/state';
+
+    // Page=1 will result into offset 0, page=2 will result into
+    // offset 50 and so on
+    const offsetByPage = ( page, limit ) => ( page - 1 ) * limit;
+
+    function RoutesArticlesListPage( options, update, didMount ) {
+        const pageTitle = $();
+        const dataLoaded = $();
+        const categories = $();
+        const items = $();
+        const page = $();
+        const limit = $();
+        const total = $();
+        const errors = $();
+
+        const state = options( {
+            [ pageTitle ]: 'Articles',
+            [ dataLoaded ]: false,
+            [ items ]: [],
+            [ page ]: 1,
+            [ limit ]: 50,
+            [ total ]: 0
+        } );
+
+        const store = () => this.DI.resolve( 'store' );
+
+        didMount( () => {
+            this.DI.resolve( 'title' ).change( state[ pageTitle ] );
+            this$.loadCategories()
+                .then(
+                    () => this$.loadData( 1 ),
+                    ( { Messages = [ 'Fail load article categories' ] } ) => update( {
+                        [ dataLoaded ]: true,
+                        [ errors ]: Messages
+                    } )
+                );
+        } );
+
+        this$.loadCategories = () => store()
+            .articleCategories()
+            .then(
+                data => update( {
+                    [ categories ]: data.categories
+                } )
+            );
+
+        this$.loadData = ( currentPage ) => {
+            update( {
+                [ dataLoaded ]: false
+            } );
+            store().articles(
+                offsetByPage( currentPage, state[ limit ] ),
+                state[ limit ]
+            ).then(
+                data => update( {
+                    [ dataLoaded ]: true,
+                    [ errors ]: [],
+                    [ page ]: currentPage,
+                    [ items ]: data.articles,
+                    [ limit ]: data.meta.limit,
+                    [ total ]: data.meta.total
+                } ),
+                ( { Messages = [ 'Fail load article list' ] } ) => update( {
+                    [ dataLoaded ]: true,
+                    [ errors ]: Messages
+                } )
+            );
+        };
+    }
+
+    export default Component( Template, SetField, RoutesArticlesListPage );
+</script>

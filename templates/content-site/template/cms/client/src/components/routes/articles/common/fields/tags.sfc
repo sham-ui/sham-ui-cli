@@ -1,0 +1,52 @@
+<template>
+    {% import SelectTag from './select-tag.sfc' %}
+
+    <div class="tags-input">
+        {% for index, tag of selected %}
+            <div class="tag">
+                \{{tag.name}}
+                <span
+                    :onclick=\{{this$._removeTag.bind( this, index )}}
+                    data-test-remove-tag=\{{tag.name}}
+                    class="remove"
+                    data-test-close-button
+                >&times;</span>
+            </div>
+        {% endfor %}
+
+        <SelectTag
+            items=\{{this$._filterNotSelected( all, selected )}}
+            onChange=\{{this$._addTag}}
+        />
+    </div>
+</template>
+
+<script>
+    function TagsField( options ) {
+        const all = $();
+        const selected = $();
+        const onChange = $();
+
+        const state = options( {
+            [ all ]: [],
+            [ selected ]: [],
+            [ onChange ]() {}
+        } );
+
+        this$._filterNotSelected = ( all, selected ) => all.filter(
+            x => -1 === selected.indexOf( x )
+        );
+
+        this$._addTag = ( tag ) => {
+            state[ selected ].push( tag );
+            state[ onChange ]( state[ selected ] );
+        };
+
+        this$._removeTag = ( index ) => {
+            state[ selected ].splice( index, 1 );
+            state[ onChange ]( state[ selected ] );
+        };
+    }
+
+    export default Component( Template, TagsField );
+</script>

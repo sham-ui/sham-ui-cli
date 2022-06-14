@@ -1,0 +1,46 @@
+<template>
+    {% import ArticlesPage from '../_common/articles/page.sfc' %}
+
+    <ArticlesPage
+        pathName="tag.page"
+        getPageTitle=\{{getPageTitle}}
+        loadData=\{{loadData}}
+    >
+        {% block 'header' %}
+            <div class="container-fluid">
+                <div class="row">
+                    <div class="categorie-title">
+                        <h3>Tag : <span>\{{tag}}</span></h3>
+                    </div>
+                </div>
+            </div>
+        {% endblock %}
+    </ArticlesPage>
+</template>
+
+<script>
+    function TagPage( options, update ) {
+        const tag = $();
+
+        const state = options( {
+            [ tag ]: '',
+            [ $.getPageTitle ]: () => state[ tag ],
+            [ $.loadData ]: ( offset, limit ) => this.DI.resolve( 'store' ).articles(
+                offset,
+                limit,
+                {
+                    tag: this.DI.resolve( 'router' ).storage.params.tag
+                }
+            ).then(
+                data => {
+                    update( {
+                        [ tag ]: data.meta.tag
+                    } );
+                    return data;
+                }
+            )
+        } );
+    }
+
+    export default Component( Template, TagPage );
+</script>

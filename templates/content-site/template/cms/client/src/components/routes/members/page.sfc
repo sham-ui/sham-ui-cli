@@ -1,0 +1,148 @@
+<template>
+    {% import ErrorsPanel from '../../ErrorsPanel.sht' %}
+    {% import Page from '../../Page.sfc' %}
+    {% import Pagination from '../../pagination/index.sfc' %}
+    {% import MembersCreate from './create.sfc' %}
+    {% import MembersTable from './table.sfc' %}
+    {% import MembersDetail from './detail.sfc' %}
+
+    <Page>
+        {% block 'header' %}
+            \{{pageTitle}}
+        {% endblock %}
+
+        {% block 'body' %}
+            <div class="members-page">
+                <ErrorsPanel errors=\{{errors}}/>
+
+                <div class="container">
+                    <button
+                        data-test-toggle-create-form
+                        class="mg-b-30"
+                        :onclick=\{{this$.toggleField( $.createFormVisible )}}
+                    >
+                        \{{
+                            createFormVisible ?
+                                'Hide create new member form' :
+                                'Show create new member form'
+                        }}
+                    </button>
+                    {% if createFormVisible %}
+                        <div class="panel mg-b-30 create-member">
+                            <MembersCreate onCreateSuccess=\{{this$._onCreateMember}} />
+                        </div>
+                    {% endif %}
+                </div>
+
+                <div class="container">
+                    <div class="members-list">
+                        <div class="panel">
+                            <Pagination
+                                dataLoaded=\{{dataLoaded}}
+                                goToPage=\{{this$.loadData}}
+                                currentPage=\{{page}}
+                                limit=\{{limit}}
+                                total=\{{total}}
+                            >
+                                <MembersTable
+                                    members=\{{members}}
+                                    selectedMember=\{{selectedMember}}
+                                    onSelectMember=\{{this$.setField( $.selectedMember )}}
+                                    showErrors=\{{this$.setField( $.errors )}}
+                                    refresh=\{{this$.loadData.bind( this, page )}}
+                                />
+                            </Pagination>
+                        </div>
+                    </div>
+
+                    {% if selectedMember %}
+                        <div class="member-detail">
+                            <div class="panel">
+                                <MembersDetail
+                                    member=\{{selectedMember}}
+                                    onUpdateSuccess=\{{this$.loadData.bind( this, page )}}
+                                />
+                            </div>
+                        </div>
+                    {% endif %}
+                </div>
+            </div>
+        {% endblock %}
+    </Page>
+</template>
+
+<script>
+    import { ToggleField, SetField } from '../../../mixins/state';
+
+    function RoutesMembersPage( options, update, didMount ) {
+        const pageTitle = $();
+        const dataLoaded = $();
+        const errors = $();
+        const page = $();
+        const limit = $();
+        const total = $();
+        const members = $();
+        const createFormVisible = $();
+        const selectedMember = $();
+
+        const state = options( {
+            [ pageTitle ]: 'Members',
+            [ dataLoaded ]: false,
+            [ errors ]: [],
+            [ page ]: 1,
+            [ limit ]: 50,
+            [ total ]: 0,
+            [ members ]: [],
+            [ createFormVisible ]: false,
+            [ selectedMember ]: null
+        } );
+
+        const loadData = $();
+
+        didMount( () => {
+            this.DI.resolve( 'title' ).change( state[ pageTitle ] );
+            this[ loadData ]( 1 );
+        } );
+
+
+        // Page=1 will result into offset 0, page=2 will result into
+        // offset 50 and so on
+        const offsetByPage = ( page, limit ) => ( page - 1 ) * limit;
+
+        this[ loadData ] = currentPage => {
+            update( {
+                [ dataLoaded ]: false,
+                [ selectedMember ]: null
+            } );
+            this.DI.resolve( 'store' ).api.request( {
+                url: 'admin/members',
+                params: {
+                    offset: offsetByPage( currentPage, state[ limit ] ),
+                    limit: state[ limit ]
+                }
+            } ).then(
+                data => update( {
+                    [ dataLoaded ]: true,
+                    [ errors ]: [],
+                    [ page ]: currentPage,
+                    [ members ]: data.members,
+                    [ limit ]: data.meta.limit,
+                    [ total ]: data.meta.total
+                } ),
+                ( { Messages = [ 'Fail load members list' ] } ) => update( {
+                    [ dataLoaded ]: true,
+                    [ errors ]: Messages
+                } )
+            );
+        };
+
+        this$._onCreateMember = () => {
+            update( {
+                [ createFormVisible ]: false
+            } );
+            this[ loadData ]( state[ page ] );
+        };
+    }
+
+    export default Component( Template, ToggleField, SetField, RoutesMembersPage );
+</script>

@@ -1,0 +1,110 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`cancel create article 1`] = `
+"<h4 class=\\"page-header\\"> Create article
+  <!--0-->
+</h4>
+<div class=\\"page-body\\">
+  <div class=\\"articles-page\\">
+    <!--0-->
+    <!--0-->
+    <div class=\\"panel\\">
+      <!--0-->
+      <!--0-->
+      <form class=\\"form-layout\\">
+        <!--0-->
+        <!--0-->
+        <!--1-->
+        <div class=\\"form-group\\" data-test-field-title=\\"\\">
+          <label>Title:</label>
+          <input autofocus=\\"\\">
+        </div>
+        <div class=\\"form-group\\" data-test-field-category=\\"\\">
+          <label>Category:</label>
+          <select>
+            <option value=\\"null\\">- - -</option>
+            <option value=\\"1\\">Кухня</option>
+            <option value=\\"2\\">Быт</option>
+          </select>
+          <!--0-->
+        </div>
+        <div class=\\"form-group\\" data-test-field-short-body=\\"\\">
+          <label>Short body:</label>
+          <textarea></textarea>
+        </div>
+        <div class=\\"form-group\\" data-test-field-body=\\"\\">
+          <label>Body:</label>
+          <textarea>&lt;p&gt;Full body text&lt;/p&gt;</textarea>
+          <!--1-->
+        </div>
+        <div class=\\"form-group\\" data-test-field-tags=\\"\\">
+          <label>Tags:</label>
+          <div class=\\"tags-input\\">
+            <div class=\\"tag\\">Hello world<span class=\\"remove\\" data-test-close-button=\\"\\" data-test-remove-tag=\\"Hello world\\">×</span></div>
+            <div class=\\"tag\\">New<span class=\\"remove\\" data-test-close-button=\\"\\" data-test-remove-tag=\\"New\\">×</span></div>
+            <!--0-->
+            <div class=\\"autocomplete-input\\">
+              <input autocomplete=\\"off\\">
+              <!--0-->
+            </div>
+            <!--1-->
+          </div>
+          <!--2-->
+        </div>
+        <div class=\\"form-group\\" data-test-field-published-at=\\"\\">
+          <label>Published at:</label>
+          <table class=\\"sham-ui-datetimepicker\\">
+            <thead>
+              <tr>
+                <th colspan=\\"5\\" class=\\"picker-switch\\">четверг, 15 июня 2000 г.</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td class=\\"change\\"><span>+</span></td>
+                <td></td>
+                <td class=\\"change\\"><span>+</span></td>
+                <td></td>
+                <td class=\\"change\\"><span>+</span></td>
+              </tr>
+              <!--0-->
+              <tr>
+                <td class=\\"hour\\">09</td>
+                <td>:</td>
+                <td class=\\"minute\\">35</td>
+                <td>:</td>
+                <td class=\\"second\\">10</td>
+              </tr>
+              <tr>
+                <td class=\\"change\\"><span>–</span></td>
+                <td></td>
+                <td class=\\"change\\"><span>–</span></td>
+                <td></td>
+                <td class=\\"change\\"><span>–</span></td>
+              </tr>
+              <!--1-->
+            </tbody>
+            <!--0-->
+          </table>
+          <!--3-->
+        </div>
+        <!--0-->
+        <!--2-->
+        <button type=\\"submit\\">
+          <!--3-->Save
+          <!--4-->
+        </button>
+        <!--5-->
+      </form>
+      <!--0-->
+      <!--1-->
+      <!--1-->
+      <!--0-->
+    </div>
+  </div>
+  <!--1-->
+</div>
+<!--0-->
+<!--0-->
+<!--0-->"
+`;

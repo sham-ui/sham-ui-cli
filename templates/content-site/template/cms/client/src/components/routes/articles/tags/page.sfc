@@ -1,0 +1,48 @@
+<template>
+    {% import CrudPage from '../../../pages/crud-page.sfc' %}
+    {% import TagForm from './detail/form.sfc' %}
+    {% import TagsTable from './table.sfc' %}
+    {% import TagDetail from './detail.sfc' %}
+
+    <CrudPage
+        pageTitle="Tags"
+        typeName="tag"
+        loadItems=\{{this$.loadData}}
+        confirmDeleteText=\{{this$.confirmDeleteText}}
+        deleteItem=\{{this$.deleteTag}}
+    >
+        {% block 'createForm' %}
+            <TagForm
+                save=\{{this$.createTag}}
+            />
+        {% endblock %}
+
+        {% block 'table' %}
+            <TagsTable/>
+        {% endblock %}
+
+        {% block 'itemDetail' %}
+            <TagDetail/>
+        {% endblock %}
+    </CrudPage>
+</template>
+
+<script>
+    function RoutesArticlesTagsPage() {
+        this$.loadData = () => this.DI.resolve( 'store' ).articleTags().then(
+            data => data.tags
+        );
+
+        this$.createTag = ( data ) => this.DI.resolve( 'store' ).createArticlesTag(
+            data
+        );
+
+        this$.confirmDeleteText = ( tag ) => `Are you sure you want to delete tag "${tag.name}"?`;
+
+        this$.deleteTag = ( tag ) => this.DI.resolve( 'store' ).deleteArticleTag(
+            tag.id
+        );
+    }
+
+    export default Component( Template, RoutesArticlesTagsPage );
+</script>

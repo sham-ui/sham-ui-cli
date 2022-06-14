@@ -1,0 +1,43 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`renders correctly 1`] = `
+Object {
+  "Options": Object {
+    "ID": "component",
+    "currentPage": 1,
+    "directives": Object {
+      "EventListener": [Function],
+      "UpdateOnEvent": [Function],
+      "disabled": [Function],
+      "onChangeUpdate": [Function],
+      "onInputUpdate": [Function],
+      "onclick": [Function],
+      "oninput": [Function],
+      "onload": [Function],
+      "onresize": [Function],
+      "onscroll": [Function],
+      "onselect": [Function],
+      "onsubmit": [Function],
+      "ref": [Function],
+    },
+    "goToPage": [Function],
+    "limit": 50,
+    "pageArraySize": 7,
+    "patch": "",
+    "pathName": "",
+    "queryString": "",
+    "total": 0,
+  },
+  "html": "
+<div class=\\"pagination mt--10\\">
+  <ul class=\\"list-inline\\">
+    <!--0-->
+    <li>
+      <a data-test-page=\\"1\\" class=\\"active\\" href=\\"/\\">1</a>
+    </li>
+    <!--1-->
+  </ul>
+</div>
+",
+}
+`;

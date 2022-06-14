@@ -1,0 +1,30 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`renders correctly 1`] = `
+Object {
+  "Options": Object {
+    "ID": "component",
+    "currentRoute": Object {
+      "activePageComponent": null,
+      "activePageOptions": null,
+      "name": "",
+      "pageLoaded": false,
+      "params": Object {},
+      "url": "",
+    },
+    "directives": Object {
+      "hrefto": [Function],
+    },
+  },
+  "html": "
+<ul class=\\"navbar-nav ml-auto mr-auto\\">
+  <li class=\\"nav-item\\">
+    <a class=\\"nav-link \\" href=\\"/\\">Home</a>
+  </li>
+  <li class=\\"nav-item\\">
+    <a class=\\"nav-link active\\" href=\\"/\\">Contact</a>
+  </li>
+</ul>
+",
+}
+`;

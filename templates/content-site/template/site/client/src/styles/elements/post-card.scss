@@ -1,0 +1,59 @@
+/* ------------------------------
+		 Post-card
+------------------------------ */
+.post{
+	&-card{
+		background-color: $white-color !important;
+		padding: 30px;
+		border-radius: $rd-round !important;
+		margin-bottom:60px;
+		display: block;
+		position: relative;
+		@include shadow();
+		&-content{
+			.categorie{
+				margin-bottom:20px;
+			}
+			h5{
+				margin-bottom:8px;
+				a{
+					@include easeInOut(0.5);
+					&:hover{
+						color:$base-color;
+					}
+				}
+			}
+			p{
+				margin-bottom:30px;
+			}
+		}
+		&-info{
+			ul{
+				display: flex;
+    			align-items: center;
+			}
+			img{
+				width:40px !important;
+				height: 40px;
+				border-radius: $rd-circle;
+				margin-right:7px;
+
+			}
+			li{
+				margin-bottom:0;
+				font-size: 13px;
+				color:$text-color;
+				font-weight: 500;
+				a:hover{
+					color:$base-color;
+				}
+			}
+		}
+	}
+}
+
+
+
+
+
+

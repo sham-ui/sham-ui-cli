@@ -1,0 +1,41 @@
+<template>
+    {% import FormWithConfirmModal from '../../../../FormWithConfirmModal.sfc' %}
+
+    <FormWithConfirmModal
+        saveData=\{{this$._saveData}}
+        onSuccess=\{{onSuccess}}
+        getErrors=\{{this$._getErrors}}
+        confirmTitle=\{{confirmTitle}}
+        confirmText=\{{confirmText}}
+        submitText=\{{submitText}}
+    >
+        <div class="form-group">
+            <label>Name:</label>
+            <input name="name" type="text" autofocus value=\{{name}} :onChangeUpdate=\{{$.name}}>
+        </div>
+    </FormWithConfirmModal>
+</template>
+
+<script>
+    function CategoryForm( options ) {
+        const name = $();
+        const save = $();
+
+        const state = options( {
+            [ $.confirmTitle ]: '',
+            [ $.confirmText ]: '',
+            [ name ]: '',
+            [ save ]() {},
+            [ $.submitText ]: '',
+            [ $.onSuccess ]() {}
+        } );
+
+        this$._saveData = () => state[ save ]( {
+            name: state[ name ].trim()
+        } );
+
+        this$._getErrors = ( { Messages = [ 'Save category data fail' ] } ) => Messages;
+    }
+
+    export default Component( Template, CategoryForm );
+</script>

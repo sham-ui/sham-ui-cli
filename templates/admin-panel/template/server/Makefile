@@ -8,6 +8,7 @@ install: restore_deps
 build_js:
 	cd ../client/
 	yarn build
+	rm -r ../server/{{ shortName }}/assets/files
 	mkdir -p ../server/{{ shortName }}/assets/files
 	cp -r dist/* ../server/{{ shortName }}/assets/files
 

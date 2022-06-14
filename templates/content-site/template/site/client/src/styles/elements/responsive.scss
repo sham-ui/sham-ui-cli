@@ -1,0 +1,80 @@
+/* ------------------------------
+		 Responsive
+------------------------------ */
+
+@media screen and (max-width:768px){
+	.search-form{
+		width:100%;
+		input{
+			width:calc(100% - 100px);
+		}
+	}
+
+	.search .close{
+		right:30px;
+	}
+}
+
+@media screen and (max-width:576px){
+	.search-width{
+    	max-width:100%;
+   		margin: 0;
+	}
+
+	.page404 {
+    	width: auto;
+	}
+
+	.navbar-right .search-icon{
+		margin-left: 15px;
+	}
+
+	.theme-switch-wrapper{
+		margin-right: 0px;
+	}
+
+	.post-single-footer{
+		flex-direction: column;
+		align-items: flex-start;
+	}
+	.page404 .content h1{
+		font-size:130px;
+	}
+}
+
+@media screen and (max-width:321px){
+	.post-card-info{
+		img{
+			display: none !important;
+		}
+	}
+	.search{
+	  	.close {
+			right: 15px;
+			top:15px;
+		}
+		&-form{
+			flex-direction: column;
+			box-shadow: none;
+			input{
+				border-radius: $rd-round !important;
+				width:100% !important;
+				@include shadow();
+			}
+			.search-btn{
+				width:100%;
+				height: 45px;
+				border-radius: $rd-round !important;
+				margin-top:10px;
+			}
+		}
+	}
+	.page404 .content h1 {
+    	font-size: 100px;
+	}
+	.page404 .content h3{
+		font-size:$f-s-h4;
+	}
+}
+
+

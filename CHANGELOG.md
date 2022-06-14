@@ -1,3 +1,9 @@
+## master
+* Fix scaffolding in templates
+* Clear go assets files before build `admin-panel`
+* Add template for `content-site` - content site with SSR & CMS panel
+* Update `sham-ui` dependencies
+
 ## 5.0.0-alpha.2
 * Fix title in admin-panel
 

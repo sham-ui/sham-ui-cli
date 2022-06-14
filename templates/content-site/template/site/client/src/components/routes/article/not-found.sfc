@@ -1,0 +1,18 @@
+<template>
+    {% import path from 'sham-ui-router/lib/params' %}
+
+    <div class="container-fluid">
+        <div class="page404  widget">
+            <div class="content">
+                <h1>404</h1>
+                <h3>Page Not Found.</h3>
+                <p>It looks like nothing was found at this location. </p>
+                <a class="btn-custom" :hrefto=\{{path('home')}}>Go back to Home</a>
+            </div>
+        </div>
+    </div>
+</template>
+
+<script>
+    export default Component( Template );
+</script>

@@ -1,0 +1,22 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`renders correctly 1`] = `
+Object {
+  "Options": Object {
+    "ID": "component",
+    "createFormVisible": false,
+    "dataLoaded": false,
+    "items": Array [],
+    "loadItems": [Function],
+    "pageTitle": "",
+    "selectedItem": null,
+    "typeName": "",
+  },
+  "html": "
+<!--0-->
+<!--0-->
+<!--0-->
+<!--0-->
+",
+}
+`;

@@ -1,0 +1,31 @@
+<template>
+    {% import CategoryForm from './detail/form.sfc' %}
+
+    <h6>Category: \{{item.name}}</h6>
+    <CategoryForm
+        submitText="Update"
+        confirmTitle="Change category data"
+        confirmText="Are you sure you want to change category data?"
+        name=\{{item.name}}
+        save=\{{this$.updateCategory}}
+        onSuccess=\{{onUpdateSuccess}}
+    />
+</template>
+
+<script>
+    function MembersDetail( options )  {
+        const item = $();
+
+        const state = options( {
+            [ $.onUpdateSuccess ]() {},
+            [ item ]: {}
+        } );
+
+        this$.updateCategory = ( data ) => this.DI.resolve( 'store' ).updateArticlesCategory(
+            state[ item ].id,
+            data
+        );
+    }
+
+    export default Component( Template, MembersDetail );
+</script>

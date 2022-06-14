@@ -19,7 +19,8 @@ function scaffold( name, src, dest, done ) {
         noEscape: true,
         classifiedName: classify( name ),
         gitignore: '.gitignore',
-        npmignore: '.npmignore'
+        npmignore: '.npmignore',
+        escapedName: '{{name}}'
     } );
 
     metalsmith.use( promptQuestions( opts.prompts ) )

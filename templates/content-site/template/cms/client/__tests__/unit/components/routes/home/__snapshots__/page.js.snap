@@ -1,0 +1,21 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`renders correctly 1`] = `
+Object {
+  "Options": Object {
+    "ID": "component",
+    "pageTitle": "Home",
+  },
+  "html": "
+<h4 class=\\"page-header\\"> Home
+  <!--0-->
+</h4>
+<div class=\\"page-body\\">
+  <div class=\\"panel\\"> Project description </div>
+  <!--1-->
+</div>
+<!--0-->
+<!--0-->
+",
+}
+`;

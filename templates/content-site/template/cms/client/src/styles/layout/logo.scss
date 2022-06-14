@@ -1,0 +1,55 @@
+.logo {
+  position: fixed;
+  top: 0;
+  left: -230px;
+  width: 230px;
+  height: 60px;
+  background-color: #fff;
+  border-right: 1px solid rgba(0, 0, 0, 0.15);
+  font-size: 24px;
+  font-weight: 700;
+  padding: 0 20px;
+  display: flex;
+  align-items: center;
+  z-index: 1030;
+  transition: all 0.2s ease-in-out;
+  > a, span {
+    color: #212529;
+    letter-spacing: -0.5px;
+    i {
+      font-style: normal;
+      font-weight: 500;
+      color: #17a2b8;
+    }
+    span {
+      font-weight: 300;
+      color: #00b297;
+      display: inline-block;
+      transition: all 0.2s ease-in-out;
+    }
+    &:hover, &:focus {
+      text-decoration: none;
+    }
+    span:first-child {
+      padding-right: 2px;
+    }
+    span:last-child {
+      padding-left: 2px;
+    }
+    &:hover span:first-child, &:focus span:first-child {
+      transform: translateX(-5px);
+    }
+    &:hover span:last-child, &:focus span:last-child {
+      transform: translateX(5px);
+    }
+  }
+}
+
+@media (min-width: 992px) {
+  .logo {
+    left: 0;
+  }
+  .collapsed-menu .logo {
+    left: -230px;
+  }
+}

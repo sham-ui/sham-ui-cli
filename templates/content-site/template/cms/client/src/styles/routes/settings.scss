@@ -1,0 +1,15 @@
+.settings {
+  a {
+    margin-left: 5px;
+    color: #0866C6;
+    &:focus, &:active, &:hover {
+      color: #0753a1;
+    }
+  }
+}
+
+@media (min-width: 992px) {
+  .settings .form-layout {
+    width: 600px;
+  }
+}

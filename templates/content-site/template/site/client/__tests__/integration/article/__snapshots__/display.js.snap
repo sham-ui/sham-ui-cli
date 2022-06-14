@@ -1,0 +1,557 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`display 1`] = `
+"<nav class=\\"navbar navbar-expand-lg fixed-top\\">
+  <div class=\\"container-fluid\\">
+    <div class=\\"logo\\">
+      <a href=\\"\\">
+        <img src=\\"/images/logo-dark.png\\" alt=\\"logo\\">
+      </a>
+    </div>
+    <!--0-->
+    <div class=\\"collapse navbar-collapse\\">
+      <ul class=\\"navbar-nav ml-auto mr-auto\\">
+        <li class=\\"nav-item\\">
+          <a class=\\"nav-link \\" href=\\"\\">Home</a>
+        </li>
+        <li class=\\"nav-item\\">
+          <a class=\\"nav-link\\" href=\\"/contact/\\">Contact</a>
+        </li>
+      </ul>
+    </div>
+    <div class=\\"navbar-right ml-auto\\">
+      <div class=\\"theme-switch-wrapper\\">
+        <label class=\\"theme-switch\\" for=\\"checkbox\\">
+          <input type=\\"checkbox\\" id=\\"checkbox\\">
+          <div class=\\"slider round\\"></div>
+        </label>
+      </div>
+      <!--1-->
+      <div class=\\"search-icon\\">
+        <i class=\\"icon-search\\"></i>
+      </div>
+      <button class=\\"navbar-toggler\\" type=\\"button\\" aria-expanded=\\"false\\" aria-label=\\"Toggle navigation\\"><span class=\\"navbar-toggler-icon\\"></span></button>
+    </div>
+  </div>
+</nav>
+<!--0-->
+<div data-test-page-body=\\"\\">
+  <section class=\\"section pt-55\\">
+    <div class=\\"container\\">
+      <div class=\\"row\\">
+        <div class=\\"col-lg-10 offset-lg-1 mb-20\\">
+          <div class=\\"post-single\\">
+            <div class=\\"post-single-content\\">
+              <a class=\\"categorie\\" href=\\"/category/pervya/1/\\">Первая</a>
+              <h4>Первая тестовая статья</h4>
+              <div class=\\"post-single-info\\">
+                <ul class=\\"list-inline\\">
+                  <li>среда, 25 мая 2022 г., 02:54:20</li>
+                </ul>
+              </div>
+            </div>
+            <div class=\\"post-single-body\\">
+              <p>Short <b>content</b>
+              </p>
+            </div>
+            <div class=\\"post-single-footer\\">
+              <div class=\\"tags\\">
+                <ul class=\\"list-inline\\">
+                  <li>
+                    <a href=\\"/tag/byt/1/\\" data-test-tag=\\"byt\\">Быт</a>
+                  </li>
+                </ul>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!--0-->
+    <!--0-->
+  </section>
+  <!--0-->
+</div>
+<!--0-->
+<!--0-->
+<!--0-->
+<!--1-->
+<footer class=\\"footer\\">
+  <div class=\\"container-fluid\\">
+    <div class=\\"row\\">
+      <div class=\\"col-lg-12\\">
+        <div class=\\"back\\">
+          <a href=\\"#\\" class=\\"back-top\\">
+            <i class=\\"icon-up\\"></i>
+          </a>
+        </div>
+      </div>
+    </div>
+  </div>
+</footer>
+<!--2-->
+<!--3-->
+<!--0-->
+<!--0-->"
+`;
+
+exports[`ssr & rehydrate 1`] = `
+"<nav class=\\"navbar navbar-expand-lg fixed-top\\">
+  <div class=\\"container-fluid\\">
+    <div class=\\"logo\\">
+      <a href=\\"\\">
+        <img src=\\"/images/logo-dark.png\\" alt=\\"logo\\">
+      </a>
+    </div>
+    <!--0-->
+    <div class=\\"collapse navbar-collapse\\">
+      <ul class=\\"navbar-nav ml-auto mr-auto\\">
+        <li class=\\"nav-item\\">
+          <a href=\\"\\" class=\\"nav-link \\">Home</a>
+        </li>
+        <li class=\\"nav-item\\">
+          <a href=\\"/contact/\\" class=\\"nav-link\\">Contact</a>
+        </li>
+      </ul>
+    </div>
+    <div class=\\"navbar-right ml-auto\\">
+      <div class=\\"theme-switch-wrapper\\">
+        <label for=\\"checkbox\\" class=\\"theme-switch\\">
+          <input type=\\"checkbox\\" id=\\"checkbox\\">
+          <div class=\\"slider round\\"></div>
+        </label>
+      </div>
+      <!--1-->
+      <div class=\\"search-icon\\">
+        <i class=\\"icon-search\\"></i>
+      </div>
+      <button type=\\"button\\" aria-expanded=\\"false\\" aria-label=\\"Toggle navigation\\" class=\\"navbar-toggler\\"><span class=\\"navbar-toggler-icon\\"></span></button>
+    </div>
+  </div>
+</nav>
+<!--0-->
+<div data-test-page-body=\\"\\">
+  <section class=\\"section pt-55\\">
+    <div class=\\"container\\">
+      <div class=\\"row\\">
+        <div class=\\"col-lg-10 offset-lg-1 mb-20\\">
+          <div class=\\"post-single\\">
+            <div class=\\"post-single-content\\">
+              <a href=\\"/category/pervya/1/\\" class=\\"categorie\\">Первая</a>
+              <h4>Первая тестовая статья</h4>
+              <div class=\\"post-single-info\\">
+                <ul class=\\"list-inline\\">
+                  <li>среда, 25 мая 2022 г., 02:54:20</li>
+                </ul>
+              </div>
+            </div>
+            <div class=\\"post-single-body\\">
+              <p>Short <b>content</b>
+              </p>
+            </div>
+            <div class=\\"post-single-footer\\">
+              <div class=\\"tags\\">
+                <ul class=\\"list-inline\\">
+                  <li>
+                    <a href=\\"/tag/byt/1/\\" data-test-tag=\\"byt\\">Быт</a>
+                  </li>
+                </ul>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!--0-->
+    <!--0-->
+  </section>
+  <!--0-->
+</div>
+<!--0-->
+<!--0-->
+<!--0-->
+<!--1-->
+<footer class=\\"footer\\">
+  <div class=\\"container-fluid\\">
+    <div class=\\"row\\">
+      <div class=\\"col-lg-12\\">
+        <div class=\\"back\\">
+          <a href=\\"#\\" class=\\"back-top\\">
+            <i class=\\"icon-up\\"></i>
+          </a>
+        </div>
+      </div>
+    </div>
+  </div>
+</footer>
+<!--2-->
+<!--3-->
+<!--0-->
+<!--0-->
+<script>
+  window.data = {
+    \\"0\\": {
+      \\"C\\": [\\"1\\"],
+      \\"N\\": [10]
+    },
+    \\"1\\": {
+      \\"C\\": [\\"2\\", \\"6\\", \\"7\\"],
+      \\"N\\": [1, 6, 8, 9]
+    },
+    \\"2\\": {
+      \\"C\\": [\\"3\\", \\"4\\", \\"5\\"],
+      \\"N\\": [0, [0, 0],
+        [0, 0, 1],
+        [0, 0, 2],
+        [0, 0, 3],
+        [0, 0, 3, 1],
+        [0, 0, 3, 2],
+        [0, 0, 3, 2, 0],
+        [0, 0, 3, 3],
+        [0, 0, 3, 3, 0]
+      ]
+    },
+    \\"3\\": {
+      \\"N\\": [0, [0, 0],
+        [0, 0, 0]
+      ]
+    },
+    \\"4\\": {
+      \\"N\\": [0, [0, 0],
+        [0, 0, 0],
+        [0, 0, 0, 0],
+        [0, 1],
+        [0, 1, 0],
+        [0, 1, 0, 0]
+      ]
+    },
+    \\"5\\": {
+      \\"N\\": [0, [0, 0],
+        [0, 0, 0],
+        [0, 0, 1]
+      ]
+    },
+    \\"6\\": {
+      \\"N\\": [7, [7, 0],
+        [7, 0, 0],
+        [7, 0, 0, 0],
+        [7, 0, 0, 0, 0],
+        [7, 0, 0, 0, 0, 0],
+        [7, 0, 0, 0, 0, 0, 0]
+      ]
+    },
+    \\"7\\": {
+      \\"C\\": [\\"8\\"],
+      \\"N\\": [5]
+    },
+    \\"8\\": {
+      \\"C\\": [\\"9\\"]
+    },
+    \\"9\\": {
+      \\"O\\": {
+        \\"article\\": {
+          \\"tags\\": [{
+            \\"name\\": \\"Быт\\",
+            \\"slug\\": \\"byt\\"
+          }]
+        },
+        \\"dataLoaded\\": true
+      },
+      \\"C\\": [\\"10\\"],
+      \\"N\\": [4]
+    },
+    \\"10\\": {
+      \\"C\\": [\\"13\\"],
+      \\"N\\": [3]
+    },
+    \\"13\\": {
+      \\"C\\": [\\"14\\"],
+      \\"N\\": [2, [2, 1]]
+    },
+    \\"14\\": {
+      \\"C\\": [\\"15\\"],
+      \\"N\\": [0]
+    },
+    \\"15\\": {
+      \\"C\\": [\\"16\\"],
+      \\"N\\": [2]
+    },
+    \\"16\\": {
+      \\"C\\": [\\"17\\"],
+      \\"N\\": [1]
+    },
+    \\"17\\": {
+      \\"C\\": [\\"18\\"],
+      \\"N\\": [0, [0, 0],
+        [0, 0, 0],
+        [0, 0, 0, 0],
+        [0, 0, 0, 0, 0],
+        [0, 0, 0, 0, 0, 0],
+        [0, 0, 0, 0, 0, 0, 0],
+        [0, 0, 0, 0, 0, 1],
+        [0, 0, 0, 0, 0, 1, 0],
+        [0, 0, 0, 0, 0, 2],
+        [0, 0, 0, 0, 0, 2, 0],
+        [0, 0, 0, 0, 0, 2, 0, 0],
+        [0, 0, 0, 0, 0, 2, 0, 0, 0],
+        [0, 0, 0, 0, 1],
+        [0, 0, 0, 0, 2],
+        [0, 0, 0, 0, 2, 0],
+        [0, 0, 0, 0, 2, 0, 0]
+      ]
+    },
+    \\"18\\": {
+      \\"N\\": [0, [0, 0],
+        [0, 0, 0]
+      ]
+    },
+    \\"app\\": {
+      \\"C\\": [\\"0\\"],
+      \\"N\\": [11]
+    }
+  };
+</script>
+<script src=\\"/s.min.js\\"></script>
+<script>
+  System.import('/bundle.js');
+</script>"
+`;
+
+exports[`ssr 1`] = `
+"<!doctype html>
+<html>
+
+  <head>
+    <meta charset=\\"UTF-8\\">
+    <meta name=\\"viewport\\" content=\\"width=device-width, initial-scale=1.0\\">
+    <meta name=\\"theme-color\\" content=\\"\\">
+    <link rel=\\"icon\\" href=\\"/favicon.ico\\">
+    <title>{{ logoText }} | Первая тестовая статья</title>
+    <link rel=\\"stylesheet\\" href=\\"/bundle.css\\" />
+  </head>
+
+  <body class=\\"animation-stopped\\">
+    <nav class=\\"navbar navbar-expand-lg fixed-top\\">
+      <div class=\\"container-fluid\\">
+        <div class=\\"logo\\">
+          <a href=\\"\\">
+            <img src=\\"/images/logo-dark.png\\" alt=\\"logo\\">
+            </img>
+          </a>
+        </div>
+        <!--0-->
+        <div class=\\"collapse navbar-collapse\\">
+          <ul class=\\"navbar-nav ml-auto mr-auto\\">
+            <li class=\\"nav-item\\">
+              <a href=\\"\\" class=\\"nav-link\\">Home</a>
+            </li>
+            <li class=\\"nav-item\\">
+              <a href=\\"/contact/\\" class=\\"nav-link\\">Contact</a>
+            </li>
+          </ul>
+        </div>
+        <div class=\\"navbar-right ml-auto\\">
+          <div class=\\"theme-switch-wrapper\\">
+            <label for=\\"checkbox\\" class=\\"theme-switch\\">
+              <input type=\\"checkbox\\" id=\\"checkbox\\">
+              <div class=\\"slider round\\"></div>
+            </label>
+          </div>
+          <!--1-->
+          <div class=\\"search-icon\\">
+            <i class=\\"icon-search\\"></i>
+          </div>
+          <button type=\\"button\\" aria-expanded=\\"false\\" aria-label=\\"Toggle navigation\\" class=\\"navbar-toggler\\"><span class=\\"navbar-toggler-icon\\"></span></button>
+        </div>
+      </div>
+    </nav>
+    <!--0-->
+    <div data-test-page-body=\\"\\">
+      <section class=\\"section pt-55\\">
+        <div class=\\"container\\">
+          <div class=\\"row\\">
+            <div class=\\"col-lg-10 offset-lg-1 mb-20\\">
+              <div class=\\"post-single\\">
+                <div class=\\"post-single-content\\">
+                  <a href=\\"/category/pervya/1/\\" class=\\"categorie\\">Первая</a>
+                  <h4>Первая тестовая статья</h4>
+                  <div class=\\"post-single-info\\">
+                    <ul class=\\"list-inline\\">
+                      <li>среда, 25 мая 2022 г., 02:54:20</li>
+                    </ul>
+                  </div>
+                </div>
+                <div class=\\"post-single-body\\">
+                  <p>Short <b>content</b>
+                  </p>
+                </div>
+                <div class=\\"post-single-footer\\">
+                  <div class=\\"tags\\">
+                    <ul class=\\"list-inline\\">
+                      <li>
+                        <a href=\\"/tag/byt/1/\\" data-test-tag=\\"byt\\">Быт</a>
+                      </li>
+                    </ul>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <!--0-->
+        <!--0-->
+      </section>
+      <!--0-->
+    </div>
+    <!--0-->
+    <!--0-->
+    <!--0-->
+    <!--1-->
+    <footer class=\\"footer\\">
+      <div class=\\"container-fluid\\">
+        <div class=\\"row\\">
+          <div class=\\"col-lg-12\\">
+            <div class=\\"back\\">
+              <a href=\\"#\\" class=\\"back-top\\">
+                <i class=\\"icon-up\\"></i>
+              </a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </footer>
+    <!--2-->
+    <!--3-->
+    <!--0-->
+    <!--0-->
+    <script>
+      window.data = {
+        \\"0\\": {
+          \\"C\\": [\\"1\\"],
+          \\"N\\": [10]
+        },
+        \\"1\\": {
+          \\"C\\": [\\"2\\", \\"6\\", \\"7\\"],
+          \\"N\\": [1, 6, 8, 9]
+        },
+        \\"2\\": {
+          \\"C\\": [\\"3\\", \\"4\\", \\"5\\"],
+          \\"N\\": [0, [0, 0],
+            [0, 0, 1],
+            [0, 0, 2],
+            [0, 0, 3],
+            [0, 0, 3, 1],
+            [0, 0, 3, 2],
+            [0, 0, 3, 2, 0],
+            [0, 0, 3, 3],
+            [0, 0, 3, 3, 0]
+          ]
+        },
+        \\"3\\": {
+          \\"N\\": [0, [0, 0],
+            [0, 0, 0]
+          ]
+        },
+        \\"4\\": {
+          \\"N\\": [0, [0, 0],
+            [0, 0, 0],
+            [0, 0, 0, 0],
+            [0, 1],
+            [0, 1, 0],
+            [0, 1, 0, 0]
+          ]
+        },
+        \\"5\\": {
+          \\"N\\": [0, [0, 0],
+            [0, 0, 0],
+            [0, 0, 1]
+          ]
+        },
+        \\"6\\": {
+          \\"N\\": [7, [7, 0],
+            [7, 0, 0],
+            [7, 0, 0, 0],
+            [7, 0, 0, 0, 0],
+            [7, 0, 0, 0, 0, 0],
+            [7, 0, 0, 0, 0, 0, 0]
+          ]
+        },
+        \\"7\\": {
+          \\"C\\": [\\"8\\"],
+          \\"N\\": [5]
+        },
+        \\"8\\": {
+          \\"C\\": [\\"9\\"]
+        },
+        \\"9\\": {
+          \\"O\\": {
+            \\"article\\": {
+              \\"tags\\": [{
+                \\"name\\": \\"Быт\\",
+                \\"slug\\": \\"byt\\"
+              }]
+            },
+            \\"dataLoaded\\": true
+          },
+          \\"C\\": [\\"10\\"],
+          \\"N\\": [4]
+        },
+        \\"10\\": {
+          \\"C\\": [\\"13\\"],
+          \\"N\\": [3]
+        },
+        \\"13\\": {
+          \\"C\\": [\\"14\\"],
+          \\"N\\": [2, [2, 1]]
+        },
+        \\"14\\": {
+          \\"C\\": [\\"15\\"],
+          \\"N\\": [0]
+        },
+        \\"15\\": {
+          \\"C\\": [\\"16\\"],
+          \\"N\\": [2]
+        },
+        \\"16\\": {
+          \\"C\\": [\\"17\\"],
+          \\"N\\": [1]
+        },
+        \\"17\\": {
+          \\"C\\": [\\"18\\"],
+          \\"N\\": [0, [0, 0],
+            [0, 0, 0],
+            [0, 0, 0, 0],
+            [0, 0, 0, 0, 0],
+            [0, 0, 0, 0, 0, 0],
+            [0, 0, 0, 0, 0, 0, 0],
+            [0, 0, 0, 0, 0, 1],
+            [0, 0, 0, 0, 0, 1, 0],
+            [0, 0, 0, 0, 0, 2],
+            [0, 0, 0, 0, 0, 2, 0],
+            [0, 0, 0, 0, 0, 2, 0, 0],
+            [0, 0, 0, 0, 0, 2, 0, 0, 0],
+            [0, 0, 0, 0, 1],
+            [0, 0, 0, 0, 2],
+            [0, 0, 0, 0, 2, 0],
+            [0, 0, 0, 0, 2, 0, 0]
+          ]
+        },
+        \\"18\\": {
+          \\"N\\": [0, [0, 0],
+            [0, 0, 0]
+          ]
+        },
+        \\"app\\": {
+          \\"C\\": [\\"0\\"],
+          \\"N\\": [11]
+        }
+      };
+    </script>
+    <script src=\\"/s.min.js\\"></script>
+    <script>
+      System.import('/bundle.js');
+    </script>
+  </body>
+
+</html>"
+`;

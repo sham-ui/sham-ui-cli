@@ -1,0 +1,73 @@
+<template>
+    <div class="panel runtime">
+        <h6>Runtime info</h6>
+        <table>
+            <tbody>
+                <tr>
+                    <td>Host</td>
+                    <td>\{{host}}</td>
+                </tr>
+                <tr>
+                    <td>Num CPU</td>
+                    <td>\{{runtime.NumCPU}}</td>
+                </tr>
+                <tr>
+                    <td>Memory</td>
+                    <td>\{{runtime.Memory | fileSize}}</td>
+                </tr>
+                <tr>
+                    <td>Mem Sys</td>
+                    <td>\{{runtime.MemSys | fileSize}}</td>
+                </tr>
+                <tr>
+                    <td>Heap Alloc</td>
+                    <td>\{{runtime.HeapAlloc | fileSize}}</td>
+                </tr>
+                <tr>
+                    <td>Heap Sys</td>
+                    <td>\{{runtime.HeapSys | fileSize}}</td>
+                </tr>
+                <tr>
+                    <td>Heap Idle</td>
+                    <td>\{{runtime.HeapIdle | fileSize}}</td>
+                </tr>
+                <tr>
+                    <td>Heap Inuse</td>
+                    <td>\{{runtime.HeapInuse | fileSize}}</td>
+                </tr>
+                <tr>
+                    <td>Next GC</td>
+                    <td>\{{runtime.NextGC | fileSize}}</td>
+                </tr>
+                <tr>
+                    <td>Goroutines</td>
+                    <td>\{{runtime.Goroutines}}</td>
+                </tr>
+                <tr>
+                    <td>UpTime</td>
+                    <td>\{{runtime.UpTime | duration}}</td>
+                </tr>
+                <tr>
+                    <td>Time</td>
+                    <td>\{{runtime.Time}}</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</template>
+
+<script>
+    import { fileSize, duration } from './filters';
+
+    function RuntimePanel( options ) {
+        options( {
+            [ $.host ]: '',
+            [ $.runtime ]: {}
+        } );
+
+        this.filters.fileSize = fileSize;
+        this.filters.duration = duration;
+    }
+
+    export default Component( Template, RuntimePanel );
+</script>

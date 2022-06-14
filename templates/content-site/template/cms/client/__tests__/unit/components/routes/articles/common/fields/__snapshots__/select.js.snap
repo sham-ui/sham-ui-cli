@@ -1,0 +1,24 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`renders correctly 1`] = `
+Object {
+  "Options": Object {
+    "ID": "component",
+    "directives": Object {
+      "oninput": [Function],
+    },
+    "emptyItem": Object {
+      "id": null,
+      "name": "- - -",
+    },
+    "items": Array [],
+    "onChange": [Function],
+    "value": null,
+  },
+  "html": "
+<select>
+  <option value=\\"null\\">- - -</option>
+</select>
+",
+}
+`;

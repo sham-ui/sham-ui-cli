@@ -1,0 +1,48 @@
+<template>
+    {% import ActivePageContainer from 'sham-ui-router/lib/active-page-container' %}
+    {% import WithoutFlushLoader from 'sham-ui-without-flush-loader' %}
+    {% import Navigation from './navigation/main.sfc' %}
+    {% import Footer from './footer/main.sfc' %}
+    {% import SearchForm from './search-form/main.sfc' %}
+    {% import PageLoadingIndicator from '../PageLoadingIndicator.sht' %}
+
+    <Navigation
+        onOpenSearchForm=\{{this$._onOpenSearchForm}}
+    />
+
+    {% if routerState.pageLoaded %}
+        <ActivePageContainer/>
+    {% else %}
+        <WithoutFlushLoader loadingComponent=\{{PageLoadingIndicator}}/>
+    {% endif %}
+
+    <Footer/>
+
+    {% if searchFormVisible %}
+        <SearchForm
+            onClose=\{{this$._onSearchFormClose}}
+        />
+    {% endif %}
+</template>
+
+<script>
+    import { useStorage } from 'sham-ui-router/lib/storage';
+
+    function Layout( options, update ) {
+        const searchFormVisible = $();
+
+        options( {
+            [ searchFormVisible ]: false
+        } );
+
+        this$._onOpenSearchForm = () => update( {
+            [ searchFormVisible ]: true
+        } );
+
+        this$._onSearchFormClose = () => update( {
+            [ searchFormVisible ]: false
+        } );
+    }
+
+    export default Component( Template, useStorage( $.routerState ), Layout );
+</script>

@@ -35,7 +35,9 @@ export const app = {
     },
     form: {
         fill( field, value ) {
-            document.querySelector( `[name="${field}"]` ).value = value;
+            const element = document.querySelector( `[name="${field}"]` );
+            element.value = value;
+            element.dispatchEvent( new Event( 'change' ) );
         },
         async submit() {
             app.click( '[type="submit"]' );

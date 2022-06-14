@@ -1,0 +1,99 @@
+/* ------------------------------
+		Dark Mode
+------------------------------ */
+.dark{
+    background-color:$bg-color;
+    color:$font-color;
+
+    .post-card-info li,
+    .post-single-info li,
+    .post-single-footer .tags ul li,
+    .post-single-footer .tags ul li a:hover {
+        color:$font-color;
+    }
+
+    .section,
+    .post-single-body .quote,
+    .post-single-footer .tags ul li,
+    .loading {
+        background-color:$bg-color;
+    }
+
+    .navbar,
+    .widget,
+    .footer,
+    .search,
+    .search-form input,
+    .dropdown-menu {
+        background-color: $bg-hover;
+    }
+    .post-card,
+    .contact,
+    .post-single {
+        background-color: $bg-hover !important;
+    }
+
+    .post-card,
+    .widget,
+    .post-single,
+    .navbar-scroll,
+    .search-form {
+        box-shadow: none !important;
+    }
+
+    h1, h2, h3, h4, h5, h6,
+    .navbar .nav-item .nav-link,
+    .post-single-body .quote p {
+        color:$white-color;
+    }
+    .navbar-toggler span{
+        background-color:$white-color;
+        box-shadow: 0px -8px 0 0px $white-color, 0px 8px 0 0px $white-color;
+
+    }
+
+    .search-form input{
+        border: 1px solid rgba($white-color, 0.1);
+    }
+
+    .search-form input:hover,
+    .search-form input:focus{
+        background-color: $bg-color;
+        border: 1px solid $bg-color;
+        box-shadow: none;
+    }
+
+    .categorie:hover,
+    .link:hover{
+        background-color: $white-color;
+        color:$dark-color !important;
+    }
+
+    @media screen and (max-width: 991px){
+        .navbar .nav-item .dropdown-menu {
+            background-color: $bg-color !important;
+        }
+    }
+
+    .sk-cube-grid .sk-cube {
+        background-color: $base-color;
+    }
+
+    ::-webkit-input-placeholder {
+        color: $font-color !important;
+    }
+
+    ::-ms-input-placeholder {
+        color: $font-color !important;
+    }
+
+    :-ms-input-placeholder {
+        color: $font-color !important;
+    }
+
+    ::placeholder {
+        color: $font-color !important;
+
+    }
+}
+

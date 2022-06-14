@@ -1,0 +1,51 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`renders correctly 1`] = `
+Object {
+  "Options": Object {
+    "ID": "component",
+    "confirmText": "",
+    "confirmTitle": "",
+    "directives": Object {
+      "EventListener": [Function],
+      "UpdateOnEvent": [Function],
+      "disabled": [Function],
+      "onChangeUpdate": [Function],
+      "onInputUpdate": [Function],
+      "onclick": [Function],
+      "oninput": [Function],
+      "onload": [Function],
+      "onresize": [Function],
+      "onscroll": [Function],
+      "onselect": [Function],
+      "onsubmit": [Function],
+      "ref": [Function],
+    },
+    "name": "",
+    "onSuccess": [Function],
+    "save": [Function],
+    "submitText": "",
+  },
+  "html": "
+<form class=\\"form-layout\\">
+  <!--0-->
+  <!--0-->
+  <!--1-->
+  <div class=\\"form-group\\">
+    <label>Name:</label>
+    <input name=\\"name\\" type=\\"text\\" autofocus=\\"\\">
+  </div>
+  <!--0-->
+  <!--2-->
+  <button type=\\"submit\\">
+    <!--3-->
+    <!--4-->
+  </button>
+  <!--5-->
+</form>
+<!--0-->
+<!--1-->
+<!--0-->
+",
+}
+`;

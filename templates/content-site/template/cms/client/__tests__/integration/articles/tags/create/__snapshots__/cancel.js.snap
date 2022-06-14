@@ -1,0 +1,111 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`cancel create tag 1`] = `
+"<h4 class=\\"page-header\\"> Tags
+  <!--0-->
+</h4>
+<div class=\\"page-body\\">
+  <div class=\\"crud-page\\">
+    <!--0-->
+    <!--0-->
+    <div class=\\"container\\">
+      <button data-test-toggle-create-form=\\"\\" class=\\"mg-b-30\\">Hide create new tag form</button>
+      <div class=\\"panel mg-b-30 item-create\\">
+        <form class=\\"form-layout\\">
+          <!--0-->
+          <!--0-->
+          <!--1-->
+          <div class=\\"form-group\\">
+            <label>Name:</label>
+            <input name=\\"name\\" type=\\"text\\" autofocus=\\"\\">
+          </div>
+          <!--0-->
+          <!--2-->
+          <button type=\\"submit\\">
+            <!--3-->Create
+            <!--4-->
+          </button>
+          <!--5-->
+        </form>
+        <!--0-->
+        <!--1-->
+        <!--0-->
+        <!--0-->
+        <!--0-->
+        <!--0-->
+      </div>
+      <!--1-->
+    </div>
+    <div class=\\"container\\">
+      <div class=\\"items-list\\">
+        <div class=\\"panel\\">
+          <table>
+            <thead>
+              <tr>
+                <th>ID</th>
+                <th>Name</th>
+                <th>Slug</th>
+                <th></th>
+              </tr>
+            </thead>
+            <tbody></tbody>
+          </table>
+          <!--0-->
+          <!--0-->
+          <!--0-->
+          <!--1-->
+        </div>
+      </div>
+      <!--2-->
+    </div>
+  </div>
+  <!--1-->
+</div>
+<!--0-->
+<!--0-->
+<!--0-->
+<!--0-->"
+`;
+
+exports[`cancel create tag 2`] = `
+"<h4 class=\\"page-header\\"> Tags
+  <!--0-->
+</h4>
+<div class=\\"page-body\\">
+  <div class=\\"crud-page\\">
+    <!--0-->
+    <!--0-->
+    <div class=\\"container\\">
+      <button data-test-toggle-create-form=\\"\\" class=\\"mg-b-30\\">Show create new tag form</button>
+      <!--1-->
+    </div>
+    <div class=\\"container\\">
+      <div class=\\"items-list\\">
+        <div class=\\"panel\\">
+          <table>
+            <thead>
+              <tr>
+                <th>ID</th>
+                <th>Name</th>
+                <th>Slug</th>
+                <th></th>
+              </tr>
+            </thead>
+            <tbody></tbody>
+          </table>
+          <!--0-->
+          <!--0-->
+          <!--0-->
+          <!--1-->
+        </div>
+      </div>
+      <!--2-->
+    </div>
+  </div>
+  <!--1-->
+</div>
+<!--0-->
+<!--0-->
+<!--0-->
+<!--0-->"
+`;

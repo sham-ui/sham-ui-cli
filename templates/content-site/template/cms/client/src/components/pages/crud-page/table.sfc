@@ -1,0 +1,77 @@
+<template>
+    {% import ModalWindow from '../../ModalWindow.sfc' %}
+
+    {%
+        defblock 'default'
+        $( {
+            items: items,
+            showErrors: showErrors,
+            refresh: refresh,
+            selectedItem: selectedItem,
+            selectItem: this$.selectItem,
+            confirmDelete: this$.confirmDelete
+        } )
+    %}
+
+    {% if deleteModalVisible %}
+        <ModalWindow
+            title=\{{"Delete " + typeName}}
+            text=\{{confirmDeleteText( item )}}
+            isDanger=\{{true}}
+            onOk=\{{this$._deleteItem}}
+            onClose=\{{this$._closeDeleteModal}}
+        />
+    {% endif %}
+</template>
+<script>
+    function CrudPageTable( options, update ) {
+        const typeName = $();
+        const showErrors = $();
+        const refresh = $();
+        const onSelectItem = $();
+        const deleteModalVisible = $();
+        const item = $();
+        const deleteItem = $();
+
+        const state = options( {
+            [ $.items ]: [],
+            [ typeName ]: '',
+            [ showErrors ]() {},
+            [ refresh ]() {},
+            [ onSelectItem ]() {},
+            [ deleteModalVisible ]: false,
+            [ $.confirmDeleteText ]() {},
+            [ deleteItem ]() {}
+        } );
+
+        this$.selectItem = item => {
+            state[ showErrors ]( [] );
+            state[ onSelectItem ]( item );
+        };
+
+        this$.confirmDelete = selectedItem => {
+            state[ showErrors ]( [] );
+            update( {
+                [ item ]: selectedItem,
+                [ deleteModalVisible ]: true
+            } );
+        };
+
+        this$._closeDeleteModal  = () => update( {
+            [ item ]: null,
+            [ deleteModalVisible ]: false
+        } );
+
+        this$._deleteItem = () => {
+            state[ deleteItem ]( state[ item ] ).then(
+                state[ refresh ],
+                ( { Messages = [ `Fail delete ${state[ typeName ]}` ] } ) => {
+                    state[ showErrors ]( Messages );
+                    this$._closeDeleteModal();
+                }
+            );
+        };
+    }
+
+    export default Component( Template, CrudPageTable );
+</script>

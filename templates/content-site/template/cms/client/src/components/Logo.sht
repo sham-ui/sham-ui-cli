@@ -1,0 +1,7 @@
+<div class="logo">
+    <span>
+        <span>[</span>
+           {{ logoText }}
+        <span>]</span>
+    </span>
+</div>

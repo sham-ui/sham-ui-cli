@@ -1,0 +1,42 @@
+/* ------------------------------
+		Footer
+------------------------------ */
+.footer{
+    background-color:$white-color;
+    .back{
+        display:flex;
+        justify-content: flex-end;
+        .back-top {
+            width: 45px;
+            height: 45px;
+            background-color: $base-color;
+            position: fixed;
+            bottom: 15px;
+            right:30px;
+            border-radius: $rd-circle;
+            z-index: 9;
+            display: none;
+            text-align: center;
+            @include easeInOut(0.5);
+            border:1px solid $base-color;
+            &.show {
+                display: block;
+            }
+            i{
+                color: $white-color;
+                line-height: 45px;
+                font-size: 16px;
+                text-align: center;
+                font-weight: 700;
+            }
+            &:hover{
+                @include shadow();
+                background-color:transparent;
+                border:1px solid $base-color;
+                i{
+                    color:$base-color;
+                }
+            }
+        }
+    }
+}

@@ -1,0 +1,45 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`renders correctly 1`] = `
+Object {
+  "Options": Object {
+    "ID": "component",
+    "directives": Object {
+      "EventListener": [Function],
+      "UpdateOnEvent": [Function],
+      "disabled": [Function],
+      "onChangeUpdate": [Function],
+      "onInputUpdate": [Function],
+      "onclick": [Function],
+      "oninput": [Function],
+      "onload": [Function],
+      "onresize": [Function],
+      "onscroll": [Function],
+      "onselect": [Function],
+      "onsubmit": [Function],
+      "ref": [Function],
+    },
+    "errors": Array [],
+    "pageTitle": "Create article",
+  },
+  "html": "
+<h4 class=\\"page-header\\"> Create article
+  <!--0-->
+</h4>
+<div class=\\"page-body\\">
+  <div class=\\"articles-page\\">
+    <!--0-->
+    <!--0-->
+    <div class=\\"panel\\">
+      <!--0-->
+      <!--0-->
+      <!--0-->
+    </div>
+  </div>
+  <!--1-->
+</div>
+<!--0-->
+<!--0-->
+",
+}
+`;

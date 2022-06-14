@@ -14,7 +14,7 @@ func TestLoginInvalidCSRF(t *testing.T) {
 
 	resp := env.API.Request("POST", "/api/login", nil)
 	asserts.Equals(t, http.StatusForbidden, resp.Response.Code, "code")
-	asserts.Equals(t, "Forbidden - CSRF token invalid\n", resp.Text(), "body")
+	asserts.Equals(t, "Forbidden - CSRF token not found in request\n", resp.Text(), "body")
 }
 
 func TestLoginSuccess(t *testing.T) {

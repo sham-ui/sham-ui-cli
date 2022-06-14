@@ -1,0 +1,28 @@
+<template>
+    {% import Page from '../../Page.sfc' %}
+    <Page>
+        {% block 'header' %}
+            \{{pageTitle}}
+        {% endblock %}
+
+        {% block 'body' %}
+            <div class="panel">
+                Project description
+            </div>
+        {% endblock %}
+    </Page>
+</template>
+
+<script>
+    function RoutesHomePage( options, update, didMount ) {
+        const pageTitle = $();
+
+        const state = options( {
+            [ pageTitle ]: 'Home'
+        } );
+
+        didMount( () => this.DI.resolve( 'title' ).change( state[ pageTitle ] ) );
+    }
+
+    export default Component( Template, RoutesHomePage );
+</script>

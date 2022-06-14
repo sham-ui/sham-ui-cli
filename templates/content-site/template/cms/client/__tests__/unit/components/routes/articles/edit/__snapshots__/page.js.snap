@@ -1,0 +1,379 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`fail load article data 1`] = `
+Object {
+  "Options": Object {
+    "ID": "component",
+    "article": Object {},
+    "dataLoaded": true,
+    "directives": Object {
+      "EventListener": [Function],
+      "UpdateOnEvent": [Function],
+      "disabled": [Function],
+      "onChangeUpdate": [Function],
+      "onFocusIn": [Function],
+      "onInputUpdate": [Function],
+      "onclick": [Function],
+      "oninput": [Function],
+      "onload": [Function],
+      "onresize": [Function],
+      "onscroll": [Function],
+      "onselect": [Function],
+      "onsubmit": [Function],
+      "ref": [Function],
+    },
+    "errors": Array [
+      "Load article detail fail",
+    ],
+    "pageTitle": "Edit article",
+  },
+  "html": "
+<h4 class=\\"page-header\\"> Edit article:undefined
+  <!--0-->
+</h4>
+<div class=\\"page-body\\">
+  <div class=\\"articles-page\\">
+    <ul class=\\"errors-panel\\">
+      <li>Load article detail fail</li>
+    </ul>
+    <!--0-->
+    <!--0-->
+    <div class=\\"panel\\">
+      <!--0-->
+      <!--0-->
+      <form class=\\"form-layout\\">
+        <!--0-->
+        <!--0-->
+        <!--1-->
+        <div class=\\"form-group\\" data-test-field-title=\\"\\">
+          <label>Title:</label>
+          <input autofocus=\\"\\">
+        </div>
+        <div class=\\"form-group\\" data-test-field-category=\\"\\">
+          <label>Category:</label>
+          <select>
+            <option value=\\"null\\">- - -</option>
+            <option value=\\"4\\">Hello world!</option>
+            <option value=\\"6\\">Название категории</option>
+          </select>
+          <!--0-->
+        </div>
+        <div class=\\"form-group\\" data-test-field-short-body=\\"\\">
+          <label>Short body:</label>
+          <textarea></textarea>
+        </div>
+        <div class=\\"form-group\\" data-test-field-body=\\"\\">
+          <label>Body:</label>
+          <textarea></textarea>
+          <!--1-->
+        </div>
+        <div class=\\"form-group\\" data-test-field-tags=\\"\\">
+          <label>Tags:</label>
+          <div class=\\"tags-input\\">
+            <!--0-->
+            <div class=\\"autocomplete-input\\">
+              <input autocomplete=\\"off\\">
+              <!--0-->
+            </div>
+            <!--1-->
+          </div>
+          <!--2-->
+        </div>
+        <div class=\\"form-group\\" data-test-field-published-at=\\"\\">
+          <label>Published at:</label>
+          <table class=\\"sham-ui-datetimepicker\\">
+            <thead>
+              <tr>
+                <th><span>◂</span></th>
+                <th colspan=\\"5\\" class=\\"picker-switch\\">Invalid Date</th>
+                <th><span>▸</span></th>
+              </tr>
+              <tr>
+                <th>Пн</th>
+                <th>Вт</th>
+                <th>Ср</th>
+                <th>Чт</th>
+                <th>Пт</th>
+                <th>Сб</th>
+                <th>Вс</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td class=\\"day other-month\\">NaN</td>
+                <td class=\\"day other-month\\">NaN</td>
+                <td class=\\"day other-month\\">NaN</td>
+                <td class=\\"day other-month\\">NaN</td>
+                <td class=\\"day other-month\\">NaN</td>
+                <td class=\\"day other-month\\">NaN</td>
+                <td class=\\"day other-month\\">NaN</td>
+              </tr>
+              <tr>
+                <td class=\\"day other-month\\">NaN</td>
+                <td class=\\"day other-month\\">NaN</td>
+                <td class=\\"day other-month\\">NaN</td>
+                <td class=\\"day other-month\\">NaN</td>
+                <td class=\\"day other-month\\">NaN</td>
+                <td class=\\"day other-month\\">NaN</td>
+                <td class=\\"day other-month\\">NaN</td>
+              </tr>
+              <tr>
+                <td class=\\"day other-month\\">NaN</td>
+                <td class=\\"day other-month\\">NaN</td>
+                <td class=\\"day other-month\\">NaN</td>
+                <td class=\\"day other-month\\">NaN</td>
+                <td class=\\"day other-month\\">NaN</td>
+                <td class=\\"day other-month\\">NaN</td>
+                <td class=\\"day other-month\\">NaN</td>
+              </tr>
+              <tr>
+                <td class=\\"day other-month\\">NaN</td>
+                <td class=\\"day other-month\\">NaN</td>
+                <td class=\\"day other-month\\">NaN</td>
+                <td class=\\"day other-month\\">NaN</td>
+                <td class=\\"day other-month\\">NaN</td>
+                <td class=\\"day other-month\\">NaN</td>
+                <td class=\\"day other-month\\">NaN</td>
+              </tr>
+              <tr>
+                <td class=\\"day other-month\\">NaN</td>
+                <td class=\\"day other-month\\">NaN</td>
+                <td class=\\"day other-month\\">NaN</td>
+                <td class=\\"day other-month\\">NaN</td>
+                <td class=\\"day other-month\\">NaN</td>
+                <td class=\\"day other-month\\">NaN</td>
+                <td class=\\"day other-month\\">NaN</td>
+              </tr>
+              <tr>
+                <td class=\\"day other-month\\">NaN</td>
+                <td class=\\"day other-month\\">NaN</td>
+                <td class=\\"day other-month\\">NaN</td>
+                <td class=\\"day other-month\\">NaN</td>
+                <td class=\\"day other-month\\">NaN</td>
+                <td class=\\"day other-month\\">NaN</td>
+                <td class=\\"day other-month\\">NaN</td>
+              </tr>
+            </tbody>
+            <tfoot>
+              <tr>
+                <th colspan=\\"7\\">Invalid Date</th>
+              </tr>
+            </tfoot>
+            <!--0-->
+            <!--0-->
+          </table>
+          <!--3-->
+        </div>
+        <!--0-->
+        <!--2-->
+        <button type=\\"submit\\">
+          <!--3-->Save
+          <!--4-->
+        </button>
+        <!--5-->
+      </form>
+      <!--0-->
+      <!--1-->
+      <!--1-->
+      <!--0-->
+    </div>
+  </div>
+  <!--1-->
+</div>
+<!--0-->
+<!--0-->
+",
+}
+`;
+
+exports[`renders correctly 1`] = `
+Object {
+  "Options": Object {
+    "ID": "component",
+    "article": Object {
+      "body": "<p>Текст</p><p><u>Текст</u></p>",
+      "category_id": "6",
+      "published_at": "2022-04-25T19:34:23.619+07:00",
+      "short_body": "Короткое",
+      "slug": "test2",
+      "tags": Array [
+        "hello-world",
+      ],
+      "title": "Тест2",
+    },
+    "dataLoaded": true,
+    "directives": Object {
+      "EventListener": [Function],
+      "UpdateOnEvent": [Function],
+      "disabled": [Function],
+      "onChangeUpdate": [Function],
+      "onFocusIn": [Function],
+      "onInputUpdate": [Function],
+      "onclick": [Function],
+      "oninput": [Function],
+      "onload": [Function],
+      "onresize": [Function],
+      "onscroll": [Function],
+      "onselect": [Function],
+      "onsubmit": [Function],
+      "ref": [Function],
+    },
+    "errors": Array [],
+    "pageTitle": "Edit article",
+  },
+  "html": "
+<h4 class=\\"page-header\\"> Edit article:Тест2
+  <!--0-->
+</h4>
+<div class=\\"page-body\\">
+  <div class=\\"articles-page\\">
+    <!--0-->
+    <!--0-->
+    <div class=\\"panel\\">
+      <!--0-->
+      <!--0-->
+      <form class=\\"form-layout\\">
+        <!--0-->
+        <!--0-->
+        <!--1-->
+        <div class=\\"form-group\\" data-test-field-title=\\"\\">
+          <label>Title:</label>
+          <input autofocus=\\"\\">
+        </div>
+        <div class=\\"form-group\\" data-test-field-category=\\"\\">
+          <label>Category:</label>
+          <select>
+            <option value=\\"null\\">- - -</option>
+            <option value=\\"4\\">Hello world!</option>
+            <option value=\\"6\\">Название категории</option>
+          </select>
+          <!--0-->
+        </div>
+        <div class=\\"form-group\\" data-test-field-short-body=\\"\\">
+          <label>Short body:</label>
+          <textarea></textarea>
+        </div>
+        <div class=\\"form-group\\" data-test-field-body=\\"\\">
+          <label>Body:</label>
+          <textarea>&lt;p&gt;Текст&lt;/p&gt;&lt;p&gt;&lt;u&gt;Текст&lt;/u&gt;&lt;/p&gt;</textarea>
+          <!--1-->
+        </div>
+        <div class=\\"form-group\\" data-test-field-tags=\\"\\">
+          <label>Tags:</label>
+          <div class=\\"tags-input\\">
+            <div class=\\"tag\\">Hello world!<span class=\\"remove\\" data-test-close-button=\\"\\" data-test-remove-tag=\\"Hello world!\\">×</span></div>
+            <!--0-->
+            <div class=\\"autocomplete-input\\">
+              <input autocomplete=\\"off\\">
+              <!--0-->
+            </div>
+            <!--1-->
+          </div>
+          <!--2-->
+        </div>
+        <div class=\\"form-group\\" data-test-field-published-at=\\"\\">
+          <label>Published at:</label>
+          <table class=\\"sham-ui-datetimepicker\\">
+            <thead>
+              <tr>
+                <th><span>◂</span></th>
+                <th colspan=\\"5\\" class=\\"picker-switch\\">Апрель 2022 г.</th>
+                <th><span>▸</span></th>
+              </tr>
+              <tr>
+                <th>Пн</th>
+                <th>Вт</th>
+                <th>Ср</th>
+                <th>Чт</th>
+                <th>Пт</th>
+                <th>Сб</th>
+                <th>Вс</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td class=\\"day other-month\\">28</td>
+                <td class=\\"day other-month\\">29</td>
+                <td class=\\"day other-month\\">30</td>
+                <td class=\\"day other-month\\">31</td>
+                <td class=\\"day\\">1</td>
+                <td class=\\"day\\">2</td>
+                <td class=\\"day\\">3</td>
+              </tr>
+              <tr>
+                <td class=\\"day\\">4</td>
+                <td class=\\"day\\">5</td>
+                <td class=\\"day\\">6</td>
+                <td class=\\"day\\">7</td>
+                <td class=\\"day\\">8</td>
+                <td class=\\"day\\">9</td>
+                <td class=\\"day\\">10</td>
+              </tr>
+              <tr>
+                <td class=\\"day\\">11</td>
+                <td class=\\"day\\">12</td>
+                <td class=\\"day\\">13</td>
+                <td class=\\"day\\">14</td>
+                <td class=\\"day\\">15</td>
+                <td class=\\"day\\">16</td>
+                <td class=\\"day\\">17</td>
+              </tr>
+              <tr>
+                <td class=\\"day\\">18</td>
+                <td class=\\"day\\">19</td>
+                <td class=\\"day\\">20</td>
+                <td class=\\"day\\">21</td>
+                <td class=\\"day\\">22</td>
+                <td class=\\"day\\">23</td>
+                <td class=\\"day\\">24</td>
+              </tr>
+              <tr>
+                <td class=\\"day active\\">25</td>
+                <td class=\\"day\\">26</td>
+                <td class=\\"day\\">27</td>
+                <td class=\\"day\\">28</td>
+                <td class=\\"day\\">29</td>
+                <td class=\\"day\\">30</td>
+                <td class=\\"day other-month\\">1</td>
+              </tr>
+              <tr>
+                <td class=\\"day other-month\\">2</td>
+                <td class=\\"day other-month\\">3</td>
+                <td class=\\"day other-month\\">4</td>
+                <td class=\\"day other-month\\">5</td>
+                <td class=\\"day other-month\\">6</td>
+                <td class=\\"day other-month\\">7</td>
+                <td class=\\"day other-month\\">8</td>
+              </tr>
+            </tbody>
+            <tfoot>
+              <tr>
+                <th colspan=\\"7\\">19:34:23</th>
+              </tr>
+            </tfoot>
+            <!--0-->
+            <!--0-->
+          </table>
+          <!--3-->
+        </div>
+        <!--0-->
+        <!--2-->
+        <button type=\\"submit\\">
+          <!--3-->Save
+          <!--4-->
+        </button>
+        <!--5-->
+      </form>
+      <!--0-->
+      <!--1-->
+      <!--1-->
+      <!--0-->
+    </div>
+  </div>
+  <!--1-->
+</div>
+<!--0-->
+<!--0-->
+",
+}
+`;

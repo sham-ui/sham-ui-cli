@@ -10,16 +10,19 @@
     >
         <div class="form-group">
             <label>Name:</label>
-            <input name="name" type="text" value=\{{member.Name}} autofocus>
+            <input name="name" type="text" autofocus value=\{{name}} :onChangeUpdate=\{{$.name}}>
         </div>
         <div class="form-group">
             <label>Email:</label>
-            <input name="email" type="text" value=\{{member.Email}}>
+            <input name="email" type="text" value=\{{email}} :onChangeUpdate=\{{$.email}}>
         </div>
         <div class="form-group">
             <label></label>
             <label class="checkbox">
-                <input name="is_superuser" type="checkbox" value=\{{member.IsSuperuser}} checked=\{{member.IsSuperuser ? "checked": ""}}>
+                <input name="is_superuser" type="checkbox"
+                    checked=\{{isSuperUser ? "checked" : ""}}
+                    :onChangeUpdate=\{{$.isSuperUser}}
+                >
                 <span>Is Superuser</span>
             </label>
         </div>
@@ -28,20 +31,24 @@
 
 <script>
     function UpdateDataForm( options ) {
-        const member = $();
+        const name = $();
+        const email = $();
+        const isSuperUser = $();
 
         const state = options( {
-            [ member ]: {},
+            [ name ]: '',
+            [ email ]: '',
+            [ isSuperUser ]: false,
             [ $.onUpdateSuccess ]() {}
         } );
 
-        this$._saveData = formData => this.DI.resolve( 'store' ).api.request( {
-            url: `admin/members/${state[ member ].ID}`,
+        this$._saveData = () => this.DI.resolve( 'store' ).api.request( {
+            url: `admin/members/${state[ $.id ]}`,
             method: 'put',
             data: {
-                name: formData.get( 'name' ).trim(),
-                email: formData.get( 'email' ).trim(),
-                is_superuser:  null !== formData.get( 'is_superuser' )
+                name: state[ name ].trim(),
+                email: state[ email ].trim(),
+                is_superuser: state[ isSuperUser ]
             }
         } );
 

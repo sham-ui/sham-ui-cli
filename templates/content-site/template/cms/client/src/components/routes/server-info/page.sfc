@@ -1,0 +1,69 @@
+<template>
+    {% import Page from '../../Page.sfc' %}
+    {% import ErrorsPanel from '../../ErrorsPanel.sht' %}
+    {% import RuntimePanel from './runtime-panel.sfc' %}
+    {% import AssetsPanel from './assets-panel.sfc' %}
+
+    <Page dataLoaded=\{{dataLoaded}}>
+        {% block 'header' %}
+            \{{pageTitle}}
+        {% endblock %}
+
+        {% block 'body' %}
+            <div class="server-info">
+                <ErrorsPanel errors=\{{errors}} />
+
+                <RuntimePanel
+                    host=\{{host}}
+                    runtime=\{{runtime}}
+                />
+
+                <AssetsPanel
+                    files=\{{files}}
+                />
+            </div>
+        {% endblock %}
+    </Page>
+
+</template>
+
+<script>
+    function RoutesServerInfoPage( options, update, didMount ) {
+        const pageTitle = $();
+        const dataLoaded = $();
+        const errors = $();
+        const host = $();
+        const runtime = $();
+        const files = $();
+
+        const state = options( {
+            [ pageTitle ]: 'Server information',
+            [ dataLoaded ]: false,
+            [ errors ]: [],
+            [ host ]: '',
+            [ runtime ]: {},
+            [ files ]: []
+        } );
+
+        didMount( () => {
+            this.DI.resolve( 'title' ).change( state[ pageTitle ] );
+            update( {
+                [ dataLoaded ]: false
+            } );
+            this.DI.resolve( 'store' ).api.request( { url: 'admin/server-info' } ).then(
+                info => update( {
+                    [ dataLoaded ]: true,
+                    [ host ]: info.Host,
+                    [ runtime ]: info.Runtime,
+                    [ files ]: info.Files
+                } ),
+                ( { Messages = [ 'Fail load accounting info' ] } ) => update( {
+                    [ dataLoaded ]: true,
+                    [ errors ]: Messages
+                } )
+            );
+        } );
+    }
+
+    export default Component( Template, RoutesServerInfoPage );
+</script>

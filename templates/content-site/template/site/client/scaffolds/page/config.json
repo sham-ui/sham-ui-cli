@@ -1,0 +1,15 @@
+{
+  "prompts": {
+    "name": {
+      "type": "string",
+      "required": true,
+      "label": "Component path (start with src/components)"
+    },
+    "title": {
+      "type": "string",
+      "required": true,
+      "label": "Page title"
+    }
+  },
+  "testImportExtension": ".sfc"
+}

@@ -1,0 +1,24 @@
+<template>
+    {%
+        defblock 'default'
+        $( {
+            saveData: saveData,
+            onSuccess: onSuccess,
+            submitText: "Create",
+            confirmTitle: "Create new " + typeName,
+            confirmText: "Are you sure you want to create new " + typeName + "?"
+        } )
+    %}
+</template>
+
+<script>
+    function PagesCrudPageCreate( options ) {
+        options( {
+            [ $.typeName ]: '',
+            [ $.saveData ]() {},
+            [ $.onSuccess ]() {}
+        } );
+    }
+
+    export default Component( Template, PagesCrudPageCreate );
+</script>

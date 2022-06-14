@@ -1,0 +1,39 @@
+<template>
+    <div class="page-buttons">
+        {% for item of pages | pageItems %}
+            {% if item.showAsLast %}
+                ...
+            {% endif %}
+            <button
+                data-test-pagination-page=\{{item.page}}
+                :onclick=\{{goToPage.bind( this,  item.page )}}
+                :disabled=\{{item.page === currentPage}}
+            >
+                \{{item.page}}
+            </button>
+            {% if item.showAsFirst %}
+                ...
+            {% endif %}
+        {% endfor %}
+    </div>
+</template>
+
+<script>
+    function PaginationPages( options ) {
+        options( {
+            [ $.pages ]: [],
+            [ $.currentPage ]: 1,
+            [ $.goToPage ]() {}
+        } );
+
+        this.filters.pageItems = pages => pages.map(
+            ( page, index, enumerable ) => ( {
+                page,
+                showAsFirst: ( enumerable[ index + 1 ] || page ) - page > 1,
+                showAsLast: index > 0 && ( enumerable[ index - 1 ] - page > 1 )
+            } )
+        );
+    }
+
+    export default Component( Template, PaginationPages );
+</script>

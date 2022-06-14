@@ -1,0 +1,6 @@
+pkg/
+/config.cfg
+/ssr.js
+/site/ssr.js
+bin/
+coverage.out

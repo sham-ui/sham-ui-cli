@@ -1,0 +1,141 @@
+<template>
+    {% import WithoutFlushLoader from 'sham-ui-without-flush-loader' %}
+    {% import DateTimePicker from 'sham-ui-datetimepicker' %}
+    {% import PageLoadingIndicator from '../../../PageLoadingIndicator.sht' %}
+    {% import ErrorsPanel from '../../../ErrorsPanel.sht' %}
+    {% import FormWithConfirmModal from '../../../FormWithConfirmModal.sfc' %}
+    {% import SelectField from './fields/select.sfc' %}
+    {% import EditorField from './fields/editor.sfc' %}
+    {% import TagsField from './fields/tags.sfc' %}
+
+    {% if dataLoaded %}
+        <ErrorsPanel errors=\{{errors}} />
+
+        <FormWithConfirmModal
+            saveData=\{{this$.saveData}}
+            onSuccess=\{{onSaveSuccess}}
+            getErrors=\{{this$._getErrors}}
+            submitText="Save"
+            confirmTitle="Save article"
+            confirmText="Are you sure you want to publish article?"
+        >
+            <div class="form-group" data-test-field-title>
+                <label>Title:</label>
+                <input autofocus value=\{{title}} :onChangeUpdate=\{{$.title}}>
+            </div>
+            <div class="form-group" data-test-field-category>
+                <label>Category:</label>
+                <SelectField
+                    items=\{{categories}}
+                    value=\{{category}}
+                    onChange=\{{this$.setField( $.category )}}
+                />
+            </div>
+            <div class="form-group" data-test-field-short-body>
+                <label>Short body:</label>
+                <textarea value=\{{shortBody}} :onChangeUpdate=\{{$.shortBody}}></textarea>
+            </div>
+            <div class="form-group" data-test-field-body>
+                <label>Body:</label>
+                <EditorField
+                    value=\{{body}}
+                    onChange=\{{this$.setField( $.body )}}
+                />
+            </div>
+            <div class="form-group" data-test-field-tags>
+                <label>Tags:</label>
+                <TagsField
+                    all=\{{allTags}}
+                    selected=\{{tags}}
+                    onChange=\{{this$.setField( $.tags )}}
+                />
+            </div>
+            <div class="form-group" data-test-field-published-at>
+                <label>Published at:</label>
+                <DateTimePicker
+                    value=\{{publishedAt}}
+                    onChange=\{{this$.setField( $.publishedAt )}}
+                />
+            </div>
+        </FormWithConfirmModal>
+    {% else %}
+        <WithoutFlushLoader loadingComponent=\{{PageLoadingIndicator}}/>
+    {% endif %}
+</template>
+
+<script>
+    import { SetField } from '../../../../mixins/state';
+
+    function ArticleForm( options, update, didMount ) {
+        const title = $();
+        const category = $();
+        const shortBody = $();
+        const body = $();
+        const tags = $();
+        const publishedAt = $();
+
+
+        const categories = $();
+        const allTags = $();
+        const dataLoaded = $();
+
+        const save = $();
+
+        const errors = $();
+
+        const state = options( {
+            [ title ]: '',
+            [ category ]: null,
+            [ shortBody ]: '',
+            [ body ]: '',
+            [ tags ]: [],
+            [ publishedAt ]: new Date(),
+            [ categories ]: [],
+            [ dataLoaded ]: false,
+            [ allTags ]: [],
+            [ save ]() {},
+            [ errors ]: [],
+            [ $.onSaveSuccess ]() {}
+        } );
+
+        didMount( () => {
+            const store = this.DI.resolve( 'store' );
+            store.articleCategories()
+                .then(
+                    data => update( {
+                        [ categories ]: data.categories
+                    } )
+                ).then(
+                    () => store.articleTags()
+                ).then(
+                    data => update( {
+                        [ allTags ]: data.tags,
+                        [ tags ]: state[ tags ].map(
+                            x => data.tags.find( tag => tag.slug === x )
+                        )
+                    } ),
+                ).then(
+                    () => update( {
+                        [ dataLoaded ]: true
+                    } ),
+                    ( { Messages = [ 'Fail load data' ] } ) => update( {
+                        [ dataLoaded ]: true,
+                        [ errors ]: Messages
+                    } )
+                );
+        } );
+
+        this$._getErrors = ( { Messages = [ 'Save article fail' ] } ) => Messages;
+
+        this$.saveData = () => state[ save ]( {
+            title: state[ title ],
+            category_id: state[ category ],
+            tags: state[ tags ],
+            short_body: state[ shortBody ],
+            body: state[ body ],
+            published_at: state[ publishedAt ].toISOString()
+        } );
+    }
+
+    export default Component( Template, SetField, ArticleForm );
+</script>

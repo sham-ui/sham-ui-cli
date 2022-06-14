@@ -1,0 +1,4 @@
+pkg/
+/config.cfg
+bin/
+coverage.out

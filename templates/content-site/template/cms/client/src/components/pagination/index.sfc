@@ -1,0 +1,54 @@
+<template>
+    {% import WithoutFlushLoader from 'sham-ui-without-flush-loader' %}
+    {% import CubeAnimation from 'sham-ui-cube-animation' %}
+    {% import PaginationPages from './pages.sfc' %}
+
+    <div class="pagination">
+        {% let pages = this[ $.pages ]( limit, total, currentPage, pageArraySize ) %}
+
+        <PaginationPages
+            pages=\{{pages}}
+            goToPage=\{{goToPage}}
+            currentPage=\{{currentPage}}
+        />
+
+        {% if dataLoaded %}
+            {% defblock %}
+        {% else %}
+            <WithoutFlushLoader loadingComponent=\{{CubeAnimation}}/>
+        {% endif %}
+
+        <PaginationPages
+            pages=\{{pages}}
+            goToPage=\{{goToPage}}
+            currentPage=\{{currentPage}}
+        />
+    </div>
+</template>
+
+<script>
+    function PaginationIndex( options ) {
+        options( {
+            [ $.dataLoaded ]: true,
+            [ $.currentPage ]: 1,
+            [ $.limit ]: 50,
+            [ $.total ]: 0,
+            [ $.goToPage ]() {},
+            [ $.pageArraySize ]: 3
+        } );
+
+        this$.pages = ( limit, total, currentPage, pageArraySize ) => {
+            const totalPages = Math.ceil( total / limit );
+            const pages = [ 1 ];
+            for ( let i = 2; i < totalPages && Math.abs( i - currentPage ) < pageArraySize; i++ ) {
+                pages[ i - 1 ] = i;
+            }
+            if ( totalPages > 1 ) {
+                pages.push( totalPages );
+            }
+            return pages;
+        };
+    }
+
+    export default Component( Template,  PaginationIndex );
+</script>

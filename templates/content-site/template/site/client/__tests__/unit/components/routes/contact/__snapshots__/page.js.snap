@@ -1,0 +1,35 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`renders correctly 1`] = `
+Object {
+  "Options": Object {
+    "ID": "component",
+    "pageTitle": "Contact",
+  },
+  "html": "
+<div data-test-page-body=\\"\\">
+  <section class=\\"section pt-55\\">
+    <div class=\\"container\\">
+      <div class=\\"row\\">
+        <div class=\\"container-fluid\\">
+          <div class=\\"row\\">
+            <div class=\\"categorie-title\\">
+              <h3>Contact us</h3>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class=\\"row\\">
+        <div class=\\"col-lg-10 offset-lg-1 mb-20\\"> For contact with us send email to
+          <img src=\\"/images/email.png\\" alt=\\"contact-email\\">
+        </div>
+      </div>
+    </div>
+  </section>
+  <!--0-->
+</div>
+<!--0-->
+<!--0-->
+",
+}
+`;

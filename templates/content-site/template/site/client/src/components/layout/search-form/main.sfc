@@ -1,0 +1,47 @@
+<template>
+    <div class="search">
+        <div class="container-fluid">
+            <div class="search-width  text-center">
+                <button type="button" class="close" :onclick=\{{onClose}}>
+                    <i class="icon-cancel"></i>
+                </button>
+                <form class="search-form" :onsubmit=\{{this$._submitForm}} :ref="formNode">
+                    <input type="search" value="" placeholder="What are you looking for?" name="query">
+                    <button type="submit" class="search-btn">search</button>
+                </form>
+            </div>
+        </div>
+    </div>
+</template>
+
+<script>
+    function LayoutSearchFormMain( options ) {
+        const onClose = $();
+
+        const state = options( {
+            [ onClose ]() {}
+        } );
+
+        this$._submitForm = ( e ) => {
+            e.preventDefault();
+            const DI = this.DI.resolve;
+            const router = DI( 'router' );
+
+            // Get data from form
+            const data = new FormData( this.formNode );
+            const query = data.get( 'query' ).trim().toLowerCase();
+
+            // Generate url
+            const url = router.generate( 'search.page', { page: 1 } ) + `?q=${query}`;
+
+            // Save to DI & go to URL
+            this.DI.bind( 'location:href', `${DI( 'location:origin' )}${url}` );
+            router.navigate( url );
+
+            // Close form
+            state[ onClose ]();
+        };
+    }
+
+    export default Component( Template, LayoutSearchFormMain );
+</script>

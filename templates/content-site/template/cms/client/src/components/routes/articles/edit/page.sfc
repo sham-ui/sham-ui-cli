@@ -1,0 +1,81 @@
+<template>
+    {% import ErrorsPanel from '../../../ErrorsPanel.sht' %}
+    {% import Page from '../../../Page.sfc' %}
+    {% import ArticleForm from '../common/article-form.sfc' %}
+
+    <Page dataLoaded=\{{dataLoaded}}>
+        {% block 'header' %}
+            \{{pageTitle + ":" + article.title}}
+        {% endblock %}
+
+        {% block 'body' %}
+            <div class="articles-page">
+                <ErrorsPanel errors=\{{errors}} />
+                <div class="panel">
+                    <ArticleForm
+                        title=\{{article.title}}
+                        category=\{{article.category_id}}
+                        shortBody=\{{article.short_body}}
+                        body=\{{article.body}}
+                        tags=\{{article.tags || []}}
+                        publishedAt=\{{article.published_at | parseDate}}
+                        save=\{{this$.updateArticle}}
+                        onSaveSuccess=\{{this$.onUpdateArticle}}
+                    />
+                </div>
+            </div>
+        {% endblock %}
+    </Page>
+</template>
+
+<script>
+    function RoutesArticlesEditPage( options, update, didMount ) {
+        const dataLoaded = $();
+        const article = $();
+        const pageTitle = $();
+        const errors = $();
+
+        this.filters.parseDate = date => new Date( date );
+
+        const state = options( {
+            [ dataLoaded ]: false,
+            [ article ]: {},
+            [ errors ]: [],
+            [ pageTitle ]: 'Edit article'
+        } );
+
+        /** @type {Store} */
+        const store = this.DI.resolve( 'store' );
+
+        const router = this.DI.resolve( 'router' );
+
+        didMount( () => {
+            store.articleDetail( router.storage.params.id ).then(
+                detail => {
+                    this.DI.resolve( 'title' ).change(
+                        `${state[ pageTitle ]}: ${detail.title}`
+                    );
+                    update( {
+                        [ article ]: detail,
+                        [ dataLoaded ]: true
+                    } );
+                },
+                ( { Messages = [ 'Load article detail fail' ] } ) => update( {
+                    [ dataLoaded ]: true,
+                    [ errors ]: Messages
+                } )
+            );
+        } );
+
+        this$.updateArticle = ( data ) => store.updateArticle(
+            router.storage.params.id,
+            data
+        );
+
+        this$.onUpdateArticle = () => router.navigate(
+            router.generate( 'articles/list', {} )
+        );
+    }
+
+    export default Component( Template, RoutesArticlesEditPage );
+</script>

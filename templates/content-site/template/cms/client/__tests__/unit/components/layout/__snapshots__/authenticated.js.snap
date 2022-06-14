@@ -1,0 +1,101 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`renders correctly 1`] = `
+Object {
+  "Options": Object {
+    "ID": "component",
+    "directives": Object {
+      "EventListener": [Function],
+      "UpdateOnEvent": [Function],
+      "disabled": [Function],
+      "hrefto": [Function],
+      "onChangeUpdate": [Function],
+      "onInputUpdate": [Function],
+      "onclick": [Function],
+      "oninput": [Function],
+      "onload": [Function],
+      "onresize": [Function],
+      "onscroll": [Function],
+      "onselect": [Function],
+      "onsubmit": [Function],
+      "ref": [Function],
+    },
+    "menuCollapsed": false,
+    "routerData": Object {
+      "activePageComponent": null,
+      "activePageOptions": null,
+      "name": "",
+      "pageLoaded": false,
+      "params": Object {},
+      "url": "",
+    },
+    "smallScreenSize": false,
+    "wrapperClasses": "",
+  },
+  "html": "
+<div class=\\"\\">
+  <div class=\\"logo\\">
+    <a href=\\"/\\"><span>[</span> {{ logoText }} <span>]</span></a>
+  </div>
+  <div class=\\"sideleft\\">
+    <label class=\\"sidebar-label\\">Navigation</label>
+    <div class=\\"menu\\">
+      <a href=\\"/\\" class=\\"active\\">
+        <div class=\\"menu-item\\">
+          <i class=\\"icon-home-outline menu-item-icon\\"></i><span class=\\"menu-item-label\\">Dashboard</span>
+        </div>
+      </a>
+      <a href=\\"/\\" class=\\"active\\">
+        <div class=\\"menu-item\\">
+          <i class=\\"icon-docs menu-item-icon\\"></i><span class=\\"menu-item-label\\">Articles</span>
+        </div>
+      </a>
+      <a href=\\"/\\" class=\\"active\\">
+        <div class=\\"menu-item\\">
+          <i class=\\"icon-flow-split menu-item-icon\\"></i><span class=\\"menu-item-label\\">Categories</span>
+        </div>
+      </a>
+      <a href=\\"/\\" class=\\"active\\">
+        <div class=\\"menu-item\\">
+          <i class=\\"icon-tags menu-item-icon\\"></i><span class=\\"menu-item-label\\">Tags</span>
+        </div>
+      </a>
+      <!--0-->
+    </div>
+  </div>
+  <div class=\\"header\\">
+    <div class=\\"header-left\\">
+      <div class=\\"navicon-left\\">
+        <a>
+          <i class=\\"icon-menu\\"></i>
+        </a>
+      </div>
+    </div>
+    <div class=\\"header-right\\">
+      <div class=\\"dropdown\\">
+        <a class=\\"link-profile\\"><span class=\\"logged-name\\">Test member</span></a>
+        <div class=\\"dropdown-menu \\">
+          <ul class=\\"user-profile-nav\\">
+            <li>
+              <a href=\\"/\\">
+                <i class=\\"icon-cog\\"></i> Settings
+              </a>
+            </li>
+            <li>
+              <a href=\\"#\\">
+                <i class=\\"icon-logout\\"></i> Sign Out
+              </a>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class=\\"mainpanel\\">
+    <!--0-->
+    <!--0-->
+  </div>
+</div>
+",
+}
+`;

@@ -1,0 +1,62 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`renders correctly 1`] = `
+Object {
+  "Options": Object {
+    "ID": "component",
+    "articles": Array [],
+    "dataLoaded": true,
+    "directives": Object {
+      "EventListener": [Function],
+      "UpdateOnEvent": [Function],
+      "disabled": [Function],
+      "onChangeUpdate": [Function],
+      "onInputUpdate": [Function],
+      "onclick": [Function],
+      "oninput": [Function],
+      "onload": [Function],
+      "onresize": [Function],
+      "onscroll": [Function],
+      "onselect": [Function],
+      "onsubmit": [Function],
+      "ref": [Function],
+    },
+    "errors": Array [],
+    "getPageTitle": [Function],
+    "limit": 20,
+    "loadData": [Function],
+    "offset": 0,
+    "page": 2,
+    "pathName": "",
+    "queryString": "",
+    "total": 0,
+  },
+  "html": "
+<div data-test-page-body=\\"\\">
+  <section class=\\"section pt-55\\">
+    <!--0-->
+    <!--1-->
+    <div class=\\"container-fluid\\">
+      <div class=\\"row\\">
+        <!--2-->
+        <div class=\\"col-lg-12\\">
+          <div class=\\"pagination mt--10\\">
+            <ul class=\\"list-inline\\">
+              <!--0-->
+              <li>
+                <a data-test-page=\\"1\\" class=\\"\\" href=\\"/\\">1</a>
+              </li>
+              <!--1-->
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+  <!--0-->
+</div>
+<!--0-->
+<!--0-->
+",
+}
+`;

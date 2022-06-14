@@ -4,7 +4,7 @@
   "author": "{{ author }}",
   "main": "index.js",
   "module": "index.module.js",
-  "version": "2.0.0-alpha.7",
+  "version": "0.0.1",
   "license": "MIT",
   "scripts": {
     "start": "MACRO_REF_REPLACE=enabled rollup -w -c ./demo-app/rollup.config.js",
@@ -19,14 +19,11 @@
   },
   "devDependencies": {
     "@babel/core": "^7.6.2",
-    "@babel/plugin-proposal-function-bind": "^7.0.0",
-    "@babel/plugin-proposal-object-rest-spread": "^7.0.0",
     "@babel/plugin-transform-runtime": "^7.13.15",
     "@babel/preset-env": "^7.6.2",
     "@babel/runtime": "^7.14.0",
     "@rollup/plugin-babel": "^5.3.0",
     "@rollup/plugin-commonjs": "^18.1.0",
-    "@rollup/plugin-node-resolve": "^13.0.0",
     "@rollup/plugin-replace": "^2.4.2",
     "@size-limit/preset-small-lib": "^2.1.6",
     "babel-core": "^7.0.0-bridge.0",
@@ -43,22 +40,24 @@
     "jest-runner-stylelint": "^1.0.0",
     "rollup": "^2.47.0",
     "rollup-plugin-cleaner": "^1.0.0",
+    "rollup-plugin-copy": "^3.4.0",
     "rollup-plugin-livereload": "^2.0.0",
+    "rollup-plugin-node-resolve-with-sham-ui-macro": "^2.0.0",
     "rollup-plugin-scss": "^2.6.1",
     "rollup-plugin-serve": "^1.1.0",
-    "rollup-plugin-sham-ui-templates": "^1.0.8",
+    "rollup-plugin-sham-ui-templates": "^1.0.15",
     "sass": "^1.32.12",
-    "sham-ui-directives": "^5.0.0-alpha.8",
-    "sham-ui-templates-jest-preprocessor": "^1.2.5",
-    "sham-ui-macro": "^3.5.0",
+    "sham-ui-directives": "^5.0.0-alpha.13",
+    "sham-ui-macro": "^3.6.0",
     "sham-ui-macro-jest-preprocessor": "^1.0.0",
-    "sham-ui-templates": "^5.0.0-alpha.10",
-    "sham-ui-test-helpers": "^5.0.0-alpha.11",
+    "sham-ui-templates": "^5.0.0-alpha.16",
+    "sham-ui-templates-jest-preprocessor": "^1.2.10",
+    "sham-ui-test-helpers": "^5.0.0-alpha.16",
     "stylelint": "^10.1.0",
     "stylelint-config-recommended-scss": "^3.3.0",
     "stylelint-scss": "^3.8.0"
   },
   "dependencies": {
-    "sham-ui": "^5.0.0-alpha.5"
+    "sham-ui": "^5.0.0-alpha.8"
   }
 }

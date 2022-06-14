@@ -1,0 +1,24 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`renders correctly 1`] = `
+Object {
+  "Options": Object {
+    "ID": "component",
+    "files": Array [],
+  },
+  "html": "
+<div class=\\"panel files\\">
+  <h6>Asset files</h6>
+  <table>
+    <thead>
+      <tr>
+        <th>File</th>
+        <th>Size</th>
+      </tr>
+    </thead>
+    <tbody></tbody>
+  </table>
+</div>
+",
+}
+`;

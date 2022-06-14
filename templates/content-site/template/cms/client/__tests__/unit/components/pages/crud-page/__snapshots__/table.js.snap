@@ -1,0 +1,21 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`renders correctly 1`] = `
+Object {
+  "Options": Object {
+    "ID": "component",
+    "confirmDeleteText": [Function],
+    "deleteItem": [Function],
+    "deleteModalVisible": false,
+    "items": Array [],
+    "onSelectItem": [Function],
+    "refresh": [Function],
+    "showErrors": [Function],
+    "typeName": "",
+  },
+  "html": "
+<!--0-->
+<!--1-->
+",
+}
+`;

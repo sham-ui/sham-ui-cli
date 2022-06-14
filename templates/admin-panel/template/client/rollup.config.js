@@ -73,7 +73,7 @@ export default {
         shamUICompiler( {
             extensions: [ '.sht' ],
             compilerOptions: {
-                removeDataTest: false
+                removeDataTest: prod
             }
         } ),
         shamUICompiler( {
@@ -81,7 +81,7 @@ export default {
             compilerOptions: {
                 asModule: false,
                 asSingleFileComponent: true,
-                removeDataTest: false
+                removeDataTest: prod
             }
         } ),
         nodeResolveWithMacro( {

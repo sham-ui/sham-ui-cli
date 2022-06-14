@@ -1,0 +1,30 @@
+<template>
+    {% import path from 'sham-ui-router/lib/params' %}
+
+    <ul class="navbar-nav ml-auto mr-auto">
+        <li class="nav-item">
+            <a
+                class="nav-link \{{ [ 'home', 'home.page' ].includes( currentRoute.name ) ? 'active': '' }}"
+                :hrefto=\{{path('home')}}
+            >Home</a>
+        </li>
+
+        <li class="nav-item">
+            <a
+                class="nav-link"
+                :hrefto=\{{path('contact')._useActiveClass()}}
+            >Contact</a>
+        </li>
+    </ul>
+</template>
+
+<script>
+    import { useStorage } from 'sham-ui-router/lib/storage';
+
+
+    function NavBar() {
+
+    }
+
+    export default Component( Template, useStorage( $.currentRoute ), NavBar );
+</script>

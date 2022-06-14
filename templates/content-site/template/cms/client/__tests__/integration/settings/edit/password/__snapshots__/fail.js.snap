@@ -1,0 +1,129 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`fail edit password 1`] = `
+"<div class=\\"\\">
+  <div class=\\"logo\\">
+    <a href=\\"\\"><span>[</span> {{ logoText }} <span>]</span></a>
+  </div>
+  <div class=\\"sideleft\\">
+    <label class=\\"sidebar-label\\">Navigation</label>
+    <div class=\\"menu\\">
+      <a href=\\"\\">
+        <div class=\\"menu-item\\">
+          <i class=\\"icon-home-outline menu-item-icon\\"></i><span class=\\"menu-item-label\\">Dashboard</span>
+        </div>
+      </a>
+      <a href=\\"/articles\\">
+        <div class=\\"menu-item\\">
+          <i class=\\"icon-docs menu-item-icon\\"></i><span class=\\"menu-item-label\\">Articles</span>
+        </div>
+      </a>
+      <a href=\\"/articles/categories\\">
+        <div class=\\"menu-item\\">
+          <i class=\\"icon-flow-split menu-item-icon\\"></i><span class=\\"menu-item-label\\">Categories</span>
+        </div>
+      </a>
+      <a href=\\"/articles/tags\\">
+        <div class=\\"menu-item\\">
+          <i class=\\"icon-tags menu-item-icon\\"></i><span class=\\"menu-item-label\\">Tags</span>
+        </div>
+      </a>
+      <!--0-->
+    </div>
+  </div>
+  <div class=\\"header\\">
+    <div class=\\"header-left\\">
+      <div class=\\"navicon-left\\">
+        <a>
+          <i class=\\"icon-menu\\"></i>
+        </a>
+      </div>
+    </div>
+    <div class=\\"header-right\\">
+      <div class=\\"dropdown\\">
+        <a class=\\"link-profile\\"><span class=\\"logged-name\\">John Smith</span></a>
+        <div class=\\"dropdown-menu \\">
+          <ul class=\\"user-profile-nav\\">
+            <li>
+              <a href=\\"/settings\\">
+                <i class=\\"icon-cog\\"></i> Settings
+              </a>
+            </li>
+            <li>
+              <a href=\\"#\\">
+                <i class=\\"icon-logout\\"></i> Sign Out
+              </a>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class=\\"mainpanel\\">
+    <h4 class=\\"page-header\\"> Profile settings
+      <!--0-->
+    </h4>
+    <div class=\\"page-body\\">
+      <div class=\\"panel settings\\">
+        <h6>Name</h6>
+        <p class=\\"mg-b-30\\">John Smith<a>
+            <i class=\\"icon-pencil\\"></i>
+          </a>
+          <!--0-->
+        </p>
+        <!--0-->
+        <h6>Email</h6>
+        <p class=\\"mg-b-30\\">j.smith@example.com<a>
+            <i class=\\"icon-pencil\\"></i>
+          </a>
+          <!--0-->
+        </p>
+        <!--1-->
+        <h6>Password</h6>
+        <p class=\\"mg-b-0\\">******<a>
+            <i class=\\"icon-pencil\\"></i>
+          </a>
+        <form class=\\"form-layout\\">
+          <!--0-->
+          <ul class=\\"errors-panel\\">
+            <li>Passwords don't match.</li>
+          </ul>
+          <!--0-->
+          <!--1-->
+          <div class=\\"form-group\\">
+            <label>Enter your password:</label>
+            <input name=\\"pass1\\" type=\\"password\\" autofocus=\\"\\">
+          </div>
+          <div class=\\"form-group\\">
+            <label>Confirm your password:</label>
+            <input name=\\"pass2\\" type=\\"password\\">
+          </div>
+          <!--0-->
+          <!--2-->
+          <button type=\\"submit\\">
+            <!--3-->Update
+            <!--4-->
+          </button>
+          <!--5-->
+        </form>
+        <!--0-->
+        <!--1-->
+        <!--0-->
+        <!--0-->
+        <!--0-->
+        <!--0-->
+        </p>
+        <!--2-->
+      </div>
+      <!--1-->
+    </div>
+    <!--0-->
+    <!--0-->
+    <!--0-->
+  </div>
+</div>
+<!--0-->
+<!--0-->
+<!--0-->
+<!--0-->"
+`;

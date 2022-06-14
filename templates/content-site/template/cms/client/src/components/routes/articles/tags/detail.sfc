@@ -1,0 +1,31 @@
+<template>
+    {% import TagForm from './detail/form.sfc' %}
+
+    <h6>Tag: \{{item.name}}</h6>
+    <TagForm
+        submitText="Update"
+        confirmTitle="Change tag data"
+        confirmText="Are you sure you want to change tag data?"
+        name=\{{item.name}}
+        save=\{{this$.updateTag}}
+        onSuccess=\{{onUpdateSuccess}}
+    />
+</template>
+
+<script>
+    function MembersDetail( options )  {
+        const item = $();
+
+        const state = options( {
+            [ $.onUpdateSuccess ]() {},
+            [ item ]: {}
+        } );
+
+        this$.updateTag = ( data ) => this.DI.resolve( 'store' ).updateArticlesTag(
+            state[ item ].id,
+            data
+        );
+    }
+
+    export default Component( Template, MembersDetail );
+</script>

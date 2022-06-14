@@ -1,0 +1,16 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`renders correctly 1`] = `
+Object {
+  "Options": Object {
+    "ID": "component",
+    "dataLoaded": true,
+  },
+  "html": "
+<div data-test-page-body=\\"\\">
+  <!--0-->
+</div>
+<!--0-->
+",
+}
+`;

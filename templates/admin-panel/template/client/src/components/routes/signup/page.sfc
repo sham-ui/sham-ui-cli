@@ -16,16 +16,16 @@
 
             {% block 'default' %}
                 <div class="form-group">
-                    <input name="name" type="text" placeholder="Enter your username" autofocus>
+                    <input name="name" type="text" placeholder="Enter your username" autofocus :onChangeUpdate=\{{$.name}}>
                 </div>
                 <div class="form-group">
-                    <input name="email" type="text" placeholder="Enter your email" >
+                    <input name="email" type="text" placeholder="Enter your email" :onChangeUpdate=\{{$.email}}>
                 </div>
                 <div class="form-group">
-                    <input name="password" type="password" placeholder="Enter your password">
+                    <input name="password" type="password" placeholder="Enter your password" :onChangeUpdate=\{{$.password}}>
                 </div>
                 <div class="form-group">
-                    <input name="password2" type="password" placeholder="Confirm your password">
+                    <input name="password2" type="password" placeholder="Confirm your password" :onChangeUpdate=\{{$.password2}}>
                 </div>
             {% endblock %}
 
@@ -43,13 +43,25 @@
 
 <script>
     function RoutesSignupPage( options, update, didMount ) {
+        const name = $();
+        const email = $();
+        const password = $();
+        const password2 = $();
+
+        const state = options( {
+            [ name ]: '',
+            [ email ]: '',
+            [ password ]: '',
+            [ password2 ]: ''
+        } );
+
         didMount( () => this.DI.resolve( 'title' ).change( 'Sing Up' ) );
 
-        this$._submitForm = formData => this.DI.resolve( 'store' ).signUp( {
-            name: formData.get( 'name' ).trim(),
-            email: formData.get( 'email' ).trim(),
-            password: formData.get( 'password' ),
-            password2: formData.get( 'password2' )
+        this$._submitForm = () => this.DI.resolve( 'store' ).signUp( {
+            name: state[ name ].trim(),
+            email: state[ email ].trim(),
+            password: state[ password ],
+            password2: state[ password2 ]
         } );
 
         this$._signUpSuccess = () => {

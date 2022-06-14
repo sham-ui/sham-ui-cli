@@ -1,0 +1,29 @@
+@media (min-width: 1280px) {
+  .articles-page .form-layout .form-group {
+    label:not(.checkbox) {
+      justify-content: flex-end;
+      flex: 0 0 15%;
+      max-width: 15%;
+    }
+
+    input:not([type="checkbox"]),
+    select,
+    label.checkbox,
+    textarea,
+    .sun-editor,
+    .tags-input,
+    .tags-input .autocomplete-input .autocomplete-results {
+      flex: 0 0 85%;
+      max-width: 85%;
+    }
+  }
+}
+
+@media (min-width: 576px) {
+  .articles-page .form-layout .form-group .tags-input {
+    input, .autocomplete-results {
+      flex: 0 0 100%;
+      max-width: 100%;
+    }
+  }
+}

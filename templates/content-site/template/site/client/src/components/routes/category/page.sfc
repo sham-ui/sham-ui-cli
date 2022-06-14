@@ -1,0 +1,46 @@
+<template>
+    {% import ArticlesPage from '../_common/articles/page.sfc' %}
+
+    <ArticlesPage
+        pathName="category.page"
+        getPageTitle=\{{getPageTitle}}
+        loadData=\{{loadData}}
+    >
+        {% block 'header' %}
+            <div class="container-fluid">
+                <div class="row">
+                    <div class="categorie-title">
+                        <h3>Category : <span>\{{category}}</span></h3>
+                    </div>
+                </div>
+            </div>
+        {% endblock %}
+    </ArticlesPage>
+</template>
+
+<script>
+    function CategoryPage( options, update ) {
+        const category = $();
+
+        const state = options( {
+            [ category ]: '',
+            [ $.getPageTitle ]: () => state[ category ],
+            [ $.loadData ]: ( offset, limit ) => this.DI.resolve( 'store' ).articles(
+                offset,
+                limit,
+                {
+                    category: this.DI.resolve( 'router' ).storage.params.category
+                }
+            ).then(
+                data => {
+                    update( {
+                        [ category ]: data.meta.category
+                    } );
+                    return data;
+                }
+            )
+        } );
+    }
+
+    export default Component( Template, CategoryPage );
+</script>

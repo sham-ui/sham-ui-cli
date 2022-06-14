@@ -1,0 +1,23 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`renders correctly 1`] = `
+Object {
+  "Options": Object {
+    "ID": "component",
+    "appState": Object {
+      "darkThemeEnabled": false,
+      "routerResolved": false,
+    },
+    "directives": Object {
+      "hrefto": [Function],
+    },
+  },
+  "html": "
+<div class=\\"logo\\">
+  <a href=\\"/\\">
+    <img src=\\"/images/logo-dark.png\\" alt=\\"logo\\">
+  </a>
+</div>
+",
+}
+`;

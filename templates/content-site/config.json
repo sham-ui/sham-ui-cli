@@ -1,0 +1,44 @@
+{
+  "prompts": {
+    "name": {
+      "type": "string",
+      "required": true,
+      "label": "Site name"
+    },
+    "logoText": {
+      "type": "string",
+      "required": true,
+      "label": "Logo text & base site title"
+    },
+    "cookiePrefix": {
+      "type": "string",
+      "required": true,
+      "label": "Cookie prefix for CMS"
+    },
+    "dbName": {
+      "type": "string",
+      "required": true,
+      "label": "Database name"
+    },
+    "dbUser": {
+      "type": "string",
+      "required": true,
+      "label": "Database user"
+    },
+    "dbPassword": {
+      "type": "string",
+      "required": true,
+      "label": "Database user password"
+    },
+    "description": {
+      "type": "string",
+      "required": true,
+      "label": "Site description"
+    },
+    "author": {
+      "type": "string",
+      "label": "Author"
+    }
+  },
+  "renameFiles": false
+}

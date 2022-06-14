@@ -1,0 +1,48 @@
+<template>
+    {% import CrudPage from '../../../pages/crud-page.sfc' %}
+    {% import CategoryForm from './detail/form.sfc' %}
+    {% import CategoriesTable from './table.sfc' %}
+    {% import CategoryDetail from './detail.sfc' %}
+
+    <CrudPage
+        pageTitle="Categories"
+        typeName="category"
+        loadItems=\{{this$.loadData}}
+        confirmDeleteText=\{{this$.confirmDeleteText}}
+        deleteItem=\{{this$.deleteCategory}}
+    >
+        {% block 'createForm' %}
+            <CategoryForm
+                save=\{{this$.createCategory}}
+            />
+        {% endblock %}
+
+        {% block 'table' %}
+            <CategoriesTable/>
+        {% endblock %}
+
+        {% block 'itemDetail' %}
+            <CategoryDetail/>
+        {% endblock %}
+    </CrudPage>
+</template>
+
+<script>
+    function RoutesArticlesCategoriesPage() {
+        this$.loadData = () => this.DI.resolve( 'store' ).articleCategories().then(
+            data => data.categories
+        );
+
+        this$.createCategory = ( data ) => this.DI.resolve( 'store' ).createArticlesCategory(
+            data
+        );
+
+        this$.confirmDeleteText = ( category ) => `Are you sure you want to delete category "${category.name}"?`;
+
+        this$.deleteCategory = ( category ) => this.DI.resolve( 'store' ).deleteArticleCategory(
+            category.id
+        );
+    }
+
+    export default Component( Template, RoutesArticlesCategoriesPage );
+</script>

@@ -1,0 +1,223 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`add tag 1`] = `
+Object {
+  "Options": Object {
+    "ID": "component",
+    "all": Array [
+      Object {
+        "name": "first",
+      },
+      Object {
+        "name": "second",
+      },
+    ],
+    "directives": Object {
+      "EventListener": [Function],
+      "UpdateOnEvent": [Function],
+      "disabled": [Function],
+      "onChangeUpdate": [Function],
+      "onFocusIn": [Function],
+      "onInputUpdate": [Function],
+      "onclick": [Function],
+      "oninput": [Function],
+      "onload": [Function],
+      "onresize": [Function],
+      "onscroll": [Function],
+      "onselect": [Function],
+      "onsubmit": [Function],
+      "ref": [Function],
+    },
+    "onChange": [MockFunction] {
+      "calls": Array [
+        Array [
+          Array [
+            Object {
+              "name": "second",
+            },
+          ],
+        ],
+      ],
+      "results": Array [
+        Object {
+          "isThrow": false,
+          "value": undefined,
+        },
+      ],
+    },
+    "selected": Array [
+      Object {
+        "name": "second",
+      },
+    ],
+  },
+  "html": "
+<div class=\\"tags-input\\">
+  <!--0-->
+  <div class=\\"autocomplete-input\\">
+    <input autocomplete=\\"off\\">
+    <!--0-->
+  </div>
+  <!--1-->
+</div>
+",
+}
+`;
+
+exports[`remove tag 1`] = `
+Object {
+  "Options": Object {
+    "ID": "component",
+    "all": Array [
+      Object {
+        "name": "first",
+      },
+      Object {
+        "name": "second",
+      },
+    ],
+    "directives": Object {
+      "EventListener": [Function],
+      "UpdateOnEvent": [Function],
+      "disabled": [Function],
+      "onChangeUpdate": [Function],
+      "onFocusIn": [Function],
+      "onInputUpdate": [Function],
+      "onclick": [Function],
+      "oninput": [Function],
+      "onload": [Function],
+      "onresize": [Function],
+      "onscroll": [Function],
+      "onselect": [Function],
+      "onsubmit": [Function],
+      "ref": [Function],
+    },
+    "onChange": [MockFunction] {
+      "calls": Array [
+        Array [
+          Array [
+            Object {
+              "name": "first",
+            },
+          ],
+        ],
+      ],
+      "results": Array [
+        Object {
+          "isThrow": false,
+          "value": undefined,
+        },
+      ],
+    },
+    "selected": Array [
+      Object {
+        "name": "first",
+      },
+    ],
+  },
+  "html": "
+<div class=\\"tags-input\\">
+  <div class=\\"tag\\">first<span class=\\"remove\\" data-test-close-button=\\"\\" data-test-remove-tag=\\"first\\">×</span></div>
+  <div class=\\"tag\\">second<span class=\\"remove\\" data-test-close-button=\\"\\" data-test-remove-tag=\\"second\\">×</span></div>
+  <!--0-->
+  <div class=\\"autocomplete-input\\">
+    <input autocomplete=\\"off\\">
+    <!--0-->
+  </div>
+  <!--1-->
+</div>
+",
+}
+`;
+
+exports[`renders correctly 1`] = `
+Object {
+  "Options": Object {
+    "ID": "component",
+    "all": Array [
+      Object {
+        "name": "first",
+      },
+      Object {
+        "name": "second",
+      },
+    ],
+    "directives": Object {
+      "EventListener": [Function],
+      "UpdateOnEvent": [Function],
+      "disabled": [Function],
+      "onChangeUpdate": [Function],
+      "onFocusIn": [Function],
+      "onInputUpdate": [Function],
+      "onclick": [Function],
+      "oninput": [Function],
+      "onload": [Function],
+      "onresize": [Function],
+      "onscroll": [Function],
+      "onselect": [Function],
+      "onsubmit": [Function],
+      "ref": [Function],
+    },
+    "onChange": [Function],
+    "selected": Array [],
+  },
+  "html": "
+<div class=\\"tags-input\\">
+  <!--0-->
+  <div class=\\"autocomplete-input\\">
+    <input autocomplete=\\"off\\">
+    <!--0-->
+  </div>
+  <!--1-->
+</div>
+",
+}
+`;
+
+exports[`show all items on click 1`] = `
+Object {
+  "Options": Object {
+    "ID": "component",
+    "all": Array [
+      Object {
+        "name": "first",
+      },
+      Object {
+        "name": "second",
+      },
+    ],
+    "directives": Object {
+      "EventListener": [Function],
+      "UpdateOnEvent": [Function],
+      "disabled": [Function],
+      "onChangeUpdate": [Function],
+      "onFocusIn": [Function],
+      "onInputUpdate": [Function],
+      "onclick": [Function],
+      "oninput": [Function],
+      "onload": [Function],
+      "onresize": [Function],
+      "onscroll": [Function],
+      "onselect": [Function],
+      "onsubmit": [Function],
+      "ref": [Function],
+    },
+    "onChange": [Function],
+    "selected": Array [],
+  },
+  "html": "
+<div class=\\"tags-input\\">
+  <!--0-->
+  <div class=\\"autocomplete-input\\">
+    <input autocomplete=\\"off\\">
+    <div class=\\"autocomplete-results\\">
+      <div class=\\"result-item\\" data-test-item=\\"first\\">first</div>
+      <div class=\\"result-item\\" data-test-item=\\"second\\">second</div>
+    </div>
+    <!--0-->
+  </div>
+  <!--1-->
+</div>
+",
+}
+`;

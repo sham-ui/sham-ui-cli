@@ -1,0 +1,101 @@
+<template>
+    {% import ModalWindow from '../../ModalWindow.sfc' %}
+
+    <table>
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>Name</th>
+                <th>Email</th>
+                <th>Is superuser?</th>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for member of members %}
+                <tr class=\{{selectedMember && selectedMember.ID === member.ID ? "selected": ""}}>
+                    <td>\{{member.ID}}</td>
+                    <td>\{{member.Name}}</td>
+                    <td>\{{member.Email}}</td>
+                    <td class="text-center">\{{member.IsSuperuser ? 'Yes' : 'No'}}</td>
+                    <td class="actions">
+                        <button
+                            data-test-update-button=\{{member.ID}}
+                            :onclick=\{{this$.selectMember.bind( this, member )}}
+                        >
+                            Edit
+                        </button>
+                        <button
+                            data-test-delete-button=\{{member.ID}}
+                            class="btn-danger"
+                            :onclick=\{{this$.confirmDelete.bind( this, member )}}
+                        >
+                            Delete
+                        </button>
+                    </td>
+                </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+
+    {% if deleteModalVisible %}
+        <ModalWindow
+            title="Delete member"
+            text=\{{"Are you sure you want to delete member with email \"" + member.Email + "\"?" }}
+            isDanger=\{{true}}
+            onOk=\{{this$.deleteMember}}
+            onClose=\{{this$._closeDeleteModal}}
+        />
+    {% endif %}
+</template>
+<script>
+    function MembersTable( options, update ) {
+        const showErrors = $();
+        const refresh = $();
+        const onSelectMember = $();
+        const deleteModalVisible = $();
+        const member = $();
+
+        const state = options( {
+            [ $.members ]: [],
+            [ showErrors ]() {},
+            [ refresh ]() {},
+            [ onSelectMember ]() {},
+            [ deleteModalVisible ]: false
+        } );
+
+        this$.selectMember = member => {
+            state[ showErrors ]( [] );
+            state[ onSelectMember ]( member );
+        };
+
+        this$.confirmDelete = selectedMember => {
+            state[ showErrors ]( [] );
+            update( {
+                [ member ]: selectedMember,
+                [ deleteModalVisible ]: true
+            } );
+        };
+
+        const _closeDeleteModal = $();
+        this[ _closeDeleteModal ] = () => update( {
+            [ member ]: null,
+            [ deleteModalVisible ]: false
+        } );
+
+        this$.deleteMember = () => {
+            this.DI.resolve( 'store' ).api.request( {
+                url: `admin/members/${state[ member ].ID}`,
+                method: 'delete'
+            } ).then(
+                state[ refresh ],
+                ( { Messages = [ 'Fail delete member' ] } ) => {
+                    state[ showErrors ]( Messages );
+                    this[ _closeDeleteModal ]();
+                }
+            );
+        };
+    }
+
+    export default Component( Template, MembersTable );
+</script>

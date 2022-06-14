@@ -1,0 +1,65 @@
+<template>
+    {% import path from 'sham-ui-router/lib/params' %}
+
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-10 offset-lg-1 mb-20">
+                <div class="post-single">
+                    <div class="post-single-content">
+                        <a
+                            :hrefto=\{{path('category.page').param('category', category.slug).param('page', 1)}}
+                            class="categorie"
+                        >
+                            \{{category.name}}
+                        </a>
+                        <h4>\{{title}}</h4>
+                        <div class="post-single-info">
+                            <ul class="list-inline">
+                                <li>\{{createdAt | formatLocaleDate}}</li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <div class="post-single-body">
+                        {% unsafe content %}
+                    </div>
+
+                    <div class="post-single-footer">
+                        <div class="tags">
+                            <ul class="list-inline">
+                                {% for tag of tags %}
+                                    <li>
+                                        <a
+                                            :hrefto=\{{path('tag.page').param('tag', tag.slug).param('page', 1)}}
+                                            data-test-tag=\{{tag.slug}}
+                                        >
+                                            \{{tag.name}}
+                                        </a>
+                                    </li>
+                                {% endfor %}
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</template>
+
+<script>
+    function Post( options ) {
+        options( {
+            [ $.category ]: '',
+            [ $.title ]: '',
+            [ $.createdAt ]: '',
+            [ $.content ]: '',
+            [ $.tags ]: []
+        } );
+
+        if ( IS_SSR ) {
+            this.hydratedOptions = {};
+        }
+    }
+
+    export default Component( Template, Post );
+</script>

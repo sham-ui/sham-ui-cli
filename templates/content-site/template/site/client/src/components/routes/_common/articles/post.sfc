@@ -1,0 +1,43 @@
+<template>
+    {% import path from 'sham-ui-router/lib/params' %}
+
+    <div class="col-lg-4 col-md-6">
+        <div class="post-card">
+            <div class="post-card-content">
+                <a
+                    :hrefto=\{{path('category.page').param('category', category.slug).param('page', 1)}}
+                    class="categorie"
+                >
+                    \{{category.name}}
+                </a>
+                <h5>
+                    <a :hrefto=\{{path('article').param('slug', slug)}}>\{{title}}</a>
+                </h5>
+                <p>\{{content}}</p>
+                <div class="post-card-info">
+                    <ul class="list-inline">
+                        <li>\{{createdAt | formatLocaleDate}}</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+</template>
+
+<script>
+    function Post( options ) {
+        options( {
+            [ $.category ]: '',
+            [ $.slug ]: '',
+            [ $.title ]: '',
+            [ $.createdAt ]: '',
+            [ $.content ]: ''
+        } );
+
+        if ( IS_SSR ) {
+            this.hydratedOptions = {};
+        }
+    }
+
+    export default Component( Template, Post );
+</script>

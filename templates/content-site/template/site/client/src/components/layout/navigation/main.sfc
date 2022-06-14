@@ -1,0 +1,50 @@
+<template>
+    {% import Logo from './logo.sfc' %}
+    {% import NavBar from './navbar.sfc' %}
+    {% import ThemeSwitch from './theme-switch.sfc' %}
+
+    <nav class="navbar navbar-expand-lg fixed-top">
+        <div class="container-fluid">
+            <Logo/>
+
+            <div class="collapse navbar-collapse" :ref="navbar" :onclick=\{{this$.toggleNavbar}}>
+                <NavBar/>
+            </div>
+
+            <div class="navbar-right ml-auto">
+                <ThemeSwitch/>
+
+                <div class="search-icon" :onclick=\{{onOpenSearchForm}}>
+                    <i class="icon-search"></i>
+                </div>
+
+                <button class="navbar-toggler" type="button" aria-expanded="false" aria-label="Toggle navigation" :onclick=\{{this$.toggleNavbar}}>
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+            </div>
+        </div>
+    </nav>
+</template>
+
+<script>
+    function LayoutNavigationMain( options ) {
+        options( {
+            [ $.onOpenSearchForm ]() {}
+        } );
+
+        let navbarVisible = false;
+
+        this$.toggleNavbar = ( e ) => {
+            e.preventDefault();
+            navbarVisible = !navbarVisible;
+            const navbar = this.navbar;
+            navbar.classList.toggle( 'show' );
+            navbar.style.maxHeight = navbarVisible ?
+                `${navbar.scrollHeight}px` :
+                null
+            ;
+        };
+    }
+
+    export default Component( Template, LayoutNavigationMain );
+</script>

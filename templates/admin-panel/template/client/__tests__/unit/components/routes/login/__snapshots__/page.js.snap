@@ -6,8 +6,11 @@ Object {
     "ID": "component",
     "directives": Object {
       "EventListener": [Function],
+      "UpdateOnEvent": [Function],
       "disabled": [Function],
       "hrefto": [Function],
+      "onChangeUpdate": [Function],
+      "onInputUpdate": [Function],
       "onclick": [Function],
       "oninput": [Function],
       "onload": [Function],
@@ -17,6 +20,8 @@ Object {
       "onsubmit": [Function],
       "ref": [Function],
     },
+    "email": "",
+    "password": "",
   },
   "html": "
 <div class=\\"login-page\\">
@@ -57,8 +62,11 @@ Object {
     "ID": "component",
     "directives": Object {
       "EventListener": [Function],
+      "UpdateOnEvent": [Function],
       "disabled": [Function],
       "hrefto": [Function],
+      "onChangeUpdate": [Function],
+      "onInputUpdate": [Function],
       "onclick": [Function],
       "oninput": [Function],
       "onload": [Function],
@@ -68,6 +76,8 @@ Object {
       "onsubmit": [Function],
       "ref": [Function],
     },
+    "email": "",
+    "password": "",
   },
   "html": "
 <div class=\\"login-page\\">

@@ -1,0 +1,60 @@
+<template>
+    {% import ArticlesPage from '../_common/articles/page.sfc' %}
+
+    <ArticlesPage
+        pathName="search.page"
+        queryString=\{{queryString}}
+        getPageTitle=\{{getPageTitle}}
+        loadData=\{{loadData}}
+    >
+        {% block 'header' %}
+            <div class="container-fluid">
+                <div class="row">
+                    <div class="categorie-title">
+                        <h3>Search : <span>\{{query}}</span></h3>
+                    </div>
+                </div>
+            </div>
+        {% endblock %}
+    </ArticlesPage>
+</template>
+
+<script>
+    const queryRegExp = new RegExp( '[?&]q=([^&]*)' );
+
+    function SearchPage( options, update ) {
+        const query = $();
+        const queryString = $();
+
+        const DI = this.DI.resolve;
+
+        const state = options( {
+            [ query ]: '',
+            [ $.getPageTitle ]: () => `Search ${state[ query ]}`,
+            [ $.loadData ]: ( offset, limit ) => {
+                const match = queryRegExp.exec( DI( 'location:href' ) );
+                const q = null == match ?
+                    '' :
+                    decodeURI( match[ 1 ] )
+                ;
+                return DI( 'store' ).articles(
+                    offset,
+                    limit,
+                    {
+                        q
+                    }
+                ).then(
+                    data => {
+                        update( {
+                            [ query ]: q,
+                            [ queryString ]: '?q=' + q
+                        } );
+                        return data;
+                    }
+                );
+            }
+        } );
+    }
+
+    export default Component( Template, SearchPage );
+</script>

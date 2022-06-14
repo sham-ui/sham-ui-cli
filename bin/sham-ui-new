@@ -11,7 +11,8 @@ const VALID_TEMPLATES = [
     'app',
     'component',
     'styled-component',
-    'admin-panel'
+    'admin-panel',
+    'content-site'
 ];
 
 program

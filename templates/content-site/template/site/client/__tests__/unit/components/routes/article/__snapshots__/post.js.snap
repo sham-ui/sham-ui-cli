@@ -1,0 +1,45 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`renders correctly 1`] = `
+Object {
+  "Options": Object {
+    "ID": "component",
+    "category": "",
+    "content": "",
+    "createdAt": "",
+    "directives": Object {
+      "hrefto": [Function],
+    },
+    "filters": Object {
+      "formatLocaleDate": [Function],
+    },
+    "tags": Array [],
+    "title": "",
+  },
+  "html": "
+<div class=\\"container\\">
+  <div class=\\"row\\">
+    <div class=\\"col-lg-10 offset-lg-1 mb-20\\">
+      <div class=\\"post-single\\">
+        <div class=\\"post-single-content\\">
+          <a class=\\"categorie\\" href=\\"/\\">null</a>
+          <h4></h4>
+          <div class=\\"post-single-info\\">
+            <ul class=\\"list-inline\\">
+              <li>Invalid Date</li>
+            </ul>
+          </div>
+        </div>
+        <div class=\\"post-single-body\\"></div>
+        <div class=\\"post-single-footer\\">
+          <div class=\\"tags\\">
+            <ul class=\\"list-inline\\"></ul>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+",
+}
+`;

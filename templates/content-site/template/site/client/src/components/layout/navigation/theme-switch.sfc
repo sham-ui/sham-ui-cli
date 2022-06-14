@@ -1,0 +1,18 @@
+<template>
+    <div class="theme-switch-wrapper">
+        <label class="theme-switch" for="checkbox">
+            <input type="checkbox" id="checkbox" checked=\{{appState.darkThemeEnabled}} :onclick=\{{this$.onClick}}/>
+            <div class="slider round"></div>
+        </label>
+    </div>
+</template>
+
+<script>
+    import { useStorage } from '../../../storages/app';
+
+    function ThemeSwitch() {
+        this$.onClick = () => this.DI.resolve( 'dark-theme' ).toggle();
+    }
+
+    export default Component( Template, useStorage( $.appState ), ThemeSwitch );
+</script>

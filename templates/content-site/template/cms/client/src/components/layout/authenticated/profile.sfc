@@ -1,0 +1,58 @@
+<template>
+    {% import path from 'sham-ui-router/lib/params' %}
+
+    <div class="dropdown">
+        <a class="link-profile" :onclick=\{{this$.toggleField( $.dropDownVisible )}}>
+            <span class="logged-name">
+                \{{sessionData.name}}
+            </span>
+        </a>
+        <div class="dropdown-menu \{{dropDownVisible ? 'show' : ''}}" :onclick=\{{this$.menuItemOnClick}}>
+            <ul class="user-profile-nav">
+                <li>
+                    <a :hrefto=\{{path("settings")}}>
+                        <i class="icon-cog"></i> Settings
+                    </a>
+                </li>
+                <li>
+                    <a href="#" :onclick=\{{this$.logoutOnClick}}>
+                        <i class="icon-logout"></i> Sign Out
+                    </a>
+                </li>
+            </ul>
+        </div>
+    </div>
+</template>
+
+<script>
+    import { ToggleField } from '../../../mixins/state';
+    import { useStorage } from '../../../storages/session';
+
+    function LayoutAuthenticatedProfile( options, update ) {
+        const dropDownVisible = $();
+
+        const state = options( {
+            [ dropDownVisible ]: false
+        } );
+
+        this$.menuItemOnClick = () => {
+            if ( state[ dropDownVisible ] ) {
+                update( {
+                    [ dropDownVisible ]: false
+                } );
+            }
+        };
+
+        this$.logoutOnClick = ( e ) => {
+            e.preventDefault();
+            this.DI.resolve( 'session' ).logout();
+        };
+    }
+
+    export default Component(
+        Template,
+        ToggleField,
+        useStorage( $.sessionData ),
+        LayoutAuthenticatedProfile
+    );
+</script>

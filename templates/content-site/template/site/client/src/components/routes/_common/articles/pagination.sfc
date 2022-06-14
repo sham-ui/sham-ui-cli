@@ -1,0 +1,99 @@
+<template>
+    {% import path from 'sham-ui-router/lib/params' %}
+
+    <div class="pagination mt--10">
+        <ul class="list-inline">
+            {% for item of this$.pageItems( limit, total, currentPage, pageArraySize ) %}
+                {% if item.showAsLast %}
+                    <li class="mr-2">...</li>
+                {% endif %}
+                <li>
+                    <a
+                        class=\{{currentPage === item.page ? 'active' : '' }}
+                        href=\{{
+                            this.DI.resolve( 'router' ).generate(
+                                pathName,
+                                Object.assign(
+                                    {},
+                                    this.DI.resolve( 'router' ).storage.params,
+                                    { "page": item.page } 
+                                )
+                            ) + queryString
+                        }}
+                        data-test-page=\{{item.page}}
+                        :onclick=\{{this$.handleClick}}
+                    >
+                        \{{item.page}}
+                    </a>
+                </li>
+                {% if item.showAsFirst %}
+                    <li class="mr-2">...</li>
+                {% endif %}
+            {% endfor %}
+        </ul>
+    </div>
+</template>
+
+<script>
+    function Pagination( options ) {
+        const goToPage = $();
+
+        options( {
+            [ $.pathName ]: '',
+            [ $.pageArraySize ]: 7,
+            [ $.currentPage ]: 1,
+            [ $.limit ]: 50,
+            [ $.total ]: 0,
+            [ goToPage ]() {},
+            [ $.patch ]: '',
+            [ $.queryString ]: ''
+        } );
+
+        if ( IS_SSR ) {
+            this.hydratedOptions = {};
+        }
+
+        this$.pageItems = ( limit, total, currentPage, pageArraySize ) => {
+            const totalPages = Math.ceil( total / limit );
+            let start = Math.floor( pageArraySize  / 2 ) - 1;
+            if ( totalPages - currentPage <= start ) {
+
+                // It's last pages
+                start = pageArraySize - 2 - ( totalPages - currentPage  );
+            }
+            const pages = [ {
+                page: 1,
+
+                // If not start from 2 page
+                showAsFirst: currentPage - start > 2
+            } ];
+            for ( let i = -start; pages.length < pageArraySize - 1; i++ ) {
+                if ( i + currentPage >= totalPages ) {
+                    break;
+                }
+                if ( currentPage + i <= 1 ) {
+                    continue;
+                }
+                pages.push( {
+                    page: currentPage + i
+                } );
+            }
+            if ( totalPages > 1 ) {
+                pages.push( {
+                    page: totalPages,
+
+                    // If finish not last - page
+                    showAsLast: totalPages - pages[ pages.length - 1 ].page > 1
+                } );
+            }
+            return pages;
+        };
+
+        this$.handleClick = ( e ) => {
+            e.preventDefault();
+            this.DI.resolve( 'router' ).navigate( e.target.getAttribute( 'href' ) );
+        };
+    }
+
+    export default Component( Template, Pagination );
+</script>

@@ -1,0 +1,118 @@
+<template>
+    {% import path from 'sham-ui-router/lib/params' %}
+    {% import ModalWindow from '../../../ModalWindow.sfc' %}
+
+    <table class="list-table">
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>Title</th>
+                <th>Slug</th>
+                <th>Category</th>
+                <th>Published at</th>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody>
+            {% let categoryTitleById = this$._buildCategoryNameById( categories ) %}
+
+            {% for article of articles || [] %}
+                <tr>
+                    <td class="text-center">\{{article.id}}</td>
+                    <td>\{{article.title}}</td>
+                    <td>\{{article.slug}}</td>
+                    <td>\{{categoryTitleById[ article.category_id ] }}</td>
+                    <td>\{{article.published_at | formatLocaleDate}}</td>
+                    <td class="actions">
+                        <a
+                            class="btn"
+                            :hrefto=\{{path("articles/edit").param("id", article.id)}}
+                            data-test-update-button=\{{article.id}}
+                        >
+                            Edit
+                        </a>
+                        <button
+                            data-test-delete-button=\{{article.id}}
+                            class="btn-danger"
+                            :onclick=\{{this$.confirmDelete.bind( this, article )}}
+                        >
+                            Delete
+                        </button>
+                    </td>
+                </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+
+    {% if deleteModalVisible %}
+        <ModalWindow
+            title="Delete article"
+            text=\{{"Are you sure you want to delete article \"" + article.title + "\"?" }}
+            isDanger=\{{true}}
+            onOk=\{{this$.deleteArticle}}
+            onClose=\{{this$._closeDeleteModal}}
+        />
+    {% endif %}
+</template>
+
+<script>
+    function ArticlesTable( options, update ) {
+        const showErrors = $();
+        const refresh = $();
+        const deleteModalVisible = $();
+        const article = $();
+
+        const state = options( {
+            [ $.articles ]: [],
+            [ showErrors ]() {},
+            [ refresh ]() {},
+            [ deleteModalVisible ]: false
+        } );
+
+        this.filters.formatLocaleDate = date => ( new Date( date ) ).toLocaleDateString( 'ru-RU',  {
+            weekday: 'long',
+            year: 'numeric',
+            month: 'long',
+            day: 'numeric',
+            hour: '2-digit',
+            minute: '2-digit',
+            second: '2-digit'
+        } );
+
+        this$._buildCategoryNameById = categories => categories.reduce(
+            ( acc, category ) => {
+                acc[ category.id ] = category.name;
+                return acc;
+            },
+            {}
+        );
+
+        this$.confirmDelete = selectedArticle => {
+            state[ showErrors ]( [] );
+            update( {
+                [ article ]: selectedArticle,
+                [ deleteModalVisible ]: true
+            } );
+        };
+
+        const _closeDeleteModal = $();
+        this[ _closeDeleteModal ] = () => update( {
+            [ article ]: null,
+            [ deleteModalVisible ]: false
+        } );
+
+        this$.deleteArticle = () => {
+            this.DI.resolve( 'store' )
+                .deleteArticle( state[ article ].id )
+                .then(
+                    state[ refresh ],
+                    ( { Messages = [ 'Fail delete article' ] } ) => {
+                        state[ showErrors ]( Messages );
+                        this[ _closeDeleteModal ]();
+                    }
+                );
+        };
+    }
+
+    export default Component( Template, ArticlesTable );
+</script>

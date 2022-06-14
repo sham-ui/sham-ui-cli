@@ -1,0 +1,25 @@
+.login-page {
+  height: 100vh;
+  background-color: #1D2939;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  .form {
+    .logo {
+      position: relative;
+      border: none;
+      padding: 0;
+      width: 100%;
+      left: 0 !important;
+      justify-content: center;
+      margin-bottom: 20px;
+    }
+  }
+}
+
+
+@media (min-width: 480px) {
+  .login-page .form {
+    width: 350px;
+  }
+}

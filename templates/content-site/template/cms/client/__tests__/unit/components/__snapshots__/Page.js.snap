@@ -1,0 +1,26 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`renders correctly 1`] = `
+Object {
+  "Options": Object {
+    "ID": "component",
+    "dataLoaded": true,
+    "sessionData": Object {
+      "email": "",
+      "isAuthenticated": false,
+      "isSuperuser": false,
+      "name": "",
+      "sessionValidated": true,
+    },
+  },
+  "html": "
+<h4 class=\\"page-header\\">
+  <!--0-->
+</h4>
+<div class=\\"page-body\\">
+  <!--1-->
+</div>
+<!--0-->
+",
+}
+`;

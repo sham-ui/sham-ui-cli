@@ -1,0 +1,63 @@
+<template>
+    {% import CubeAnimation from 'sham-ui-cube-animation' %}
+
+    <div class="modal" data-test-modal>
+        {% if !dataSaving %}
+            <span :onclick=\{{this$._closeClick}} class="close" title="Close Modal" data-test-close-button>&times;</span>
+        {% endif %}
+        <div class="modal-content">
+            <div class="container">
+                <h4>\{{title}}</h4>
+                <p class="content">\{{text}}</p>
+
+                <div class="footer">
+                    {% if dataSaving %}
+                        <CubeAnimation />
+                    {% else %}
+                        <button :onclick=\{{this$._okClick}} data-test-ok-button class=\{{isDanger ? "btn-danger" : ""}}>
+                            \{{okText}}
+                        </button>
+                        <button class="btn-secondary" :onclick=\{{this$._closeClick}} data-test-cancel-button>
+                            \{{cancelText}}
+                        </button>
+                    {% endif %}
+                </div>
+            </div>
+        </div>
+    </div>
+</template>
+
+<script>
+    function ModalWindow( options, update ) {
+        const dataSaving = $();
+        const onOk = $();
+        const onClose = $();
+
+        const state = options( {
+            [ $.title ]: '',
+            [ $.text ]: '',
+            [ $.cancelText ]: 'Cancel',
+            [ $.okText ]: 'Ok',
+            [ $.isDanger ]: false,
+            [ dataSaving ]: false,
+            [ onOk ]() {},
+            [ onClose ]() {}
+        } );
+
+        const enableSaving = () => update( {
+            [ dataSaving ]: true
+        } );
+
+        this$._okClick = () => {
+            enableSaving();
+            state[ onOk ]();
+        };
+
+        this$._closeClick = () => {
+            enableSaving();
+            state[ onClose ]();
+        };
+    }
+
+    export default Component( Template, ModalWindow );
+</script>

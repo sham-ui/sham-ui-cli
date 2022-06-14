@@ -1,0 +1,102 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`display errors 1`] = `
+Object {
+  "Options": Object {
+    "ID": "component",
+    "directives": Object {
+      "EventListener": [Function],
+      "UpdateOnEvent": [Function],
+      "disabled": [Function],
+      "hrefto": [Function],
+      "onChangeUpdate": [Function],
+      "onInputUpdate": [Function],
+      "onclick": [Function],
+      "oninput": [Function],
+      "onload": [Function],
+      "onresize": [Function],
+      "onscroll": [Function],
+      "onselect": [Function],
+      "onsubmit": [Function],
+      "ref": [Function],
+    },
+    "email": "",
+    "password": "",
+  },
+  "html": "
+<div class=\\"login-page\\">
+  <form class=\\"form\\">
+    <div class=\\"logo\\"><span><span>[</span> {{ logoText }} <span>]</span></span></div>
+    <!--0-->
+    <!--0-->
+    <ul class=\\"errors-panel\\">
+      <li>Login fail</li>
+    </ul>
+    <!--0-->
+    <!--1-->
+    <div class=\\"form-group\\">
+      <input name=\\"email\\" type=\\"text\\" placeholder=\\"Enter your email\\" autofocus=\\"\\">
+    </div>
+    <div class=\\"form-group\\">
+      <input name=\\"password\\" type=\\"password\\" placeholder=\\"Enter your password\\">
+    </div>
+    <!--2-->
+    <button type=\\"submit\\">
+      <!--3-->Sign In
+      <!--4-->
+    </button>
+    <!--5-->
+  </form>
+</div>
+",
+}
+`;
+
+exports[`renders correctly 1`] = `
+Object {
+  "Options": Object {
+    "ID": "component",
+    "directives": Object {
+      "EventListener": [Function],
+      "UpdateOnEvent": [Function],
+      "disabled": [Function],
+      "hrefto": [Function],
+      "onChangeUpdate": [Function],
+      "onInputUpdate": [Function],
+      "onclick": [Function],
+      "oninput": [Function],
+      "onload": [Function],
+      "onresize": [Function],
+      "onscroll": [Function],
+      "onselect": [Function],
+      "onsubmit": [Function],
+      "ref": [Function],
+    },
+    "email": "",
+    "password": "",
+  },
+  "html": "
+<div class=\\"login-page\\">
+  <form class=\\"form\\">
+    <div class=\\"logo\\"><span><span>[</span> {{ logoText }} <span>]</span></span></div>
+    <!--0-->
+    <!--0-->
+    <!--0-->
+    <!--1-->
+    <div class=\\"form-group\\">
+      <input name=\\"email\\" type=\\"text\\" placeholder=\\"Enter your email\\" autofocus=\\"\\">
+    </div>
+    <div class=\\"form-group\\">
+      <input name=\\"password\\" type=\\"password\\" placeholder=\\"Enter your password\\">
+    </div>
+    <!--2-->
+    <button type=\\"submit\\">
+      <!--3-->Sign In
+      <!--4-->
+    </button>
+    <!--5-->
+  </form>
+</div>
+",
+}
+`;

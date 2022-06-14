@@ -1,0 +1,88 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`renders correctly 1`] = `
+Object {
+  "Options": Object {
+    "ID": "component",
+    "directives": Object {
+      "EventListener": [Function],
+      "UpdateOnEvent": [Function],
+      "disabled": [Function],
+      "onChangeUpdate": [Function],
+      "onInputUpdate": [Function],
+      "onclick": [Function],
+      "oninput": [Function],
+      "onload": [Function],
+      "onresize": [Function],
+      "onscroll": [Function],
+      "onselect": [Function],
+      "onsubmit": [Function],
+      "ref": [Function],
+    },
+    "getPageTitle": [Function],
+    "loadData": [Function],
+    "query": "content",
+    "queryString": "?q=content",
+  },
+  "html": "
+<div data-test-page-body=\\"\\">
+  <section class=\\"section pt-55\\">
+    <div class=\\"container-fluid\\">
+      <div class=\\"row\\">
+        <div class=\\"categorie-title\\">
+          <h3>Search : <span>content</span></h3>
+        </div>
+      </div>
+    </div>
+    <!--0-->
+    <!--1-->
+    <div class=\\"container-fluid\\">
+      <div class=\\"row\\">
+        <!--2-->
+        <div class=\\"col-lg-12\\">
+          <div class=\\"pagination mt--10\\">
+            <ul class=\\"list-inline\\">
+              <!--0-->
+              <li>
+                <a data-test-page=\\"1\\" class=\\"\\" href=\\"/?q=content\\">1</a>
+              </li>
+              <!--1-->
+              <!--0-->
+              <li>
+                <a data-test-page=\\"2\\" class=\\"active\\" href=\\"/?q=content\\">2</a>
+              </li>
+              <!--1-->
+              <!--0-->
+              <li>
+                <a data-test-page=\\"3\\" class=\\"\\" href=\\"/?q=content\\">3</a>
+              </li>
+              <!--1-->
+              <!--0-->
+              <li>
+                <a data-test-page=\\"4\\" class=\\"\\" href=\\"/?q=content\\">4</a>
+              </li>
+              <!--1-->
+              <!--0-->
+              <li>
+                <a data-test-page=\\"5\\" class=\\"\\" href=\\"/?q=content\\">5</a>
+              </li>
+              <!--1-->
+              <!--0-->
+              <li>
+                <a data-test-page=\\"6\\" class=\\"\\" href=\\"/?q=content\\">6</a>
+              </li>
+              <!--1-->
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+  <!--0-->
+</div>
+<!--0-->
+<!--0-->
+<!--0-->
+",
+}
+`;

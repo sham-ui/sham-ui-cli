@@ -1,0 +1,185 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`fail update category data (500 status code) 1`] = `
+"<h4 class=\\"page-header\\"> Categories
+  <!--0-->
+</h4>
+<div class=\\"page-body\\">
+  <div class=\\"crud-page\\">
+    <!--0-->
+    <!--0-->
+    <div class=\\"container\\">
+      <button data-test-toggle-create-form=\\"\\" class=\\"mg-b-30\\">Show create new category form</button>
+      <!--1-->
+    </div>
+    <div class=\\"container\\">
+      <div class=\\"items-list\\">
+        <div class=\\"panel\\">
+          <table>
+            <thead>
+              <tr>
+                <th>ID</th>
+                <th>Name</th>
+                <th>Slug</th>
+                <th></th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr class=\\"\\">
+                <td class=\\"text-center\\">1</td>
+                <td>Hello world!</td>
+                <td>hello-world</td>
+                <td class=\\"actions\\">
+                  <button data-test-update-button=\\"1\\"> Edit </button>
+                  <button class=\\"btn-danger\\" data-test-delete-button=\\"1\\"> Delete </button>
+                </td>
+              </tr>
+              <tr class=\\"selected\\">
+                <td class=\\"text-center\\">6</td>
+                <td>Название категории</td>
+                <td>nazvanie-kategorii</td>
+                <td class=\\"actions\\">
+                  <button data-test-update-button=\\"6\\"> Edit </button>
+                  <button class=\\"btn-danger\\" data-test-delete-button=\\"6\\"> Delete </button>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+          <!--0-->
+          <!--0-->
+          <!--0-->
+          <!--1-->
+        </div>
+      </div>
+      <div class=\\"item-detail\\">
+        <div class=\\"panel\\">
+          <h6>Category: Название категории</h6>
+          <form class=\\"form-layout\\">
+            <!--0-->
+            <ul class=\\"errors-panel\\">
+              <li>Save category data fail</li>
+            </ul>
+            <!--0-->
+            <!--1-->
+            <div class=\\"form-group\\">
+              <label>Name:</label>
+              <input name=\\"name\\" type=\\"text\\" autofocus=\\"\\">
+            </div>
+            <!--0-->
+            <!--2-->
+            <button type=\\"submit\\">
+              <!--3-->Update
+              <!--4-->
+            </button>
+            <!--5-->
+          </form>
+          <!--0-->
+          <!--1-->
+          <!--0-->
+          <!--0-->
+          <!--0-->
+          <!--0-->
+        </div>
+      </div>
+      <!--2-->
+    </div>
+  </div>
+  <!--1-->
+</div>
+<!--0-->
+<!--0-->
+<!--0-->
+<!--0-->"
+`;
+
+exports[`fail update category data 1`] = `
+"<h4 class=\\"page-header\\"> Categories
+  <!--0-->
+</h4>
+<div class=\\"page-body\\">
+  <div class=\\"crud-page\\">
+    <!--0-->
+    <!--0-->
+    <div class=\\"container\\">
+      <button data-test-toggle-create-form=\\"\\" class=\\"mg-b-30\\">Show create new category form</button>
+      <!--1-->
+    </div>
+    <div class=\\"container\\">
+      <div class=\\"items-list\\">
+        <div class=\\"panel\\">
+          <table>
+            <thead>
+              <tr>
+                <th>ID</th>
+                <th>Name</th>
+                <th>Slug</th>
+                <th></th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr class=\\"\\">
+                <td class=\\"text-center\\">1</td>
+                <td>Hello world!</td>
+                <td>hello-world</td>
+                <td class=\\"actions\\">
+                  <button data-test-update-button=\\"1\\"> Edit </button>
+                  <button class=\\"btn-danger\\" data-test-delete-button=\\"1\\"> Delete </button>
+                </td>
+              </tr>
+              <tr class=\\"selected\\">
+                <td class=\\"text-center\\">6</td>
+                <td>Название категории</td>
+                <td>nazvanie-kategorii</td>
+                <td class=\\"actions\\">
+                  <button data-test-update-button=\\"6\\"> Edit </button>
+                  <button class=\\"btn-danger\\" data-test-delete-button=\\"6\\"> Delete </button>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+          <!--0-->
+          <!--0-->
+          <!--0-->
+          <!--1-->
+        </div>
+      </div>
+      <div class=\\"item-detail\\">
+        <div class=\\"panel\\">
+          <h6>Category: Название категории</h6>
+          <form class=\\"form-layout\\">
+            <!--0-->
+            <ul class=\\"errors-panel\\">
+              <li>Can't update category data</li>
+            </ul>
+            <!--0-->
+            <!--1-->
+            <div class=\\"form-group\\">
+              <label>Name:</label>
+              <input name=\\"name\\" type=\\"text\\" autofocus=\\"\\">
+            </div>
+            <!--0-->
+            <!--2-->
+            <button type=\\"submit\\">
+              <!--3-->Update
+              <!--4-->
+            </button>
+            <!--5-->
+          </form>
+          <!--0-->
+          <!--1-->
+          <!--0-->
+          <!--0-->
+          <!--0-->
+          <!--0-->
+        </div>
+      </div>
+      <!--2-->
+    </div>
+  </div>
+  <!--1-->
+</div>
+<!--0-->
+<!--0-->
+<!--0-->
+<!--0-->"
+`;

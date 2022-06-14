@@ -1,0 +1,58 @@
+<template>
+    {% import FormContainer from '../../FormContainer.sfc' %}
+    {% import Logo from '../../Logo.sht' %}
+
+    <div class="login-page">
+        <FormContainer
+            submitText="Sign In"
+            submit=\{{this$._submitForm}}
+            success=\{{this$._loginSuccess}}
+            getErrors=\{{this$._getErrors}}
+        >
+            {% block 'header' %}
+                <Logo/>
+            {% endblock %}
+
+            {% block 'default' %}
+                <div class="form-group">
+                    <input name="email" type="text" placeholder="Enter your email" autofocus :onChangeUpdate=\{{$.email}}>
+                </div>
+                <div class="form-group">
+                    <input name="password" type="password" placeholder="Enter your password" :onChangeUpdate=\{{$.password}}>
+                </div>
+            {% endblock %}
+        </FormContainer>
+    </div>
+</template>
+
+<script>
+    function RoutesLoginPage( options, update, didMount ) {
+        const email = $();
+        const password = $();
+
+        const state = options( {
+            [ email ]: '',
+            [ password ]: ''
+        } );
+
+        didMount( () => this.DI.resolve( 'title' ).change( 'Login' ) );
+
+        this$._submitForm = () => {
+            return this.DI.resolve( 'session' ).login(
+                state[ email ].trim(),
+                state[ password ].trim()
+            );
+        };
+
+        this$._loginSuccess = () => {
+            const router = this.DI.resolve( 'router' );
+            router.navigate(
+                router.generate( 'home', {} )
+            );
+        };
+
+        this$._getErrors = ( { Messages = [ 'Login fail' ] } ) => Messages;
+    }
+
+    export default Component( Template, RoutesLoginPage );
+</script>

@@ -1,0 +1,5 @@
+{% import CubeAnimation from 'sham-ui-cube-animation' %}
+
+<div class="page-loading-indicator">
+    <CubeAnimation/>
+</div>

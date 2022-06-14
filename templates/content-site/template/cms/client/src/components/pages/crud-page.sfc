@@ -1,0 +1,132 @@
+<template>
+    {% import ErrorsPanel from '../ErrorsPanel.sht' %}
+    {% import Page from '../Page.sfc' %}
+    {% import CreateForm from './crud-page/create.sfc' %}
+    {% import ItemsTable from './crud-page/table.sfc' %}
+
+    <Page dataLoaded=\{{dataLoaded}}>
+        {% block 'header' %}
+            \{{pageTitle}}
+        {% endblock %}
+
+        {% block 'body' %}
+            <div class="crud-page">
+                <ErrorsPanel errors=\{{errors}}/>
+
+                <div class="container">
+                    <button
+                        data-test-toggle-create-form
+                        class="mg-b-30"
+                        :onclick=\{{this$.toggleField( $.createFormVisible )}}
+                    >
+                        \{{ ( createFormVisible ? 'Hide' : 'Show' ) + ' create new ' + typeName + ' form' }}
+                    </button>
+                    {% if createFormVisible %}
+                        <div class="panel mg-b-30 item-create">
+                            <CreateForm
+                                typeName=\{{typeName}}
+                                onSuccess=\{{this$._onCreate}}
+                            >
+                                {% block 'default' with createFormData %}
+                                    {% defblock 'createForm' createFormData %}
+                                {% endblock %}
+                            </CreateForm>
+                        </div>
+                    {% endif %}
+                </div>
+
+                <div class="container">
+                    <div class="items-list">
+                        <div class="panel">
+                            <ItemsTable
+                                typeName=\{{typeName}}
+                                items=\{{items}}
+                                selectedItem=\{{selectedItem}}
+                                onSelectItem=\{{this$.setField( $.selectedItem )}}
+                                showErrors=\{{this$.setField( $.errors )}}
+                                refresh=\{{this$.loadData}}
+                                confirmDeleteText=\{{confirmDeleteText}}
+                                deleteItem=\{{deleteItem}}
+                            >
+                                {% block 'default' with tableData %}
+                                    {% defblock 'table' tableData %}
+                                {% endblock %}
+                            </ItemsTable>
+                        </div>
+                    </div>
+
+                    {% if selectedItem %}
+                        <div class="item-detail">
+                            <div class="panel">
+                                {% defblock 'itemDetail'
+                                    $( {
+                                        item: selectedItem,
+                                        onUpdateSuccess: this$.loadData
+                                    } )
+                                %}
+                            </div>
+                        </div>
+                    {% endif %}
+                </div>
+            </div>
+        {% endblock %}
+    </Page>
+</template>
+
+<script>
+    import { SetField, ToggleField } from '../../mixins/state';
+
+    function PagesCrudPage( options, update, didMount ) {
+        const typeName = $();
+        const pageTitle = $();
+        const dataLoaded = $();
+        const loadItems = $();
+        const items = $();
+        const errors = $();
+
+        const selectedItem = $();
+        const createFormVisible = $();
+
+        const state = options( {
+            [ typeName ]: '',
+            [ pageTitle ]: '',
+            [ loadItems ]() {},
+            [ dataLoaded ]: true,
+            [ selectedItem ]: null,
+            [ createFormVisible ]: false,
+            [ items ]: []
+        } );
+
+        didMount( () => {
+            this.DI.resolve( 'title' ).change( state[ pageTitle ] );
+            this$.loadData();
+        } );
+
+        this$.loadData = () => {
+            update( {
+                [ dataLoaded ]: false,
+                [ selectedItem ]: null
+            } );
+            state[ loadItems ]().then(
+                data => update( {
+                    [ dataLoaded ]: true,
+                    [ items ]: data,
+                    [ errors ]: []
+                } ),
+                ( { Messages = [ `Fail load ${state[ typeName ]} list` ] } ) => update( {
+                    [ items ]: true,
+                    [ errors ]: Messages
+                } )
+            );
+        };
+
+        this$._onCreate = () => {
+            update( {
+                [ createFormVisible ]: false
+            } );
+            this$.loadData();
+        };
+    }
+
+    export default Component( Template, SetField, ToggleField, PagesCrudPage );
+</script>

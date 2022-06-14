@@ -1,0 +1,107 @@
+.form {
+  padding: 25px;
+  box-shadow: 0px 1px 3px 0px rgba(0, 0, 0, 0.21);
+  width: 300px;
+  border-radius: 3px;
+  background-color: #fff;
+  button {
+    width: 100%;
+  }
+}
+
+.form, .form-layout {
+  .form-group {
+    margin-bottom: 1rem;
+
+    input, select, .tags-input, .sun-editor {
+      min-height: 1px;
+    }
+
+    input, select, .tags-input {
+      line-height: 1.25;
+    }
+
+    textarea {
+      line-height: 1;
+      min-height: 100px;
+    }
+
+    input, select, textarea, .tags-input, .sun-editor {
+      display: block;
+      width: 100%;
+      padding: .65rem .75rem;
+      font-size: .875rem;
+      color: #495057;
+      background: #fff none;
+      background-clip: padding-box;
+      border: 1px solid rgba(0,0,0,.15);
+      border-radius: 3px;
+      transition: border-color ease-in-out .15s,box-shadow ease-in-out .15s;
+      margin: 0;
+      font-family: inherit;
+      touch-action: manipulation;
+      overflow: visible;
+      position: relative;
+      &:focus {
+        color: #495057;
+        background-color: #fff;
+        border-color: #55a6f8;
+        outline: 0;
+      }
+      &[type="checkbox"] {
+        width: auto;
+        margin-right: .65rem;
+      }
+    }
+  }
+
+  button {
+    margin-left: auto;
+    margin-right: auto;
+  }
+}
+
+@media (min-width: 480px) {
+  .form {
+    padding: 40px;
+    width: 400px
+  }
+}
+
+.form-layout {
+  padding: 30px;
+  border: 1px solid #ced4da;
+  .form-group {
+    display: flex;
+    flex-wrap: wrap;
+    margin-right: -15px;
+    margin-left: -15px;
+    label {
+      display: flex;
+      align-items: center;
+      margin-bottom: 0;
+      position: relative;
+      width: 100%;
+      min-height: 1px;
+      padding-right: 15px;
+      padding-left: 15px;
+      &.checkbox {
+        padding-left: 0;
+      }
+    }
+  }
+}
+
+@media (min-width: 576px) {
+  .form-layout .form-group {
+    label:not(.checkbox), select, textarea, .tags-input, .sun-editor {
+      justify-content: flex-end;
+      flex: 0 0 33.3333333333%;
+      max-width: 33.3333333333%;
+    }
+    input:not([type="checkbox"]), select, label.checkbox, textarea, .tags-input, .sun-editor {
+      flex: 0 0 66.6666666667%;
+      max-width: 66.6666666667%;
+    }
+  }
+}

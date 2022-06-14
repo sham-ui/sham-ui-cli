@@ -1,0 +1,14 @@
+.errors-panel {
+  padding: 15px 20px;
+  position: relative;
+  color: #b51f2e;
+  background-color: #f7d1d5;
+  margin-bottom: 1rem;
+  border: 1px solid transparent;
+  border-radius: 3px;
+  display: block;
+  list-style-position: inside;
+  &:hover {
+    background-color: #efcace;
+  }
+}

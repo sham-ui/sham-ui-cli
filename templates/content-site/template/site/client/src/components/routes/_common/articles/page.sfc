@@ -1,0 +1,137 @@
+<template>
+    {% import Page from '../../../Page.sfc' %}
+    {% import Post from './post.sfc' %}
+    {% import Pagination from './pagination.sfc' %}
+    {% import ErrorsPanel from '../../../ErrorsPanel.sht' %}
+
+    <Page dataLoaded=\{{dataLoaded}}>
+        <section class="section pt-55">
+            {% defblock 'header' %}
+
+            {% if errors.length > 0 %}
+                <ErrorsPanel errors=\{{errors}}/>
+            {% endif %}
+
+            <div class="container-fluid">
+                <div class="row">
+
+                    {% for article of articles %}
+                        <Post
+                            category=\{{article.category}}
+                            slug=\{{article.slug}}
+                            title=\{{article.title}}
+                            content=\{{article.content}}
+                            createdAt=\{{article.createdAt}}
+                        />
+                    {% endfor %}
+
+                    <div class="col-lg-12">
+                        <Pagination
+                            pathName=\{{pathName}}
+                            queryString=\{{queryString}}
+                            currentPage=\{{page}}
+                            limit=\{{limit}}
+                            total=\{{total}}
+                        />
+                    </div>
+                </div>
+            </div>
+        </section>
+    </Page>
+</template>
+
+<script>
+    function ArticlesPage( options, update, didMount ) {
+        const getPageTitle = $();
+        const dataLoaded = $();
+        const page = $();
+        const articles = $();
+        const offset = $();
+        const limit = $();
+        const total = $();
+        const errors = $();
+        const loadData = $();
+        const pathName = $();
+        const queryString = $();
+
+        const state = options( {
+            [ getPageTitle ]: () => '',
+            [ dataLoaded ]: false,
+            [ errors ]: [],
+            [ page ]: 1,
+            [ offset ]: 0,
+            [ limit ]: 9,
+            [ total ]: 0,
+            [ articles ]: [],
+            [ loadData ]() {},
+            [ pathName ]: '',
+            [ queryString ]: ''
+        } );
+
+        const setPageTitle = () => this.DI.resolve( 'title' ).change( state[ getPageTitle ]() );
+
+        didMount( () => {
+
+            // Load data only if not loaded
+            if ( !state[ dataLoaded ] ) {
+                const params = this.DI.resolve( 'router' ).storage.params;
+                let page = parseInt( params.page, 10 );
+                if ( isNaN( page ) || page <= 0 ) {
+                    page = 1;
+                }
+
+                // Hydrate only on data load
+                this.hydrateReady = this$._loadData( page ).then(
+                    setPageTitle
+                );
+            } else {
+                setPageTitle();
+            }
+        } );
+
+        // Page=1 will result into offset 0, page=2 will result into
+        // offset 50 and so on
+        const offsetByPage = ( page, limit ) => ( page - 1 ) * limit;
+
+        this$._loadData = currentPage => {
+            update( {
+                [ dataLoaded ]: false
+            } );
+            return state[ loadData ](
+                offsetByPage( currentPage, state[ limit ] ),
+                state[ limit ]
+            ).then(
+                data => {
+                    update( {
+                        [ dataLoaded ]: true,
+                        [ errors ]: [],
+                        [ page ]: currentPage,
+                        [ articles ]: data.articles,
+                        [ limit ]: data.meta.limit,
+                        [ total ]: data.meta.total
+                    } );
+
+                    if ( IS_SSR ) {
+
+                        // Reduce hydrated data
+                        const hydratedOptions = Object.assign( {}, state );
+                        const hydratedArticles = [];
+                        for ( let i = 0; i < hydratedOptions[ articles ].length; i++ ) {
+                            hydratedArticles[ i ] = {};
+                        }
+                        hydratedOptions[ articles ] = hydratedArticles;
+                        delete hydratedOptions[ queryString ];
+                        delete hydratedOptions[ pathName ];
+                        this.hydratedOptions = hydratedOptions;
+                    }
+                },
+                ( { Messages = [ 'Fail load articles list' ] } ) => update( {
+                    [ dataLoaded ]: true,
+                    [ errors ]: Messages
+                } )
+            );
+        };
+    }
+
+    export default Component( Template, ArticlesPage );
+</script>

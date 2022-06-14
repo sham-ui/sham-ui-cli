@@ -1,0 +1,58 @@
+<template>
+    <textarea :ref=\{{$.textarea}}>\{{value}}</textarea>
+</template>
+
+<script>
+    import suneditor from 'suneditor';
+    import { link, formatBlock, blockquote, align, list, table } from 'suneditor/src/plugins';
+
+    function EditorField( options, update, didMount, onRemove ) {
+        const value = $();
+        const onChange = $();
+
+        let editor = null;
+
+        const state = options( {
+            [ value ]: '',
+            [ onChange ]() {}
+        } );
+
+        const createEditor = suneditor.init( {
+            height: 400,
+            width: '100%',
+            plugins: [
+                link,
+                formatBlock,
+                blockquote,
+                align,
+                list,
+                table
+            ],
+            buttonList: [
+                [ 'undo', 'redo' ],
+                [ 'formatBlock' ],
+                [ 'blockquote' ],
+                [ 'bold', 'underline', 'italic', 'strike', 'subscript', 'superscript' ],
+                [ 'removeFormat' ],
+                [ 'outdent', 'indent' ],
+                [ 'align', 'list'  ],
+                [ 'table', 'link' ],
+                [ 'fullScreen', 'showBlocks', 'codeView' ],
+                [ 'preview', 'print' ]
+            ]
+        } );
+
+        didMount( () => {
+            editor = createEditor.create( this$.textarea );
+            editor.onChange = contents => state[ onChange ]( contents );
+        } );
+
+        onRemove( () => {
+            editor.destroy();
+            editor = null;
+        } );
+
+    }
+
+    export default Component( Template, EditorField );
+</script>

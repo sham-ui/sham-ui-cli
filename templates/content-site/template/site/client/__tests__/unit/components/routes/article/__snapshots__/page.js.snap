@@ -1,0 +1,19 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`renders correctly 1`] = `
+Object {
+  "Options": Object {
+    "ID": "component",
+    "article": Object {},
+    "dataLoaded": false,
+    "errors": Array [],
+    "isNotFound": false,
+  },
+  "html": "
+<!--0-->
+<!--0-->
+<!--0-->
+<!--0-->
+",
+}
+`;
