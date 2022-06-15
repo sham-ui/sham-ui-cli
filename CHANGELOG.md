@@ -1,4 +1,4 @@
-## master
+## 5.0.0-alpha.3
 * Fix scaffolding in templates
 * Clear go assets files before build `admin-panel`
 * Add template for `content-site` - content site with SSR & CMS panel
