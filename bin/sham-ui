@@ -4,6 +4,7 @@ require( 'commander' )
     .version( require( '../package' ).version )
     .usage( '<command> [options]' )
     .command( 'new', 'generate a new project from a template' ).alias( 'n' )
+    .command( 'upgrade', 'upgrade existed project from a template' ).alias( 'u' )
     .command( 'generate', 'generate a new component' ).alias( 'g' )
     .command( 'destroy', 'destroy component' ).alias( 'd' )
     .parse( process.argv );
