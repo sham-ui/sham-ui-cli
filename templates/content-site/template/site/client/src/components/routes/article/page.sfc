@@ -60,6 +60,9 @@
                                 tags: state[ article ].tags
                             };
                             this.hydratedOptions =  hydratedOptions;
+
+                            // Set content for SEO
+                            DI( 'seo' ).setContent( data.shortContent );
                         }
                     },
                     ( { Messages = [ 'Fail load article' ], status } ) => {

@@ -38,12 +38,13 @@ func (h *detailHandler) Validate(_ *handler.Context, data interface{}) (*handler
 }
 
 type articleData struct {
-	Title     string   `json:"title"`
-	Slug      string   `json:"slug"`
-	Category  category `json:"category"`
-	Tags      []tag    `json:"tags"`
-	Content   string   `json:"content"`
-	CreatedAt string   `json:"createdAt"`
+	Title        string   `json:"title"`
+	Slug         string   `json:"slug"`
+	Category     category `json:"category"`
+	Tags         []tag    `json:"tags"`
+	ShortContent string   `json:"shortContent"`
+	Content      string   `json:"content"`
+	CreatedAt    string   `json:"createdAt"`
 }
 
 type tag struct {
@@ -78,9 +79,10 @@ func (h *detailHandler) Process(ctx *handler.Context, data interface{}) (interfa
 			Name: article.Category.Name,
 			Slug: article.Category.Slug,
 		},
-		Tags:      tags,
-		Content:   article.Content,
-		CreatedAt: article.PublishedAt.AsTime().Format("2006-01-02 15:04:05.999999999 -0700 MST"),
+		Tags:         tags,
+		ShortContent: article.ShortContent,
+		Content:      article.Content,
+		CreatedAt:    article.PublishedAt.AsTime().Format("2006-01-02 15:04:05.999999999 -0700 MST"),
 	}, nil
 }
 

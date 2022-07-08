@@ -405,7 +405,8 @@ func TestArticle(t *testing.T) {
 								Name: "Кухня",
 								Slug: "kuhnya",
 							},
-							Content: "Short content",
+							ShortContent: "short content",
+							Content:      "Full content",
 							Tags: []*proto.Tag{
 								{
 									Name: "Быт",
@@ -429,7 +430,8 @@ func TestArticle(t *testing.T) {
 						"name": "Быт",
 						"slug": "byt"
 					} ],
-					"content": "Short content",
+					"shortContent": "short content",
+					"content": "Full content",
 					"createdAt": "2022-05-24 19:54:20 +0000 UTC"
 				}`,
 		},

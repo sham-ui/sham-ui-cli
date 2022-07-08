@@ -81,9 +81,10 @@ message Article {
     string Title = 1;
     string Slug = 2;
     Category Category = 3;
-    string Content = 4;
-    repeated Tag Tags = 5;
-    google.protobuf.Timestamp PublishedAt = 6;
+    string ShortContent = 4;
+    string Content = 5;
+    repeated Tag Tags = 6;
+    google.protobuf.Timestamp PublishedAt = 7;
 }
 
 message NotFound {

@@ -5,6 +5,7 @@ import Cookies from '../services/cookies';
 import DarkTheme from '../services/dark-theme';
 import Store from '../services/store';
 import Title from '../services/title';
+import SEO from '../services/seo';
 import startRouter from './routes';
 import formatLocaleDate from '../filters/format-locale-date';
 import App from '../components/App.sfc';
@@ -16,6 +17,9 @@ export default function( DI, container ) {
     new DarkTheme( DI, container );
     new Store( DI );
     new Title( DI );
+    if ( IS_SSR ) {
+        new SEO( DI );
+    }
 
     // Mount root component
     new App( {

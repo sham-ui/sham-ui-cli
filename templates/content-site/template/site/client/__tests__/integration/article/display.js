@@ -56,6 +56,7 @@ it( 'ssr', async() => {
                 'slug': 'byt'
             } ],
             'content': '<p>Short <b>content</b></p>',
+            'shortContent': 'short content',
             'createdAt': '2022-05-24 19:54:20 +0000 UTC'
         } )
     ;
@@ -81,6 +82,7 @@ it( 'ssr & rehydrate', async() => {
                 'slug': 'byt'
             } ],
             'content': '<p>Short <b>content</b></p>',
+            'shortContent': 'short content',
             'createdAt': '2022-05-24 19:54:20 +0000 UTC'
         } )
     ;

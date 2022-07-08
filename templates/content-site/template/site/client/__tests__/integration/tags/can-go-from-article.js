@@ -28,6 +28,7 @@ it( 'go from article', async() => {
                 'slug': 'byt'
             } ],
             'content': '<p>Short <b>content</b></p>',
+            'shortContent': 'short content',
             'createdAt': '2022-05-24 19:54:20 +0000 UTC'
         } )
         .use( 'get', '/articles', {
@@ -85,6 +86,7 @@ it( 'go from article (ssr & rehydrate)', async() => {
                 'slug': 'byt'
             } ],
             'content': '<p>Short <b>content</b></p>',
+            'shortContent': 'short content',
             'createdAt': '2022-05-24 19:54:20 +0000 UTC'
         } )
         .use( 'get', '/articles', {

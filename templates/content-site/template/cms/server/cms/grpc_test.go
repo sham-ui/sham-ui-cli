@@ -495,7 +495,8 @@ func TestGRPC(t *testing.T) {
 								Name: "Хобби",
 								Slug: "hobby",
 							},
-							Content: "body text",
+							ShortContent: "short body",
+							Content:      "body text",
 							Tags: []*proto.Tag{
 								{
 									Name: "Первый",

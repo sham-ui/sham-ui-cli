@@ -64,7 +64,7 @@ if ( prod ) {
         output: {
             dir: 'dist',
             format: 'system',
-            sourcemap: true,
+            sourcemap: false,
             entryFileNames: 'bundle.js',
             chunkFileNames( chunkInfo ) {
                 const id = chunkInfo.facadeModuleId;

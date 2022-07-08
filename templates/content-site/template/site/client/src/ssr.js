@@ -18,7 +18,8 @@ export function renderAPP( apiURL, origin, href, cookie ) {
         .bind( 'location:href', href )
         .bind( 'document', { // Container for services
             cookie,
-            title: ''
+            title: '',
+            content: ''
         } )
     ;
 
@@ -26,10 +27,12 @@ export function renderAPP( apiURL, origin, href, cookie ) {
         .then( () => start( DI ) )
         .then( () => hydrate( DI ) )
         .then( storage => {
+            const doc = DI.resolve( 'document' );
             return {
                 ...storage.hydrate(),
                 darkThemeEnabled: DI.resolve( 'app:storage' ).darkThemeEnabled,
-                title: DI.resolve( 'document' ).title
+                title: doc.title,
+                content: doc.content
             };
         } );
 }
@@ -40,17 +43,23 @@ export function renderAPP( apiURL, origin, href, cookie ) {
  * @param {string} title
  * @param {string} html
  * @param {boolean} darkThemeEnabled
+ * @param {string} content
  * @return {string}
  */
-export function toHTML( { data, title, html, darkThemeEnabled } ) {
+export function toHTML( { data, title, html, darkThemeEnabled, content } ) {
     const darkTheme = darkThemeEnabled ?
         ' dark' :
+        ''
+    ;
+    const metaDescription = content ?
+        `<meta name="description" content="${content}"/>` :
         ''
     ;
     return (
         '<!doctype html><html><head><meta charset="UTF-8">' +
         '<meta name="viewport" content="width=device-width, initial-scale=1.0">' +
         `<meta name="theme-color" content="${darkThemeEnabled ? '#2b2b2b' : ''}">` +
+        metaDescription +
         '<link rel="icon" href="/favicon.ico">' +
         `<title>${title}</title><link rel="stylesheet" href="/bundle.css" /></head>` +
         `<body class="animation-stopped${darkTheme}">${html}<script>window.data=${data};</script>` +

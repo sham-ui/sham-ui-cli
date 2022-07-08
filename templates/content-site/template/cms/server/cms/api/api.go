@@ -182,12 +182,12 @@ func (a *api) Article(ctx context.Context, request *proto.ArticleRequest) (*prot
 	err := a.db.QueryRowContext(
 		ctx,
 		`
-		SELECT a.title, a.slug, a.body, ct.name, ct.slug, a.published_at
+		SELECT a.title, a.slug, a.short_body, a.body, ct.name, ct.slug, a.published_at
 		FROM article a
 		JOIN category ct ON ct.id = a.category_id
 		WHERE a.slug = $1`,
 		request.Slug,
-	).Scan(&article.Title, &article.Slug, &article.Content, &article.Category.Name, &article.Category.Slug, &publishedAt)
+	).Scan(&article.Title, &article.Slug, &article.ShortContent, &article.Content, &article.Category.Name, &article.Category.Slug, &publishedAt)
 	if nil != err {
 		if errors.Is(err, sql.ErrNoRows) {
 			resp.Response = &proto.ArticleResponse_NotFound{
