@@ -87,6 +87,7 @@ if ( prod ) {
             copy( {
                 targets: [
                     { src: 'favicon.ico', dest: 'dist' },
+                    { src: 'robots.txt', dest: 'dist' },
                     { src: 'src/images', dest: 'dist' },
                     { src: './node_modules/systemjs/dist/s.min.js', dest: 'dist' },
                     {
@@ -168,6 +169,7 @@ if ( prod ) {
                 targets: [
                     { src: 'index.html', dest: 'dist' },
                     { src: 'favicon.ico', dest: 'dist' },
+                    { src: 'robots.txt', dest: 'dist' },
                     { src: 'src/images', dest: 'dist' },
                     { src: './node_modules/systemjs/dist/s.min.js', dest: 'dist' },
                     {
