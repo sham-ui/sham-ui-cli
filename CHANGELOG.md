@@ -1,4 +1,4 @@
-## master
+## 5.0.0-alpha.5
 * Disable sourcemap for content-site
 * Add `<meta name="description" content/>` for content site
 * Add `robots.txt` for content site
