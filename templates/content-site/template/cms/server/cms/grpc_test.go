@@ -2,6 +2,7 @@ package main
 
 import (
 	"cms/api"
+	"cms/config"
 	"cms/proto"
 	"cms/test_helpers"
 	"cms/test_helpers/asserts"
@@ -10,6 +11,8 @@ import (
 	"errors"
 	"fmt"
 	"google.golang.org/protobuf/types/known/timestamppb"
+	"os"
+	"path"
 	"testing"
 	"time"
 )
@@ -520,6 +523,64 @@ func TestGRPC(t *testing.T) {
 				testCase.Prepare(execSQL)
 			}
 			resp, err := srv.Article(context.Background(), testCase.Request)
+			asserts.Equals(t, testCase.ExpectedError, err, fmt.Sprintf("%s: check error", testCase.Name))
+			asserts.Equals(t, testCase.ExpectedResponse, resp, fmt.Sprintf("%s: check response", testCase.Name))
+		}
+	})
+
+	t.Run("Asset", func(t *testing.T) {
+		prepareUploadDirs(t)
+
+		gifFile, err := os.ReadFile(path.Join("testdata", "Sorting_quicksort_anim.gif"))
+		if nil != err {
+			t.Fatalf("can't read test gif file: %s", err)
+		}
+		f, err := os.Create(path.Join(config.Upload.Path, "d4e5d0a778dba725091d8317e6bac939.gif"))
+		if nil != err {
+			t.Fatalf("can't create file: %s", err)
+		}
+		_, err = f.Write(gifFile)
+		if nil != err {
+			t.Fatalf("can't write file: %s", err)
+		}
+
+		testCases := []struct {
+			Name             string
+			Request          *proto.AssetRequest
+			ExpectedResponse *proto.AssetResponse
+			ExpectedError    error
+		}{
+			{
+				Name:             "Empty",
+				Request:          &proto.AssetRequest{},
+				ExpectedResponse: &proto.AssetResponse{},
+				ExpectedError:    errors.New("get content: read /tmp/upload: is a directory"),
+			},
+			{
+				Name: "Not found",
+				Request: &proto.AssetRequest{
+					Path: "not-found",
+				},
+				ExpectedResponse: &proto.AssetResponse{
+					Response: &proto.AssetResponse_NotFound{
+						NotFound: &proto.NotFound{},
+					},
+				},
+			},
+			{
+				Name: "Success",
+				Request: &proto.AssetRequest{
+					Path: "d4e5d0a778dba725091d8317e6bac939.gif",
+				},
+				ExpectedResponse: &proto.AssetResponse{
+					Response: &proto.AssetResponse_File{
+						File: gifFile,
+					},
+				},
+			},
+		}
+		for _, testCase := range testCases {
+			resp, err := srv.Asset(context.Background(), testCase.Request)
 			asserts.Equals(t, testCase.ExpectedError, err, fmt.Sprintf("%s: check error", testCase.Name))
 			asserts.Equals(t, testCase.ExpectedResponse, resp, fmt.Sprintf("%s: check response", testCase.Name))
 		}

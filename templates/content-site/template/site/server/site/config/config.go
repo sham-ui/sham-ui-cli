@@ -57,7 +57,7 @@ allowedDomains = http://127.0.0.1:3000
 allowedDomains = http://localhost:3000
 
 [api]
-socketPath = /tmp/{{ name }}/cms.sock'
+socketPath = /tmp/{{ name }}/cms.sock
 `
 
 func LoadConfiguration(configFilename string) {

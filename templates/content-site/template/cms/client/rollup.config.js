@@ -3,11 +3,11 @@ import commonjs from '@rollup/plugin-commonjs';
 import replace from '@rollup/plugin-replace';
 import cleaner from 'rollup-plugin-cleaner';
 import scss from 'rollup-plugin-scss';
-import serve from 'rollup-plugin-serve';
+import serve from 'rollup-plugin-dev';
 import { terser } from 'rollup-plugin-terser';
 import nodeResolveWithMacro from 'rollup-plugin-node-resolve-with-sham-ui-macro';
 import shamUICompiler from 'rollup-plugin-sham-ui-templates';
-import copy from 'rollup-plugin-copy'
+import copy from 'rollup-plugin-copy';
 import pkg from './package.json';
 
 const prod = !process.env.ROLLUP_WATCH;
@@ -102,11 +102,12 @@ export default {
         } ),
         dev && serve( {
             port: 3000,
-            contentBase: 'dist',
-            historyApiFallback: '/index.html'
+            dirs: [ 'dist' ],
+            spa: true,
+            proxy: [
+                { from: '/assets', to: 'http://localhost:3003/assets' }
+            ]
         } ),
         prod && terser()
     ]
 };
-
-

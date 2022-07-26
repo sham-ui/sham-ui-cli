@@ -12,6 +12,7 @@ service CMS {
     rpc ArticleListForTag(ArticleListForTagRequest) returns (ArticleListForTagResponse) {};
     rpc ArticleListForQuery(ArticleListForQueryRequest) returns (ArticleListResponse) {};
     rpc Article(ArticleRequest) returns (ArticleResponse) {};
+    rpc Asset(AssetRequest) returns (AssetResponse) {};
 }
 
 message ArticleListRequest {
@@ -94,6 +95,17 @@ message NotFound {
 message ArticleResponse {
     oneof response {
         Article article = 1;
+        NotFound not_found = 2;
+    }
+}
+
+message AssetRequest {
+    string Path = 1;
+}
+
+message AssetResponse {
+    oneof response {
+        bytes File = 1;
         NotFound not_found = 2;
     }
 }

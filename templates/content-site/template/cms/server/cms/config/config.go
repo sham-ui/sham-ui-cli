@@ -36,6 +36,7 @@ var (
 	Server   server
 	DataBase dataBaseConfig
 	Session  session
+	Upload   upload
 	Api      api
 )
 
@@ -43,6 +44,7 @@ type Config struct {
 	Server   server
 	Database dataBaseConfig
 	Session  session
+	Upload   upload
 	Api      api
 }
 
@@ -59,6 +61,10 @@ type dataBaseConfig struct {
 	Pass string
 }
 
+func (dbCfg *dataBaseConfig) GetURL() string {
+	return fmt.Sprintf("postgres://%s:%s@%s:%d/%s", dbCfg.User, dbCfg.Pass, dbCfg.Host, dbCfg.Port, dbCfg.Name)
+}
+
 type session struct {
 	Secret string
 }
@@ -67,13 +73,13 @@ type api struct {
 	SocketPath string
 }
 
-func (dbCfg *dataBaseConfig) GetURL() string {
-	return fmt.Sprintf("postgres://%s:%s@%s:%d/%s", dbCfg.User, dbCfg.Pass, dbCfg.Host, dbCfg.Port, dbCfg.Name)
+type upload struct {
+	Path string
 }
 
 const defaultConfig = `
 [server]
-port = 3000
+port = 3003
 allowedDomains = http://{{ name }}.com
 allowedDomains = http://www.{{ name }}.com
 
@@ -87,8 +93,11 @@ pass = {{ dbPassword }}
 [session]
 secret = secret-key
 
+[upload]
+path = ./upload
+
 [api]
-socketPath = /tmp/{{ name }}/cms.sock'
+socketPath = /tmp/{{ name }}/cms.sock
 `
 
 func LoadConfiguration(configFilename string) {
@@ -109,5 +118,6 @@ func LoadConfiguration(configFilename string) {
 	Server = cfg.Server
 	DataBase = cfg.Database
 	Session = cfg.Session
+	Upload = cfg.Upload
 	Api = cfg.Api
 }

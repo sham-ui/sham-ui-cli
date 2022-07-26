@@ -49,7 +49,11 @@ it( 'renders correctly', async() => {
                 'published_at': '2022-04-25T19:34:23.619+07:00',
                 'tags': [ 'hello-world' ]
             } )
-        )
+        ),
+        api: {
+            token: '123',
+            baseURL: 'localhost'
+        }
     } );
     const meta = renderer( RoutesArticlesEditPage, {
         DI,
@@ -97,7 +101,11 @@ it( 'fail load article data', async() => {
         ),
         articleDetail: jest.fn().mockReturnValue(
             Promise.reject( {} )
-        )
+        ),
+        api: {
+            token: '123',
+            baseURL: 'localhost'
+        }
     } );
     const meta = renderer( RoutesArticlesEditPage, {
         DI,

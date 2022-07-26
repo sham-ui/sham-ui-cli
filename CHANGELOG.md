@@ -1,3 +1,10 @@
+## master   
+* Fix default port for development mode CMS
+* Add support upload image for content-site
+* Fix false-pasitive site backend test for content site 
+* Add auto restart node.js SSR sub process in content-site server
+* Fix default socket path for content-site
+
 ## 5.0.0-alpha.5
 * Disable sourcemap for content-site
 * Add `<meta name="description" content/>` for content site

@@ -27,7 +27,7 @@ func (env *TestEnv) Default() func() {
 	return func() {}
 }
 
-func NewTestEnv(render *ssr.ServerSideRender) *TestEnv {
+func NewTestEnv(render ssr.Render) *TestEnv {
 	env := &TestEnv{}
 	env.DisableLogger()
 	n := negroni.New()

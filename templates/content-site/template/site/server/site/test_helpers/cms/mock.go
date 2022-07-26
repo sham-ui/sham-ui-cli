@@ -19,6 +19,12 @@ type MockCMSClient struct {
 	MockForArticleListForTag      MockResponse
 	MockForArticleListForQuery    MockResponse
 	MockForArticle                MockResponse
+	MockForAsset                  MockResponse
+}
+
+func (m *MockCMSClient) Asset(ctx context.Context, in *proto.AssetRequest, opts ...grpc.CallOption) (*proto.AssetResponse, error) {
+	mock := m.MockForAsset
+	return mock.Response.(*proto.AssetResponse), mock.Error
 }
 
 func (m *MockCMSClient) ArticleList(ctx context.Context, in *proto.ArticleListRequest, opts ...grpc.CallOption) (*proto.ArticleListResponse, error) {

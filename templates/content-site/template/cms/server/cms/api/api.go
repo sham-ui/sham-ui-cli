@@ -1,12 +1,16 @@
 package api
 
 import (
+	"cms/config"
 	"cms/proto"
 	"context"
 	"database/sql"
 	"errors"
 	"fmt"
 	"google.golang.org/protobuf/types/known/timestamppb"
+	"os"
+	"path"
+	"strings"
 	"time"
 )
 
@@ -223,6 +227,35 @@ func (a *api) Article(ctx context.Context, request *proto.ArticleRequest) (*prot
 	}
 	resp.Response = &proto.ArticleResponse_Article{
 		Article: article,
+	}
+	return resp, nil
+}
+
+func (a *api) Asset(ctx context.Context, request *proto.AssetRequest) (*proto.AssetResponse, error) {
+	resp := &proto.AssetResponse{}
+	filePath := strings.ToLower(request.Path)
+	filePath = strings.Replace(filePath, "\\", "/", -1)
+	if !strings.HasPrefix(filePath, "/") {
+		filePath = "/" + filePath
+	}
+	filePath = path.Clean(filePath)
+	filePath = path.Join(config.Upload.Path, filePath)
+	_, err := os.Stat(filePath)
+	if nil != err {
+		if errors.Is(err, os.ErrNotExist) {
+			resp.Response = &proto.AssetResponse_NotFound{
+				NotFound: &proto.NotFound{},
+			}
+			return resp, nil
+		}
+		return resp, fmt.Errorf("stats: %s", err)
+	}
+	content, err := os.ReadFile(filePath)
+	if nil != err {
+		return resp, fmt.Errorf("get content: %s", err)
+	}
+	resp.Response = &proto.AssetResponse_File{
+		File: content,
 	}
 	return resp, nil
 }

@@ -15,7 +15,7 @@ export default class Store {
     _setupAPI() {
         const baseURL = PRODUCTION ?
             `${document.location.protocol}//${document.location.host}/api/` :
-            'http://localhost:3001/api/';
+            'http://localhost:3003/api/';
         this.api = new API( this.DI, {
             baseURL,
             onUnauthorized: ::this._onAPIUnauthorized

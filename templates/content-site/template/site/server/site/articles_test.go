@@ -2,10 +2,12 @@ package main
 
 import (
 	"encoding/json"
+	"fmt"
 	"google.golang.org/protobuf/types/known/timestamppb"
 	"net/http"
 	"site/proto"
 	"site/test_helpers"
+	"site/test_helpers/asserts"
 	"site/test_helpers/client"
 	"site/test_helpers/cms"
 	"testing"
@@ -463,5 +465,51 @@ func TestArticle(t *testing.T) {
 				ExpectedResponseJSON:       expectedJSON,
 			},
 		})
+	}
+}
+
+func TestAsset(t *testing.T) {
+	env := test_helpers.NewTestEnv(nil)
+	revert := env.Default()
+	defer revert()
+
+	testCases := []struct {
+		Name                       string
+		Request                    string
+		Mock                       cms.MockResponse
+		ExpectedResponse           []byte
+		ExpectedResponseStatusCode int
+	}{
+		{
+			Name:    "success",
+			Request: "/assets/foo.gif",
+			Mock: cms.MockResponse{
+				Response: &proto.AssetResponse{
+					Response: &proto.AssetResponse_File{
+						File: []byte("123"),
+					},
+				},
+			},
+			ExpectedResponseStatusCode: http.StatusOK,
+			ExpectedResponse:           []byte("123"),
+		},
+		{
+			Name:    "not found",
+			Request: "/assets/not-found.gif",
+			Mock: cms.MockResponse{
+				Response: &proto.AssetResponse{
+					Response: &proto.AssetResponse_NotFound{NotFound: &proto.NotFound{}},
+				},
+			},
+			ExpectedResponseStatusCode: http.StatusNotFound,
+			ExpectedResponse:           []byte("{\"Status\":\"Not Found\"}\n"),
+		},
+	}
+
+	for _, testCase := range testCases {
+		env.CMS.MockForAsset = testCase.Mock
+		resp := env.API.Request(http.MethodGet, testCase.Request, nil)
+		asserts.Equals(t, testCase.ExpectedResponseStatusCode, resp.Response.Code, fmt.Sprintf("%s: status code", testCase.Name))
+		asserts.Equals(t, testCase.ExpectedResponse, resp.Response.Body.Bytes(), fmt.Sprintf("%s: body", testCase.Name))
 	}
 }

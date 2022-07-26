@@ -118,6 +118,10 @@ func StartApplication(configPath string, n *negroni.Negroni) *sql.DB {
 	r.HandleFunc("/api/articles/{id:[0-9]+}", article.NewDetailHandler(db, sessionsStore)).Methods(http.MethodGet)
 	r.HandleFunc("/api/articles/{id:[0-9]+}", article.NewDeleteHandler(db, sessionsStore)).Methods(http.MethodDelete)
 
+	// Upload routes
+	r.HandleFunc("/api/upload-image", article.NewUploadHandler(sessionsStore)).Methods(http.MethodPost)
+	r.HandleFunc("/assets/{file}", article.NewImagesHandler(sessionsStore)).Methods(http.MethodGet)
+
 	// Resources
 	spaHandler := assets.NewHandler(sessionsStore)
 	r.PathPrefix("/").Handler(spaHandler)

@@ -1,12 +1,15 @@
 package main
 
 import (
+	"cms/config"
 	"cms/test_helpers"
 	"cms/test_helpers/asserts"
 	"cms/test_helpers/client"
 	"database/sql"
 	"fmt"
 	"net/http"
+	"os"
+	"path"
 	"sort"
 	"testing"
 	"time"
@@ -49,6 +52,19 @@ func prepareArticles(t *testing.T, db *sql.DB) {
 	_, err = db.Exec("INSERT into tag(id, name, slug) VALUES(2, 'second', 'second')")
 	if nil != err {
 		t.Fatalf("insert second tag: %s", err)
+	}
+}
+
+func prepareUploadDirs(t *testing.T) {
+	if _, err := os.Stat(config.Upload.Path); !os.IsNotExist(err) {
+		err := os.RemoveAll(config.Upload.Path)
+		if nil != err {
+			t.Fatalf("can't remove upload dir: %s", err)
+		}
+	}
+	err := os.MkdirAll(config.Upload.Path, os.ModePerm)
+	if nil != err {
+		t.Fatalf("can't create upload dir: %s", err)
 	}
 }
 
@@ -454,4 +470,124 @@ func TestArticleDelete(t *testing.T) {
 			ExpectedResponseJSON:       `{"articles": null, "meta": {"limit": 20, "offset": 0, "total": 0}}`,
 		},
 	})
+}
+
+func TestArticleUploadImages(t *testing.T) {
+	env := test_helpers.NewTestEnv()
+	revert := env.Default()
+	defer revert()
+	env.CreateUser()
+	env.API.GetCSRF()
+	env.API.Login()
+
+	prepareUploadDirs(t)
+
+	gifFile, err := os.ReadFile(path.Join("testdata", "Sorting_quicksort_anim.gif"))
+	if nil != err {
+		t.Fatalf("can't read test gif file: %s", err)
+	}
+
+	testCases := []struct {
+		Message                    string
+		Request                    *client.MulipartRequest
+		ExpectedResponseStatusCode int
+		ExpectedResponse           string
+	}{
+		{
+			Message:                    "empty request",
+			Request:                    &client.MulipartRequest{},
+			ExpectedResponseStatusCode: http.StatusBadRequest,
+			ExpectedResponse:           `{"Status": "Bad Request"}`,
+		},
+		{
+			Message: "empty content",
+			Request: &client.MulipartRequest{
+				FileField: "file-0",
+				FilePath:  "image.jpg",
+			},
+			ExpectedResponseStatusCode: http.StatusOK,
+			ExpectedResponse: `{
+				"errorMessage":"",
+				"result":[{
+					"url":"/assets/d41d8cd98f00b204e9800998ecf8427e.jpg",
+					"name":"d41d8cd98f00b204e9800998ecf8427e.jpg",
+					"size":"0"
+				}]
+			}`,
+		},
+		{
+			Message: "success",
+			Request: &client.MulipartRequest{
+				FileField: "file-0",
+				FilePath:  "image.png",
+				Content:   gifFile,
+			},
+			ExpectedResponseStatusCode: http.StatusOK,
+			ExpectedResponse: `{
+				"errorMessage":"",
+				"result":[{
+					"url":"/assets/d4e5d0a778dba725091d8317e6bac939.png",
+					"name":"d4e5d0a778dba725091d8317e6bac939.png",
+					"size":"93016"
+				}]
+			}`,
+		},
+	}
+
+	for _, test := range testCases {
+		resp := env.API.RequestMultiPart(http.MethodPost, "/api/upload-image", test.Request)
+		asserts.Equals(t, test.ExpectedResponseStatusCode, resp.Response.Code, fmt.Sprintf("%s: http code", test.Message))
+		asserts.JSONEqualsWithoutSomeKeys(t, []string{}, test.ExpectedResponse, resp.Text(), fmt.Sprintf("%s: body", test.Message))
+	}
+}
+
+func TestArticleFetchImages(t *testing.T) {
+	env := test_helpers.NewTestEnv()
+	revert := env.Default()
+	defer revert()
+	env.CreateUser()
+	env.API.GetCSRF()
+	env.API.Login()
+
+	prepareUploadDirs(t)
+
+	gifFile, err := os.ReadFile(path.Join("testdata", "Sorting_quicksort_anim.gif"))
+	if nil != err {
+		t.Fatalf("can't read test gif file: %s", err)
+	}
+	f, err := os.Create(path.Join(config.Upload.Path, "d4e5d0a778dba725091d8317e6bac939.gif"))
+	if nil != err {
+		t.Fatalf("can't create file: %s", err)
+	}
+	_, err = f.Write(gifFile)
+	if nil != err {
+		t.Fatalf("can't write file: %s", err)
+	}
+	f.Close()
+
+	testCases := []struct {
+		Message                    string
+		Path                       string
+		ExpectedResponseStatusCode int
+		ExpectedResponse           []byte
+	}{
+		{
+			Message:                    "not found",
+			Path:                       "/assets/not-found.jpg",
+			ExpectedResponseStatusCode: http.StatusNotFound,
+			ExpectedResponse:           []byte("404 page not found\n"),
+		},
+		{
+			Message:                    "success",
+			Path:                       "/assets/d4e5d0a778dba725091d8317e6bac939.gif",
+			ExpectedResponseStatusCode: http.StatusOK,
+			ExpectedResponse:           gifFile,
+		},
+	}
+
+	for _, test := range testCases {
+		resp := env.API.Request(http.MethodGet, test.Path, nil)
+		asserts.Equals(t, test.ExpectedResponseStatusCode, resp.Response.Code, fmt.Sprintf("%s: http code", test.Message))
+		asserts.Equals(t, test.ExpectedResponse, resp.Response.Body.Bytes(), fmt.Sprintf("%s: body", test.Message))
+	}
 }

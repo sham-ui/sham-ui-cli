@@ -27,6 +27,7 @@ type CMSClient interface {
 	ArticleListForTag(ctx context.Context, in *ArticleListForTagRequest, opts ...grpc.CallOption) (*ArticleListForTagResponse, error)
 	ArticleListForQuery(ctx context.Context, in *ArticleListForQueryRequest, opts ...grpc.CallOption) (*ArticleListResponse, error)
 	Article(ctx context.Context, in *ArticleRequest, opts ...grpc.CallOption) (*ArticleResponse, error)
+	Asset(ctx context.Context, in *AssetRequest, opts ...grpc.CallOption) (*AssetResponse, error)
 }
 
 type cMSClient struct {
@@ -82,6 +83,15 @@ func (c *cMSClient) Article(ctx context.Context, in *ArticleRequest, opts ...grp
 	return out, nil
 }
 
+func (c *cMSClient) Asset(ctx context.Context, in *AssetRequest, opts ...grpc.CallOption) (*AssetResponse, error) {
+	out := new(AssetResponse)
+	err := c.cc.Invoke(ctx, "/proto.CMS/Asset", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
 // CMSServer is the server API for CMS service.
 // All implementations must embed UnimplementedCMSServer
 // for forward compatibility
@@ -91,6 +101,7 @@ type CMSServer interface {
 	ArticleListForTag(context.Context, *ArticleListForTagRequest) (*ArticleListForTagResponse, error)
 	ArticleListForQuery(context.Context, *ArticleListForQueryRequest) (*ArticleListResponse, error)
 	Article(context.Context, *ArticleRequest) (*ArticleResponse, error)
+	Asset(context.Context, *AssetRequest) (*AssetResponse, error)
 	mustEmbedUnimplementedCMSServer()
 }
 
@@ -112,6 +123,9 @@ func (UnimplementedCMSServer) ArticleListForQuery(context.Context, *ArticleListF
 }
 func (UnimplementedCMSServer) Article(context.Context, *ArticleRequest) (*ArticleResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method Article not implemented")
+}
+func (UnimplementedCMSServer) Asset(context.Context, *AssetRequest) (*AssetResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method Asset not implemented")
 }
 func (UnimplementedCMSServer) mustEmbedUnimplementedCMSServer() {}
 
@@ -216,6 +230,24 @@ func _CMS_Article_Handler(srv interface{}, ctx context.Context, dec func(interfa
 	return interceptor(ctx, in, info, handler)
 }
 
+func _CMS_Asset_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(AssetRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(CMSServer).Asset(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/proto.CMS/Asset",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(CMSServer).Asset(ctx, req.(*AssetRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
 // CMS_ServiceDesc is the grpc.ServiceDesc for CMS service.
 // It's only intended for direct use with grpc.RegisterService,
 // and not to be introspected or modified (even as a copy)
@@ -242,6 +274,10 @@ var CMS_ServiceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "Article",
 			Handler:    _CMS_Article_Handler,
+		},
+		{
+			MethodName: "Asset",
+			Handler:    _CMS_Asset_Handler,
 		},
 	},
 	Streams:  []grpc.StreamDesc{},

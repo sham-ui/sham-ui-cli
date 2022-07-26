@@ -16,7 +16,7 @@ import (
 var Assets embed.FS
 
 type Handler struct {
-	render     *ssr.ServerSideRender
+	ssr        http.Handler
 	fsys       fs.FS
 	fileServer http.Handler
 }
@@ -49,7 +49,7 @@ func (h Handler) ServeHTTP(w http.ResponseWriter, r *http.Request) {
 	// check whether a file exists at the given path
 	cannonicalName := strings.Replace(path, "\\", "/", -1)
 	if "" == cannonicalName {
-		h.render.Serve(w, r)
+		h.ssr.ServeHTTP(w, r)
 		return
 	}
 
@@ -59,7 +59,7 @@ func (h Handler) ServeHTTP(w http.ResponseWriter, r *http.Request) {
 	}
 	if errors.Is(err, fs.ErrNotExist) {
 		// file does not exist, serve SSR
-		h.render.Serve(w, r)
+		h.ssr.ServeHTTP(w, r)
 	} else if err != nil {
 		log.WithError(err).Error("can't get file")
 		http.Error(w, err.Error(), http.StatusInternalServerError)
@@ -73,7 +73,7 @@ func (h Handler) ServeHTTP(w http.ResponseWriter, r *http.Request) {
 
 		if stat.IsDir() {
 			// file is dir with assets, serve SSR
-			h.render.Serve(w, r)
+			h.ssr.ServeHTTP(w, r)
 			return
 		}
 
@@ -88,13 +88,13 @@ func (h Handler) fileServe(w http.ResponseWriter, r *http.Request) {
 	h.fileServer.ServeHTTP(w, r)
 }
 
-func NewHandler(render *ssr.ServerSideRender) http.Handler {
+func NewHandler(render ssr.Render) http.Handler {
 	fsys, err := fs.Sub(Assets, "files")
 	if nil != err {
 		log.WithError(err).Fatal("can' get file system")
 	}
 	return gziphandler.GzipHandler(Handler{
-		render:     render,
+		ssr:        ssr.NewServer(render),
 		fsys:       fsys,
 		fileServer: http.FileServer(http.FS(fsys)),
 	})

@@ -18,6 +18,7 @@ func main() {
 	config.LoadConfiguration("config.cfg")
 	n := negroni.New(negroni.NewRecovery(), loggerMiddleware)
 	render := ssr.NewServerSideRender()
+	render.Start()
 	cmsClient := app.CreateCMSClient()
 	app.StartApplication(n, cmsClient, render)
 	port := strconv.Itoa(config.Server.Port)

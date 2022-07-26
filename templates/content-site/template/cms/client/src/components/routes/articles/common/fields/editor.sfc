@@ -1,22 +1,32 @@
 <template>
-    <textarea :ref=\{{$.textarea}}>\{{value}}</textarea>
+    <textarea :ref=\{{$.textarea}}></textarea>
 </template>
 
 <script>
     import suneditor from 'suneditor';
-    import { link, formatBlock, blockquote, align, list, table } from 'suneditor/src/plugins';
+    import { link, formatBlock, blockquote, align, list, table, image } from 'suneditor/src/plugins';
 
     function EditorField( options, update, didMount, onRemove ) {
         const value = $();
         const onChange = $();
-
-        let editor = null;
 
         const state = options( {
             [ value ]: '',
             [ onChange ]() {}
         } );
 
+        let editor = null;
+
+        this.spots = [ [
+            value,
+            contents => {
+                if ( editor && contents !== editor.getContents() ) {
+                    editor.setContents( contents );
+                }
+            }
+        ] ];
+
+        const api = this.DI.resolve( 'store' ).api;
         const createEditor = suneditor.init( {
             height: 400,
             width: '100%',
@@ -26,7 +36,8 @@
                 blockquote,
                 align,
                 list,
-                table
+                table,
+                image
             ],
             buttonList: [
                 [ 'undo', 'redo' ],
@@ -37,13 +48,26 @@
                 [ 'outdent', 'indent' ],
                 [ 'align', 'list'  ],
                 [ 'table', 'link' ],
+                [ 'image' ],
                 [ 'fullScreen', 'showBlocks', 'codeView' ],
                 [ 'preview', 'print' ]
-            ]
+            ],
+            imageUploadHeader: { 'X-CSRF-Token': api.token },
+            imageUploadUrl: api.baseURL + 'upload-image'
         } );
 
         didMount( () => {
             editor = createEditor.create( this$.textarea );
+            if ( !PRODUCTION ) {
+
+                // For dev environment use monkey patching suneditor util for work in CORS mode
+                editor.util.getXMLHttpRequest = function() {
+                    const xhr = new XMLHttpRequest();
+                    xhr.withCredentials = true;
+                    return xhr;
+                };
+            }
+            editor.setContents( state[ value ] );
             editor.onChange = contents => state[ onChange ]( contents );
         } );
 
@@ -51,7 +75,6 @@
             editor.destroy();
             editor = null;
         } );
-
     }
 
     export default Component( Template, EditorField );

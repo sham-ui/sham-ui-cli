@@ -13,7 +13,7 @@ import (
 	"strings"
 )
 
-func StartApplication(n *negroni.Negroni, cmsClient proto.CMSClient, render *ssr.ServerSideRender) {
+func StartApplication(n *negroni.Negroni, cmsClient proto.CMSClient, render ssr.Render) {
 	log.Infof("Allowed domains: %s", strings.Join(config.Server.AllowedDomains, ", "))
 
 	c := cors.New(cors.Options{
@@ -31,6 +31,9 @@ func StartApplication(n *negroni.Negroni, cmsClient proto.CMSClient, render *ssr
 	// Articles
 	r.HandleFunc("/api/articles", articlesHandlers.NewListHandler(cmsClient)).Methods("GET")
 	r.HandleFunc("/api/articles/{slug}", articlesHandlers.NewDetailHandler(cmsClient)).Methods("GET")
+
+	// Assets
+	r.HandleFunc("/assets/{file}", articlesHandlers.NewAssetsHandler(cmsClient)).Methods("GET")
 
 	// Resources
 	spaHandler := assets.NewHandler(render)

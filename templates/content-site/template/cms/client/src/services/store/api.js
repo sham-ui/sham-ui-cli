@@ -6,6 +6,7 @@ export class API {
 
     constructor( DI, { baseURL, onUnauthorized } ) {
         this.DI = DI;
+        this.baseURL = baseURL;
         this.axios = axios.create( {
             baseURL,
             withCredentials: true

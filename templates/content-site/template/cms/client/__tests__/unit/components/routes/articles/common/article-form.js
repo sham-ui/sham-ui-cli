@@ -25,7 +25,11 @@ it( 'renders correctly', async() => {
                 ],
                 meta: {}
             } )
-        )
+        ),
+        api: {
+            token: '123',
+            baseURL: 'localhost'
+        }
     } );
     const meta = renderer( RoutesArticlesCommonArticleForm, {
         DI,
@@ -54,7 +58,11 @@ it( 'fail load data', async() => {
         ),
         articleTags: jest.fn().mockReturnValueOnce(
             Promise.reject( {} )
-        )
+        ),
+        api: {
+            token: '123',
+            baseURL: 'localhost'
+        }
     } );
     const meta = renderer( RoutesArticlesCommonArticleForm, {
         DI,
