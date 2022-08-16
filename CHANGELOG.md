@@ -1,3 +1,6 @@
+## master
+* Update dependencies
+
 ## 5.0.0-alpha.6   
 * Fix default port for development mode CMS
 * Add support upload image for content-site
