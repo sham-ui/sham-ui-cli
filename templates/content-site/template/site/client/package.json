@@ -58,7 +58,7 @@
   },
   "dependencies": {
     "axios": "^0.19.0",
-    "sham-ui": "^5.0.0-alpha.8",
+    "sham-ui": "^5.0.0",
     "sham-ui-cube-animation": "^2.1.7",
     "sham-ui-data-storage": "^2.0.0",
     "sham-ui-directives": "^5.0.0",
