@@ -57,7 +57,7 @@
     "stylelint-scss": "^3.8.0"
   },
   "dependencies": {
-    "axios": "^0.19.0",
+    "axios": "^0.21.2",
     "sham-ui": "^6.0.0-alpha.4",
     "sham-ui-cube-animation": "^2.1.10",
     "sham-ui-data-storage": "^3.0.0-alpha.5",
