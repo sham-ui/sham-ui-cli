@@ -1,6 +1,6 @@
 <template>
     <div class="page-buttons">
-        {% for item of pages | pageItems %}
+        {% for item of this$.buildItems( pages ) %}
             {% if item.showAsLast %}
                 ...
             {% endif %}
@@ -26,7 +26,7 @@
             [ $.goToPage ]() {}
         } );
 
-        this.filters.pageItems = pages => pages.map(
+        this$.buildItems = pages => pages.map(
             ( page, index, enumerable ) => ( {
                 page,
                 showAsFirst: ( enumerable[ index + 1 ] || page ) - page > 1,

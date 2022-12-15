@@ -28,7 +28,7 @@
 </template>
 
 <script>
-    function ModalWindow( options, update ) {
+    function ModalWindow( options ) {
         const dataSaving = $();
         const onOk = $();
         const onClose = $();
@@ -44,9 +44,7 @@
             [ onClose ]() {}
         } );
 
-        const enableSaving = () => update( {
-            [ dataSaving ]: true
-        } );
+        const enableSaving = () => state[ dataSaving ] = true;
 
         this$._okClick = () => {
             enableSaving();

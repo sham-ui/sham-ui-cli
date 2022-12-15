@@ -16,7 +16,7 @@ it( 'renders correctly', () => {
         }
     } );
 
-    const meta = renderer( LayoutMain, {
+    const meta = renderer( LayoutMain, {}, {
         DI,
         directives: {
             hrefto,

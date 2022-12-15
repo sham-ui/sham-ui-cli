@@ -14,7 +14,7 @@
 </template>
 
 <script>
-    function RoutesSettingsParagraph( options, update ) {
+    function RoutesSettingsParagraph( options ) {
         const editFormVisible = $();
         const onUpdateValue = $();
 
@@ -33,9 +33,7 @@
             toggleEdit();
         };
 
-        const toggleEdit = () => update( {
-            [ editFormVisible ]: !state[ editFormVisible ]
-        } );
+        const toggleEdit = () => state[ editFormVisible ] =  !state[ editFormVisible ];
 
         this$._onUpdateValue = () => state[ onUpdateValue ]( toggleEdit );
 

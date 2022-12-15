@@ -6,7 +6,7 @@ import { createDI } from 'sham-ui';
 
 it( 'renders correctly', () => {
     const DI = createDI();
-    const meta = renderer( RoutesSettingsFormName, {
+    const meta = renderer( RoutesSettingsFormName, {}, {
         DI,
         directives
     } );
@@ -22,20 +22,18 @@ it( 'display errors', async() => {
         updateMemberName: updateMock.mockReturnValueOnce( Promise.reject( {} ) )
     } );
 
-    const meta = renderer( RoutesSettingsFormName, {
+    const meta = renderer( RoutesSettingsFormName, {}, {
         DI,
-        directives: {
-            ...directives
-        }
+        directives
     } );
 
     const formData = {
         newName: 'Johny Smithy'
     };
-    const { component } = meta;
-    component.container.querySelector( '[name="name"]' ).value = formData.newName;
-    component.container.querySelector( '[type="submit"]' ).click();
-    component.container.querySelector( '[data-test-modal] [data-test-ok-button]' ).click();
+    const { ctx } = meta;
+    ctx.container.querySelector( '[name="name"]' ).value = formData.newName;
+    ctx.container.querySelector( '[type="submit"]' ).click();
+    ctx.container.querySelector( '[data-test-modal] [data-test-ok-button]' ).click();
 
     await new Promise( resolve => setImmediate( resolve ) );
 

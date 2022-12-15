@@ -22,7 +22,7 @@ it( 'renders correctly', () => {
             Promise.resolve( { meta: {} } )
         )
     } );
-    const meta = renderer( RoutesArticlePage, {
+    const meta = renderer( RoutesArticlePage, {}, {
         DI
     } );
     expect( meta.toJSON() ).toMatchSnapshot();

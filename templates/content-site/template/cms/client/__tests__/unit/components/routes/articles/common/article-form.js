@@ -32,12 +32,13 @@ it( 'renders correctly', async() => {
         }
     } );
     const meta = renderer( RoutesArticlesCommonArticleForm, {
+        publishedAt: new Date( '2022-04-29T12:24:51.637Z' )
+    }, {
         DI,
         directives: {
             onFocusIn,
             ...directives
-        },
-        publishedAt: new Date( '2022-04-29T12:24:51.637Z' )
+        }
     } );
     await new Promise( resolve => setImmediate( resolve ) );
     expect( meta.toJSON() ).toMatchSnapshot();
@@ -65,12 +66,13 @@ it( 'fail load data', async() => {
         }
     } );
     const meta = renderer( RoutesArticlesCommonArticleForm, {
+        publishedAt: new Date( '2022-04-29T12:24:51.637Z' )
+    }, {
         DI,
         directives: {
             onFocusIn,
             ...directives
-        },
-        publishedAt: new Date( '2022-04-29T12:24:51.637Z' )
+        }
     } );
     await new Promise( resolve => setImmediate( resolve ) );
     expect( meta.toJSON() ).toMatchSnapshot();

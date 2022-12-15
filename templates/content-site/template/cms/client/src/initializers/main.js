@@ -16,17 +16,18 @@ export default function( DI ) {
     new Title( DI );
 
     // Mount root component
-    new App( {
-        DI,
-        ID: 'app',
-        container: document.querySelector( 'body' ),
-        directives: {
-            ...directives,
-            hrefto,
-            onFocusIn
-        },
-        filters: {}
-    } );
+    new App(
+        createRootContext( {
+            DI,
+            ID: 'app',
+            container: document.querySelector( 'body' ),
+            directives: {
+                ...directives,
+                hrefto,
+                onFocusIn
+            }
+        } )
+    );
 
     // Load token
     store.csrftoken().then( () => {

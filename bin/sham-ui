@@ -6,5 +6,6 @@ require( 'commander' )
     .command( 'new', 'generate a new project from a template' ).alias( 'n' )
     .command( 'upgrade', 'upgrade existed project from a template' ).alias( 'u' )
     .command( 'generate', 'generate a new component' ).alias( 'g' )
+    .command( 'collect', 'collect filters & directives' ).alias( 'c' )
     .command( 'destroy', 'destroy component' ).alias( 'd' )
     .parse( process.argv );

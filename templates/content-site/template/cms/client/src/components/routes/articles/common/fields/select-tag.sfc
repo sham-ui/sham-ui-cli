@@ -25,7 +25,7 @@
 </template>
 
 <script>
-    function SelectTag( options, update, didMount, onRemove ) {
+    function SelectTag( options, didMount ) {
         const query = $();
         const showItems = $();
         const onChange = $();
@@ -50,7 +50,7 @@
         };
 
         this$._selectItem = ( item, q ) => {
-            update( {
+            state( {
                 [ showItems ]: false,
                 [ query ]: ''
             } );
@@ -61,26 +61,17 @@
             );
         };
 
-        this$._inputOnFocusIn = () => {
-            update( {
-                [ showItems ]: true
-            } );
-        };
+        this$._inputOnFocusIn = () => state[ showItems ] = true;
 
         const documentClickHandler = ( e ) => {
             if ( this$.inputContainer && !this$.inputContainer.contains( e.target ) ) {
-                update( {
-                    [ showItems ]: false
-                } );
+                state[ showItems ] = false;
             }
         };
 
         didMount( () => {
             document.addEventListener( 'click', documentClickHandler, true );
-        } );
-
-        onRemove( () => {
-            document.removeEventListener( 'click', documentClickHandler, true );
+            return () => document.removeEventListener( 'click', documentClickHandler, true );
         } );
     }
 

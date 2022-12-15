@@ -3,16 +3,9 @@
 exports[`renders correctly 1`] = `
 Object {
   "Options": Object {
-    "ID": "component",
     "category": "",
     "content": "",
     "createdAt": "",
-    "directives": Object {
-      "hrefto": [Function],
-    },
-    "filters": Object {
-      "formatLocaleDate": [Function],
-    },
     "slug": "",
     "title": "",
   },

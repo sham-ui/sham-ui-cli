@@ -3,7 +3,7 @@ import RoutesMembersDetail  from '../../../../../src/components/routes/members/d
 import renderer from 'sham-ui-test-helpers';
 
 it( 'renders correctly', () => {
-    const meta = renderer( RoutesMembersDetail, {
+    const meta = renderer( RoutesMembersDetail, {}, {
         directives
     } );
     expect( meta.toJSON() ).toMatchSnapshot();

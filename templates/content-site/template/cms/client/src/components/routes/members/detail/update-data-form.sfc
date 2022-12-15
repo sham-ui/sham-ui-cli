@@ -33,19 +33,21 @@
 
 <script>
     function UpdateDataForm( options ) {
+        const id = $();
         const name = $();
         const email = $();
         const isSuperUser = $();
 
         const state = options( {
+            [ id ]: '',
             [ name ]: '',
             [ email ]: '',
             [ isSuperUser ]: false,
             [ $.onUpdateSuccess ]() {}
         } );
 
-        this$._saveData = () => this.DI.resolve( 'store' ).api.request( {
-            url: `admin/members/${state[ $.id ]}`,
+        this$._saveData = () => this.ctx.DI.resolve( 'store' ).api.request( {
+            url: `admin/members/${state[ id ]}`,
             method: 'put',
             data: {
                 name: state[ name ].trim(),

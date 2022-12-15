@@ -48,7 +48,7 @@
 
     const MAX_SCREEN_SIZE = 992;
 
-    function LayoutAuthenticated( options, update ) {
+    function LayoutAuthenticated( options ) {
         const wrapperClasses = $();
         const menuCollapsed = $();
         const smallScreenSize = $();
@@ -71,7 +71,7 @@
                     classes = 'collapsed-menu';
                 }
             }
-            update( {
+            state( {
                 [ wrapperClasses ]: classes,
                 [ menuCollapsed ]: !state[ menuCollapsed ]
             } );
@@ -79,7 +79,7 @@
 
         this$.wrapperOnClick = () => {
             if ( state[ smallScreenSize ] && !state[ menuCollapsed ] ) {
-                update( {
+                state( {
                     [ menuCollapsed ]: true,
                     [ wrapperClasses ]: ''
                 } );
@@ -95,7 +95,7 @@
             // media query change
             const WidthChange = ( mq ) => {
                 const smallScreenSizeNow = !mq.matches;
-                update( {
+                state( {
                     [ smallScreenSize ]: smallScreenSizeNow,
                     [ menuCollapsed ]: (
                         smallScreenSizeNow &&

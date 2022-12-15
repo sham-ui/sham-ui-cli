@@ -3,10 +3,6 @@
 exports[`renders correctly 1`] = `
 Object {
   "Options": Object {
-    "ID": "component",
-    "directives": Object {
-      "hrefto": [Function],
-    },
     "sessionData": Object {
       "email": "",
       "isAuthenticated": false,

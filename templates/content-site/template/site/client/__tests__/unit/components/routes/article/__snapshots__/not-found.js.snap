@@ -2,12 +2,7 @@
 
 exports[`renders correctly 1`] = `
 Object {
-  "Options": Object {
-    "ID": "component",
-    "directives": Object {
-      "hrefto": [Function],
-    },
-  },
+  "Options": Object {},
   "html": "
 <div class=\\"container-fluid\\">
   <div class=\\"page404  widget\\">

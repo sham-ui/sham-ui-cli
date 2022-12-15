@@ -3,27 +3,11 @@
 exports[`cancel save 1`] = `
 Object {
   "Options": Object {
-    "ID": "component",
     "confirmCancelErrors": Object {
       "Messages": Array [],
     },
     "confirmText": "",
     "confirmTitle": "",
-    "directives": Object {
-      "EventListener": [Function],
-      "UpdateOnEvent": [Function],
-      "disabled": [Function],
-      "onChangeUpdate": [Function],
-      "onInputUpdate": [Function],
-      "onclick": [Function],
-      "oninput": [Function],
-      "onload": [Function],
-      "onresize": [Function],
-      "onscroll": [Function],
-      "onselect": [Function],
-      "onsubmit": [Function],
-      "ref": [Function],
-    },
     "getErrors": [Function],
     "modalVisible": false,
     "onSuccess": [Function],
@@ -52,27 +36,11 @@ Object {
 exports[`fail save 1`] = `
 Object {
   "Options": Object {
-    "ID": "component",
     "confirmCancelErrors": Object {
       "Messages": Array [],
     },
     "confirmText": "",
     "confirmTitle": "",
-    "directives": Object {
-      "EventListener": [Function],
-      "UpdateOnEvent": [Function],
-      "disabled": [Function],
-      "onChangeUpdate": [Function],
-      "onInputUpdate": [Function],
-      "onclick": [Function],
-      "oninput": [Function],
-      "onload": [Function],
-      "onresize": [Function],
-      "onscroll": [Function],
-      "onselect": [Function],
-      "onsubmit": [Function],
-      "ref": [Function],
-    },
     "getErrors": [Function],
     "modalVisible": false,
     "onSuccess": [Function],
@@ -104,27 +72,11 @@ Object {
 exports[`renders correctly 1`] = `
 Object {
   "Options": Object {
-    "ID": "component",
     "confirmCancelErrors": Object {
       "Messages": Array [],
     },
     "confirmText": "",
     "confirmTitle": "",
-    "directives": Object {
-      "EventListener": [Function],
-      "UpdateOnEvent": [Function],
-      "disabled": [Function],
-      "onChangeUpdate": [Function],
-      "onInputUpdate": [Function],
-      "onclick": [Function],
-      "oninput": [Function],
-      "onload": [Function],
-      "onresize": [Function],
-      "onscroll": [Function],
-      "onselect": [Function],
-      "onsubmit": [Function],
-      "ref": [Function],
-    },
     "getErrors": [Function],
     "modalVisible": false,
     "onSuccess": [Function],
@@ -153,27 +105,11 @@ Object {
 exports[`success save 1`] = `
 Object {
   "Options": Object {
-    "ID": "component",
     "confirmCancelErrors": Object {
       "Messages": Array [],
     },
     "confirmText": "",
     "confirmTitle": "",
-    "directives": Object {
-      "EventListener": [Function],
-      "UpdateOnEvent": [Function],
-      "disabled": [Function],
-      "onChangeUpdate": [Function],
-      "onInputUpdate": [Function],
-      "onclick": [Function],
-      "oninput": [Function],
-      "onload": [Function],
-      "onresize": [Function],
-      "onscroll": [Function],
-      "onselect": [Function],
-      "onsubmit": [Function],
-      "ref": [Function],
-    },
     "getErrors": [Function],
     "modalVisible": true,
     "onSuccess": [MockFunction],
@@ -228,33 +164,17 @@ Object {
 exports[`success save 2`] = `
 Object {
   "Options": Object {
-    "ID": "component",
     "confirmCancelErrors": Object {
       "Messages": Array [],
     },
     "confirmText": "",
     "confirmTitle": "",
-    "directives": Object {
-      "EventListener": [Function],
-      "UpdateOnEvent": [Function],
-      "disabled": [Function],
-      "onChangeUpdate": [Function],
-      "onInputUpdate": [Function],
-      "onclick": [Function],
-      "oninput": [Function],
-      "onload": [Function],
-      "onresize": [Function],
-      "onscroll": [Function],
-      "onselect": [Function],
-      "onsubmit": [Function],
-      "ref": [Function],
-    },
     "getErrors": [Function],
     "modalVisible": false,
     "onSuccess": [MockFunction] {
       "calls": Array [
         Array [
-          undefined,
+          false,
         ],
       ],
       "results": Array [

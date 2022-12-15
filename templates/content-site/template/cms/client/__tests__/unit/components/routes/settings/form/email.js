@@ -6,7 +6,7 @@ import { createDI } from 'sham-ui';
 
 it( 'renders correctly', () => {
     const DI = createDI();
-    const meta = renderer( RoutesSettingsFormEmail, {
+    const meta = renderer( RoutesSettingsFormEmail, {}, {
         DI,
         directives
     } );
@@ -22,22 +22,20 @@ it( 'display errors', async() => {
         updateMemberEmail: updateMock.mockReturnValueOnce( Promise.reject( {} ) )
     } );
 
-    const meta = renderer( RoutesSettingsFormEmail, {
+    const meta = renderer( RoutesSettingsFormEmail, {}, {
         DI,
-        directives: {
-            ...directives
-        }
+        directives
     } );
 
     const formData = {
         email1: 'admin1@gmail.com',
         email2: 'admin1@gmail.com'
     };
-    const { component } = meta;
-    component.container.querySelector( '[name="email1"]' ).value = formData.email1;
-    component.container.querySelector( '[name="email2"]' ).value = formData.email2;
-    component.container.querySelector( '[type="submit"]' ).click();
-    component.container.querySelector( '[data-test-modal] [data-test-ok-button]' ).click();
+    const { ctx } = meta;
+    ctx.container.querySelector( '[name="email1"]' ).value = formData.email1;
+    ctx.container.querySelector( '[name="email2"]' ).value = formData.email2;
+    ctx.container.querySelector( '[type="submit"]' ).click();
+    ctx.container.querySelector( '[data-test-modal] [data-test-ok-button]' ).click();
 
     await new Promise( resolve => setImmediate( resolve ) );
 

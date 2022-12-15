@@ -21,7 +21,7 @@
             [ item ]: {}
         } );
 
-        this$.updateCategory = ( data ) => this.DI.resolve( 'store' ).updateArticlesCategory(
+        this$.updateCategory = ( data ) => this.ctx.DI.resolve( 'store' ).updateArticlesCategory(
             state[ item ].id,
             data
         );

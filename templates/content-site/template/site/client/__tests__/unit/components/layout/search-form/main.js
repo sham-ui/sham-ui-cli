@@ -3,7 +3,7 @@ import LayoutSearchFormMain  from '../../../../../src/components/layout/search-f
 import renderer from 'sham-ui-test-helpers';
 
 it( 'renders correctly', () => {
-    const meta = renderer( LayoutSearchFormMain, {
+    const meta = renderer( LayoutSearchFormMain, {}, {
         directives
     } );
     expect( meta.toJSON() ).toMatchSnapshot();

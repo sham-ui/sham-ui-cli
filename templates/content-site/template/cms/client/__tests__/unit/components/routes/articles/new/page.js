@@ -33,7 +33,7 @@ it( 'renders correctly', () => {
         )
     } );
 
-    const meta = renderer( RoutesArticlesNewPage, {
+    const meta = renderer( RoutesArticlesNewPage, {}, {
         DI,
         directives
     } );

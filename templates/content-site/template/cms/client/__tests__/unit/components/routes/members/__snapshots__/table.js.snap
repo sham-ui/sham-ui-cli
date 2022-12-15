@@ -3,8 +3,8 @@
 exports[`renders correctly 1`] = `
 Object {
   "Options": Object {
-    "ID": "component",
     "deleteModalVisible": false,
+    "member": null,
     "members": Array [],
     "onSelectMember": [Function],
     "refresh": [Function],

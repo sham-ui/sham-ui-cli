@@ -28,20 +28,16 @@
 <script>
     import { useStorage } from 'sham-ui-router/lib/storage';
 
-    function Layout( options, update ) {
+    function Layout( options ) {
         const searchFormVisible = $();
 
-        options( {
+        const state = options( {
             [ searchFormVisible ]: false
         } );
 
-        this$._onOpenSearchForm = () => update( {
-            [ searchFormVisible ]: true
-        } );
+        this$._onOpenSearchForm = () => state[ searchFormVisible ] = true;
 
-        this$._onSearchFormClose = () => update( {
-            [ searchFormVisible ]: false
-        } );
+        this$._onSearchFormClose = () => state[ searchFormVisible ] = false;
     }
 
     export default Component( Template, useStorage( $.routerState ), Layout );

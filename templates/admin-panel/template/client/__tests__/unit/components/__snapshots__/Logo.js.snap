@@ -2,9 +2,7 @@
 
 exports[`renders correctly 1`] = `
 Object {
-  "Options": Object {
-    "ID": "component",
-  },
+  "Options": Object {},
   "html": "<div class=\\"logo\\"><span><span>[</span> {{ logoText }} <span>]</span></span></div>",
 }
 `;

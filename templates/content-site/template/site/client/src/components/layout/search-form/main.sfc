@@ -24,7 +24,7 @@
 
         this$._submitForm = ( e ) => {
             e.preventDefault();
-            const DI = this.DI.resolve;
+            const DI = this.ctx.DI.resolve;
             const router = DI( 'router' );
 
             // Get data from form
@@ -35,7 +35,7 @@
             const url = router.generate( 'search.page', { page: 1 } ) + `?q=${query}`;
 
             // Save to DI & go to URL
-            this.DI.bind( 'location:href', `${DI( 'location:origin' )}${url}` );
+            this.ctx.DI.bind( 'location:href', `${DI( 'location:origin' )}${url}` );
             router.navigate( url );
 
             // Close form

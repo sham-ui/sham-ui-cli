@@ -3,24 +3,8 @@
 exports[`pages 1`] = `
 Object {
   "Options": Object {
-    "ID": "component",
     "currentPage": 1,
     "dataLoaded": true,
-    "directives": Object {
-      "EventListener": [Function],
-      "UpdateOnEvent": [Function],
-      "disabled": [Function],
-      "onChangeUpdate": [Function],
-      "onInputUpdate": [Function],
-      "onclick": [Function],
-      "oninput": [Function],
-      "onload": [Function],
-      "onresize": [Function],
-      "onscroll": [Function],
-      "onselect": [Function],
-      "onsubmit": [Function],
-      "ref": [Function],
-    },
     "goToPage": [Function],
     "limit": 20,
     "offset": 40,
@@ -63,24 +47,8 @@ Object {
 exports[`renders correctly 1`] = `
 Object {
   "Options": Object {
-    "ID": "component",
     "currentPage": 1,
     "dataLoaded": true,
-    "directives": Object {
-      "EventListener": [Function],
-      "UpdateOnEvent": [Function],
-      "disabled": [Function],
-      "onChangeUpdate": [Function],
-      "onInputUpdate": [Function],
-      "onclick": [Function],
-      "oninput": [Function],
-      "onload": [Function],
-      "onresize": [Function],
-      "onscroll": [Function],
-      "onselect": [Function],
-      "onsubmit": [Function],
-      "ref": [Function],
-    },
     "goToPage": [Function],
     "limit": 50,
     "pageArraySize": 3,

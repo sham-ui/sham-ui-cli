@@ -8,9 +8,8 @@ import HomePage from '../components/routes/home/page.sfc';
 export default function( DI ) {
     const router = new Router( DI, document.location.origin + '/' );
 
-    // Cached home page & login URL
+    // Cached home page URL
     let homePageURL;
-    let loginPageURL;
 
     router
         {{#if signupEnabled}}
@@ -75,7 +74,7 @@ export default function( DI ) {
                         } else {
 
                             // If non authenticated then redirects to login
-                            router.navigate( loginPageURL );
+                            router.navigateToRoute( 'login' );
                         }
                     }
                 } );
@@ -83,7 +82,6 @@ export default function( DI ) {
         } );
 
     homePageURL = router.generate( 'home' );
-    loginPageURL = router.generate( 'login' );
     router.resolve();
 }
 

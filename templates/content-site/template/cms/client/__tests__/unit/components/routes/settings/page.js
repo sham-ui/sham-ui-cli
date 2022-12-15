@@ -16,7 +16,7 @@ it( 'renders correctly', () => {
     session.sessionValidated = true;
     new Session( DI );
 
-    const meta = renderer( RoutesSettingsPage, {
+    const meta = renderer( RoutesSettingsPage, {}, {
         DI,
         directives
     } );

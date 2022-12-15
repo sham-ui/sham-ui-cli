@@ -25,7 +25,7 @@ it( 'renders correctly', async() => {
     } );
     DI.bind( 'location:href', 'http://client.example.com/search/1/?q=content' );
 
-    const meta = renderer( RoutesSearchPage, {
+    const meta = renderer( RoutesSearchPage, {}, {
         DI,
         directives
     } );

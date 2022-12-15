@@ -3,13 +3,9 @@
 exports[`renders correctly 1`] = `
 Object {
   "Options": Object {
-    "ID": "component",
     "appState": Object {
       "darkThemeEnabled": false,
       "routerResolved": false,
-    },
-    "directives": Object {
-      "hrefto": [Function],
     },
   },
   "html": "

@@ -13,7 +13,7 @@ it( 'renders correctly', () => {
 
     setupUnsafe( DI );
 
-    const meta = renderer( RoutesHomePost, {
+    const meta = renderer( RoutesHomePost, {}, {
         DI,
         directives: {
             hrefto

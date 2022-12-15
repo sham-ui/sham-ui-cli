@@ -3,7 +3,6 @@
 exports[`fail load articles 1`] = `
 Object {
   "Options": Object {
-    "ID": "component",
     "categories": Array [
       Object {
         "id": "4",
@@ -17,22 +16,6 @@ Object {
       },
     ],
     "dataLoaded": true,
-    "directives": Object {
-      "EventListener": [Function],
-      "UpdateOnEvent": [Function],
-      "disabled": [Function],
-      "hrefto": [Function],
-      "onChangeUpdate": [Function],
-      "onInputUpdate": [Function],
-      "onclick": [Function],
-      "oninput": [Function],
-      "onload": [Function],
-      "onresize": [Function],
-      "onscroll": [Function],
-      "onselect": [Function],
-      "onsubmit": [Function],
-      "ref": [Function],
-    },
     "errors": Array [
       "Fail load article list",
     ],
@@ -107,24 +90,8 @@ Object {
 exports[`fail load categories data 1`] = `
 Object {
   "Options": Object {
-    "ID": "component",
+    "categories": Array [],
     "dataLoaded": true,
-    "directives": Object {
-      "EventListener": [Function],
-      "UpdateOnEvent": [Function],
-      "disabled": [Function],
-      "hrefto": [Function],
-      "onChangeUpdate": [Function],
-      "onInputUpdate": [Function],
-      "onclick": [Function],
-      "oninput": [Function],
-      "onload": [Function],
-      "onresize": [Function],
-      "onscroll": [Function],
-      "onselect": [Function],
-      "onsubmit": [Function],
-      "ref": [Function],
-    },
     "errors": Array [
       "Fail load article categories",
     ],
@@ -199,7 +166,6 @@ Object {
 exports[`renders correctly 1`] = `
 Object {
   "Options": Object {
-    "ID": "component",
     "categories": Array [
       Object {
         "id": "4",
@@ -213,22 +179,6 @@ Object {
       },
     ],
     "dataLoaded": true,
-    "directives": Object {
-      "EventListener": [Function],
-      "UpdateOnEvent": [Function],
-      "disabled": [Function],
-      "hrefto": [Function],
-      "onChangeUpdate": [Function],
-      "onInputUpdate": [Function],
-      "onclick": [Function],
-      "oninput": [Function],
-      "onload": [Function],
-      "onresize": [Function],
-      "onscroll": [Function],
-      "onselect": [Function],
-      "onsubmit": [Function],
-      "ref": [Function],
-    },
     "errors": Array [],
     "items": Array [
       Object {

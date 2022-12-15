@@ -25,7 +25,7 @@ function scaffold( name, src, dest, done ) {
 
     metalsmith.use( promptQuestions( opts.prompts ) )
         .use( filterFiles( opts.filters ) )
-        .use( renameFiles )
+        .use( renameFiles( opts.skipInterpolation ) )
         .use( renderTemplates( opts.skipInterpolation ) );
 
     metalsmith.clean( false )

@@ -3,25 +3,9 @@
 exports[`renders correctly 1`] = `
 Object {
   "Options": Object {
-    "ID": "component",
     "appState": Object {
       "darkThemeEnabled": false,
       "routerResolved": false,
-    },
-    "directives": Object {
-      "EventListener": [Function],
-      "UpdateOnEvent": [Function],
-      "disabled": [Function],
-      "onChangeUpdate": [Function],
-      "onInputUpdate": [Function],
-      "onclick": [Function],
-      "oninput": [Function],
-      "onload": [Function],
-      "onresize": [Function],
-      "onscroll": [Function],
-      "onselect": [Function],
-      "onsubmit": [Function],
-      "ref": [Function],
     },
   },
   "html": "
@@ -38,25 +22,9 @@ Object {
 exports[`toggle theme 1`] = `
 Object {
   "Options": Object {
-    "ID": "component",
     "appState": Object {
       "darkThemeEnabled": false,
       "routerResolved": false,
-    },
-    "directives": Object {
-      "EventListener": [Function],
-      "UpdateOnEvent": [Function],
-      "disabled": [Function],
-      "onChangeUpdate": [Function],
-      "onInputUpdate": [Function],
-      "onclick": [Function],
-      "oninput": [Function],
-      "onload": [Function],
-      "onresize": [Function],
-      "onscroll": [Function],
-      "onselect": [Function],
-      "onsubmit": [Function],
-      "ref": [Function],
     },
   },
   "html": "

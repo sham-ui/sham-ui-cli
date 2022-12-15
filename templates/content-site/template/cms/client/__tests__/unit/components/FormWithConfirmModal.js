@@ -3,7 +3,7 @@ import FormWithConfirmModal  from '../../../src/components/FormWithConfirmModal.
 import renderer from 'sham-ui-test-helpers';
 
 it( 'renders correctly', () => {
-    const meta = renderer( FormWithConfirmModal, {
+    const meta = renderer( FormWithConfirmModal, {}, {
         directives
     } );
     expect( meta.toJSON() ).toMatchSnapshot();
@@ -13,15 +13,16 @@ it( 'success save', async() => {
     expect.assertions( 3 );
     const onSuccess = jest.fn();
     const meta = renderer( FormWithConfirmModal, {
-        directives,
         onSuccess
+    }, {
+        directives
     } );
 
-    meta.component.container.querySelector( '[type="submit"]' ).click();
+    meta.ctx.container.querySelector( '[type="submit"]' ).click();
     await new Promise( resolve => setImmediate( resolve ) );
     expect( meta.toJSON() ).toMatchSnapshot();
 
-    meta.component.container.querySelector( '[data-test-ok-button]' ).click();
+    meta.ctx.container.querySelector( '[data-test-ok-button]' ).click();
     await new Promise( resolve => setImmediate( resolve ) );
 
     expect( onSuccess ).toHaveBeenCalledTimes( 1 );
@@ -31,14 +32,15 @@ it( 'success save', async() => {
 it( 'fail save', async() => {
     expect.assertions( 1 );
     const meta = renderer( FormWithConfirmModal, {
-        directives,
         saveData: () => Promise.reject( [ 'Error test' ] )
+    }, {
+        directives
     } );
 
-    meta.component.container.querySelector( '[type="submit"]' ).click();
+    meta.ctx.container.querySelector( '[type="submit"]' ).click();
     await new Promise( resolve => setImmediate( resolve ) );
 
-    meta.component.container.querySelector( '[data-test-ok-button]' ).click();
+    meta.ctx.container.querySelector( '[data-test-ok-button]' ).click();
     await new Promise( resolve => setImmediate( resolve ) );
 
     expect( meta.toJSON() ).toMatchSnapshot();
@@ -49,14 +51,15 @@ it( 'cancel save', async() => {
     expect.assertions( 2 );
     const saveData = jest.fn();
     const meta = renderer( FormWithConfirmModal, {
-        directives,
         saveData
+    }, {
+        directives
     } );
 
-    meta.component.container.querySelector( '[type="submit"]' ).click();
+    meta.ctx.container.querySelector( '[type="submit"]' ).click();
     await new Promise( resolve => setImmediate( resolve ) );
 
-    meta.component.container.querySelector( '[data-test-cancel-button]' ).click();
+    meta.ctx.container.querySelector( '[data-test-cancel-button]' ).click();
     await new Promise( resolve => setImmediate( resolve ) );
 
     expect( saveData ).toHaveBeenCalledTimes( 0 );

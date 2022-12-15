@@ -5,7 +5,7 @@ import renderer from 'sham-ui-test-helpers';
 import LayoutNavigationThemeSwitch  from '../../../../../src/components/layout/navigation/theme-switch.sfc';
 
 it( 'renders correctly', () => {
-    const meta = renderer( LayoutNavigationThemeSwitch, {
+    const meta = renderer( LayoutNavigationThemeSwitch, {}, {
         directives
     } );
     expect( meta.toJSON() ).toMatchSnapshot();
@@ -17,11 +17,11 @@ it( 'toggle theme', () => {
     DI.bind( 'dark-theme', {
         toggle: toggle
     } );
-    const meta = renderer( LayoutNavigationThemeSwitch, {
+    const meta = renderer( LayoutNavigationThemeSwitch, {}, {
         DI,
         directives
     } );
-    meta.component.container.querySelector( '#checkbox' ).click();
+    meta.ctx.container.querySelector( '#checkbox' ).click();
     expect( meta.toJSON() ).toMatchSnapshot();
     expect( toggle ).toHaveBeenCalledTimes( 1 );
 } );

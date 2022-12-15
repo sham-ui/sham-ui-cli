@@ -20,7 +20,7 @@ it( 'renders correctly', () => {
         }
     } );
 
-    const meta = renderer( RoutesMembersPage, {
+    const meta = renderer( RoutesMembersPage, {}, {
         DI,
         directives
     } );
@@ -40,7 +40,7 @@ it( 'display errors', async() => {
             )
         }
     } );
-    const meta = renderer( RoutesMembersPage, {
+    const meta = renderer( RoutesMembersPage, {}, {
         DI,
         directives
     } );

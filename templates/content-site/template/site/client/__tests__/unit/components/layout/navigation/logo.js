@@ -9,7 +9,7 @@ it( 'renders correctly', () => {
         generate: () => '/'
     } );
 
-    const meta = renderer( LayoutNavigationLogo, {
+    const meta = renderer( LayoutNavigationLogo, {}, {
         DI,
         directives: {
             hrefto

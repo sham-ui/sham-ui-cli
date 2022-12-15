@@ -1,3 +1,4 @@
+import { createRootContext } from 'sham-ui';
 import * as directives from 'sham-ui-directives';
 import hrefto from 'sham-ui-router/lib/href-to';
 import { storage as appState } from '../storages/app';
@@ -22,18 +23,20 @@ export default function( DI, container ) {
     }
 
     // Mount root component
-    new App( {
-        DI,
-        ID: 'app',
-        container,
-        directives: {
-            ...directives,
-            hrefto
-        },
-        filters: {
-            formatLocaleDate
-        }
-    } );
+    new App(
+        createRootContext( {
+            DI,
+            ID: 'app',
+            container,
+            directives: {
+                ...directives,
+                hrefto
+            },
+            filters: {
+                formatLocaleDate
+            }
+        } )
+    );
 
     // create storage
     appState( DI );

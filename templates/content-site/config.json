@@ -40,5 +40,9 @@
       "label": "Author"
     }
   },
-  "renameFiles": false
+  "renameFiles": false,
+  "skipInterpolation": [
+    "cms/client/scaffolds/**",
+    "site/client/scaffolds/**"
+  ]
 }

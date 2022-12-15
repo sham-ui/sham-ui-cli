@@ -14,14 +14,14 @@
 </template>
 
 <script>
-    function RoutesHomePage( options, update, didMount ) {
+    function RoutesHomePage( options, didMount ) {
         const pageTitle = $();
 
         const state = options( {
             [ pageTitle ]: 'Home'
         } );
 
-        didMount( () => this.DI.resolve( 'title' ).change( state[ pageTitle ] ) );
+        didMount( () => this.ctx.DI.resolve( 'title' ).change( state[ pageTitle ] ) );
     }
 
     export default Component( Template, RoutesHomePage );

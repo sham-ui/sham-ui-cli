@@ -27,28 +27,24 @@
 <script>
     import { useStorage } from '../../../storages/session';
 
-    function LayoutAuthenticatedProfile( options, update ) {
+    function LayoutAuthenticatedProfile( options ) {
         const dropDownVisible = $();
 
         const state = options( {
             [ dropDownVisible ]: false
         } );
 
-        this$.linkProfileOnClick = () => update( {
-            [ dropDownVisible ]: !state[ dropDownVisible ]
-        } );
+        this$.linkProfileOnClick = () => state[ dropDownVisible ] = !state[ dropDownVisible ];
 
         this$.menuItemOnClick = () => {
             if ( state[ dropDownVisible ] ) {
-                update( {
-                    [ dropDownVisible ]: false
-                } );
+                state[ dropDownVisible ] = false;
             }
         };
 
         this$.logoutOnClick = ( e ) => {
             e.preventDefault();
-            this.DI.resolve( 'session' ).logout();
+            this.ctx.DI.resolve( 'session' ).logout();
         };
     }
 

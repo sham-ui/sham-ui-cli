@@ -2,24 +2,7 @@
 
 exports[`display errors 1`] = `
 Object {
-  "Options": Object {
-    "ID": "component",
-    "directives": Object {
-      "EventListener": [Function],
-      "UpdateOnEvent": [Function],
-      "disabled": [Function],
-      "onChangeUpdate": [Function],
-      "onInputUpdate": [Function],
-      "onclick": [Function],
-      "oninput": [Function],
-      "onload": [Function],
-      "onresize": [Function],
-      "onscroll": [Function],
-      "onselect": [Function],
-      "onsubmit": [Function],
-      "ref": [Function],
-    },
-  },
+  "Options": Object {},
   "html": "
 <!--0-->
 <!--0-->
@@ -32,24 +15,7 @@ Object {
 
 exports[`renders correctly 1`] = `
 Object {
-  "Options": Object {
-    "ID": "component",
-    "directives": Object {
-      "EventListener": [Function],
-      "UpdateOnEvent": [Function],
-      "disabled": [Function],
-      "onChangeUpdate": [Function],
-      "onInputUpdate": [Function],
-      "onclick": [Function],
-      "oninput": [Function],
-      "onload": [Function],
-      "onresize": [Function],
-      "onscroll": [Function],
-      "onselect": [Function],
-      "onsubmit": [Function],
-      "ref": [Function],
-    },
-  },
+  "Options": Object {},
   "html": "
 <!--0-->
 <!--0-->

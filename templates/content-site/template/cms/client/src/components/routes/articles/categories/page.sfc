@@ -29,17 +29,17 @@
 
 <script>
     function RoutesArticlesCategoriesPage() {
-        this$.loadData = () => this.DI.resolve( 'store' ).articleCategories().then(
+        this$.loadData = () => this.ctx.DI.resolve( 'store' ).articleCategories().then(
             data => data.categories
         );
 
-        this$.createCategory = ( data ) => this.DI.resolve( 'store' ).createArticlesCategory(
+        this$.createCategory = ( data ) => this.ctx.DI.resolve( 'store' ).createArticlesCategory(
             data
         );
 
         this$.confirmDeleteText = ( category ) => `Are you sure you want to delete category "${category.name}"?`;
 
-        this$.deleteCategory = ( category ) => this.DI.resolve( 'store' ).deleteArticleCategory(
+        this$.deleteCategory = ( category ) => this.ctx.DI.resolve( 'store' ).deleteArticleCategory(
             category.id
         );
     }

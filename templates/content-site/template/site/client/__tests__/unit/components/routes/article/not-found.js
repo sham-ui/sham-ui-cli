@@ -16,7 +16,7 @@ it( 'renders correctly', () => {
         generate: () => '/'
     } );
 
-    const meta = renderer( RoutesArticleNotFound, {
+    const meta = renderer( RoutesArticleNotFound, {}, {
         DI,
         directives: {
             hrefto

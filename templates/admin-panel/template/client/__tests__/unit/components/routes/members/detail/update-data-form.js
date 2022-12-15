@@ -4,7 +4,7 @@ import RoutesMembersDetailUpdateDataForm  from '../../../../../../src/components
 import renderer from 'sham-ui-test-helpers';
 
 it( 'renders correctly', () => {
-    const meta = renderer( RoutesMembersDetailUpdateDataForm, {
+    const meta = renderer( RoutesMembersDetailUpdateDataForm, {}, {
         directives
     } );
     expect( meta.toJSON() ).toMatchSnapshot();

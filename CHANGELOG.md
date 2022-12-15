@@ -1,5 +1,9 @@
 ## master
 * Update dependencies
+* Update templates to sham-ui 6.x
+* Fix upgrade project (add `mkdir -p`, fail open editor, etc)
+* Fix scaffolding templates in admin-panel & content-site
+* Add `collect` command for collect all usable directives & filters in project
 
 ## 5.0.0-alpha.6   
 * Fix default port for development mode CMS

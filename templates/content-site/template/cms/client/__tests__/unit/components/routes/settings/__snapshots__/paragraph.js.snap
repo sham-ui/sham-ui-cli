@@ -2,24 +2,7 @@
 
 exports[`default onUpdate options 1`] = `
 Object {
-  "Options": Object {
-    "ID": "component",
-    "directives": Object {
-      "EventListener": [Function],
-      "UpdateOnEvent": [Function],
-      "disabled": [Function],
-      "onChangeUpdate": [Function],
-      "onInputUpdate": [Function],
-      "onclick": [Function],
-      "oninput": [Function],
-      "onload": [Function],
-      "onresize": [Function],
-      "onscroll": [Function],
-      "onselect": [Function],
-      "onsubmit": [Function],
-      "ref": [Function],
-    },
-  },
+  "Options": Object {},
   "html": "
 <h6></h6>
 <p class=\\"mg-b-0\\">
@@ -37,24 +20,7 @@ Object {
 
 exports[`default onUpdate options 2`] = `
 Object {
-  "Options": Object {
-    "ID": "component",
-    "directives": Object {
-      "EventListener": [Function],
-      "UpdateOnEvent": [Function],
-      "disabled": [Function],
-      "onChangeUpdate": [Function],
-      "onInputUpdate": [Function],
-      "onclick": [Function],
-      "oninput": [Function],
-      "onload": [Function],
-      "onresize": [Function],
-      "onscroll": [Function],
-      "onselect": [Function],
-      "onsubmit": [Function],
-      "ref": [Function],
-    },
-  },
+  "Options": Object {},
   "html": "
 <h6></h6>
 <p class=\\"mg-b-0\\">
@@ -73,22 +39,6 @@ Object {
 exports[`renders correctly 1`] = `
 Object {
   "Options": Object {
-    "ID": "component",
-    "directives": Object {
-      "EventListener": [Function],
-      "UpdateOnEvent": [Function],
-      "disabled": [Function],
-      "onChangeUpdate": [Function],
-      "onInputUpdate": [Function],
-      "onclick": [Function],
-      "oninput": [Function],
-      "onload": [Function],
-      "onresize": [Function],
-      "onscroll": [Function],
-      "onselect": [Function],
-      "onsubmit": [Function],
-      "ref": [Function],
-    },
     "editFormVisible": false,
     "onUpdateValue": [Function],
     "paragraphClassName": "mg-b-0",

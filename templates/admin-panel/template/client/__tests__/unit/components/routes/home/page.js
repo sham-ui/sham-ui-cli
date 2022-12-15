@@ -10,7 +10,7 @@ it( 'renders correctly', () => {
     } );
     storage( DI ).sessionValidated = true;
 
-    const meta = renderer( RoutesHomePage, {
+    const meta = renderer( RoutesHomePage, {}, {
         DI
     } );
     expect( meta.toJSON() ).toMatchSnapshot();

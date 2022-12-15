@@ -41,7 +41,7 @@
 </template>
 
 <script>
-    function ArticlesPage( options, update, didMount ) {
+    function ArticlesPage( options, didMount ) {
         const getPageTitle = $();
         const dataLoaded = $();
         const page = $();
@@ -68,13 +68,13 @@
             [ queryString ]: ''
         } );
 
-        const setPageTitle = () => this.DI.resolve( 'title' ).change( state[ getPageTitle ]() );
+        const setPageTitle = () => this.ctx.DI.resolve( 'title' ).change( state[ getPageTitle ]() );
 
         didMount( () => {
 
             // Load data only if not loaded
             if ( !state[ dataLoaded ] ) {
-                const params = this.DI.resolve( 'router' ).storage.params;
+                const params = this.ctx.DI.resolve( 'router' ).storage.params;
                 let page = parseInt( params.page, 10 );
                 if ( isNaN( page ) || page <= 0 ) {
                     page = 1;
@@ -94,15 +94,13 @@
         const offsetByPage = ( page, limit ) => ( page - 1 ) * limit;
 
         this$._loadData = currentPage => {
-            update( {
-                [ dataLoaded ]: false
-            } );
+            state[ dataLoaded ] = false;
             return state[ loadData ](
                 offsetByPage( currentPage, state[ limit ] ),
                 state[ limit ]
             ).then(
                 data => {
-                    update( {
+                    state( {
                         [ dataLoaded ]: true,
                         [ errors ]: [],
                         [ page ]: currentPage,
@@ -125,7 +123,7 @@
                         this.hydratedOptions = hydratedOptions;
                     }
                 },
-                ( { Messages = [ 'Fail load articles list' ] } ) => update( {
+                ( { Messages = [ 'Fail load articles list' ] } ) => state( {
                     [ dataLoaded ]: true,
                     [ errors ]: Messages
                 } )

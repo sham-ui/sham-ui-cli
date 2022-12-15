@@ -22,11 +22,11 @@
 <script>
     const queryRegExp = new RegExp( '[?&]q=([^&]*)' );
 
-    function SearchPage( options, update ) {
+    function SearchPage( options ) {
         const query = $();
         const queryString = $();
 
-        const DI = this.DI.resolve;
+        const DI = this.ctx.DI.resolve;
 
         const state = options( {
             [ query ]: '',
@@ -45,7 +45,7 @@
                     }
                 ).then(
                     data => {
-                        update( {
+                        state( {
                             [ query ]: q,
                             [ queryString ]: '?q=' + q
                         } );

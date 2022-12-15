@@ -4,7 +4,7 @@ import RoutesMembersDetailUpdatePasswordForm  from '../../../../../../src/compon
 import renderer from 'sham-ui-test-helpers';
 
 it( 'renders correctly', () => {
-    const meta = renderer( RoutesMembersDetailUpdatePasswordForm, {
+    const meta = renderer( RoutesMembersDetailUpdatePasswordForm, {}, {
         directives
     } );
     expect( meta.toJSON() ).toMatchSnapshot();

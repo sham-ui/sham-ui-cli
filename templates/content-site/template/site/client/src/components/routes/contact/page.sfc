@@ -25,14 +25,14 @@
 </template>
 
 <script>
-    function ContactPage( options, update, didMount ) {
+    function ContactPage( options, didMount ) {
         const pageTitle = $();
 
         const state = options( {
             [ pageTitle ]: 'Contact'
         } );
 
-        didMount( () => this.DI.resolve( 'title' ).change( state[ pageTitle ] ) );
+        didMount( () => this.ctx.DI.resolve( 'title' ).change( state[ pageTitle ] ) );
     }
 
     export default Component( Template, ContactPage );

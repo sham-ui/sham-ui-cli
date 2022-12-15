@@ -1,3 +1,4 @@
+const multimatch = require( 'multimatch' );
 const async = require( 'async' );
 const render = require( 'consolidate' ).handlebars.render;
 

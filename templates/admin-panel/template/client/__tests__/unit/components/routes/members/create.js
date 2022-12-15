@@ -3,7 +3,7 @@ import RoutesMembersCreate  from '../../../../../src/components/routes/members/c
 import renderer from 'sham-ui-test-helpers';
 
 it( 'renders correctly', () => {
-    const meta = renderer( RoutesMembersCreate, {
+    const meta = renderer( RoutesMembersCreate, {}, {
         directives
     } );
     expect( meta.toJSON() ).toMatchSnapshot();

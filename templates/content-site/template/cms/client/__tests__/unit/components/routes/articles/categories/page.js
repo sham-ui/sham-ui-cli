@@ -19,7 +19,7 @@ it( 'renders correctly', () => {
         )
     } );
 
-    const meta = renderer( RoutesArticlesCategoriesPage, {
+    const meta = renderer( RoutesArticlesCategoriesPage, {}, {
         DI,
         directives
     } );
@@ -37,7 +37,7 @@ it( 'display errors', async() => {
             Promise.reject( {} )
         )
     } );
-    const meta = renderer( RoutesArticlesCategoriesPage, {
+    const meta = renderer( RoutesArticlesCategoriesPage, {}, {
         DI,
         directives
     } );

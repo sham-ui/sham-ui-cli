@@ -1,0 +1,42 @@
+#!/usr/bin/env node
+
+const fs = require( 'fs' );
+const program = require( 'commander' );
+const path = require( 'path' );
+const ora = require( 'ora' );
+const { cyan } = require( 'chalk' );
+const collect = require( '../src/collect' );
+
+
+const VALID_ENTITIES = [
+    'filters',
+    'directives'
+];
+
+program
+    .usage( `<${VALID_ENTITIES.join( '|' )}> [path]` )
+    .parse( process.argv );
+
+if ( program.args.length < 1 ) {
+    return program.help();
+}
+
+const type = program.args[ 0 ];
+if ( -1 === VALID_ENTITIES.indexOf( type ) ) {
+    return program.help();
+}
+
+const projectPath = path.resolve( program.args[ 1 ] );
+
+collectFromProject( type, projectPath );
+
+function collectFromProject( type, projectPath ) {
+    const spinner = ora( 'Process project' );
+    spinner.start();
+    collect( type, projectPath ).then(
+        items => items.forEach(
+            item => console.log( cyan( item ) )
+        )
+    );
+    spinner.stop();
+}

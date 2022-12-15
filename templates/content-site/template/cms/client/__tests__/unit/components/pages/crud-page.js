@@ -8,10 +8,11 @@ it( 'renders correctly', () => {
         change() {}
     } );
     const meta = renderer( PagesCrudPage, {
-        DI,
         loadItems() {
             return Promise.resolve( [] );
         }
+    }, {
+        DI
     } );
     expect( meta.toJSON() ).toMatchSnapshot();
 } );

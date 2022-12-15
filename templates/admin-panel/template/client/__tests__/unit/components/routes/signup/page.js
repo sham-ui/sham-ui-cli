@@ -16,7 +16,7 @@ it( 'renders correctly', () => {
             url: '/'
         }
     } );
-    const meta = renderer( RoutesSignupPage, {
+    const meta = renderer( RoutesSignupPage, {}, {
         DI,
         directives: {
             ...directives,
@@ -46,7 +46,7 @@ it( 'display errors', async() => {
         signUp: signUpMock.mockReturnValueOnce( Promise.reject( {} ) )
     } );
 
-    const meta = renderer( RoutesSignupPage, {
+    const meta = renderer( RoutesSignupPage, {}, {
         DI,
         directives: {
             ...directives,
@@ -59,12 +59,12 @@ it( 'display errors', async() => {
         email: 'admin@gmail.com',
         password: 'passw0rd'
     };
-    const { component } = meta;
-    component.container.querySelector( '[name="name"]' ).value = formData.name;
-    component.container.querySelector( '[name="email"]' ).value = formData.email;
-    component.container.querySelector( '[name="password"]' ).value = formData.password;
-    component.container.querySelector( '[name="password2"]' ).value = formData.password;
-    component.container.querySelector( '[type="submit"]' ).click();
+    const { ctx } = meta;
+    ctx.container.querySelector( '[name="name"]' ).value = formData.name;
+    ctx.container.querySelector( '[name="email"]' ).value = formData.email;
+    ctx.container.querySelector( '[name="password"]' ).value = formData.password;
+    ctx.container.querySelector( '[name="password2"]' ).value = formData.password;
+    ctx.container.querySelector( '[type="submit"]' ).click();
 
     await new Promise( resolve => setImmediate( resolve ) );
 

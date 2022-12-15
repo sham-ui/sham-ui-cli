@@ -5,7 +5,7 @@ import RoutesArticlesCommonFieldsSelectTag  from '../../../../../../../src/compo
 import renderer from 'sham-ui-test-helpers';
 
 it( 'renders correctly', () => {
-    const meta = renderer( RoutesArticlesCommonFieldsSelectTag, {
+    const meta = renderer( RoutesArticlesCommonFieldsSelectTag, {}, {
         directives: {
             onFocusIn,
             ...directives

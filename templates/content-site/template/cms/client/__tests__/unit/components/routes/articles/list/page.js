@@ -44,7 +44,7 @@ it( 'renders correctly', async() => {
         )
     } );
 
-    const meta = renderer( RoutesArticlesListPage, {
+    const meta = renderer( RoutesArticlesListPage, {}, {
         DI,
         directives: {
             ...directives,
@@ -71,7 +71,7 @@ it( 'fail load categories data', async() => {
         )
     } );
 
-    const meta = renderer( RoutesArticlesListPage, {
+    const meta = renderer( RoutesArticlesListPage, {}, {
         DI,
         directives: {
             ...directives,
@@ -107,7 +107,7 @@ it( 'fail load articles', async() => {
         )
     } );
 
-    const meta = renderer( RoutesArticlesListPage, {
+    const meta = renderer( RoutesArticlesListPage, {}, {
         DI,
         directives: {
             ...directives,

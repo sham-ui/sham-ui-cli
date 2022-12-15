@@ -30,7 +30,7 @@
             [ $.onUpdateSuccess ]() {}
         } );
 
-        this$._saveData = () => this.DI.resolve( 'store' ).updateMemberEmail( {
+        this$._saveData = () => this.ctx.DI.resolve( 'store' ).updateMemberEmail( {
             newEmail1: state[ email1 ].trim(),
             newEmail2: state[ email2 ].trim()
         } );

@@ -64,9 +64,9 @@
 </template>
 
 <script>
-    import { SetField } from '../../../../mixins/state';
+    import { SetField } from 'sham-ui-helpers';
 
-    function ArticleForm( options, update, didMount ) {
+    function ArticleForm( options, didMount ) {
         const title = $();
         const category = $();
         const shortBody = $();
@@ -99,26 +99,22 @@
         } );
 
         didMount( () => {
-            const store = this.DI.resolve( 'store' );
+            const store = this.ctx.DI.resolve( 'store' );
             store.articleCategories()
                 .then(
-                    data => update( {
-                        [ categories ]: data.categories
-                    } )
+                    data => state[ categories ] = data.categories
                 ).then(
                     () => store.articleTags()
                 ).then(
-                    data => update( {
+                    data => state( {
                         [ allTags ]: data.tags,
                         [ tags ]: state[ tags ].map(
                             x => data.tags.find( tag => tag.slug === x )
                         )
                     } ),
                 ).then(
-                    () => update( {
-                        [ dataLoaded ]: true
-                    } ),
-                    ( { Messages = [ 'Fail load data' ] } ) => update( {
+                    () => state[ dataLoaded ] = true,
+                    ( { Messages = [ 'Fail load data' ] } ) => state( {
                         [ dataLoaded ]: true,
                         [ errors ]: Messages
                     } )

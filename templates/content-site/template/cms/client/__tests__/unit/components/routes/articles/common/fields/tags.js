@@ -9,7 +9,8 @@ it( 'renders correctly', () => {
         all: [
             { name: 'first' },
             { name: 'second' }
-        ],
+        ]
+    }, {
         directives: {
             onFocusIn,
             ...directives
@@ -23,7 +24,8 @@ it( 'show all items on click', () => {
         all: [
             { name: 'first' },
             { name: 'second' }
-        ],
+        ]
+    }, {
         directives: {
             onFocusIn,
             ...directives
@@ -42,7 +44,8 @@ it( 'add tag', () => {
     const meta = renderer( RoutesArticlesCommonFieldsTags, {
         all: tags,
         selected: [],
-        onChange,
+        onChange
+    }, {
         directives: {
             onFocusIn,
             ...directives
@@ -66,7 +69,8 @@ it( 'remove tag', () => {
     const meta = renderer( RoutesArticlesCommonFieldsTags, {
         all: tags,
         selected: [ ...tags ],
-        onChange,
+        onChange
+    }, {
         directives: {
             onFocusIn,
             ...directives

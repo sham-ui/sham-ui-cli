@@ -55,7 +55,7 @@ it( 'renders correctly', async() => {
             baseURL: 'localhost'
         }
     } );
-    const meta = renderer( RoutesArticlesEditPage, {
+    const meta = renderer( RoutesArticlesEditPage, {}, {
         DI,
         directives: {
             ...directives,
@@ -107,7 +107,7 @@ it( 'fail load article data', async() => {
             baseURL: 'localhost'
         }
     } );
-    const meta = renderer( RoutesArticlesEditPage, {
+    const meta = renderer( RoutesArticlesEditPage, {}, {
         DI,
         directives: {
             ...directives,

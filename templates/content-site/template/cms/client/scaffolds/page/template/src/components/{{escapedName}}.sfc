@@ -13,14 +13,14 @@
 </template>
 
 <script>
-    function {{classifiedName}}( options, update, didMount ) {
+    function {{classifiedName}}( options, didMount ) {
         const pageTitle = $();
 
         const state = options( {
             [ pageTitle ]: '{{title}}'
         } );
 
-        didMount( () => this.DI.resolve( 'title' ).change( state[ pageTitle ] ) );
+        didMount( () => this.ctx.DI.resolve( 'title' ).change( state[ pageTitle ] ) );
     }
 
     export default Component( Template, {{classifiedName}} );

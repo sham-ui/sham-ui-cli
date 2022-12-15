@@ -24,7 +24,7 @@
     {% endif %}
 </template>
 <script>
-    function CrudPageTable( options, update ) {
+    function CrudPageTable( options ) {
         const typeName = $();
         const showErrors = $();
         const refresh = $();
@@ -41,7 +41,8 @@
             [ onSelectItem ]() {},
             [ deleteModalVisible ]: false,
             [ $.confirmDeleteText ]() {},
-            [ deleteItem ]() {}
+            [ deleteItem ]() {},
+            [ item ]: null
         } );
 
         this$.selectItem = item => {
@@ -51,13 +52,13 @@
 
         this$.confirmDelete = selectedItem => {
             state[ showErrors ]( [] );
-            update( {
+            state( {
                 [ item ]: selectedItem,
                 [ deleteModalVisible ]: true
             } );
         };
 
-        this$._closeDeleteModal  = () => update( {
+        this$._closeDeleteModal  = () => state( {
             [ item ]: null,
             [ deleteModalVisible ]: false
         } );

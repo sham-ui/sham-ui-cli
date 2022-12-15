@@ -6,7 +6,7 @@
     import suneditor from 'suneditor';
     import { link, formatBlock, blockquote, align, list, table, image } from 'suneditor/src/plugins';
 
-    function EditorField( options, update, didMount, onRemove ) {
+    function EditorField( options, didMount ) {
         const value = $();
         const onChange = $();
 
@@ -17,16 +17,16 @@
 
         let editor = null;
 
-        this.spots = [ [
+        this.addSpots( [ [
             value,
             contents => {
                 if ( editor && contents !== editor.getContents() ) {
                     editor.setContents( contents );
                 }
             }
-        ] ];
+        ] ] );
 
-        const api = this.DI.resolve( 'store' ).api;
+        const api = this.ctx.DI.resolve( 'store' ).api;
         const createEditor = suneditor.init( {
             height: 400,
             width: '100%',
@@ -69,11 +69,11 @@
             }
             editor.setContents( state[ value ] );
             editor.onChange = contents => state[ onChange ]( contents );
-        } );
 
-        onRemove( () => {
-            editor.destroy();
-            editor = null;
+            return () => {
+                editor.destroy();
+                editor = null;
+            };
         } );
     }
 

@@ -49,7 +49,7 @@
     {% endif %}
 </template>
 <script>
-    function MembersTable( options, update ) {
+    function MembersTable( options ) {
         const showErrors = $();
         const refresh = $();
         const onSelectMember = $();
@@ -61,7 +61,8 @@
             [ showErrors ]() {},
             [ refresh ]() {},
             [ onSelectMember ]() {},
-            [ deleteModalVisible ]: false
+            [ deleteModalVisible ]: false,
+            [ member ]: null
         } );
 
         this$.selectMember = member => {
@@ -71,20 +72,20 @@
 
         this$.confirmDelete = selectedMember => {
             state[ showErrors ]( [] );
-            update( {
+            state( {
                 [ member ]: selectedMember,
                 [ deleteModalVisible ]: true
             } );
         };
 
         const _closeDeleteModal = $();
-        this[ _closeDeleteModal ] = () => update( {
+        this[ _closeDeleteModal ] = () => state( {
             [ member ]: null,
             [ deleteModalVisible ]: false
         } );
 
         this$.deleteMember = () => {
-            this.DI.resolve( 'store' ).api.request( {
+            this.ctx.DI.resolve( 'store' ).api.request( {
                 url: `admin/members/${state[ member ].ID}`,
                 method: 'delete'
             } ).then(

@@ -21,7 +21,7 @@
             [ item ]: {}
         } );
 
-        this$.updateTag = ( data ) => this.DI.resolve( 'store' ).updateArticlesTag(
+        this$.updateTag = ( data ) => this.ctx.DI.resolve( 'store' ).updateArticlesTag(
             state[ item ].id,
             data
         );

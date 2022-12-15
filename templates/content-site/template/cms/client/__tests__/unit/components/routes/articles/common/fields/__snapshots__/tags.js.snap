@@ -3,7 +3,6 @@
 exports[`add tag 1`] = `
 Object {
   "Options": Object {
-    "ID": "component",
     "all": Array [
       Object {
         "name": "first",
@@ -12,22 +11,6 @@ Object {
         "name": "second",
       },
     ],
-    "directives": Object {
-      "EventListener": [Function],
-      "UpdateOnEvent": [Function],
-      "disabled": [Function],
-      "onChangeUpdate": [Function],
-      "onFocusIn": [Function],
-      "onInputUpdate": [Function],
-      "onclick": [Function],
-      "oninput": [Function],
-      "onload": [Function],
-      "onresize": [Function],
-      "onscroll": [Function],
-      "onselect": [Function],
-      "onsubmit": [Function],
-      "ref": [Function],
-    },
     "onChange": [MockFunction] {
       "calls": Array [
         Array [
@@ -67,7 +50,6 @@ Object {
 exports[`remove tag 1`] = `
 Object {
   "Options": Object {
-    "ID": "component",
     "all": Array [
       Object {
         "name": "first",
@@ -76,22 +58,6 @@ Object {
         "name": "second",
       },
     ],
-    "directives": Object {
-      "EventListener": [Function],
-      "UpdateOnEvent": [Function],
-      "disabled": [Function],
-      "onChangeUpdate": [Function],
-      "onFocusIn": [Function],
-      "onInputUpdate": [Function],
-      "onclick": [Function],
-      "oninput": [Function],
-      "onload": [Function],
-      "onresize": [Function],
-      "onscroll": [Function],
-      "onselect": [Function],
-      "onsubmit": [Function],
-      "ref": [Function],
-    },
     "onChange": [MockFunction] {
       "calls": Array [
         Array [
@@ -133,7 +99,6 @@ Object {
 exports[`renders correctly 1`] = `
 Object {
   "Options": Object {
-    "ID": "component",
     "all": Array [
       Object {
         "name": "first",
@@ -142,22 +107,6 @@ Object {
         "name": "second",
       },
     ],
-    "directives": Object {
-      "EventListener": [Function],
-      "UpdateOnEvent": [Function],
-      "disabled": [Function],
-      "onChangeUpdate": [Function],
-      "onFocusIn": [Function],
-      "onInputUpdate": [Function],
-      "onclick": [Function],
-      "oninput": [Function],
-      "onload": [Function],
-      "onresize": [Function],
-      "onscroll": [Function],
-      "onselect": [Function],
-      "onsubmit": [Function],
-      "ref": [Function],
-    },
     "onChange": [Function],
     "selected": Array [],
   },
@@ -177,7 +126,6 @@ Object {
 exports[`show all items on click 1`] = `
 Object {
   "Options": Object {
-    "ID": "component",
     "all": Array [
       Object {
         "name": "first",
@@ -186,22 +134,6 @@ Object {
         "name": "second",
       },
     ],
-    "directives": Object {
-      "EventListener": [Function],
-      "UpdateOnEvent": [Function],
-      "disabled": [Function],
-      "onChangeUpdate": [Function],
-      "onFocusIn": [Function],
-      "onInputUpdate": [Function],
-      "onclick": [Function],
-      "oninput": [Function],
-      "onload": [Function],
-      "onresize": [Function],
-      "onscroll": [Function],
-      "onselect": [Function],
-      "onsubmit": [Function],
-      "ref": [Function],
-    },
     "onChange": [Function],
     "selected": Array [],
   },

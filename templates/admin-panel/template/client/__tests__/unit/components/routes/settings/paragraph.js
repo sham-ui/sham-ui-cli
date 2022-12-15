@@ -3,7 +3,7 @@ import RoutesSettingsParagraph  from '../../../../../src/components/routes/setti
 import renderer, { compile } from 'sham-ui-test-helpers';
 
 it( 'renders correctly', () => {
-    const meta = renderer( RoutesSettingsParagraph, {
+    const meta = renderer( RoutesSettingsParagraph, {}, {
         directives
     } );
     expect( meta.toJSON() ).toMatchSnapshot();
@@ -19,11 +19,11 @@ it( 'default onUpdate options', () => {
             {% endblock %}
         </RoutesSettingsParagraph>
     `;
-    const meta = renderer( Paragraph, {
+    const meta = renderer( Paragraph, {}, {
         directives
     } );
-    meta.component.container.querySelector( '.icon-pencil' ).click();
+    meta.ctx.container.querySelector( '.icon-pencil' ).click();
     expect( meta.toJSON() ).toMatchSnapshot();
-    meta.component.container.querySelector( '[data-test-dummy-button]' ).click();
+    meta.ctx.container.querySelector( '[data-test-dummy-button]' ).click();
     expect( meta.toJSON() ).toMatchSnapshot();
 } );

@@ -16,7 +16,7 @@ it( 'renders correctly', () => {
         }
     } );
 
-    const meta = renderer( LayoutAuthenticatedNavigation, {
+    const meta = renderer( LayoutAuthenticatedNavigation, {}, {
         DI,
         directives: {
             hrefto

@@ -19,23 +19,21 @@
 </template>
 
 <script>
-    function TagPage( options, update ) {
+    function TagPage( options ) {
         const tag = $();
 
         const state = options( {
             [ tag ]: '',
             [ $.getPageTitle ]: () => state[ tag ],
-            [ $.loadData ]: ( offset, limit ) => this.DI.resolve( 'store' ).articles(
+            [ $.loadData ]: ( offset, limit ) => this.ctx.DI.resolve( 'store' ).articles(
                 offset,
                 limit,
                 {
-                    tag: this.DI.resolve( 'router' ).storage.params.tag
+                    tag: this.ctx.DI.resolve( 'router' ).storage.params.tag
                 }
             ).then(
                 data => {
-                    update( {
-                        [ tag ]: data.meta.tag
-                    } );
+                    state[ tag ] = data.meta.tag;
                     return data;
                 }
             )

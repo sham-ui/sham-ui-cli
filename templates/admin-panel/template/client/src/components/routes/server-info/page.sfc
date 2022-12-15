@@ -28,7 +28,7 @@
 </template>
 
 <script>
-    function RoutesServerInfoPage( options, update, didMount ) {
+    function RoutesServerInfoPage( options, didMount ) {
         const pageTitle = $();
         const dataLoaded = $();
         const errors = $();
@@ -46,18 +46,18 @@
         } );
 
         didMount( () => {
-            this.DI.resolve( 'title' ).change( state[ pageTitle ] );
-            update( {
+            this.ctx.DI.resolve( 'title' ).change( state[ pageTitle ] );
+            state( {
                 [ dataLoaded ]: false
             } );
-            this.DI.resolve( 'store' ).api.request( { url: 'admin/server-info' } ).then(
-                info => update( {
+            this.ctx.DI.resolve( 'store' ).api.request( { url: 'admin/server-info' } ).then(
+                info => state( {
                     [ dataLoaded ]: true,
                     [ host ]: info.Host,
                     [ runtime ]: info.Runtime,
                     [ files ]: info.Files
                 } ),
-                ( { Messages = [ 'Fail load accounting info' ] } ) => update( {
+                ( { Messages = [ 'Fail load accounting info' ] } ) => state( {
                     [ dataLoaded ]: true,
                     [ errors ]: Messages
                 } )

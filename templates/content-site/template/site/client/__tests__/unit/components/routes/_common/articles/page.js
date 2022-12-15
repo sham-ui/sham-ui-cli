@@ -21,8 +21,6 @@ it( 'renders correctly', async() => {
     } );
 
     const meta = renderer( RoutesCommonArticlesPage, {
-        DI,
-        directives,
         loadData: () => Promise.resolve( {
             articles: [],
             meta: {
@@ -30,6 +28,9 @@ it( 'renders correctly', async() => {
                 limit: 20
             }
         } )
+    }, {
+        DI,
+        directives
     } );
 
     await new Promise( resolve => setImmediate( resolve ) );

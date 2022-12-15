@@ -13,6 +13,6 @@ it( 'renders correctly', () => {
         }
     } );
 
-    const meta = renderer( LayoutMain, { DI } );
+    const meta = renderer( LayoutMain, {}, { DI } );
     expect( meta.toJSON() ).toMatchSnapshot();
 } );

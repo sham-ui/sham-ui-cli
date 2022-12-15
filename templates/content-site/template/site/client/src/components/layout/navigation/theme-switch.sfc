@@ -11,7 +11,7 @@
     import { useStorage } from '../../../storages/app';
 
     function ThemeSwitch() {
-        this$.onClick = () => this.DI.resolve( 'dark-theme' ).toggle();
+        this$.onClick = () => this.ctx.DI.resolve( 'dark-theme' ).toggle();
     }
 
     export default Component( Template, useStorage( $.appState ), ThemeSwitch );

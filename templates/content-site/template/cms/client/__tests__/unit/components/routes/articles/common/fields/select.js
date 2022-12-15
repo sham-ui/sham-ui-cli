@@ -4,7 +4,7 @@ import { oninput } from 'sham-ui-directives';
 import renderer from 'sham-ui-test-helpers';
 
 it( 'renders correctly', () => {
-    const meta = renderer( RoutesArticlesCommonFieldsSelect, {
+    const meta = renderer( RoutesArticlesCommonFieldsSelect, {}, {
         directives: {
             oninput
         }

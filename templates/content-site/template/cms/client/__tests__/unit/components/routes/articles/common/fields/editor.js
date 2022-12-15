@@ -12,7 +12,7 @@ it( 'renders correctly', () => {
             baseURL: 'localhost'
         }
     } );
-    const meta = renderer( RoutesArticlesCommonFieldsEditor, {
+    const meta = renderer( RoutesArticlesCommonFieldsEditor, {}, {
         DI,
         directives
     } );

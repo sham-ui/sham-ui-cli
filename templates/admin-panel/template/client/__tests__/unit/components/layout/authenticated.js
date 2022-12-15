@@ -20,7 +20,7 @@ it( 'renders correctly', () => {
         }
     } );
 
-    const meta = renderer( LayoutAuthenticated, {
+    const meta = renderer( LayoutAuthenticated, {}, {
         DI,
         directives: {
             ...directives,

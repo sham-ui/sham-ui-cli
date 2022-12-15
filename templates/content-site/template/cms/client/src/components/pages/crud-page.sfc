@@ -74,9 +74,9 @@
 </template>
 
 <script>
-    import { SetField, ToggleField } from '../../mixins/state';
+    import { SetField, ToggleField } from 'sham-ui-helpers';
 
-    function PagesCrudPage( options, update, didMount ) {
+    function PagesCrudPage( options, didMount ) {
         const typeName = $();
         const pageTitle = $();
         const dataLoaded = $();
@@ -98,22 +98,22 @@
         } );
 
         didMount( () => {
-            this.DI.resolve( 'title' ).change( state[ pageTitle ] );
+            this.ctx.DI.resolve( 'title' ).change( state[ pageTitle ] );
             this$.loadData();
         } );
 
         this$.loadData = () => {
-            update( {
+            state( {
                 [ dataLoaded ]: false,
                 [ selectedItem ]: null
             } );
             state[ loadItems ]().then(
-                data => update( {
+                data => state( {
                     [ dataLoaded ]: true,
                     [ items ]: data,
                     [ errors ]: []
                 } ),
-                ( { Messages = [ `Fail load ${state[ typeName ]} list` ] } ) => update( {
+                ( { Messages = [ `Fail load ${state[ typeName ]} list` ] } ) => state( {
                     [ items ]: true,
                     [ errors ]: Messages
                 } )
@@ -121,9 +121,7 @@
         };
 
         this$._onCreate = () => {
-            update( {
-                [ createFormVisible ]: false
-            } );
+            state[ createFormVisible ] = false;
             this$.loadData();
         };
     }

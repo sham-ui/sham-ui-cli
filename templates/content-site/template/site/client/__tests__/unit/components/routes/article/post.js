@@ -13,7 +13,7 @@ it( 'renders correctly', () => {
         generate: () => '/'
     } );
 
-    const meta = renderer( RoutesArticlePost, {
+    const meta = renderer( RoutesArticlePost, {}, {
         DI,
         directives: {
             hrefto

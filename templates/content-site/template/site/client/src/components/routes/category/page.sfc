@@ -19,23 +19,21 @@
 </template>
 
 <script>
-    function CategoryPage( options, update ) {
+    function CategoryPage( options ) {
         const category = $();
 
         const state = options( {
             [ category ]: '',
             [ $.getPageTitle ]: () => state[ category ],
-            [ $.loadData ]: ( offset, limit ) => this.DI.resolve( 'store' ).articles(
+            [ $.loadData ]: ( offset, limit ) => this.ctx.DI.resolve( 'store' ).articles(
                 offset,
                 limit,
                 {
-                    category: this.DI.resolve( 'router' ).storage.params.category
+                    category: this.ctx.DI.resolve( 'router' ).storage.params.category
                 }
             ).then(
                 data => {
-                    update( {
-                        [ category ]: data.meta.category
-                    } );
+                    state[ category ] = data.meta.category;
                     return data;
                 }
             )

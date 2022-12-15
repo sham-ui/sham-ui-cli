@@ -1,3 +1,4 @@
+import { createRootContext } from 'sham-ui';
 import * as directives from 'sham-ui-directives';
 import hrefto from 'sham-ui-router/lib/href-to';
 import { storage as appState } from '../storages/app';
@@ -15,16 +16,17 @@ export default function( DI ) {
     new Title( DI );
 
     // Mount root component
-    new App( {
-        DI,
-        ID: 'app',
-        container: document.querySelector( 'body' ),
-        directives: {
-            ...directives,
-            hrefto
-        },
-        filters: {}
-    } );
+    new App(
+        createRootContext( {
+            DI,
+            ID: 'app',
+            container: document.querySelector( 'body' ),
+            directives: {
+                ...directives,
+                hrefto
+            }
+        } )
+    );
 
     // Load token
     store.csrftoken().then( () => {

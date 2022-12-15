@@ -38,7 +38,7 @@
 </template>
 
 <script>
-    function RoutesLoginPage( options, update, didMount ) {
+    function RoutesLoginPage( options, didMount ) {
         const email = $();
         const password = $();
 
@@ -47,21 +47,18 @@
             [ password ]: ''
         } );
 
-        didMount( () => this.DI.resolve( 'title' ).change( 'Login' ) );
+        const DI = this.ctx.DI;
+
+        didMount( () => DI.resolve( 'title' ).change( 'Login' ) );
 
         this$._submitForm = () => {
-            return this.DI.resolve( 'session' ).login(
+            return DI.resolve( 'session' ).login(
                 state[ email ].trim(),
                 state[ password ].trim()
             );
         };
 
-        this$._loginSuccess = () => {
-            const router = this.DI.resolve( 'router' );
-            router.navigate(
-                router.generate( 'home', {} )
-            );
-        };
+        this$._loginSuccess = () => DI.resolve( 'router' ).navigateToRoute( 'home' );
 
         this$._getErrors = ( { Messages = [ 'Login fail' ] } ) => Messages;
     }

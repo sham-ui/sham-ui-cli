@@ -8,6 +8,6 @@ it( 'renders correctly', () => {
 
     storage( DI ).sessionValidated = true;
 
-    const meta = renderer( Page, { DI } );
+    const meta = renderer( Page, {}, { DI } );
     expect( meta.toJSON() ).toMatchSnapshot();
 } );

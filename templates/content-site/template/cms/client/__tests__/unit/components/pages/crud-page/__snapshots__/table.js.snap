@@ -3,10 +3,10 @@
 exports[`renders correctly 1`] = `
 Object {
   "Options": Object {
-    "ID": "component",
     "confirmDeleteText": [Function],
     "deleteItem": [Function],
     "deleteModalVisible": false,
+    "item": null,
     "items": Array [],
     "onSelectItem": [Function],
     "refresh": [Function],

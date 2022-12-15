@@ -12,6 +12,7 @@ const { gray } = require( 'chalk' );
 const copyFilePromise = util.promisify( fs.copyFile );
 const unlinkFilePromise = util.promisify( fs.unlink );
 const execPromise = util.promisify( exec );
+const mkdirPromise = util.promisify( fs.mkdir );
 
 function eachSeries( arr, iteratorFn ) {
     return arr.reduce(
@@ -65,16 +66,22 @@ function getFiles( dir ) {
 function copyFiles( srcDir, destDir, files ) {
     return Promise.all(
         files.map(
-            x => copyFilePromise(
+            x => mkdirPromise(
+                path.dirname( path.join( destDir, x ) ),
+                { recursive: true }
+            ).then( () => copyFilePromise(
                 path.join( srcDir, x ),
                 path.join( destDir, x )
-            )
+            ) )
         )
     );
 }
 
 function openInEditor( editor, file ) {
-    return execPromise( `${ editor } ${ file }` )
+    return execPromise( `${ editor } ${ file }` ).then(
+        () => {},
+        ( e ) => console.error( e )
+    )
 }
 
 function removeFiles( editor, dirFile, files ) {

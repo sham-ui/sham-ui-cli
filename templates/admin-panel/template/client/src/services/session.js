@@ -78,9 +78,7 @@ export default class Session {
                 this.resetSessionValidation();
 
                 // Go to login page
-                this.router.navigate(
-                    this.router.generate( 'login' )
-                );
+                this.router.navigateToRoute( 'login' );
             }
         );
     }

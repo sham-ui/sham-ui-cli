@@ -72,9 +72,9 @@
 </template>
 
 <script>
-    import { ToggleField, SetField } from '../../../mixins/state';
+    import { ToggleField, SetField } from 'sham-ui-helpers';
 
-    function RoutesMembersPage( options, update, didMount ) {
+    function RoutesMembersPage( options, didMount ) {
         const pageTitle = $();
         const dataLoaded = $();
         const errors = $();
@@ -100,7 +100,7 @@
         const loadData = $();
 
         didMount( () => {
-            this.DI.resolve( 'title' ).change( state[ pageTitle ] );
+            this.ctx.DI.resolve( 'title' ).change( state[ pageTitle ] );
             this[ loadData ]( 1 );
         } );
 
@@ -110,18 +110,18 @@
         const offsetByPage = ( page, limit ) => ( page - 1 ) * limit;
 
         this[ loadData ] = currentPage => {
-            update( {
+            state( {
                 [ dataLoaded ]: false,
                 [ selectedMember ]: null
             } );
-            this.DI.resolve( 'store' ).api.request( {
+            this.ctx.DI.resolve( 'store' ).api.request( {
                 url: 'admin/members',
                 params: {
                     offset: offsetByPage( currentPage, state[ limit ] ),
                     limit: state[ limit ]
                 }
             } ).then(
-                data => update( {
+                data => state( {
                     [ dataLoaded ]: true,
                     [ errors ]: [],
                     [ page ]: currentPage,
@@ -129,7 +129,7 @@
                     [ limit ]: data.meta.limit,
                     [ total ]: data.meta.total
                 } ),
-                ( { Messages = [ 'Fail load members list' ] } ) => update( {
+                ( { Messages = [ 'Fail load members list' ] } ) => state( {
                     [ dataLoaded ]: true,
                     [ errors ]: Messages
                 } )
@@ -137,9 +137,7 @@
         };
 
         this$._onCreateMember = () => {
-            update( {
-                [ createFormVisible ]: false
-            } );
+            state[ createFormVisible ] = false;
             this[ loadData ]( state[ page ] );
         };
     }

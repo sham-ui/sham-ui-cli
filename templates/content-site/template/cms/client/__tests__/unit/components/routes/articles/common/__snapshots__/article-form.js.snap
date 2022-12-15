@@ -3,7 +3,6 @@
 exports[`fail load data 1`] = `
 Object {
   "Options": Object {
-    "ID": "component",
     "allTags": Array [],
     "body": "",
     "categories": Array [
@@ -20,22 +19,6 @@ Object {
     ],
     "category": null,
     "dataLoaded": true,
-    "directives": Object {
-      "EventListener": [Function],
-      "UpdateOnEvent": [Function],
-      "disabled": [Function],
-      "onChangeUpdate": [Function],
-      "onFocusIn": [Function],
-      "onInputUpdate": [Function],
-      "onclick": [Function],
-      "oninput": [Function],
-      "onload": [Function],
-      "onresize": [Function],
-      "onscroll": [Function],
-      "onselect": [Function],
-      "onsubmit": [Function],
-      "ref": [Function],
-    },
     "errors": Array [
       "Fail load data",
     ],
@@ -194,7 +177,6 @@ Object {
 exports[`renders correctly 1`] = `
 Object {
   "Options": Object {
-    "ID": "component",
     "allTags": Array [
       Object {
         "id": "4",
@@ -222,22 +204,6 @@ Object {
     ],
     "category": null,
     "dataLoaded": true,
-    "directives": Object {
-      "EventListener": [Function],
-      "UpdateOnEvent": [Function],
-      "disabled": [Function],
-      "onChangeUpdate": [Function],
-      "onFocusIn": [Function],
-      "onInputUpdate": [Function],
-      "onclick": [Function],
-      "oninput": [Function],
-      "onload": [Function],
-      "onresize": [Function],
-      "onscroll": [Function],
-      "onselect": [Function],
-      "onsubmit": [Function],
-      "ref": [Function],
-    },
     "errors": Array [],
     "onSaveSuccess": [Function],
     "publishedAt": 2022-04-29T12:24:51.637Z,

@@ -23,13 +23,17 @@
 <script>
     import { fileSize } from './filters';
 
+    function extendContext() {
+        this.ctx.appendFilters( {
+            fileSize
+        } );
+    }
+
     function AssetsPanel( options ) {
         options( {
             [ $.files ]: []
         } );
-
-        this.filters.fileSize = fileSize;
     }
 
-    export default Component( Template, AssetsPanel );
+    export default Component( extendContext, Template, AssetsPanel );
 </script>

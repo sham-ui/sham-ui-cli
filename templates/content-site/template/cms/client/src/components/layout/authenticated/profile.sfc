@@ -25,10 +25,10 @@
 </template>
 
 <script>
-    import { ToggleField } from '../../../mixins/state';
+    import { ToggleField } from 'sham-ui-helpers';
     import { useStorage } from '../../../storages/session';
 
-    function LayoutAuthenticatedProfile( options, update ) {
+    function LayoutAuthenticatedProfile( options ) {
         const dropDownVisible = $();
 
         const state = options( {
@@ -37,15 +37,13 @@
 
         this$.menuItemOnClick = () => {
             if ( state[ dropDownVisible ] ) {
-                update( {
-                    [ dropDownVisible ]: false
-                } );
+                state[ dropDownVisible ] = false;
             }
         };
 
         this$.logoutOnClick = ( e ) => {
             e.preventDefault();
-            this.DI.resolve( 'session' ).logout();
+            this.ctx.DI.resolve( 'session' ).logout();
         };
     }
 

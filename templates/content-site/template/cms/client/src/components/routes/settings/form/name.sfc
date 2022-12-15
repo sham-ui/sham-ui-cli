@@ -24,7 +24,7 @@
             [ $.onUpdateSuccess ]: ''
         } );
 
-        this$._saveData = () => this.DI.resolve( 'store' ).updateMemberName( {
+        this$._saveData = () => this.ctx.DI.resolve( 'store' ).updateMemberName( {
             newName: state[ name ].trim()
         } );
 

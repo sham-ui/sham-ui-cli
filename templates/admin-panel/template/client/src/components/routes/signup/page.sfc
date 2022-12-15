@@ -42,7 +42,7 @@
 </template>
 
 <script>
-    function RoutesSignupPage( options, update, didMount ) {
+    function RoutesSignupPage( options, didMount ) {
         const name = $();
         const email = $();
         const password = $();
@@ -55,9 +55,9 @@
             [ password2 ]: ''
         } );
 
-        didMount( () => this.DI.resolve( 'title' ).change( 'Sing Up' ) );
+        didMount( () => this.ctx.DI.resolve( 'title' ).change( 'Sing Up' ) );
 
-        this$._submitForm = () => this.DI.resolve( 'store' ).signUp( {
+        this$._submitForm = () => this.ctx.DI.resolve( 'store' ).signUp( {
             name: state[ name ].trim(),
             email: state[ email ].trim(),
             password: state[ password ],
@@ -65,11 +65,8 @@
         } );
 
         this$._signUpSuccess = () => {
-            this.DI.resolve( 'session' ).resetSessionValidation();
-            const router = this.DI.resolve( 'router' );
-            router.navigate(
-                router.generate( 'home', {} )
-            );
+            this.ctx.DI.resolve( 'session' ).resetSessionValidation();
+            this.ctx.DI.resolve( 'router' ).navigateToRoute( 'home' );
         };
 
         this$._getErrors = ( { Messages = [ 'Signup fail' ] } ) => Messages;

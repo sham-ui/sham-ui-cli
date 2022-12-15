@@ -18,7 +18,7 @@ it( 'renders correctly', () => {
         }
     } );
 
-    const meta = renderer( RoutesLoginPage, {
+    const meta = renderer( RoutesLoginPage, {}, {
         DI,
         directives: {
             ...directives,
@@ -46,7 +46,7 @@ it( 'display errors', async() => {
         login: loginMock.mockReturnValueOnce( Promise.reject( {} ) )
     } );
 
-    const meta = renderer( RoutesLoginPage, {
+    const meta = renderer( RoutesLoginPage, {}, {
         DI,
         directives: {
             ...directives,
@@ -58,10 +58,10 @@ it( 'display errors', async() => {
         email: 'admin@gmail.com',
         password: 'passw0rd'
     };
-    const { component } = meta;
-    component.container.querySelector( '[name="email"]' ).value = formData.email;
-    component.container.querySelector( '[name="password"]' ).value = formData.password;
-    component.container.querySelector( '[type="submit"]' ).click();
+    const { ctx } = meta;
+    ctx.container.querySelector( '[name="email"]' ).value = formData.email;
+    ctx.container.querySelector( '[name="password"]' ).value = formData.password;
+    ctx.container.querySelector( '[type="submit"]' ).click();
 
     await new Promise( resolve => setImmediate( resolve ) );
 

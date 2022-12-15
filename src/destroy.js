@@ -29,7 +29,7 @@ function destroy( name, src, dest, done ) {
 
     metalsmith.use( promptQuestions( opts.prompts ) )
         .use( filterFiles( opts.filters ) )
-        .use( renameFiles )
+        .use( renameFiles( opts.skipInterpolation ) )
         .use( removeFiles );
 
     metalsmith.clean( false )

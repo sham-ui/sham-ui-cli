@@ -18,7 +18,7 @@ it( 'renders correctly', () => {
             url: '/'
         }
     } );
-    const meta = renderer( LayoutAuthenticatedProfile, {
+    const meta = renderer( LayoutAuthenticatedProfile, {}, {
         DI,
         directives: {
             ...directives,

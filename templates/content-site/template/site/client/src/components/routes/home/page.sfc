@@ -12,7 +12,7 @@
     function RoutesHomePage( options ) {
         options( {
             [ $.getPageTitle ]: () => 'Home',
-            [ $.loadData ]: ( offset, limit ) => this.DI.resolve( 'store' ).articles(
+            [ $.loadData ]: ( offset, limit ) => this.ctx.DI.resolve( 'store' ).articles(
                 offset,
                 limit
             )

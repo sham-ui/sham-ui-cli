@@ -56,7 +56,21 @@
 </template>
 
 <script>
-    function ArticlesTable( options, update ) {
+    function extendContext() {
+        this.ctx.appendFilters( {
+            formatLocaleDate: date => ( new Date( date ) ).toLocaleDateString( 'ru-RU',  {
+                weekday: 'long',
+                year: 'numeric',
+                month: 'long',
+                day: 'numeric',
+                hour: '2-digit',
+                minute: '2-digit',
+                second: '2-digit'
+            } )
+        } );
+    }
+
+    function ArticlesTable( options ) {
         const showErrors = $();
         const refresh = $();
         const deleteModalVisible = $();
@@ -66,17 +80,8 @@
             [ $.articles ]: [],
             [ showErrors ]() {},
             [ refresh ]() {},
+            [ article ]: null,
             [ deleteModalVisible ]: false
-        } );
-
-        this.filters.formatLocaleDate = date => ( new Date( date ) ).toLocaleDateString( 'ru-RU',  {
-            weekday: 'long',
-            year: 'numeric',
-            month: 'long',
-            day: 'numeric',
-            hour: '2-digit',
-            minute: '2-digit',
-            second: '2-digit'
         } );
 
         this$._buildCategoryNameById = categories => categories.reduce(
@@ -89,20 +94,20 @@
 
         this$.confirmDelete = selectedArticle => {
             state[ showErrors ]( [] );
-            update( {
+            state( {
                 [ article ]: selectedArticle,
                 [ deleteModalVisible ]: true
             } );
         };
 
         const _closeDeleteModal = $();
-        this[ _closeDeleteModal ] = () => update( {
+        this[ _closeDeleteModal ] = () => state( {
             [ article ]: null,
             [ deleteModalVisible ]: false
         } );
 
         this$.deleteArticle = () => {
-            this.DI.resolve( 'store' )
+            this.ctx.DI.resolve( 'store' )
                 .deleteArticle( state[ article ].id )
                 .then(
                     state[ refresh ],
@@ -114,5 +119,5 @@
         };
     }
 
-    export default Component( Template, ArticlesTable );
+    export default Component( extendContext, Template, ArticlesTable );
 </script>

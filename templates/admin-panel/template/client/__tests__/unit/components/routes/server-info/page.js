@@ -20,10 +20,9 @@ it( 'renders correctly', () => {
         }
     } );
 
-    const meta = renderer( RoutesServerInfoPage, {
+    const meta = renderer( RoutesServerInfoPage, {}, {
         DI,
-        directives,
-        filters: {}
+        directives
     } );
     expect( meta.toJSON() ).toMatchSnapshot();
 } );
@@ -41,10 +40,9 @@ it( 'display errors', async() => {
             )
         }
     } );
-    const meta = renderer( RoutesServerInfoPage, {
+    const meta = renderer( RoutesServerInfoPage, {}, {
         DI,
-        directives,
-        filters: {}
+        directives
     } );
     await new Promise( resolve => setImmediate( resolve ) );
     expect( meta.toJSON() ).toMatchSnapshot();

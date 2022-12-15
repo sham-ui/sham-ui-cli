@@ -4,7 +4,7 @@ import RoutesArticlesCategoriesDetail  from '../../../../../../src/components/ro
 import renderer from 'sham-ui-test-helpers';
 
 it( 'renders correctly', () => {
-    const meta = renderer( RoutesArticlesCategoriesDetail, {
+    const meta = renderer( RoutesArticlesCategoriesDetail, {}, {
         directives
     } );
     expect( meta.toJSON() ).toMatchSnapshot();

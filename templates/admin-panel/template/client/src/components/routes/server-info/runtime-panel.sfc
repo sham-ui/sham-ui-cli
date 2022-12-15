@@ -59,15 +59,19 @@
 <script>
     import { fileSize, duration } from './filters';
 
+    function extendContext() {
+        this.ctx.appendFilters( {
+            fileSize,
+            duration
+        } );
+    }
+
     function RuntimePanel( options ) {
         options( {
             [ $.host ]: '',
             [ $.runtime ]: {}
         } );
-
-        this.filters.fileSize = fileSize;
-        this.filters.duration = duration;
     }
 
-    export default Component( Template, RuntimePanel );
+    export default Component( extendContext, Template, RuntimePanel );
 </script>

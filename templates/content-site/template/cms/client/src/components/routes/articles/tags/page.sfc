@@ -29,17 +29,17 @@
 
 <script>
     function RoutesArticlesTagsPage() {
-        this$.loadData = () => this.DI.resolve( 'store' ).articleTags().then(
+        this$.loadData = () => this.ctx.DI.resolve( 'store' ).articleTags().then(
             data => data.tags
         );
 
-        this$.createTag = ( data ) => this.DI.resolve( 'store' ).createArticlesTag(
+        this$.createTag = ( data ) => this.ctx.DI.resolve( 'store' ).createArticlesTag(
             data
         );
 
         this$.confirmDeleteText = ( tag ) => `Are you sure you want to delete tag "${tag.name}"?`;
 
-        this$.deleteTag = ( tag ) => this.DI.resolve( 'store' ).deleteArticleTag(
+        this$.deleteTag = ( tag ) => this.ctx.DI.resolve( 'store' ).deleteArticleTag(
             tag.id
         );
     }

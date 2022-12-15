@@ -6,7 +6,7 @@ import { createDI } from 'sham-ui';
 
 it( 'renders correctly', () => {
     const DI = createDI();
-    const meta = renderer( RoutesSettingsFormPassword, {
+    const meta = renderer( RoutesSettingsFormPassword, {}, {
         DI,
         directives
     } );
@@ -22,7 +22,7 @@ it( 'display errors', async() => {
         updateMemberPassword: updateMock.mockReturnValueOnce( Promise.reject( {} ) )
     } );
 
-    const meta = renderer( RoutesSettingsFormPassword, {
+    const meta = renderer( RoutesSettingsFormPassword, {}, {
         DI,
         directives
     } );
@@ -31,11 +31,11 @@ it( 'display errors', async() => {
         pass1: 'admin1@gmail.com',
         pass2: 'admin1@gmail.com'
     };
-    const { component } = meta;
-    component.container.querySelector( '[name="pass1"]' ).value = formData.pass1;
-    component.container.querySelector( '[name="pass2"]' ).value = formData.pass2;
-    component.container.querySelector( '[type="submit"]' ).click();
-    component.container.querySelector( '[data-test-modal] [data-test-ok-button]' ).click();
+    const { ctx } = meta;
+    ctx.container.querySelector( '[name="pass1"]' ).value = formData.pass1;
+    ctx.container.querySelector( '[name="pass2"]' ).value = formData.pass2;
+    ctx.container.querySelector( '[type="submit"]' ).click();
+    ctx.container.querySelector( '[data-test-modal] [data-test-ok-button]' ).click();
 
     await new Promise( resolve => setImmediate( resolve ) );
 

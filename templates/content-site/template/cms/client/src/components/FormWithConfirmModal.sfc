@@ -23,7 +23,7 @@
 </template>
 
 <script>
-    function FormWithConfirmModal( options, update ) {
+    function FormWithConfirmModal( options ) {
         const saveData = $();
         const confirmCancelErrors = $();
         const modalVisible = $();
@@ -70,14 +70,10 @@
         const showModal = () => new Promise( ( resolve, reject ) => {
             this$._handleOkModal = resolve;
             this$._handleCloseModal = reject;
-            update( {
-                [ modalVisible ]: true
-            } );
+            state[ modalVisible ] = true;
         } );
 
-        const closeModal = () => update( {
-            [ modalVisible ]: false
-        } );
+        const closeModal = () => state[ modalVisible ] = false;
     }
 
     export default Component( Template, FormWithConfirmModal );

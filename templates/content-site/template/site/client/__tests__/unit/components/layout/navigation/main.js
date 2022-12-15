@@ -17,7 +17,7 @@ it( 'renders correctly', () => {
         generate: () => '/'
     } );
 
-    const meta = renderer( LayoutNavigationMain, {
+    const meta = renderer( LayoutNavigationMain, {}, {
         DI,
         directives: {
             ...directives,
@@ -41,15 +41,15 @@ it( 'toggle navbar', () => {
         generate: () => '/'
     } );
 
-    const meta = renderer( LayoutNavigationMain, {
+    const meta = renderer( LayoutNavigationMain, {}, {
         DI,
         directives: {
             ...directives,
             hrefto
         }
     } );
-    meta.component.container.querySelector( '.navbar-collapse' ).click();
+    meta.ctx.container.querySelector( '.navbar-collapse' ).click();
     expect( meta.toJSON() ).toMatchSnapshot();
-    meta.component.container.querySelector( '.navbar-collapse' ).click();
+    meta.ctx.container.querySelector( '.navbar-collapse' ).click();
     expect( meta.toJSON() ).toMatchSnapshot();
 } );

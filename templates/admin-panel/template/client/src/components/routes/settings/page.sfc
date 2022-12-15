@@ -55,17 +55,17 @@
 <script>
     import { useStorage } from '../../../storages/session';
 
-    function RoutesSettingsPage( options, update, didMount ) {
+    function RoutesSettingsPage( options, didMount ) {
         const pageTitle = $();
 
         const state = options( {
             [ pageTitle ]: 'Profile settings'
         } );
 
-        didMount( () => this.DI.resolve( 'title' ).change( state[ pageTitle ] ) );
+        didMount( () => this.ctx.DI.resolve( 'title' ).change( state[ pageTitle ] ) );
 
         this$.onUpdateSessionData = done => {
-            const session = this.DI.resolve( 'session' );
+            const session = this.ctx.DI.resolve( 'session' );
             session.resetSessionValidation();
             session.validateSession().then( done );
         };

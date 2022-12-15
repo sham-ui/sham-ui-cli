@@ -11,11 +11,11 @@
                     <a
                         class=\{{currentPage === item.page ? 'active' : '' }}
                         href=\{{
-                            this.DI.resolve( 'router' ).generate(
+                            this.ctx.DI.resolve( 'router' ).generate(
                                 pathName,
                                 Object.assign(
                                     {},
-                                    this.DI.resolve( 'router' ).storage.params,
+                                    this.ctx.DI.resolve( 'router' ).storage.params,
                                     { "page": item.page } 
                                 )
                             ) + queryString
@@ -91,7 +91,7 @@
 
         this$.handleClick = ( e ) => {
             e.preventDefault();
-            this.DI.resolve( 'router' ).navigate( e.target.getAttribute( 'href' ) );
+            this.ctx.DI.resolve( 'router' ).navigate( e.target.getAttribute( 'href' ) );
         };
     }
 

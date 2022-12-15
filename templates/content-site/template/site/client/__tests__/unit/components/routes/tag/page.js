@@ -24,7 +24,7 @@ it( 'renders correctly', async() => {
         generate: () => '/'
     } );
 
-    const meta = renderer( RoutesTagPage, {
+    const meta = renderer( RoutesTagPage, {}, {
         DI,
         directives
     } );

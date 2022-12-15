@@ -23,7 +23,7 @@
 </template>
 
 <script>
-    function RoutesArticlesNewPage( options, update, didMount ) {
+    function RoutesArticlesNewPage( options, didMount ) {
         const pageTitle = $();
         const errors = $();
 
@@ -32,18 +32,13 @@
             [ pageTitle ]: 'Create article'
         } );
 
-        const fromDI = this.DI.resolve;
+        const fromDI = this.ctx.DI.resolve;
 
         didMount( () => fromDI( 'title' ).change( state[ pageTitle ] ) );
 
         this$.createArticle = ( data ) => fromDI( 'store' ).createArticle( data );
 
-        this$.onCreateArticle = () => {
-            const router = fromDI( 'router' );
-            router.navigate(
-                router.generate( 'articles/list', {} )
-            );
-        };
+        this$.onCreateArticle = () => fromDI( 'router' ).navigateToRoute( 'articles/list' );
     }
 
     export default Component( Template, RoutesArticlesNewPage );

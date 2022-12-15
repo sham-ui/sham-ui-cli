@@ -3,31 +3,11 @@
 exports[`display errors 1`] = `
 Object {
   "Options": Object {
-    "ID": "component",
     "dataLoaded": true,
-    "directives": Object {
-      "EventListener": [Function],
-      "UpdateOnEvent": [Function],
-      "disabled": [Function],
-      "onChangeUpdate": [Function],
-      "onInputUpdate": [Function],
-      "onclick": [Function],
-      "oninput": [Function],
-      "onload": [Function],
-      "onresize": [Function],
-      "onscroll": [Function],
-      "onselect": [Function],
-      "onsubmit": [Function],
-      "ref": [Function],
-    },
     "errors": Array [
       "Fail load accounting info",
     ],
     "files": Array [],
-    "filters": Object {
-      "duration": [Function],
-      "fileSize": [Function],
-    },
     "host": "",
     "pageTitle": "Server information",
     "runtime": Object {},
@@ -124,26 +104,9 @@ Object {
 exports[`renders correctly 1`] = `
 Object {
   "Options": Object {
-    "ID": "component",
     "dataLoaded": false,
-    "directives": Object {
-      "EventListener": [Function],
-      "UpdateOnEvent": [Function],
-      "disabled": [Function],
-      "onChangeUpdate": [Function],
-      "onInputUpdate": [Function],
-      "onclick": [Function],
-      "oninput": [Function],
-      "onload": [Function],
-      "onresize": [Function],
-      "onscroll": [Function],
-      "onselect": [Function],
-      "onsubmit": [Function],
-      "ref": [Function],
-    },
     "errors": Array [],
     "files": Array [],
-    "filters": Object {},
     "host": "",
     "pageTitle": "Server information",
     "runtime": Object {},

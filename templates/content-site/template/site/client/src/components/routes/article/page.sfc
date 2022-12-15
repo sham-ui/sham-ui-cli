@@ -26,7 +26,7 @@
 </template>
 
 <script>
-    function ArticlePage( options, update, didMount ) {
+    function ArticlePage( options, didMount ) {
         const article = $();
         const errors  = $();
         const isNotFound = $();
@@ -39,7 +39,7 @@
             [ dataLoaded ]: false
         } );
 
-        const DI = this.DI.resolve;
+        const DI = this.ctx.DI.resolve;
 
         didMount( () => {
             if ( !state[ dataLoaded ] ) {
@@ -48,7 +48,7 @@
                 ).then(
                     data => {
                         DI( 'title' ).change( data.title );
-                        update( {
+                        state( {
                             [ dataLoaded ]: true,
                             [ article ]: data
                         } );
@@ -67,7 +67,7 @@
                     },
                     ( { Messages = [ 'Fail load article' ], status } ) => {
                         DI( 'title' ).change( 'Not found' );
-                        update( {
+                        state( {
                             [ dataLoaded ]: true,
                             [ errors ]: Messages,
                             [ isNotFound ]: 404 === status

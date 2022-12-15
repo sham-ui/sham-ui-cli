@@ -3,25 +3,8 @@
 exports[`fail load article data 1`] = `
 Object {
   "Options": Object {
-    "ID": "component",
     "article": Object {},
     "dataLoaded": true,
-    "directives": Object {
-      "EventListener": [Function],
-      "UpdateOnEvent": [Function],
-      "disabled": [Function],
-      "onChangeUpdate": [Function],
-      "onFocusIn": [Function],
-      "onInputUpdate": [Function],
-      "onclick": [Function],
-      "oninput": [Function],
-      "onload": [Function],
-      "onresize": [Function],
-      "onscroll": [Function],
-      "onselect": [Function],
-      "onsubmit": [Function],
-      "ref": [Function],
-    },
     "errors": Array [
       "Load article detail fail",
     ],
@@ -189,7 +172,6 @@ Object {
 exports[`renders correctly 1`] = `
 Object {
   "Options": Object {
-    "ID": "component",
     "article": Object {
       "body": "<p>Текст</p><p><u>Текст</u></p>",
       "category_id": "6",
@@ -202,22 +184,6 @@ Object {
       "title": "Тест2",
     },
     "dataLoaded": true,
-    "directives": Object {
-      "EventListener": [Function],
-      "UpdateOnEvent": [Function],
-      "disabled": [Function],
-      "onChangeUpdate": [Function],
-      "onFocusIn": [Function],
-      "onInputUpdate": [Function],
-      "onclick": [Function],
-      "oninput": [Function],
-      "onload": [Function],
-      "onresize": [Function],
-      "onscroll": [Function],
-      "onselect": [Function],
-      "onsubmit": [Function],
-      "ref": [Function],
-    },
     "errors": Array [],
     "pageTitle": "Edit article",
   },

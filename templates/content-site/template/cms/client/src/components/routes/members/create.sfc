@@ -46,7 +46,7 @@
             [ $.onCreateSuccess ]() {}
         } );
 
-        this$._saveData = () => this.DI.resolve( 'store' ).api.request( {
+        this$._saveData = () => this.ctx.DI.resolve( 'store' ).api.request( {
             url: 'admin/members',
             method: 'post',
             data: {

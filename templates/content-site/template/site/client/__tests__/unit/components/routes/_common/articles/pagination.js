@@ -17,7 +17,7 @@ it( 'renders correctly', () => {
         generate: () => '/'
     } );
 
-    const meta = renderer( RoutesHomePagination, {
+    const meta = renderer( RoutesHomePagination, {}, {
         DI,
         directives
     } );

@@ -7,7 +7,7 @@ it( 'renders correctly', () => {
     DI.bind( 'title', {
         change() {}
     } );
-    const meta = renderer( ContactPage, {
+    const meta = renderer( ContactPage, {}, {
         DI
     } );
     expect( meta.toJSON() ).toMatchSnapshot();

@@ -16,7 +16,7 @@ it( 'renders correctly', () => {
         generate: () => '/'
     } );
 
-    const meta = renderer( LayoutNavigationNavbar, {
+    const meta = renderer( LayoutNavigationNavbar, {}, {
         DI,
         directives: {
             hrefto

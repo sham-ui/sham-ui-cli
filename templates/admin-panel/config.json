@@ -57,5 +57,8 @@
     "client/__tests__/unit/components/routes/signup/**": "signupEnabled",
     "client/src/components/routes/signup/**": "signupEnabled",
     "client/src/styles/routes/signup.scss": "signupEnabled"
-  }
+  },
+  "skipInterpolation": [
+    "client/scaffolds/**"
+  ]
 }
