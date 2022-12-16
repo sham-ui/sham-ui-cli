@@ -1,3 +1,6 @@
+## 6.0.0-alpha.2
+* New tag
+
 ## 6.0.0-alpha.1
 * Update dependencies
 * Update templates to sham-ui 6.x
