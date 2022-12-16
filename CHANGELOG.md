@@ -1,4 +1,4 @@
-## master
+## 6.0.0-alpha.1
 * Update dependencies
 * Update templates to sham-ui 6.x
 * Fix upgrade project (add `mkdir -p`, fail open editor, etc)
