@@ -1,4 +1,4 @@
-## master
+## 6.0.0-alpha.3
 * Fix content site template
 * Fix pagination in admin panels
 * Fix pagination style in content site
