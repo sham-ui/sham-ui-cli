@@ -28,8 +28,9 @@
         margin: auto;
         li a {
             display: block;
-            width:35px;
+            min-width:35px;
             height: 35px;
+            padding: 0 4px;
             border-radius: $rd-circle;
             background-color: transparent;
             border:1px solid $base-color;

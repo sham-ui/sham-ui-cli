@@ -1,3 +1,8 @@
+## master
+* Fix content site template
+* Fix pagination in admin panels
+* Fix pagination style in content site
+
 ## 6.0.0-alpha.2
 * New tag
 

@@ -40,8 +40,12 @@
         this$.pages = ( limit, total, currentPage, pageArraySize ) => {
             const totalPages = Math.ceil( total / limit );
             const pages = [ 1 ];
-            for ( let i = 2; i < totalPages && Math.abs( i - currentPage ) < pageArraySize; i++ ) {
-                pages[ i - 1 ] = i;
+            for (
+                let i = Math.max( 2, currentPage - 1 );
+                i < totalPages && pages.length <= pageArraySize;
+                i++
+            ) {
+                pages.push( i );
             }
             if ( totalPages > 1 ) {
                 pages.push( totalPages );
