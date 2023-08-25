@@ -8,6 +8,7 @@ import (
 	"encoding/hex"
 	"errors"
 	"fmt"
+	"github.com/go-logr/logr"
 	"io"
 	"mime/multipart"
 	"net/http"
@@ -111,7 +112,7 @@ func (h *uploadHandler) buildFileResponse(fileName string, size int64) *uploadRe
 	}
 }
 
-func NewUploadHandler(sessionsStore *sessions.Store) http.HandlerFunc {
+func NewUploadHandler(logger logr.Logger, sessionsStore *sessions.Store) http.HandlerFunc {
 	h := &uploadHandler{}
-	return handler.Create(h, handler.WithOnlyForAuthenticated(sessionsStore))
+	return handler.Create(logger, h, handler.WithOnlyForAuthenticated(sessionsStore))
 }

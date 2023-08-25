@@ -1,7 +1,7 @@
 package config
 
 import (
-	"github.com/sirupsen/logrus"
+	"github.com/go-logr/logr"
 	"gopkg.in/gcfg.v1"
 	stdIOutls "io/ioutil"
 	stdOS "os"
@@ -12,11 +12,13 @@ import (
 type operationSystem interface {
 	Stat(name string) (stdOS.FileInfo, error)
 	IsNotExist(err error) bool
+	Exit(code int)
 }
 type originalOS struct{}
 
 func (originalOS) Stat(name string) (stdOS.FileInfo, error) { return stdOS.Stat(name) }
 func (originalOS) IsNotExist(err error) bool                { return stdOS.IsNotExist(err) }
+func (originalOS) Exit(code int)                            { stdOS.Exit(code) }
 
 // Interface for "io/ioutil" package
 type osIOutil interface {
@@ -60,20 +62,22 @@ allowedDomains = http://localhost:3000
 socketPath = /tmp/{{ name }}/cms.sock
 `
 
-func LoadConfiguration(configFilename string) {
+func LoadConfiguration(logger logr.Logger, configFilename string) {
 	if _, err := os.Stat(configFilename); os.IsNotExist(err) {
 		err := ioutil.WriteFile(configFilename, []byte(strings.TrimSpace(defaultConfig)), 0644)
 		if nil != err {
-			logrus.WithError(err).Fatal("Fail write config", logrus.Fields{"configFilename": configFilename})
+			logger.Error(err, "Fail write config", "configFilename", configFilename)
+			os.Exit(1)
 		} else {
-			logrus.Info("Create config file")
+			logger.Info("Create config file")
 		}
 	}
 
 	var cfg Config
 	err := gcfg.ReadFileInto(&cfg, configFilename)
 	if nil != err {
-		logrus.WithError(err).Fatal("Fail read config", logrus.Fields{"configFilename": configFilename})
+		logger.Error(err, "Fail read config", "configFilename", configFilename)
+		os.Exit(1)
 	}
 	Server = cfg.Server
 	Api = cfg.Api

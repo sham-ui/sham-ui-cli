@@ -4,9 +4,10 @@ import (
 	"embed"
 	"errors"
 	"github.com/NYTimes/gziphandler"
-	log "github.com/sirupsen/logrus"
+	"github.com/go-logr/logr"
 	"io/fs"
 	"net/http"
+	"os"
 	"path/filepath"
 	"site/ssr"
 	"strings"
@@ -19,6 +20,7 @@ type Handler struct {
 	ssr        http.Handler
 	fsys       fs.FS
 	fileServer http.Handler
+	logger     logr.Logger
 }
 
 // ServeHTTP inspects the URL path to locate a file within the static dir
@@ -61,12 +63,12 @@ func (h Handler) ServeHTTP(w http.ResponseWriter, r *http.Request) {
 		// file does not exist, serve SSR
 		h.ssr.ServeHTTP(w, r)
 	} else if err != nil {
-		log.WithError(err).Error("can't get file")
+		h.logger.Error(err, "can't open file", "path", cannonicalName)
 		http.Error(w, err.Error(), http.StatusInternalServerError)
 	} else {
 		stat, err := file.Stat()
 		if nil != err {
-			log.WithError(err).Error("can't get stat for files")
+			h.logger.Error(err, "can't get stat for file", "path", cannonicalName)
 			http.Error(w, err.Error(), http.StatusInternalServerError)
 			return
 		}
@@ -88,14 +90,17 @@ func (h Handler) fileServe(w http.ResponseWriter, r *http.Request) {
 	h.fileServer.ServeHTTP(w, r)
 }
 
-func NewHandler(render ssr.Render) http.Handler {
+func NewHandler(logger logr.Logger, render ssr.Render) http.Handler {
+	assetsLogger := logger.WithName("assets")
 	fsys, err := fs.Sub(Assets, "files")
 	if nil != err {
-		log.WithError(err).Fatal("can' get file system")
+		assetsLogger.Error(err, "can't get file system")
+		os.Exit(1)
 	}
 	return gziphandler.GzipHandler(Handler{
-		ssr:        ssr.NewServer(render),
+		ssr:        ssr.NewServer(logger, render),
 		fsys:       fsys,
 		fileServer: http.FileServer(http.FS(fsys)),
+		logger:     assetsLogger,
 	})
 }

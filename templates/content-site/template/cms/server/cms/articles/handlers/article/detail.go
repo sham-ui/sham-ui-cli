@@ -5,6 +5,7 @@ import (
 	"cms/core/sessions"
 	"database/sql"
 	"fmt"
+	"github.com/go-logr/logr"
 	"github.com/gorilla/mux"
 	"net/http"
 	"strconv"
@@ -67,9 +68,9 @@ func (h *detailHandler) Process(_ *handler.Context, data interface{}) (interface
 	return article, nil
 }
 
-func NewDetailHandler(db *sql.DB, sessionsStore *sessions.Store) http.HandlerFunc {
+func NewDetailHandler(logger logr.Logger, db *sql.DB, sessionsStore *sessions.Store) http.HandlerFunc {
 	h := &detailHandler{
 		db: db,
 	}
-	return handler.Create(h, handler.WithOnlyForAuthenticated(sessionsStore))
+	return handler.Create(logger, h, handler.WithOnlyForAuthenticated(sessionsStore))
 }

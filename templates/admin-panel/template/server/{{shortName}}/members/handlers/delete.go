@@ -3,6 +3,7 @@ package handlers
 import (
 	"database/sql"
 	"fmt"
+	"github.com/go-logr/logr"
 	"github.com/gorilla/mux"
 	"net/http"
 	"{{shortName}}/core/handler"
@@ -52,6 +53,6 @@ func (h *deleteHandler) Process(_ *handler.Context, data interface{}) (interface
 	}, nil
 }
 
-func NewDeleteHandler(db *sql.DB, sessionsStore *sessions.Store) http.HandlerFunc {
-	return handler.Create(&deleteHandler{db: db}, handler.WithOnlyForSuperuser(sessionsStore))
+func NewDeleteHandler(logger logr.Logger, db *sql.DB, sessionsStore *sessions.Store) http.HandlerFunc {
+	return handler.Create(logger, &deleteHandler{db: db}, handler.WithOnlyForSuperuser(sessionsStore))
 }

@@ -1,6 +1,7 @@
 package main
 
 import (
+	"github.com/go-logr/logr/testr"
 	"net/http"
 	"regexp"
 	"site/ssr"
@@ -10,8 +11,8 @@ import (
 )
 
 func TestSSR(t *testing.T) {
-	render := ssr.NewServerSideRender()
-	env := test_helpers.NewTestEnv(render)
+	render := ssr.NewServerSideRender(testr.New(t).V(1))
+	env := test_helpers.NewTestEnv(render, t)
 	revert := env.Default()
 	render.Start()
 	defer render.Stop()

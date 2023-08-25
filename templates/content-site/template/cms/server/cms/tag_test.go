@@ -8,7 +8,7 @@ import (
 )
 
 func TestTag(t *testing.T) {
-	env := test_helpers.NewTestEnv()
+	env := test_helpers.NewTestEnv(t)
 	revert := env.Default()
 	defer revert()
 	env.CreateUser()
@@ -23,7 +23,7 @@ func TestTag(t *testing.T) {
 	if nil != err {
 		t.Fatalf("delete from tag: %s", err)
 	}
-	_, err = env.DB.DB.Query("INSERT INTO tag(id, name, slug) VALUES ($1, $2,$3)", "1", "test", "test")
+	_, err = env.DB.DB.Exec("INSERT INTO tag(id, name, slug) VALUES ($1, $2,$3)", "1", "test", "test")
 	if nil != err {
 		t.Fatalf("can't insert tag: %s", err)
 	}

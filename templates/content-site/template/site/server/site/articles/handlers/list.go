@@ -2,6 +2,7 @@ package handlers
 
 import (
 	"fmt"
+	"github.com/go-logr/logr"
 	"net/http"
 	"site/core/handler"
 	"site/proto"
@@ -167,8 +168,8 @@ func (h *listHandler) buildMeta(offset, limit, total int64) map[string]interface
 	}
 }
 
-func NewListHandler(cmsClient proto.CMSClient) http.HandlerFunc {
-	return handler.Create(&listHandler{
+func NewListHandler(logger logr.Logger, cmsClient proto.CMSClient) http.HandlerFunc {
+	return handler.Create(logger, &listHandler{
 		cmsClient: cmsClient,
 	})
 }

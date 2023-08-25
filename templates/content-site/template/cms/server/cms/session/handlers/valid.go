@@ -1,9 +1,10 @@
 package handlers
 
 import (
-	"net/http"
 	"cms/core/handler"
 	"cms/core/sessions"
+	"github.com/go-logr/logr"
+	"net/http"
 )
 
 type validSessionResponse struct {
@@ -22,6 +23,6 @@ func validSessionHandler(ctx *handler.Context, _ interface{}) (interface{}, erro
 	}, nil
 }
 
-func NewValidSessionHandler(sessionsStore *sessions.Store) http.HandlerFunc {
-	return handler.CreateFromProcessFunc(validSessionHandler, handler.WithOnlyForAuthenticated(sessionsStore))
+func NewValidSessionHandler(logger logr.Logger, sessionsStore *sessions.Store) http.HandlerFunc {
+	return handler.CreateFromProcessFunc(logger, validSessionHandler, handler.WithOnlyForAuthenticated(sessionsStore))
 }

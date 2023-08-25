@@ -4,6 +4,7 @@ import (
 	"database/sql"
 	"encoding/json"
 	"fmt"
+	"github.com/go-logr/logr"
 	"github.com/gorilla/csrf"
 	gorillaSessions "github.com/gorilla/sessions"
 	"golang.org/x/crypto/bcrypt"
@@ -119,8 +120,8 @@ func (h *loginHandler) Process(ctx *handler.Context, data interface{}) (interfac
 	}, nil
 }
 
-func NewLoginHandler(sessionsStore *sessions.Store, db *sql.DB) http.HandlerFunc {
-	return handler.Create(&loginHandler{
+func NewLoginHandler(logger logr.Logger, sessionsStore *sessions.Store, db *sql.DB) http.HandlerFunc {
+	return handler.Create(logger, &loginHandler{
 		sessionsStore: sessionsStore,
 		db:            db,
 	})

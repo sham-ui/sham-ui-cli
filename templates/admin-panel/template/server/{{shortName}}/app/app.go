@@ -2,11 +2,12 @@ package app
 
 import (
 	"database/sql"
+	"github.com/go-logr/logr"
 	"github.com/gorilla/csrf"
 	"github.com/gorilla/mux"
 	"github.com/rs/cors"
-	log "github.com/sirupsen/logrus"
 	"github.com/urfave/negroni"
+	"os"
 	"{{shortName}}/assets"
 	authenticationHandlers "{{shortName}}/authentication/handlers"
 	"{{shortName}}/config"
@@ -16,35 +17,37 @@ import (
 	membersHandlers "{{shortName}}/members/handlers"
 	serverHandlers "{{shortName}}/server/handlers"
 	sessionHandlers "{{shortName}}/session/handlers"
-	"strings"
 	"time"
 )
 
-func StartApplication(configPath string, n *negroni.Negroni) *sql.DB {
-	config.LoadConfiguration(configPath)
+func StartApplication(logger logr.Logger, configPath string, n *negroni.Negroni) *sql.DB {
+	config.LoadConfiguration(logger, configPath)
 
 	db, err := database.ConnToDB(config.DataBase.GetURL())
 	if nil != err {
-		log.Fatalf("Fail connect to db: %s", err)
+		logger.Error(err, "Fail connect to db")
+		os.Exit(1)
 	}
 
 	sessionsStore, err := sessions.NewStore(db, config.Session.Secret)
 	if nil == err {
-		log.Info("Create pg session store")
+		logger.Info("Create pg session store")
 	} else {
-		log.WithError(err).Fatal("Fail create pg session store")
+		logger.Error(err, "Fail create pg session store")
+		os.Exit(1)
 	}
 	// Run a background goroutine to clean up expired sessions from the database.
 	defer sessionsStore.StopCleanup(sessionsStore.Cleanup(time.Minute * 5))
 
 	err = members.CreateMemberStructure(db)
 	if nil != err {
-		log.Fatalf("Fail create members table: %s", err)
+		logger.Error(err, "Fail create members table")
+		os.Exit(1)
 	} else {
-		log.Info("Create members table")
+		logger.Info("Create members table")
 	}
 
-	log.Infof("Allowed domains: %s", strings.Join(config.Server.AllowedDomains, ", "))
+	logger.Info("Allowed domains", "domains", config.Server.AllowedDomains)
 
 	CSRF := csrf.Protect(
 		[]byte("32-byte-long-auth-key"),
@@ -55,7 +58,7 @@ func StartApplication(configPath string, n *negroni.Negroni) *sql.DB {
 
 	c := cors.New(cors.Options{
 		AllowedOrigins:   config.Server.AllowedDomains,
-		AllowedMethods:   []string{"PUT", "POST", "GET"},
+		AllowedMethods:   []string{"PUT", "POST", "GET", "DELETE"},
 		AllowCredentials: true,
 		AllowedHeaders:   []string{"X-CSRF-Token", "Content-Type"},
 		ExposedHeaders:   []string{"X-CSRF-Token", "Content-Type"},
@@ -66,31 +69,31 @@ func StartApplication(configPath string, n *negroni.Negroni) *sql.DB {
 	r := mux.NewRouter()
 
 	// Authentication Routes
-	r.HandleFunc("/api/csrftoken", sessionHandlers.NewCsrfTokenHandler()).Methods("GET")
-	r.HandleFunc("/api/login", authenticationHandlers.NewLoginHandler(sessionsStore, db)).Methods("POST")
-	r.HandleFunc("/api/logout", authenticationHandlers.NewLogoutHandler(sessionsStore)).Methods("POST")
+	r.HandleFunc("/api/csrftoken", sessionHandlers.NewCsrfTokenHandler(logger)).Methods("GET")
+	r.HandleFunc("/api/login", authenticationHandlers.NewLoginHandler(logger, sessionsStore, db)).Methods("POST")
+	r.HandleFunc("/api/logout", authenticationHandlers.NewLogoutHandler(logger, sessionsStore)).Methods("POST")
 
 	// Session Routes
-	r.HandleFunc("/api/validsession", sessionHandlers.NewValidSessionHandler(sessionsStore)).Methods("GET")
+	r.HandleFunc("/api/validsession", sessionHandlers.NewValidSessionHandler(logger, sessionsStore)).Methods("GET")
 
 	// Member CRUD routes
 	{{#if signupEnabled}}
-	r.HandleFunc("/api/members", membersHandlers.NewSignupHandler(db, sessionsStore)).Methods("POST")
+	r.HandleFunc("/api/members", membersHandlers.NewSignupHandler(logger, db, sessionsStore)).Methods("POST")
 	{{/if}}
-	r.HandleFunc("/api/members/email", membersHandlers.NewUpdateEmailHandler(db, sessionsStore)).Methods("PUT")
-	r.HandleFunc("/api/members/name", membersHandlers.NewUpdateNameHandler(db, sessionsStore)).Methods("PUT")
-	r.HandleFunc("/api/members/password", membersHandlers.NewUpdatePasswordHandler(db, sessionsStore)).Methods("PUT")
+	r.HandleFunc("/api/members/email", membersHandlers.NewUpdateEmailHandler(logger, db, sessionsStore)).Methods("PUT")
+	r.HandleFunc("/api/members/name", membersHandlers.NewUpdateNameHandler(logger, db, sessionsStore)).Methods("PUT")
+	r.HandleFunc("/api/members/password", membersHandlers.NewUpdatePasswordHandler(logger, db, sessionsStore)).Methods("PUT")
 
 	// Superuser sections
-	r.HandleFunc("/api/admin/members", membersHandlers.NewListHandler(db, sessionsStore)).Methods("GET")
-	r.HandleFunc("/api/admin/members", membersHandlers.NewCreateHandler(db, sessionsStore)).Methods("POST")
-	r.HandleFunc("/api/admin/members/{id:[0-9]+}", membersHandlers.NewUpdateHandler(db, sessionsStore)).Methods("PUT")
-	r.HandleFunc("/api/admin/members/{id:[0-9]+}/password", membersHandlers.NewResetPasswordHandler(db, sessionsStore)).Methods("PUT")
-	r.HandleFunc("/api/admin/members/{id:[0-9]+}", membersHandlers.NewDeleteHandler(db, sessionsStore)).Methods("DELETE")
-	r.HandleFunc("/api/admin/server-info", serverHandlers.NewInfoHandler(sessionsStore)).Methods("GET")
+	r.HandleFunc("/api/admin/members", membersHandlers.NewListHandler(logger, db, sessionsStore)).Methods("GET")
+	r.HandleFunc("/api/admin/members", membersHandlers.NewCreateHandler(logger, db, sessionsStore)).Methods("POST")
+	r.HandleFunc("/api/admin/members/{id:[0-9]+}", membersHandlers.NewUpdateHandler(logger, db, sessionsStore)).Methods("PUT")
+	r.HandleFunc("/api/admin/members/{id:[0-9]+}/password", membersHandlers.NewResetPasswordHandler(logger, db, sessionsStore)).Methods("PUT")
+	r.HandleFunc("/api/admin/members/{id:[0-9]+}", membersHandlers.NewDeleteHandler(logger, db, sessionsStore)).Methods("DELETE")
+	r.HandleFunc("/api/admin/server-info", serverHandlers.NewInfoHandler(logger, sessionsStore)).Methods("GET")
 
 	// Resources
-	spaHandler := assets.NewHandler(sessionsStore)
+	spaHandler := assets.NewHandler(logger, sessionsStore)
 	r.PathPrefix("/").Handler(spaHandler)
 
 	// Middleware

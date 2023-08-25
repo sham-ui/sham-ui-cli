@@ -3,6 +3,7 @@ package handlers
 import (
 	"errors"
 	"fmt"
+	"github.com/go-logr/logr"
 	"github.com/gorilla/mux"
 	"io"
 	"io/fs"
@@ -135,9 +136,9 @@ func (h *assetsHandler) Process(ctx *handler.Context, data interface{}) (interfa
 	return nil, nil
 }
 
-func NewAssetsHandler(cmsClient proto.CMSClient) http.HandlerFunc {
+func NewAssetsHandler(logger logr.Logger, cmsClient proto.CMSClient) http.HandlerFunc {
 	h := &assetsHandler{
 		cmsClient: cmsClient,
 	}
-	return handler.Create(h, handler.WithoutSerializeResultToJSON())
+	return handler.Create(logger, h, handler.WithoutSerializeResultToJSON())
 }

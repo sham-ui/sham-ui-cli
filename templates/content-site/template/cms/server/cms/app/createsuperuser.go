@@ -6,19 +6,22 @@ import (
 	"cms/core/database"
 	"cms/core/migrations"
 	"cms/members"
-	log "github.com/sirupsen/logrus"
+	"github.com/go-logr/logr"
 	"gopkg.in/AlecAivazis/survey.v1"
+	"os"
 )
 
-func CreateSuperUser() {
-	config.LoadConfiguration("config.cfg")
+func CreateSuperUser(logger logr.Logger) {
+	config.LoadConfiguration(logger, "config.cfg")
 	db, err := database.ConnToDB(config.DataBase.GetURL())
 	if nil != err {
-		log.Fatalf("Fail connect to db: %s", err)
+		logger.Error(err, "Fail connect to db")
+		os.Exit(1)
 	}
-	migrator, err := migrations.NewMigrator(db)
+	migrator, err := migrations.NewMigrator(logger, db)
 	if nil != err {
-		log.Fatalf("Fail create migrator: %s", err)
+		logger.Error(err, "Fail create migrator")
+		os.Exit(1)
 	}
 	for _, migrationByModule := range [][]migrations.Migration{
 		members.Migrations(db),
@@ -26,7 +29,8 @@ func CreateSuperUser() {
 	} {
 		err = migrator.Apply(migrationByModule...)
 		if nil != err {
-			log.Fatalf("Fail apply migrations: %s", err)
+			logger.Error(err, "Fail apply migrations")
+			os.Exit(1)
 		}
 	}
 
@@ -35,26 +39,30 @@ func CreateSuperUser() {
 		Message: "Email:",
 	}, &email, nil)
 	if nil != err {
-		log.WithError(err).Fatal("can't get email")
+		logger.Error(err, "Can't get email")
+		os.Exit(1)
 	}
 	var name string
 	err = survey.AskOne(&survey.Input{
 		Message: "Name:",
 	}, &name, nil)
 	if nil != err {
-		log.WithError(err).Fatal("can't get name")
+		logger.Error(err, "Can't get name")
+		os.Exit(1)
 	}
 	var password string
 	err = survey.AskOne(&survey.Password{
 		Message: "Password:",
 	}, &password, nil)
 	if nil != err {
-		log.WithError(err).Fatal("can't get password")
+		logger.Error(err, "Can't get password")
+		os.Exit(1)
 	}
 
 	hashedPw, err := members.HashPassword(password)
 	if nil != err {
-		log.WithError(err).Fatal("can't hash password")
+		logger.Error(err, "Can't hash password")
+		os.Exit(1)
 	}
 
 	err = members.CreateMember(db, &members.MemberData{
@@ -63,9 +71,9 @@ func CreateSuperUser() {
 		Password:    hashedPw,
 		IsSuperuser: true,
 	})
-	if nil == err {
-		log.Info("Superuser created: ", name)
-	} else {
-		log.WithError(err).Fatal("can't create superuser")
+	if err != nil {
+		logger.Error(err, "Can't create superuser")
+		os.Exit(1)
 	}
+	logger.Info("Superuser created", "email", email, "name", name)
 }

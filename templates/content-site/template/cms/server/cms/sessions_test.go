@@ -8,7 +8,7 @@ import (
 )
 
 func TestCsrfToken(t *testing.T) {
-	env := test_helpers.NewTestEnv()
+	env := test_helpers.NewTestEnv(t)
 	revert := env.Default()
 	defer revert()
 
@@ -19,7 +19,7 @@ func TestCsrfToken(t *testing.T) {
 }
 
 func TestSessionNotExists(t *testing.T) {
-	env := test_helpers.NewTestEnv()
+	env := test_helpers.NewTestEnv(t)
 	revert := env.Default()
 	defer revert()
 	env.API.GetCSRF()
@@ -30,7 +30,7 @@ func TestSessionNotExists(t *testing.T) {
 }
 
 func TestSessionExists(t *testing.T) {
-	env := test_helpers.NewTestEnv()
+	env := test_helpers.NewTestEnv(t)
 	revert := env.Default()
 	defer revert()
 	env.CreateUser()
@@ -43,7 +43,7 @@ func TestSessionExists(t *testing.T) {
 }
 
 func TestSuperuserSession(t *testing.T) {
-	env := test_helpers.NewTestEnv()
+	env := test_helpers.NewTestEnv(t)
 	revert := env.Default()
 	defer revert()
 	env.CreateSuperUser()

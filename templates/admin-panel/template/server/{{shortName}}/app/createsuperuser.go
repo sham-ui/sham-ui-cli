@@ -1,51 +1,57 @@
 package app
 
 import (
-	log "github.com/sirupsen/logrus"
-	"gopkg.in/AlecAivazis/survey.v1"
+	"github.com/go-logr/logr"
+    "gopkg.in/AlecAivazis/survey.v1"
+    "os"
 	"{{shortName}}/config"
 	"{{shortName}}/core/database"
 	"{{shortName}}/members"
 )
 
-func CreateSuperUser() {
-	config.LoadConfiguration("config.cfg")
+func CreateSuperUser(logger logr.Logger) {
+	config.LoadConfiguration(logger, "config.cfg")
 	db, err := database.ConnToDB(config.DataBase.GetURL())
 	if nil != err {
-		log.Fatalf("Fail connect to db: %s", err)
+		logger.Error(err, "Fail connect to db")
+		os.Exit(1)
 	}
 	err = members.CreateMemberStructure(db)
 	if nil != err {
-		log.Fatalf("Fail create members table: %s", err)
-	} else {
-		log.Info("Create members table")
+		logger.Error(err, "Fail create members table")
+		os.Exit(1)
 	}
+	logger.Info("Create members table")
 
 	var email string
 	err = survey.AskOne(&survey.Input{
 		Message: "Email:",
 	}, &email, nil)
 	if nil != err {
-		log.WithError(err).Fatal("can't get email")
+		logger.Error(err, "Can't get email")
+		os.Exit(1)
 	}
 	var name string
 	err = survey.AskOne(&survey.Input{
 		Message: "Name:",
 	}, &name, nil)
 	if nil != err {
-		log.WithError(err).Fatal("can't get name")
+		logger.Error(err, "Can't get name")
+		os.Exit(1)
 	}
 	var password string
 	err = survey.AskOne(&survey.Password{
 		Message: "Password:",
 	}, &password, nil)
 	if nil != err {
-		log.WithError(err).Fatal("can't get password")
+		logger.Error(err, "Can't get password")
+		os.Exit(1)
 	}
 
 	hashedPw, err := members.HashPassword(password)
 	if nil != err {
-		log.WithError(err).Fatal("can't hash password")
+		logger.Error(err, "Can't hash password")
+		os.Exit(1)
 	}
 
 	err = members.CreateMember(db, &members.MemberData{
@@ -54,9 +60,9 @@ func CreateSuperUser() {
 		Password:    hashedPw,
 		IsSuperuser: true,
 	})
-	if nil == err {
-		log.Info("Superuser created: ", name)
-	} else {
-		log.WithError(err).Fatal("can't create superuser")
+	if err != nil {
+		logger.Error(err, "Can't create superuser")
+		os.Exit(1)
 	}
+	logger.Info("Superuser created", "email", email, "name", name)
 }

@@ -1,6 +1,9 @@
 package handler
 
-import "net/http"
+import (
+	"github.com/go-logr/logr"
+	"net/http"
+)
 
 type ProcessFunc func(ctx *Context, data interface{}) (interface{}, error)
 
@@ -14,8 +17,8 @@ func (h *onlyProcessFuncHandler) Process(ctx *Context, data interface{}) (interf
 	return h.fn(ctx, data)
 }
 
-func CreateFromProcessFunc(fn ProcessFunc, opts ...Option) http.HandlerFunc {
-	return Create(&onlyProcessFuncHandler{
+func CreateFromProcessFunc(logger logr.Logger, fn ProcessFunc, opts ...Option) http.HandlerFunc {
+	return Create(logger, &onlyProcessFuncHandler{
 		fn: fn,
 	}, opts...)
 }

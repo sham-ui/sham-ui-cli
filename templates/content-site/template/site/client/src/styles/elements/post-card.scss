@@ -16,6 +16,7 @@
 			}
 			h5{
 				margin-bottom:8px;
+				overflow-wrap: anywhere;
 				a{
 					@include easeInOut(0.5);
 					&:hover{
@@ -25,12 +26,14 @@
 			}
 			p{
 				margin-bottom:30px;
+                overflow: hidden;
+                text-overflow: ellipsis;
 			}
 		}
 		&-info{
 			ul{
 				display: flex;
-    			align-items: center;
+				align-items: center;
 			}
 			img{
 				width:40px !important;
@@ -51,9 +54,3 @@
 		}
 	}
 }
-
-
-
-
-
-

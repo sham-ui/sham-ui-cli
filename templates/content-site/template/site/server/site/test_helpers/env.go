@@ -1,16 +1,15 @@
 package test_helpers
 
 import (
-	"github.com/sirupsen/logrus"
+	"github.com/go-logr/logr/testr"
 	"github.com/urfave/negroni"
-	"io/ioutil"
-	"log"
 	"path"
 	"site/app"
 	"site/config"
 	"site/ssr"
 	"site/test_helpers/client"
 	"site/test_helpers/cms"
+	"testing"
 )
 
 type TestEnv struct {
@@ -18,22 +17,17 @@ type TestEnv struct {
 	CMS *cms.MockCMSClient
 }
 
-func (env *TestEnv) DisableLogger() {
-	log.SetOutput(ioutil.Discard)
-	logrus.SetLevel(logrus.FatalLevel)
-}
-
 func (env *TestEnv) Default() func() {
 	return func() {}
 }
 
-func NewTestEnv(render ssr.Render) *TestEnv {
+func NewTestEnv(render ssr.Render, t *testing.T) *TestEnv {
 	env := &TestEnv{}
-	env.DisableLogger()
 	n := negroni.New()
-	config.LoadConfiguration(path.Join("testdata", "config.cfg"))
+	logger := testr.New(t).V(1)
+	config.LoadConfiguration(logger, path.Join("testdata", "config.cfg"))
 	env.CMS = &cms.MockCMSClient{}
-	app.StartApplication(n, env.CMS, render)
+	app.StartApplication(logger, n, env.CMS, render)
 	env.API = client.NewApiClient(n)
 	return env
 }

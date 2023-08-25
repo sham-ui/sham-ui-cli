@@ -11,8 +11,7 @@ type ArticleRepository struct {
 
 func (r *ArticleRepository) IsUnique(slug string) (bool, int, error) {
 	var existingId int
-	row := r.db.QueryRow("SELECT id FROM article WHERE slug = $1", slug)
-	err := row.Scan(&existingId)
+	err := r.db.QueryRow("SELECT id FROM article WHERE slug = $1", slug).Scan(&existingId)
 	if err == sql.ErrNoRows {
 		return true, 0, nil
 	}
@@ -24,6 +23,7 @@ func (r *ArticleRepository) IsUnique(slug string) (bool, int, error) {
 
 func (r *ArticleRepository) GetTagIDs(tx *sql.Tx, articleID int) ([]int, error) {
 	res, err := tx.Query("SELECT tag_id FROM article_tag WHERE article_id = $1", articleID)
+	defer res.Close()
 	if nil != err {
 		return nil, fmt.Errorf("select tag_id: %s", err)
 	}

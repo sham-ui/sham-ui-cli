@@ -1,3 +1,14 @@
+## master
+* Fix content site template
+* Pass os ENV's to ssr render in content site 
+* Fix SSR restart in content site template
+* Fix SSR memory leak in content site template
+* Fix styles in content site template
+* Fix don't release DB connection in content site template
+* Refactoring logger in content site & admin panel template
+* Fix call `.Close` on nil in content site API 
+* Update browserlist in templates
+
 ## 6.0.0-alpha.3
 * Fix content site template
 * Fix pagination in admin panels

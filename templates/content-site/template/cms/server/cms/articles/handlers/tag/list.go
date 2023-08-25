@@ -5,6 +5,7 @@ import (
 	"cms/core/sessions"
 	"database/sql"
 	"fmt"
+	"github.com/go-logr/logr"
 	"net/http"
 )
 
@@ -43,6 +44,6 @@ func (h *listHandler) Process(_ *handler.Context, _ interface{}) (interface{}, e
 	}, nil
 }
 
-func NewListHandler(db *sql.DB, sessionsStore *sessions.Store) http.HandlerFunc {
-	return handler.Create(&listHandler{db: db}, handler.WithOnlyForAuthenticated(sessionsStore))
+func NewListHandler(logger logr.Logger, db *sql.DB, sessionsStore *sessions.Store) http.HandlerFunc {
+	return handler.Create(logger, &listHandler{db: db}, handler.WithOnlyForAuthenticated(sessionsStore))
 }

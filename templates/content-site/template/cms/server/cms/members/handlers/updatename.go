@@ -1,13 +1,14 @@
 package handlers
 
 import (
-	"database/sql"
-	"encoding/json"
-	"fmt"
-	"net/http"
 	"cms/core/handler"
 	"cms/core/sessions"
 	"cms/members"
+	"database/sql"
+	"encoding/json"
+	"fmt"
+	"github.com/go-logr/logr"
+	"net/http"
 	"strings"
 )
 
@@ -56,6 +57,6 @@ func (h *updateNameHandler) Process(ctx *handler.Context, data interface{}) (int
 	return &updateNameResponse{Status: "Name updated"}, nil
 }
 
-func NewUpdateNameHandler(db *sql.DB, sessionsStore *sessions.Store) http.HandlerFunc {
-	return handler.Create(&updateNameHandler{db: db}, handler.WithOnlyForAuthenticated(sessionsStore))
+func NewUpdateNameHandler(logger logr.Logger, db *sql.DB, sessionsStore *sessions.Store) http.HandlerFunc {
+	return handler.Create(logger, &updateNameHandler{db: db}, handler.WithOnlyForAuthenticated(sessionsStore))
 }

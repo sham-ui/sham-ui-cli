@@ -213,10 +213,10 @@ func (a *api) Article(ctx context.Context, request *proto.ArticleRequest) (*prot
 			WHERE a.slug = $1`,
 		request.Slug,
 	)
-	defer tagRows.Close()
 	if nil != err {
 		return nil, fmt.Errorf("select tags: %s", err)
 	}
+    defer tagRows.Close()
 	for tagRows.Next() {
 		tag := &proto.Tag{}
 		err := tagRows.Scan(&tag.Name, &tag.Slug)
@@ -280,10 +280,10 @@ func (a *api) getStringValue(ctx context.Context, query string, args ...interfac
 
 func (a *api) articleList(ctx context.Context, query string, args ...interface{}) ([]*proto.ArticleListItem, error) {
 	rows, err := a.db.QueryContext(ctx, query, args...)
-	defer rows.Close()
 	if nil != err {
 		return nil, fmt.Errorf("query: %s", err)
 	}
+    defer rows.Close()
 	var res []*proto.ArticleListItem
 	for rows.Next() {
 		var publishedAt time.Time

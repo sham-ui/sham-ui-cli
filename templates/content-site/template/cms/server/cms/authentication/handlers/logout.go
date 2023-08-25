@@ -1,10 +1,11 @@
 package handlers
 
 import (
-	"fmt"
-	"net/http"
 	"cms/core/handler"
 	"cms/core/sessions"
+	"fmt"
+	"github.com/go-logr/logr"
+	"net/http"
 )
 
 func logoutHandler(ctx *handler.Context, _ interface{}) (interface{}, error) {
@@ -20,8 +21,9 @@ func logoutHandler(ctx *handler.Context, _ interface{}) (interface{}, error) {
 	return nil, nil
 }
 
-func NewLogoutHandler(sessionsStore *sessions.Store) http.HandlerFunc {
+func NewLogoutHandler(logger logr.Logger, sessionsStore *sessions.Store) http.HandlerFunc {
 	return handler.CreateFromProcessFunc(
+		logger,
 		logoutHandler,
 		handler.WithOnlyForAuthenticated(sessionsStore),
 		handler.WithoutSerializeResultToJSON(),

@@ -6,5 +6,6 @@ type TestCase struct {
 	URL                        string
 	Data                       map[string]interface{}
 	ExpectedResponseStatusCode int
-	ExpectedResponseJSON       map[string]interface{}
+	ExpectedResponseJSON       string
+	IgnoreKeys                 []string
 }

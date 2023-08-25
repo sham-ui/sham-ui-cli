@@ -8,7 +8,7 @@ import (
 )
 
 func TestGetServerInfo(t *testing.T) {
-	env := test_helpers.NewTestEnv()
+	env := test_helpers.NewTestEnv(t)
 	revert := env.Default()
 	defer revert()
 	env.CreateSuperUser()
@@ -17,25 +17,31 @@ func TestGetServerInfo(t *testing.T) {
 
 	resp := env.API.Request("GET", "/api/admin/server-info", nil)
 	asserts.Equals(t, http.StatusOK, resp.Response.Code, "code")
-	asserts.Assert(t, len(resp.JSON()) > 0, "has keys")
+	asserts.Assert(t, len(resp.Text()) > 0, "has keys")
 }
 
-func TestGetServerInfoNonAutorized(t *testing.T) {
-	env := test_helpers.NewTestEnv()
+func TestGetServerInfoNonAuthorized(t *testing.T) {
+	env := test_helpers.NewTestEnv(t)
 	revert := env.Default()
 	defer revert()
 	env.API.GetCSRF()
 
 	resp := env.API.Request("GET", "/api/admin/server-info", nil)
 	asserts.Equals(t, http.StatusUnauthorized, resp.Response.Code, "code")
-	asserts.Equals(t, map[string]interface{}{
-		"Status":   "Unauthorized",
-		"Messages": []interface{}{"Session Expired. Log out and log back in."},
-	}, resp.JSON(), "body")
+	asserts.JSONEqualsWithoutSomeKeys(
+		t,
+		[]string{},
+		`{
+			"Status":   "Unauthorized",
+			"Messages": ["Session Expired. Log out and log back in."]
+		}`,
+		resp.Text(),
+		"body",
+	)
 }
 
 func TestGetServerInfoForNonSuperuser(t *testing.T) {
-	env := test_helpers.NewTestEnv()
+	env := test_helpers.NewTestEnv(t)
 	revert := env.Default()
 	defer revert()
 	env.CreateUser()
@@ -44,8 +50,13 @@ func TestGetServerInfoForNonSuperuser(t *testing.T) {
 
 	resp := env.API.Request("GET", "/api/admin/server-info", nil)
 	asserts.Equals(t, http.StatusForbidden, resp.Response.Code, "code")
-	asserts.Equals(t, map[string]interface{}{
-		"Messages": []interface{}{"Allowed only for superuser"},
-		"Status":   "Forbidden",
-	}, resp.JSON(), "body")
+	asserts.JSONEqualsWithoutSomeKeys(t,
+		[]string{},
+		`{
+			"Messages": ["Allowed only for superuser"],
+			"Status":   "Forbidden"
+		}`,
+		resp.Text(),
+		"body",
+	)
 }

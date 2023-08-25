@@ -15,7 +15,7 @@ import (
 )
 
 func TestArticlesList(t *testing.T) {
-	env := test_helpers.NewTestEnv(nil)
+	env := test_helpers.NewTestEnv(nil, t)
 	revert := env.Default()
 	defer revert()
 
@@ -106,7 +106,7 @@ func TestArticlesList(t *testing.T) {
 }
 
 func TestArticlesListCategory(t *testing.T) {
-	env := test_helpers.NewTestEnv(nil)
+	env := test_helpers.NewTestEnv(nil, t)
 	revert := env.Default()
 	defer revert()
 
@@ -199,7 +199,7 @@ func TestArticlesListCategory(t *testing.T) {
 }
 
 func TestArticlesListTag(t *testing.T) {
-	env := test_helpers.NewTestEnv(nil)
+	env := test_helpers.NewTestEnv(nil, t)
 	revert := env.Default()
 	defer revert()
 
@@ -292,7 +292,7 @@ func TestArticlesListTag(t *testing.T) {
 }
 
 func TestArticlesListQuery(t *testing.T) {
-	env := test_helpers.NewTestEnv(nil)
+	env := test_helpers.NewTestEnv(nil, t)
 	revert := env.Default()
 	defer revert()
 
@@ -383,7 +383,7 @@ func TestArticlesListQuery(t *testing.T) {
 }
 
 func TestArticle(t *testing.T) {
-	env := test_helpers.NewTestEnv(nil)
+	env := test_helpers.NewTestEnv(nil, t)
 	revert := env.Default()
 	defer revert()
 
@@ -469,7 +469,7 @@ func TestArticle(t *testing.T) {
 }
 
 func TestAsset(t *testing.T) {
-	env := test_helpers.NewTestEnv(nil)
+	env := test_helpers.NewTestEnv(nil, t)
 	revert := env.Default()
 	defer revert()
 

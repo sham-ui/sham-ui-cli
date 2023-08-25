@@ -1,20 +1,19 @@
 package app
 
 import (
+	"github.com/go-logr/logr"
 	"github.com/gorilla/mux"
 	"github.com/rs/cors"
-	log "github.com/sirupsen/logrus"
 	"github.com/urfave/negroni"
 	articlesHandlers "site/articles/handlers"
 	"site/assets"
 	"site/config"
 	"site/proto"
 	"site/ssr"
-	"strings"
 )
 
-func StartApplication(n *negroni.Negroni, cmsClient proto.CMSClient, render ssr.Render) {
-	log.Infof("Allowed domains: %s", strings.Join(config.Server.AllowedDomains, ", "))
+func StartApplication(logger logr.Logger, n *negroni.Negroni, cmsClient proto.CMSClient, render ssr.Render) {
+	logger.Info("Allowed domains", "domains", config.Server.AllowedDomains)
 
 	c := cors.New(cors.Options{
 		AllowedOrigins:   config.Server.AllowedDomains,
@@ -29,14 +28,14 @@ func StartApplication(n *negroni.Negroni, cmsClient proto.CMSClient, render ssr.
 	r := mux.NewRouter()
 
 	// Articles
-	r.HandleFunc("/api/articles", articlesHandlers.NewListHandler(cmsClient)).Methods("GET")
-	r.HandleFunc("/api/articles/{slug}", articlesHandlers.NewDetailHandler(cmsClient)).Methods("GET")
+	r.HandleFunc("/api/articles", articlesHandlers.NewListHandler(logger, cmsClient)).Methods("GET")
+	r.HandleFunc("/api/articles/{slug}", articlesHandlers.NewDetailHandler(logger, cmsClient)).Methods("GET")
 
 	// Assets
-	r.HandleFunc("/assets/{file}", articlesHandlers.NewAssetsHandler(cmsClient)).Methods("GET")
+	r.HandleFunc("/assets/{file}", articlesHandlers.NewAssetsHandler(logger, cmsClient)).Methods("GET")
 
 	// Resources
-	spaHandler := assets.NewHandler(render)
+	spaHandler := assets.NewHandler(logger, render)
 	r.PathPrefix("/").Handler(spaHandler)
 
 	// Middleware

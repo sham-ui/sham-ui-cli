@@ -2,7 +2,6 @@ package main
 
 import (
 	"github.com/gorilla/context"
-	log "github.com/sirupsen/logrus"
 	"github.com/urfave/negroni"
 	"net/http"
 	"site/app"
@@ -13,15 +12,15 @@ import (
 )
 
 func main() {
-	loggerMiddleware := negroni.NewLogger()
-	loggerMiddleware.ALogger = logger.Logger
-	config.LoadConfiguration("config.cfg")
-	n := negroni.New(negroni.NewRecovery(), loggerMiddleware)
-	render := ssr.NewServerSideRender()
+	logr := logger.NewLogger(0)
+	config.LoadConfiguration(logr, "config.cfg")
+	n := negroni.New(negroni.NewRecovery(), logger.CreateNegroniLogger(logr))
+	render := ssr.NewServerSideRender(logr)
 	render.Start()
-	cmsClient := app.CreateCMSClient()
-	app.StartApplication(n, cmsClient, render)
+	cmsClient := app.CreateCMSClient(logr)
+	app.StartApplication(logr, n, cmsClient, render)
 	port := strconv.Itoa(config.Server.Port)
-	log.Infof("Server start on port :%s", port)
-	log.Fatal(http.ListenAndServe(":"+port, context.ClearHandler(n)))
+
+	logr.Info("Server started", "port", port)
+	logr.Error(http.ListenAndServe(":"+port, context.ClearHandler(n)), "Server stopped")
 }

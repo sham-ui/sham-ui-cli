@@ -1,13 +1,14 @@
 package handlers
 
 import (
-	"database/sql"
-	"encoding/json"
-	"fmt"
-	"net/http"
 	"cms/core/handler"
 	"cms/core/sessions"
 	"cms/members"
+	"database/sql"
+	"encoding/json"
+	"fmt"
+	"github.com/go-logr/logr"
+	"net/http"
 	"strings"
 )
 
@@ -77,6 +78,6 @@ func (h *createHandler) Process(_ *handler.Context, data interface{}) (interface
 	}, nil
 }
 
-func NewCreateHandler(db *sql.DB, sessionsStore *sessions.Store) http.HandlerFunc {
-	return handler.Create(&createHandler{db: db}, handler.WithOnlyForSuperuser(sessionsStore))
+func NewCreateHandler(logger logr.Logger, db *sql.DB, sessionsStore *sessions.Store) http.HandlerFunc {
+	return handler.Create(logger, &createHandler{db: db}, handler.WithOnlyForSuperuser(sessionsStore))
 }

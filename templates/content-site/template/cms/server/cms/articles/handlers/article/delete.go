@@ -5,6 +5,7 @@ import (
 	"cms/core/sessions"
 	"database/sql"
 	"fmt"
+	"github.com/go-logr/logr"
 	"github.com/gorilla/mux"
 	"net/http"
 )
@@ -33,7 +34,7 @@ type deleteResponse struct {
 
 func (h *deleteHandler) Process(_ *handler.Context, data interface{}) (interface{}, error) {
 	requestData := data.(*deleteRequestData)
-	_, err := h.db.Query("DELETE FROM article WHERE id = $1", requestData.ID)
+	_, err := h.db.Exec("DELETE FROM article WHERE id = $1", requestData.ID)
 	if nil != err {
 		return nil, fmt.Errorf("delete article: %s", err)
 	}
@@ -42,7 +43,7 @@ func (h *deleteHandler) Process(_ *handler.Context, data interface{}) (interface
 	}, nil
 }
 
-func NewDeleteHandler(db *sql.DB, sessionsStore *sessions.Store) http.HandlerFunc {
+func NewDeleteHandler(logger logr.Logger, db *sql.DB, sessionsStore *sessions.Store) http.HandlerFunc {
 	h := &deleteHandler{db: db}
-	return handler.Create(h, handler.WithOnlyForAuthenticated(sessionsStore))
+	return handler.Create(logger, h, handler.WithOnlyForAuthenticated(sessionsStore))
 }

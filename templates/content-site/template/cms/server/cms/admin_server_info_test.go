@@ -8,7 +8,7 @@ import (
 )
 
 func TestGetServerInfo(t *testing.T) {
-	env := test_helpers.NewTestEnv()
+	env := test_helpers.NewTestEnv(t)
 	revert := env.Default()
 	defer revert()
 	env.CreateSuperUser()
@@ -21,7 +21,7 @@ func TestGetServerInfo(t *testing.T) {
 }
 
 func TestGetServerInfoNonAuthorized(t *testing.T) {
-	env := test_helpers.NewTestEnv()
+	env := test_helpers.NewTestEnv(t)
 	revert := env.Default()
 	defer revert()
 	env.API.GetCSRF()
@@ -41,7 +41,7 @@ func TestGetServerInfoNonAuthorized(t *testing.T) {
 }
 
 func TestGetServerInfoForNonSuperuser(t *testing.T) {
-	env := test_helpers.NewTestEnv()
+	env := test_helpers.NewTestEnv(t)
 	revert := env.Default()
 	defer revert()
 	env.CreateUser()

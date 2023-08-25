@@ -5,6 +5,7 @@ import (
 	"cms/core/handler"
 	"cms/core/sessions"
 	"github.com/NYTimes/gziphandler"
+	"github.com/go-logr/logr"
 	"github.com/gorilla/mux"
 	"net/http"
 	"path/filepath"
@@ -52,8 +53,9 @@ func (h ImagesHandler) Process(ctx *handler.Context, data interface{}) (interfac
 	return nil, nil
 }
 
-func NewImagesHandler(sessionStore *sessions.Store) http.HandlerFunc {
+func NewImagesHandler(logger logr.Logger, sessionStore *sessions.Store) http.HandlerFunc {
 	h := handler.Create(
+		logger,
 		ImagesHandler{
 			fileServer: http.FileServer(http.Dir(config.Upload.Path)),
 		},

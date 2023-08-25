@@ -3,7 +3,7 @@ package app
 import (
 	"context"
 	"fmt"
-	log "github.com/sirupsen/logrus"
+	"github.com/go-logr/logr"
 	"google.golang.org/grpc"
 	"net"
 	"os"
@@ -23,13 +23,15 @@ func unixConnect(ctx context.Context, addr string) (net.Conn, error) {
 	return conn, nil
 }
 
-func CreateCMSClient() proto.CMSClient {
+func CreateCMSClient(logger logr.Logger) proto.CMSClient {
 	if _, err := os.Stat(config.Api.SocketPath); nil != err {
-		log.WithError(err).Fatal("can't find API socket file")
+		logger.Error(err, "can't find API socket file")
+		os.Exit(1)
 	}
 	conn, err := grpc.Dial(config.Api.SocketPath, grpc.WithInsecure(), grpc.WithContextDialer(unixConnect))
 	if nil != err {
-		log.WithError(err).Fatal("can't dial with CMS")
+		logger.Error(err, "Failed to connect to CMS")
+		os.Exit(1)
 	}
 	return proto.NewCMSClient(conn)
 }

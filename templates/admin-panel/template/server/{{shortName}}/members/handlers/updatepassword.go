@@ -4,6 +4,7 @@ import (
 	"database/sql"
 	"encoding/json"
 	"fmt"
+	"github.com/go-logr/logr"
 	"net/http"
 	"{{shortName}}/core/handler"
 	"{{shortName}}/core/sessions"
@@ -56,6 +57,6 @@ func (h *updatePasswordHandler) Process(ctx *handler.Context, data interface{}) 
 	return &updatePasswordResponse{Status: "Password updated"}, nil
 }
 
-func NewUpdatePasswordHandler(db *sql.DB, sessionsStore *sessions.Store) http.HandlerFunc {
-	return handler.Create(&updatePasswordHandler{db: db}, handler.WithOnlyForAuthenticated(sessionsStore))
+func NewUpdatePasswordHandler(logger logr.Logger, db *sql.DB, sessionsStore *sessions.Store) http.HandlerFunc {
+	return handler.Create(logger, &updatePasswordHandler{db: db}, handler.WithOnlyForAuthenticated(sessionsStore))
 }

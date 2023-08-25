@@ -5,6 +5,7 @@ Object {
   "Options": Object {
     "createFormVisible": false,
     "dataLoaded": false,
+    "errors": Array [],
     "items": Array [],
     "loadItems": [Function],
     "pageTitle": "",

@@ -1,4 +1,5 @@
 import { createDI } from 'sham-ui';
+import hrefto from 'sham-ui-router/lib/href-to';
 import RoutesArticlePage  from '../../../../../src/components/routes/article/page.sfc';
 import renderer from 'sham-ui-test-helpers';
 
@@ -23,7 +24,10 @@ it( 'renders correctly', () => {
         )
     } );
     const meta = renderer( RoutesArticlePage, {}, {
-        DI
+        DI,
+        directives: {
+            hrefto
+        }
     } );
     expect( meta.toJSON() ).toMatchSnapshot();
 } );

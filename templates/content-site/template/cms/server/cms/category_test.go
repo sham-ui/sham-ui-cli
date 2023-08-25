@@ -8,7 +8,7 @@ import (
 )
 
 func TestCategory(t *testing.T) {
-	env := test_helpers.NewTestEnv()
+	env := test_helpers.NewTestEnv(t)
 	revert := env.Default()
 	defer revert()
 	env.CreateUser()
@@ -31,7 +31,7 @@ func TestCategory(t *testing.T) {
 	if nil != err {
 		t.Fatalf("delete from category: %s", err)
 	}
-	_, err = env.DB.DB.Query("INSERT INTO category(id, name, slug) VALUES ($1, $2,$3)", "1", "test", "test")
+	_, err = env.DB.DB.Exec("INSERT INTO category(id, name, slug) VALUES ($1, $2,$3)", "1", "test", "test")
 	if nil != err {
 		t.Fatalf("can't insert category: %s", err)
 	}

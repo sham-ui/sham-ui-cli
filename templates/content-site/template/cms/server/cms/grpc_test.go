@@ -58,7 +58,7 @@ func TestGRPC(t *testing.T) {
 		execSQL("INSERT INTO article_tag(id, article_id, tag_id) VALUES(2, 1, 2)")
 	}
 
-	env := test_helpers.NewTestEnv()
+	env := test_helpers.NewTestEnv(t)
 	revert := env.Default()
 	defer revert()
 

@@ -2,6 +2,7 @@ package handlers
 
 import (
 	"fmt"
+	"github.com/go-logr/logr"
 	"github.com/gorilla/mux"
 	"net/http"
 	"site/core/handler"
@@ -86,8 +87,8 @@ func (h *detailHandler) Process(ctx *handler.Context, data interface{}) (interfa
 	}, nil
 }
 
-func NewDetailHandler(cmsClient proto.CMSClient) http.HandlerFunc {
-	return handler.Create(&detailHandler{
+func NewDetailHandler(logger logr.Logger, cmsClient proto.CMSClient) http.HandlerFunc {
+	return handler.Create(logger, &detailHandler{
 		cmsClient: cmsClient,
 	})
 }

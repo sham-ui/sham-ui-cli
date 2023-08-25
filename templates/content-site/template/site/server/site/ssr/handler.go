@@ -2,8 +2,8 @@ package ssr
 
 import (
 	"context"
+	"github.com/go-logr/logr"
 	"github.com/matoous/go-nanoid/v2"
-	log "github.com/sirupsen/logrus"
 	"net/http"
 	"site/config"
 	"strconv"
@@ -13,6 +13,7 @@ import (
 type server struct {
 	apiURL string
 	render Render
+	logger logr.Logger
 }
 
 func (ssr *server) ServeHTTP(w http.ResponseWriter, r *http.Request) {
@@ -22,7 +23,7 @@ func (ssr *server) ServeHTTP(w http.ResponseWriter, r *http.Request) {
 	w.Header().Set("Content-Type", "text/html; charset=UTF-8")
 	id, err := gonanoid.New()
 	if nil != err {
-		log.WithError(err).Error("can't generate nanoid")
+		ssr.logger.Error(err, "can't generate nanoid")
 		http.Error(w, err.Error(), http.StatusInternalServerError)
 		return
 	}
@@ -47,13 +48,13 @@ func (ssr *server) ServeHTTP(w http.ResponseWriter, r *http.Request) {
 		Cookies: cookiesString,
 	})
 	if nil != err {
-		log.WithError(err).Errorf("can't ssr")
+		ssr.logger.Error(err, "can't render ssr")
 		http.Error(w, "SSR error", http.StatusInternalServerError)
 		return
 	}
 	_, err = w.Write(resp)
 	if nil != err {
-		log.WithError(err).Errorf("can't write ssr response")
+		ssr.logger.Error(err, "can't write ssr response")
 	}
 }
 
@@ -67,9 +68,10 @@ func (ssr *server) getOrigin(r *http.Request) string {
 	return url + r.Host
 }
 
-func NewServer(render Render) http.Handler {
+func NewServer(logger logr.Logger, render Render) http.Handler {
 	return &server{
 		apiURL: "http://localhost:" + strconv.Itoa(config.Server.Port) + "/api/",
 		render: render,
+		logger: logger.WithName("ssr handler"),
 	}
 }

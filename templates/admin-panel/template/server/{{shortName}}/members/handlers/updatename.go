@@ -4,6 +4,7 @@ import (
 	"database/sql"
 	"encoding/json"
 	"fmt"
+	"github.com/go-logr/logr"
 	"net/http"
 	"{{shortName}}/core/handler"
 	"{{shortName}}/core/sessions"
@@ -56,6 +57,6 @@ func (h *updateNameHandler) Process(ctx *handler.Context, data interface{}) (int
 	return &updateNameResponse{Status: "Name updated"}, nil
 }
 
-func NewUpdateNameHandler(db *sql.DB, sessionsStore *sessions.Store) http.HandlerFunc {
-	return handler.Create(&updateNameHandler{db: db}, handler.WithOnlyForAuthenticated(sessionsStore))
+func NewUpdateNameHandler(logger logr.Logger, db *sql.DB, sessionsStore *sessions.Store) http.HandlerFunc {
+	return handler.Create(logger, &updateNameHandler{db: db}, handler.WithOnlyForAuthenticated(sessionsStore))
 }

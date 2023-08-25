@@ -4,10 +4,11 @@ import (
 	"embed"
 	"errors"
 	"github.com/NYTimes/gziphandler"
-	log "github.com/sirupsen/logrus"
+	"github.com/go-logr/logr"
 	"io/fs"
 	"net/http"
 	"{{shortName}}/core/sessions"
+	"os"
 	"path/filepath"
 	"strings"
 )
@@ -17,6 +18,9 @@ var Assets embed.FS
 
 type Handler struct {
 	sessionStore *sessions.Store
+	fsys         fs.FS
+	fileServer   http.Handler
+	logger       logr.Logger
 }
 
 // ServeHTTP inspects the URL path to locate a file within the static dir
@@ -38,15 +42,9 @@ func (h Handler) ServeHTTP(w http.ResponseWriter, r *http.Request) {
 		path = path[1:]
 	}
 
-	fsys, err := fs.Sub(Assets, "files")
-	if nil != err {
-		http.Error(w, err.Error(), http.StatusBadRequest)
-		return
-	}
-
 	// check whether a file exists at the given path
 	cannonicalName := strings.Replace(path, "\\", "/", -1)
-	file, err := fsys.Open(cannonicalName)
+	file, err := h.fsys.Open(cannonicalName)
 	if nil != file {
 		defer file.Close()
 	}
@@ -56,37 +54,50 @@ func (h Handler) ServeHTTP(w http.ResponseWriter, r *http.Request) {
 		w.Header().Set("Content-Type", "text/html; charset=UTF-8")
 		content, err := Assets.ReadFile("files/index.html")
 		if nil != err {
-			log.Errorf("can't get asset index.html: %s", err)
+			h.logger.Error(err, "can't get asset index.html")
 			http.Error(w, err.Error(), http.StatusInternalServerError)
 			return
 		}
 		_, err = w.Write(content)
 		if nil != err {
-			log.Errorf("can't write index.html asset: %s", err)
+			h.logger.Error(err, "can't write index.html asset")
 		}
 	} else if strings.HasPrefix(cannonicalName, "su_") {
 		session, err := h.sessionStore.GetSession(r)
 		if nil != err {
-			log.Errorf("can't get session: %s", err)
+			h.logger.Error(err, "can't get session")
 			w.WriteHeader(http.StatusInternalServerError)
 			return
 		}
 		if nil == session {
 			http.Error(w, "Unauthorized", http.StatusUnauthorized)
 		} else if session.IsSuperuser {
-			http.FileServer(http.FS(fsys)).ServeHTTP(w, r)
+			h.fileServe(w, r)
 		} else {
 			http.Error(w, "Forbidden", http.StatusForbidden)
 		}
 	} else {
 
 		// otherwise, use http.FileServer to serve the static dir
-		http.FileServer(http.FS(fsys)).ServeHTTP(w, r)
+		h.fileServe(w, r)
 	}
 }
 
-func NewHandler(sessionStore *sessions.Store) http.Handler {
+func (h Handler) fileServe(w http.ResponseWriter, r *http.Request) {
+	w.Header().Set("Vary", "Accept-Encoding")
+	h.fileServer.ServeHTTP(w, r)
+}
+
+func NewHandler(logger logr.Logger, sessionStore *sessions.Store) http.Handler {
+	fsys, err := fs.Sub(Assets, "files")
+	if nil != err {
+		logger.Error(err, "can't get assets file system")
+		os.Exit(1)
+	}
 	return gziphandler.GzipHandler(Handler{
 		sessionStore: sessionStore,
+		fsys:         fsys,
+		fileServer:   http.FileServer(http.FS(fsys)),
+		logger:       logger.WithName("fileServer"),
 	})
 }

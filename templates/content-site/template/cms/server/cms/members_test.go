@@ -8,7 +8,7 @@ import (
 )
 
 func TestUpdateNameSuccess(t *testing.T) {
-	env := test_helpers.NewTestEnv()
+	env := test_helpers.NewTestEnv(t)
 	revert := env.Default()
 	defer revert()
 	env.CreateUser()
@@ -27,7 +27,7 @@ func TestUpdateNameSuccess(t *testing.T) {
 }
 
 func TestUpdateNameUnauthtorized(t *testing.T) {
-	env := test_helpers.NewTestEnv()
+	env := test_helpers.NewTestEnv(t)
 	revert := env.Default()
 	defer revert()
 	env.CreateUser()
@@ -41,7 +41,7 @@ func TestUpdateNameUnauthtorized(t *testing.T) {
 }
 
 func TestUpdateNameShortName(t *testing.T) {
-	env := test_helpers.NewTestEnv()
+	env := test_helpers.NewTestEnv(t)
 	revert := env.Default()
 	defer revert()
 	env.CreateUser()
@@ -60,7 +60,7 @@ func TestUpdateNameShortName(t *testing.T) {
 }
 
 func TestUpdateEmailSuccess(t *testing.T) {
-	env := test_helpers.NewTestEnv()
+	env := test_helpers.NewTestEnv(t)
 	revert := env.Default()
 	defer revert()
 	env.CreateUser()
@@ -80,7 +80,7 @@ func TestUpdateEmailSuccess(t *testing.T) {
 }
 
 func TestUpdateEmailUnauthtorized(t *testing.T) {
-	env := test_helpers.NewTestEnv()
+	env := test_helpers.NewTestEnv(t)
 	revert := env.Default()
 	defer revert()
 	env.CreateUser()
@@ -95,7 +95,7 @@ func TestUpdateEmailUnauthtorized(t *testing.T) {
 }
 
 func TestUpdateEmailShort(t *testing.T) {
-	env := test_helpers.NewTestEnv()
+	env := test_helpers.NewTestEnv(t)
 	revert := env.Default()
 	defer revert()
 	env.CreateUser()
@@ -122,7 +122,7 @@ func TestUpdateEmailShort(t *testing.T) {
 }
 
 func TestUpdateEmailNotMatch(t *testing.T) {
-	env := test_helpers.NewTestEnv()
+	env := test_helpers.NewTestEnv(t)
 	revert := env.Default()
 	defer revert()
 	env.CreateUser()
@@ -142,7 +142,7 @@ func TestUpdateEmailNotMatch(t *testing.T) {
 }
 
 func TestUpdateEmailNotUnique(t *testing.T) {
-	env := test_helpers.NewTestEnv()
+	env := test_helpers.NewTestEnv(t)
 	revert := env.Default()
 	defer revert()
 	env.CreateUser()
@@ -163,7 +163,7 @@ func TestUpdateEmailNotUnique(t *testing.T) {
 }
 
 func TestUpdatePasswordSuccess(t *testing.T) {
-	env := test_helpers.NewTestEnv()
+	env := test_helpers.NewTestEnv(t)
 	revert := env.Default()
 	defer revert()
 	env.CreateUser()
@@ -196,7 +196,7 @@ func TestUpdatePasswordSuccess(t *testing.T) {
 }
 
 func TestUpdatePasswordUnauthtorized(t *testing.T) {
-	env := test_helpers.NewTestEnv()
+	env := test_helpers.NewTestEnv(t)
 	revert := env.Default()
 	defer revert()
 	env.API.GetCSRF()
@@ -210,7 +210,7 @@ func TestUpdatePasswordUnauthtorized(t *testing.T) {
 }
 
 func TestUpdatePasswordShort(t *testing.T) {
-	env := test_helpers.NewTestEnv()
+	env := test_helpers.NewTestEnv(t)
 	revert := env.Default()
 	defer revert()
 	env.CreateUser()
@@ -233,7 +233,7 @@ func TestUpdatePasswordShort(t *testing.T) {
 }
 
 func TestUpdatePasswordNotMatch(t *testing.T) {
-	env := test_helpers.NewTestEnv()
+	env := test_helpers.NewTestEnv(t)
 	revert := env.Default()
 	defer revert()
 	env.CreateUser()

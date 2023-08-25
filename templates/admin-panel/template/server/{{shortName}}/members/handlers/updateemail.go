@@ -4,6 +4,7 @@ import (
 	"database/sql"
 	"encoding/json"
 	"fmt"
+	"github.com/go-logr/logr"
 	"net/http"
 	"{{shortName}}/core/handler"
 	"{{shortName}}/core/sessions"
@@ -68,6 +69,6 @@ func (h *updateEmailHandler) Process(ctx *handler.Context, data interface{}) (in
 	return &updateEmailResponse{Status: "Email updated"}, nil
 }
 
-func NewUpdateEmailHandler(db *sql.DB, sessionsStore *sessions.Store) http.HandlerFunc {
-	return handler.Create(&updateEmailHandler{db: db}, handler.WithOnlyForAuthenticated(sessionsStore))
+func NewUpdateEmailHandler(logger logr.Logger, db *sql.DB, sessionsStore *sessions.Store) http.HandlerFunc {
+	return handler.Create(logger, &updateEmailHandler{db: db}, handler.WithOnlyForAuthenticated(sessionsStore))
 }

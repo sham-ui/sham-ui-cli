@@ -2,13 +2,14 @@ package handler
 
 import (
 	"encoding/json"
-	log "github.com/sirupsen/logrus"
+	"github.com/go-logr/logr"
 	"net/http"
 	"{{shortName}}/core/sessions"
 )
 
 // Context container for handler data (Request, ResponseWriter, session)
 type Context struct {
+	logger           logr.Logger
 	sessionsStore    *sessions.Store
 	hasCachedSession bool
 	session          *sessions.Session
@@ -46,12 +47,13 @@ func (ctx *Context) respond(statusCode int, msg interface{}) {
 	err := json.NewEncoder(ctx.Response).Encode(msg)
 	if nil != err {
 		ctx.Response.WriteHeader(http.StatusInternalServerError)
-		log.Errorf("encode json message fail: %s", err)
+		ctx.logger.Error(err, "encode json message fail")
 	}
 }
 
-func newContext(w http.ResponseWriter, r *http.Request, sessionsStore *sessions.Store) *Context {
+func newContext(logger logr.Logger, w http.ResponseWriter, r *http.Request, sessionsStore *sessions.Store) *Context {
 	return &Context{
+		logger:        logger,
 		Request:       r,
 		Response:      w,
 		sessionsStore: sessionsStore,

@@ -68,6 +68,7 @@
         const errors = $();
 
         const state = options( {
+            [ errors ]: [],
             [ categories ]: [],
             [ pageTitle ]: 'Articles',
             [ dataLoaded ]: false,

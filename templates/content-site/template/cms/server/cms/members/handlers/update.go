@@ -1,14 +1,15 @@
 package handlers
 
 import (
-	"database/sql"
-	"encoding/json"
-	"fmt"
-	"github.com/gorilla/mux"
-	"net/http"
 	"cms/core/handler"
 	"cms/core/sessions"
 	"cms/members"
+	"database/sql"
+	"encoding/json"
+	"fmt"
+	"github.com/go-logr/logr"
+	"github.com/gorilla/mux"
+	"net/http"
 	"strings"
 )
 
@@ -80,6 +81,6 @@ func (h *updateHandler) Process(_ *handler.Context, data interface{}) (interface
 	}, nil
 }
 
-func NewUpdateHandler(db *sql.DB, sessionsStore *sessions.Store) http.HandlerFunc {
-	return handler.Create(&updateHandler{db: db}, handler.WithOnlyForSuperuser(sessionsStore))
+func NewUpdateHandler(logger logr.Logger, db *sql.DB, sessionsStore *sessions.Store) http.HandlerFunc {
+	return handler.Create(logger, &updateHandler{db: db}, handler.WithOnlyForSuperuser(sessionsStore))
 }

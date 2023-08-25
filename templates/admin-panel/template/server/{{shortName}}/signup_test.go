@@ -8,7 +8,7 @@ import (
 )
 
 func TestSignupInvalidCSRF(t *testing.T) {
-	env := test_helpers.NewTestEnv()
+	env := test_helpers.NewTestEnv(t)
 	revert := env.Default()
 	defer revert()
 
@@ -18,7 +18,7 @@ func TestSignupInvalidCSRF(t *testing.T) {
 }
 
 func TestSignupSuccess(t *testing.T) {
-	env := test_helpers.NewTestEnv()
+	env := test_helpers.NewTestEnv(t)
 	revert := env.Default()
 	defer revert()
 	env.API.GetCSRF()
@@ -30,22 +30,22 @@ func TestSignupSuccess(t *testing.T) {
 		"Password2": "password",
 	})
 	asserts.Equals(t, http.StatusOK, resp.Response.Code, "code")
-	asserts.Equals(t, map[string]interface{}{"Status": "Member created"}, resp.JSON(), "body")
+	asserts.JSONEqualsWithoutSomeKeys(t, nil, `{"Status": "Member created"}`, resp.Text(), "body")
 }
 
 func TestSignupInvalidData(t *testing.T) {
-	env := test_helpers.NewTestEnv()
+	env := test_helpers.NewTestEnv(t)
 	revert := env.Default()
 	defer revert()
 	env.API.GetCSRF()
 
 	resp := env.API.Request("POST", "/api/members", []string{})
 	asserts.Equals(t, http.StatusBadRequest, resp.Response.Code, "code")
-	asserts.Equals(t, map[string]interface{}{"Status": "Bad Request"}, resp.JSON(), "body")
+	asserts.JSONEqualsWithoutSomeKeys(t, nil, `{"Status": "Bad Request"}`, resp.Text(), "body")
 }
 
 func TestSignupPasswordMustMatch(t *testing.T) {
-	env := test_helpers.NewTestEnv()
+	env := test_helpers.NewTestEnv(t)
 	revert := env.Default()
 	defer revert()
 	env.API.GetCSRF()
@@ -57,11 +57,11 @@ func TestSignupPasswordMustMatch(t *testing.T) {
 		"Password2": "2password",
 	})
 	asserts.Equals(t, http.StatusBadRequest, resp.Response.Code, "code")
-	asserts.Equals(t, map[string]interface{}{"Status": "Bad Request", "Messages": []interface{}{"Passwords do not match."}}, resp.JSON(), "body")
+	asserts.JSONEqualsWithoutSomeKeys(t, nil, `{"Status": "Bad Request", "Messages": ["Passwords do not match."]}`, resp.Text(), "body")
 }
 
 func TestSignupEmailUnique(t *testing.T) {
-	env := test_helpers.NewTestEnv()
+	env := test_helpers.NewTestEnv(t)
 	revert := env.Default()
 	defer revert()
 	env.API.GetCSRF()
@@ -74,9 +74,9 @@ func TestSignupEmailUnique(t *testing.T) {
 	}
 	resp := env.API.Request("POST", "/api/members", data)
 	asserts.Equals(t, http.StatusOK, resp.Response.Code, "code")
-	asserts.Equals(t, map[string]interface{}{"Status": "Member created"}, resp.JSON(), "body")
+	asserts.JSONEqualsWithoutSomeKeys(t, nil, `{"Status": "Member created"}`, resp.Text(), "body")
 
 	resp = env.API.Request("POST", "/api/members", data)
 	asserts.Equals(t, http.StatusBadRequest, resp.Response.Code, "code")
-	asserts.Equals(t, map[string]interface{}{"Status": "Bad Request", "Messages": []interface{}{"Email is already in use."}}, resp.JSON(), "body")
+	asserts.JSONEqualsWithoutSomeKeys(t, nil, `{"Status": "Bad Request", "Messages": ["Email is already in use."]}`, resp.Text(), "body")
 }

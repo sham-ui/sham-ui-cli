@@ -2,7 +2,7 @@ package handler
 
 import (
 	"encoding/json"
-	log "github.com/sirupsen/logrus"
+	"github.com/go-logr/logr"
 	"net/http"
 )
 
@@ -10,6 +10,7 @@ import (
 type Context struct {
 	Request  *http.Request
 	Response http.ResponseWriter
+	logger   logr.Logger
 }
 
 type responseError struct {
@@ -17,7 +18,7 @@ type responseError struct {
 	Messages []string `json:"Messages,omitempty"`
 }
 
-// respondWithError send error to client
+// RespondWithError send error to client
 func (ctx *Context) RespondWithError(statusCode int, messages ...string) {
 	msg := &responseError{
 		Status:   http.StatusText(statusCode),
@@ -32,13 +33,14 @@ func (ctx *Context) respond(statusCode int, msg interface{}) {
 	err := json.NewEncoder(ctx.Response).Encode(msg)
 	if nil != err {
 		ctx.Response.WriteHeader(http.StatusInternalServerError)
-		log.Errorf("encode json message fail: %s", err)
+		ctx.logger.Error(err, "encode json message fail")
 	}
 }
 
-func newContext(w http.ResponseWriter, r *http.Request) *Context {
+func newContext(logger logr.Logger, w http.ResponseWriter, r *http.Request) *Context {
 	return &Context{
 		Request:  r,
 		Response: w,
+		logger:   logger,
 	}
 }

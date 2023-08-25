@@ -6,6 +6,7 @@ import (
 	"cms/core/sessions"
 	"database/sql"
 	"fmt"
+	"github.com/go-logr/logr"
 	"github.com/gorilla/mux"
 	"net/http"
 )
@@ -43,7 +44,7 @@ func (h *deleteHandler) Process(_ *handler.Context, data interface{}) (interface
 	}, nil
 }
 
-func NewDeleteHandler(db *sql.DB, sessionsStore *sessions.Store) http.HandlerFunc {
+func NewDeleteHandler(logger logr.Logger, db *sql.DB, sessionsStore *sessions.Store) http.HandlerFunc {
 	h := &deleteHandler{categoryRepository: repo.NewCategoryRepository(db)}
-	return handler.Create(h, handler.WithOnlyForAuthenticated(sessionsStore))
+	return handler.Create(logger, h, handler.WithOnlyForAuthenticated(sessionsStore))
 }

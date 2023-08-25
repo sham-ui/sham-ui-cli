@@ -13,16 +13,20 @@
 	.search .close{
 		right:30px;
 	}
+
+	pre {
+		padding: 5px 7px;
+	}
 }
 
 @media screen and (max-width:576px){
 	.search-width{
-    	max-width:100%;
-   		margin: 0;
+		max-width:100%;
+		margin: 0;
 	}
 
 	.page404 {
-    	width: auto;
+		width: auto;
 	}
 
 	.navbar-right .search-icon{
@@ -49,7 +53,7 @@
 		}
 	}
 	.search{
-	  	.close {
+		.close {
 			right: 15px;
 			top:15px;
 		}
@@ -70,7 +74,7 @@
 		}
 	}
 	.page404 .content h1 {
-    	font-size: 100px;
+		font-size: 100px;
 	}
 	.page404 .content h3{
 		font-size:$f-s-h4;

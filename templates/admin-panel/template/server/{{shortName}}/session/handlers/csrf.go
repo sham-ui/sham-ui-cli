@@ -1,6 +1,7 @@
 package handlers
 
 import (
+	"github.com/go-logr/logr"
 	"github.com/gorilla/csrf"
 	"net/http"
 	"{{shortName}}/core/handler"
@@ -12,6 +13,6 @@ func csrfToken(ctx *handler.Context, _ interface{}) (interface{}, error) {
 	return nil, nil
 }
 
-func NewCsrfTokenHandler() http.HandlerFunc {
-	return handler.CreateFromProcessFunc(csrfToken, handler.WithoutSerializeResultToJSON())
+func NewCsrfTokenHandler(logger logr.Logger) http.HandlerFunc {
+	return handler.CreateFromProcessFunc(logger, csrfToken, handler.WithoutSerializeResultToJSON())
 }

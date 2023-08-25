@@ -28,12 +28,14 @@ export function renderAPP( apiURL, origin, href, cookie ) {
         .then( () => hydrate( DI ) )
         .then( storage => {
             const doc = DI.resolve( 'document' );
-            return {
+            const data = {
                 ...storage.hydrate(),
                 darkThemeEnabled: DI.resolve( 'app:storage' ).darkThemeEnabled,
                 title: doc.title,
                 content: doc.content
             };
+            DI.resolve( 'router' ).destroy();
+            return data;
         } );
 }
 

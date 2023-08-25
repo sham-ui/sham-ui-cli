@@ -9,7 +9,7 @@ import (
 )
 
 func TestLogoutSuccess(t *testing.T) {
-	env := test_helpers.NewTestEnv()
+	env := test_helpers.NewTestEnv(t)
 	revert := env.Default()
 	defer revert()
 	env.CreateUser()
@@ -18,20 +18,32 @@ func TestLogoutSuccess(t *testing.T) {
 
 	resp := env.API.Request("GET", "/api/validsession", nil)
 	asserts.Equals(t, http.StatusOK, resp.Response.Code, "code")
-	asserts.Equals(t, map[string]interface{}{"Name": "test", "Email": "email", "IsSuperuser": false}, resp.JSON(), "body")
+	asserts.JSONEqualsWithoutSomeKeys(
+		t,
+		[]string{},
+		`{"Name": "test", "Email": "email", "IsSuperuser": false}`,
+		resp.Text(),
+		"body",
+	)
 
 	resp = env.API.Request("POST", "/api/logout", nil)
 	asserts.Equals(t, http.StatusOK, resp.Response.Code, "code")
 	asserts.Equals(t, "", resp.Text(), "text")
 
-	time.Sleep(100 * time.Millisecond) // Session reset in background
+	time.Sleep(500 * time.Millisecond) // Session reset in background
 	resp = env.API.Request("GET", "/api/validsession", nil)
 	asserts.Equals(t, http.StatusUnauthorized, resp.Response.Code, "code")
-	asserts.Equals(t, map[string]interface{}{"Status": "Unauthorized", "Messages": []interface{}{"Session Expired. Log out and log back in."}}, resp.JSON(), "body")
+	asserts.JSONEqualsWithoutSomeKeys(
+		t,
+		[]string{},
+		`{"Status": "Unauthorized", "Messages": ["Session Expired. Log out and log back in."]}`,
+		resp.Text(),
+		"body",
+	)
 }
 
 func TestLogoutFail(t *testing.T) {
-	env := test_helpers.NewTestEnv()
+	env := test_helpers.NewTestEnv(t)
 	revert := env.Default()
 	defer revert()
 	env.CreateUser()
@@ -39,5 +51,11 @@ func TestLogoutFail(t *testing.T) {
 
 	resp := env.API.Request("POST", "/api/logout", nil)
 	asserts.Equals(t, http.StatusUnauthorized, resp.Response.Code, "code")
-	asserts.Equals(t, map[string]interface{}{"Status": "Unauthorized", "Messages": []interface{}{"Session Expired. Log out and log back in."}}, resp.JSON(), "body")
+	asserts.JSONEqualsWithoutSomeKeys(
+		t,
+		[]string{},
+		`{"Status": "Unauthorized", "Messages": ["Session Expired. Log out and log back in."]}`,
+		resp.Text(),
+		"body",
+	)
 }

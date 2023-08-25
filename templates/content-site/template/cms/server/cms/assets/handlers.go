@@ -5,9 +5,10 @@ import (
 	"embed"
 	"errors"
 	"github.com/NYTimes/gziphandler"
-	log "github.com/sirupsen/logrus"
+	"github.com/go-logr/logr"
 	"io/fs"
 	"net/http"
+	"os"
 	"path/filepath"
 	"strings"
 )
@@ -19,6 +20,7 @@ type Handler struct {
 	sessionStore *sessions.Store
 	fsys         fs.FS
 	fileServer   http.Handler
+	logger       logr.Logger
 }
 
 // ServeHTTP inspects the URL path to locate a file within the static dir
@@ -52,18 +54,18 @@ func (h Handler) ServeHTTP(w http.ResponseWriter, r *http.Request) {
 		w.Header().Set("Content-Type", "text/html; charset=UTF-8")
 		content, err := Assets.ReadFile("files/index.html")
 		if nil != err {
-			log.Errorf("can't get asset index.html: %s", err)
+			h.logger.Error(err, "can't get asset index.html")
 			http.Error(w, err.Error(), http.StatusInternalServerError)
 			return
 		}
 		_, err = w.Write(content)
 		if nil != err {
-			log.Errorf("can't write index.html asset: %s", err)
+			h.logger.Error(err, "can't write index.html asset")
 		}
 	} else if strings.HasPrefix(cannonicalName, "su_") {
 		session, err := h.sessionStore.GetSession(r)
 		if nil != err {
-			log.Errorf("can't get session: %s", err)
+			h.logger.Error(err, "can't get session")
 			w.WriteHeader(http.StatusInternalServerError)
 			return
 		}
@@ -87,14 +89,16 @@ func (h Handler) fileServe(w http.ResponseWriter, r *http.Request) {
 	h.fileServer.ServeHTTP(w, r)
 }
 
-func NewHandler(sessionStore *sessions.Store) http.Handler {
+func NewHandler(logger logr.Logger, sessionStore *sessions.Store) http.Handler {
 	fsys, err := fs.Sub(Assets, "files")
 	if nil != err {
-		log.WithError(err).Fatal("can' get file system")
+		logger.Error(err, "can't get assets file system")
+		os.Exit(1)
 	}
 	return gziphandler.GzipHandler(Handler{
 		sessionStore: sessionStore,
 		fsys:         fsys,
 		fileServer:   http.FileServer(http.FS(fsys)),
+		logger:       logger.WithName("fileServer"),
 	})
 }

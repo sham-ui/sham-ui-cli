@@ -8,7 +8,7 @@ import (
 )
 
 func TestUpdateNameSuccess(t *testing.T) {
-	env := test_helpers.NewTestEnv()
+	env := test_helpers.NewTestEnv(t)
 	revert := env.Default()
 	defer revert()
 	env.CreateUser()
@@ -19,15 +19,15 @@ func TestUpdateNameSuccess(t *testing.T) {
 		"NewName": "edited test name",
 	})
 	asserts.Equals(t, http.StatusOK, resp.Response.Code, "code")
-	asserts.Equals(t, map[string]interface{}{"Status": "Name updated"}, resp.JSON(), "body")
+	asserts.JSONEqualsWithoutSomeKeys(t, nil, `{"Status": "Name updated"}`, resp.Text(), "body")
 
 	resp = env.API.Request("GET", "/api/validsession", nil)
 	asserts.Equals(t, http.StatusOK, resp.Response.Code, "code")
-	asserts.Equals(t, map[string]interface{}{"Name": "edited test name", "Email": "email", "IsSuperuser": false}, resp.JSON(), "body")
+	asserts.JSONEqualsWithoutSomeKeys(t, nil, `{"Name": "edited test name", "Email": "email", "IsSuperuser": false}`, resp.Text(), "body")
 }
 
 func TestUpdateNameUnauthtorized(t *testing.T) {
-	env := test_helpers.NewTestEnv()
+	env := test_helpers.NewTestEnv(t)
 	revert := env.Default()
 	defer revert()
 	env.CreateUser()
@@ -37,11 +37,11 @@ func TestUpdateNameUnauthtorized(t *testing.T) {
 		"NewName": "edited test name",
 	})
 	asserts.Equals(t, http.StatusUnauthorized, resp.Response.Code, "code")
-	asserts.Equals(t, map[string]interface{}{"Status": "Unauthorized", "Messages": []interface{}{"Session Expired. Log out and log back in."}}, resp.JSON(), "body")
+	asserts.JSONEqualsWithoutSomeKeys(t, nil, `{"Status": "Unauthorized", "Messages": ["Session Expired. Log out and log back in."]}`, resp.Text(), "body")
 }
 
 func TestUpdateNameShortName(t *testing.T) {
-	env := test_helpers.NewTestEnv()
+	env := test_helpers.NewTestEnv(t)
 	revert := env.Default()
 	defer revert()
 	env.CreateUser()
@@ -52,15 +52,15 @@ func TestUpdateNameShortName(t *testing.T) {
 		"NewName": "",
 	})
 	asserts.Equals(t, http.StatusBadRequest, resp.Response.Code, "code")
-	asserts.Equals(t, map[string]interface{}{"Status": "Bad Request", "Messages": []interface{}{"Name must have more than 0 characters."}}, resp.JSON(), "body")
+	asserts.JSONEqualsWithoutSomeKeys(t, nil, `{"Status": "Bad Request", "Messages": ["Name must have more than 0 characters."]}`, resp.Text(), "body")
 
 	resp = env.API.Request("GET", "/api/validsession", nil)
 	asserts.Equals(t, http.StatusOK, resp.Response.Code, "code")
-	asserts.Equals(t, map[string]interface{}{"Name": "test", "Email": "email", "IsSuperuser": false}, resp.JSON(), "body")
+	asserts.JSONEqualsWithoutSomeKeys(t, nil, `{"Name": "test", "Email": "email", "IsSuperuser": false}`, resp.Text(), "body")
 }
 
 func TestUpdateEmailSuccess(t *testing.T) {
-	env := test_helpers.NewTestEnv()
+	env := test_helpers.NewTestEnv(t)
 	revert := env.Default()
 	defer revert()
 	env.CreateUser()
@@ -72,15 +72,15 @@ func TestUpdateEmailSuccess(t *testing.T) {
 		"NewEmail2": "newemail@test.com",
 	})
 	asserts.Equals(t, http.StatusOK, resp.Response.Code, "code")
-	asserts.Equals(t, map[string]interface{}{"Status": "Email updated"}, resp.JSON(), "body")
+	asserts.JSONEqualsWithoutSomeKeys(t, nil, `{"Status": "Email updated"}`, resp.Text(), "body")
 
 	resp = env.API.Request("GET", "/api/validsession", nil)
 	asserts.Equals(t, http.StatusOK, resp.Response.Code, "code")
-	asserts.Equals(t, map[string]interface{}{"Name": "test", "Email": "newemail@test.com", "IsSuperuser": false}, resp.JSON(), "body")
+	asserts.JSONEqualsWithoutSomeKeys(t, nil, `{"Name": "test", "Email": "newemail@test.com", "IsSuperuser": false}`, resp.Text(), "body")
 }
 
 func TestUpdateEmailUnauthtorized(t *testing.T) {
-	env := test_helpers.NewTestEnv()
+	env := test_helpers.NewTestEnv(t)
 	revert := env.Default()
 	defer revert()
 	env.CreateUser()
@@ -91,11 +91,11 @@ func TestUpdateEmailUnauthtorized(t *testing.T) {
 		"NewEmail2": "newemail@test.com",
 	})
 	asserts.Equals(t, http.StatusUnauthorized, resp.Response.Code, "code")
-	asserts.Equals(t, map[string]interface{}{"Status": "Unauthorized", "Messages": []interface{}{"Session Expired. Log out and log back in."}}, resp.JSON(), "body")
+	asserts.JSONEqualsWithoutSomeKeys(t, nil, `{"Status": "Unauthorized", "Messages": ["Session Expired. Log out and log back in."]}`, resp.Text(), "body")
 }
 
 func TestUpdateEmailShort(t *testing.T) {
-	env := test_helpers.NewTestEnv()
+	env := test_helpers.NewTestEnv(t)
 	revert := env.Default()
 	defer revert()
 	env.CreateUser()
@@ -107,22 +107,22 @@ func TestUpdateEmailShort(t *testing.T) {
 		"NewEmail2": "newemail@test.com",
 	})
 	asserts.Equals(t, http.StatusBadRequest, resp.Response.Code, "code")
-	asserts.Equals(t, map[string]interface{}{"Status": "Bad Request", "Messages": []interface{}{"Email must have more than 0 characters.", "Emails don't match."}}, resp.JSON(), "body")
+	asserts.JSONEqualsWithoutSomeKeys(t, nil, `{"Status": "Bad Request", "Messages": ["Email must have more than 0 characters.", "Emails don't match."]}`, resp.Text(), "body")
 
 	resp = env.API.Request("PUT", "/api/members/email", map[string]interface{}{
 		"NewEmail1": "newemail@test.com",
 		"NewEmail2": "",
 	})
 	asserts.Equals(t, http.StatusBadRequest, resp.Response.Code, "code")
-	asserts.Equals(t, map[string]interface{}{"Status": "Bad Request", "Messages": []interface{}{"Email must have more than 0 characters.", "Emails don't match."}}, resp.JSON(), "body")
+	asserts.JSONEqualsWithoutSomeKeys(t, nil, `{"Status": "Bad Request", "Messages": ["Email must have more than 0 characters.", "Emails don't match."]}`, resp.Text(), "body")
 
 	resp = env.API.Request("GET", "/api/validsession", nil)
 	asserts.Equals(t, http.StatusOK, resp.Response.Code, "code")
-	asserts.Equals(t, map[string]interface{}{"Name": "test", "Email": "email", "IsSuperuser": false}, resp.JSON(), "body")
+	asserts.JSONEqualsWithoutSomeKeys(t, nil, `{"Name": "test", "Email": "email", "IsSuperuser": false}`, resp.Text(), "body")
 }
 
 func TestUpdateEmailNotMatch(t *testing.T) {
-	env := test_helpers.NewTestEnv()
+	env := test_helpers.NewTestEnv(t)
 	revert := env.Default()
 	defer revert()
 	env.CreateUser()
@@ -134,15 +134,15 @@ func TestUpdateEmailNotMatch(t *testing.T) {
 		"NewEmail2": "email2",
 	})
 	asserts.Equals(t, http.StatusBadRequest, resp.Response.Code, "code")
-	asserts.Equals(t, map[string]interface{}{"Status": "Bad Request", "Messages": []interface{}{"Emails don't match."}}, resp.JSON(), "body")
+	asserts.JSONEqualsWithoutSomeKeys(t, nil, `{"Status": "Bad Request", "Messages": ["Emails don't match."]}`, resp.Text(), "body")
 
 	resp = env.API.Request("GET", "/api/validsession", nil)
 	asserts.Equals(t, http.StatusOK, resp.Response.Code, "code")
-	asserts.Equals(t, map[string]interface{}{"Name": "test", "Email": "email", "IsSuperuser": false}, resp.JSON(), "body")
+	asserts.JSONEqualsWithoutSomeKeys(t, nil, `{"Name": "test", "Email": "email", "IsSuperuser": false}`, resp.Text(), "body")
 }
 
 func TestUpdateEmailNotUnique(t *testing.T) {
-	env := test_helpers.NewTestEnv()
+	env := test_helpers.NewTestEnv(t)
 	revert := env.Default()
 	defer revert()
 	env.CreateUser()
@@ -155,15 +155,15 @@ func TestUpdateEmailNotUnique(t *testing.T) {
 		"NewEmail2": "email1",
 	})
 	asserts.Equals(t, http.StatusBadRequest, resp.Response.Code, "code")
-	asserts.Equals(t, map[string]interface{}{"Status": "Bad Request", "Messages": []interface{}{"Email is already in use."}}, resp.JSON(), "body")
+	asserts.JSONEqualsWithoutSomeKeys(t, nil, `{"Status": "Bad Request", "Messages": ["Email is already in use."]}`, resp.Text(), "body")
 
 	resp = env.API.Request("GET", "/api/validsession", nil)
 	asserts.Equals(t, http.StatusOK, resp.Response.Code, "code")
-	asserts.Equals(t, map[string]interface{}{"Name": "test", "Email": "email", "IsSuperuser": false}, resp.JSON(), "body")
+	asserts.JSONEqualsWithoutSomeKeys(t, nil, `{"Name": "test", "Email": "email", "IsSuperuser": false}`, resp.Text(), "body")
 }
 
 func TestUpdatePasswordSuccess(t *testing.T) {
-	env := test_helpers.NewTestEnv()
+	env := test_helpers.NewTestEnv(t)
 	revert := env.Default()
 	defer revert()
 	env.CreateUser()
@@ -175,7 +175,7 @@ func TestUpdatePasswordSuccess(t *testing.T) {
 		"NewPassword2": "newpass",
 	})
 	asserts.Equals(t, http.StatusOK, resp.Response.Code, "code")
-	asserts.Equals(t, map[string]interface{}{"Status": "Password updated"}, resp.JSON(), "body")
+	asserts.JSONEqualsWithoutSomeKeys(t, nil, `{"Status": "Password updated"}`, resp.Text(), "body")
 
 	env.API.ResetCSRF()
 	env.API.ResetCookies()
@@ -186,7 +186,7 @@ func TestUpdatePasswordSuccess(t *testing.T) {
 		"Password": "password",
 	})
 	asserts.Equals(t, http.StatusBadRequest, resp.Response.Code, "code")
-	asserts.Equals(t, map[string]interface{}{"Status": "Bad Request", "Messages": []interface{}{"Incorrect username or password"}}, resp.JSON(), "body")
+	asserts.JSONEqualsWithoutSomeKeys(t, nil, `{"Status": "Bad Request", "Messages": ["Incorrect username or password"]}`, resp.Text(), "body")
 
 	resp = env.API.Request("POST", "/api/login", map[string]interface{}{
 		"Email":    "email",
@@ -196,7 +196,7 @@ func TestUpdatePasswordSuccess(t *testing.T) {
 }
 
 func TestUpdatePasswordUnauthtorized(t *testing.T) {
-	env := test_helpers.NewTestEnv()
+	env := test_helpers.NewTestEnv(t)
 	revert := env.Default()
 	defer revert()
 	env.API.GetCSRF()
@@ -206,11 +206,11 @@ func TestUpdatePasswordUnauthtorized(t *testing.T) {
 		"NewPassword2": "newpass",
 	})
 	asserts.Equals(t, http.StatusUnauthorized, resp.Response.Code, "code")
-	asserts.Equals(t, map[string]interface{}{"Status": "Unauthorized", "Messages": []interface{}{"Session Expired. Log out and log back in."}}, resp.JSON(), "body")
+	asserts.JSONEqualsWithoutSomeKeys(t, nil, `{"Status": "Unauthorized", "Messages": ["Session Expired. Log out and log back in."]}`, resp.Text(), "body")
 }
 
 func TestUpdatePasswordShort(t *testing.T) {
-	env := test_helpers.NewTestEnv()
+	env := test_helpers.NewTestEnv(t)
 	revert := env.Default()
 	defer revert()
 	env.CreateUser()
@@ -222,18 +222,18 @@ func TestUpdatePasswordShort(t *testing.T) {
 		"NewPassword2": "newpass",
 	})
 	asserts.Equals(t, http.StatusBadRequest, resp.Response.Code, "code")
-	asserts.Equals(t, map[string]interface{}{"Status": "Bad Request", "Messages": []interface{}{"Password must have more than 0 characters.", "Passwords don't match."}}, resp.JSON(), "body")
+	asserts.JSONEqualsWithoutSomeKeys(t, nil, `{"Status": "Bad Request", "Messages": ["Password must have more than 0 characters.", "Passwords don't match."]}`, resp.Text(), "body")
 
 	resp = env.API.Request("PUT", "/api/members/password", map[string]interface{}{
 		"NewPassword1": "newpass",
 		"NewPassword2": "",
 	})
 	asserts.Equals(t, http.StatusBadRequest, resp.Response.Code, "code")
-	asserts.Equals(t, map[string]interface{}{"Status": "Bad Request", "Messages": []interface{}{"Password must have more than 0 characters.", "Passwords don't match."}}, resp.JSON(), "body")
+	asserts.JSONEqualsWithoutSomeKeys(t, nil, `{"Status": "Bad Request", "Messages": ["Password must have more than 0 characters.", "Passwords don't match."]}`, resp.Text(), "body")
 }
 
 func TestUpdatePasswordNotMatch(t *testing.T) {
-	env := test_helpers.NewTestEnv()
+	env := test_helpers.NewTestEnv(t)
 	revert := env.Default()
 	defer revert()
 	env.CreateUser()
@@ -245,5 +245,5 @@ func TestUpdatePasswordNotMatch(t *testing.T) {
 		"NewPassword2": "newpass2",
 	})
 	asserts.Equals(t, http.StatusBadRequest, resp.Response.Code, "code")
-	asserts.Equals(t, map[string]interface{}{"Status": "Bad Request", "Messages": []interface{}{"Passwords don't match."}}, resp.JSON(), "body")
+	asserts.JSONEqualsWithoutSomeKeys(t, nil, `{"Status": "Bad Request", "Messages": ["Passwords don't match."]}`, resp.Text(), "body")
 }

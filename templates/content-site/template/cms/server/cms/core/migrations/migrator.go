@@ -3,12 +3,13 @@ package migrations
 import (
 	"database/sql"
 	"fmt"
-	log "github.com/sirupsen/logrus"
+	"github.com/go-logr/logr"
 )
 
 type Migrator struct {
 	db            *sql.DB
 	executedNames map[string]struct{}
+	logger        logr.Logger
 }
 
 func (m *Migrator) Apply(migrations ...Migration) error {
@@ -18,7 +19,7 @@ func (m *Migrator) Apply(migrations ...Migration) error {
 			if nil != err {
 				return fmt.Errorf("apply migration %s fail: %s", migration.Name(), err)
 			}
-			log.WithField("migration", migration.Name()).Info("success apply migration")
+			m.logger.Info("apply migration", "name", migration.Name())
 		}
 	}
 	return nil
@@ -73,9 +74,10 @@ func (m *Migrator) applyMigration(migration Migration) error {
 	return nil
 }
 
-func NewMigrator(db *sql.DB) (*Migrator, error) {
+func NewMigrator(logger logr.Logger, db *sql.DB) (*Migrator, error) {
 	m := &Migrator{
-		db: db,
+		db:     db,
+		logger: logger,
 	}
 	err := m.createMigrationsTable()
 	if nil != err {

@@ -3,9 +3,9 @@ package main
 import (
 	"cms/app"
 	"cms/config"
+	"cms/logger"
 	"flag"
 	"github.com/gorilla/context"
-	log "github.com/sirupsen/logrus"
 	"github.com/urfave/negroni"
 	"net/http"
 	"strconv"
@@ -14,14 +14,19 @@ import (
 func main() {
 	createSuperuserFlag := flag.Bool("createsuperuser", false, "create superuser member")
 	flag.Parse()
+
+	log := logger.NewLogger(0)
+
 	if *createSuperuserFlag {
-		app.CreateSuperUser()
+		app.CreateSuperUser(log)
 		return
 	}
-	n := negroni.New(negroni.NewRecovery(), negroni.NewLogger())
-	db := app.StartApplication("config.cfg", n)
-	go app.StartGRPC(db)
+	n := negroni.New(negroni.NewRecovery(), logger.CreateNegroniLogger(log))
+	db := app.StartApplication(log, "config.cfg", n)
+	go app.StartGRPC(log, db)
 	port := strconv.Itoa(config.Server.Port)
-	log.Infof("Server start on port :%s", port)
-	log.Fatal(http.ListenAndServe(":"+port, context.ClearHandler(n)))
+	log.Info("Server started", "port", port)
+	if err := http.ListenAndServe(":"+port, context.ClearHandler(n)); err != nil {
+		log.Error(err, "Server stopped")
+	}
 }

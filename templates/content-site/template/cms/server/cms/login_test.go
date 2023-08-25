@@ -8,7 +8,7 @@ import (
 )
 
 func TestLoginInvalidCSRF(t *testing.T) {
-	env := test_helpers.NewTestEnv()
+	env := test_helpers.NewTestEnv(t)
 	revert := env.Default()
 	defer revert()
 
@@ -18,7 +18,7 @@ func TestLoginInvalidCSRF(t *testing.T) {
 }
 
 func TestLoginSuccess(t *testing.T) {
-	env := test_helpers.NewTestEnv()
+	env := test_helpers.NewTestEnv(t)
 	revert := env.Default()
 	defer revert()
 	env.CreateUser()
@@ -38,7 +38,7 @@ func TestLoginSuccess(t *testing.T) {
 }
 
 func TestLoginIncorrectPassword(t *testing.T) {
-	env := test_helpers.NewTestEnv()
+	env := test_helpers.NewTestEnv(t)
 	revert := env.Default()
 	defer revert()
 	env.CreateUser()
@@ -59,7 +59,7 @@ func TestLoginIncorrectPassword(t *testing.T) {
 }
 
 func TestLoginIncorrectEmail(t *testing.T) {
-	env := test_helpers.NewTestEnv()
+	env := test_helpers.NewTestEnv(t)
 	revert := env.Default()
 	defer revert()
 	env.CreateUser()

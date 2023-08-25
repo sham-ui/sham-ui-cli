@@ -8,7 +8,7 @@ import (
 )
 
 func TestMembers(t *testing.T) {
-	env := test_helpers.NewTestEnv()
+	env := test_helpers.NewTestEnv(t)
 	revert := env.Default()
 	defer revert()
 	env.CreateSuperUser()
@@ -20,21 +20,19 @@ func TestMembers(t *testing.T) {
 			Method:                     http.MethodGet,
 			URL:                        "/api/admin/members?limit=20",
 			ExpectedResponseStatusCode: http.StatusOK,
-			ExpectedResponseJSON: map[string]interface{}{
-				"members": []interface{}{
-					map[string]interface{}{
-						"Email":       "email",
-						"ID":          "1",
-						"IsSuperuser": true,
-						"Name":        "test",
-					},
-				},
-				"meta": map[string]interface{}{
-					"limit":  float64(20),
-					"offset": float64(0),
-					"total":  float64(1),
-				},
-			},
+			ExpectedResponseJSON: `{
+				"members": [{
+					"Email": "email",
+                    "ID": "1",
+					"IsSuperuser": true,
+					"Name": "test"
+				}],
+                "meta": {
+					"limit": 20,
+                    "offset": 0,
+                    "total": 1
+                }
+			}`,
 		},
 		{
 			Method: http.MethodPost,
@@ -46,7 +44,7 @@ func TestMembers(t *testing.T) {
 				"password":     "test",
 			},
 			ExpectedResponseStatusCode: http.StatusOK,
-			ExpectedResponseJSON:       map[string]interface{}{"Status": "Member created"},
+			ExpectedResponseJSON:       `{"Status": "Member created"}`,
 		},
 		{
 			Message: "Empty email",
@@ -59,10 +57,10 @@ func TestMembers(t *testing.T) {
 				"password":     "test",
 			},
 			ExpectedResponseStatusCode: http.StatusBadRequest,
-			ExpectedResponseJSON: map[string]interface{}{
+			ExpectedResponseJSON: `{
 				"Status":   "Bad Request",
-				"Messages": []interface{}{"Email must not be empty"},
-			},
+				"Messages": ["Email must not be empty"]
+			}`,
 		},
 		{
 			Message: "Empty name",
@@ -75,10 +73,10 @@ func TestMembers(t *testing.T) {
 				"password":     "test",
 			},
 			ExpectedResponseStatusCode: http.StatusBadRequest,
-			ExpectedResponseJSON: map[string]interface{}{
+			ExpectedResponseJSON: `{
 				"Status":   "Bad Request",
-				"Messages": []interface{}{"Name must not be empty."},
-			},
+				"Messages": ["Name must not be empty."]
+			}`,
 		},
 		{
 			Message: "Not unique email",
@@ -91,10 +89,10 @@ func TestMembers(t *testing.T) {
 				"password":     "test",
 			},
 			ExpectedResponseStatusCode: http.StatusBadRequest,
-			ExpectedResponseJSON: map[string]interface{}{
+			ExpectedResponseJSON: `{
 				"Status":   "Bad Request",
-				"Messages": []interface{}{"Email is already in use."},
-			},
+				"Messages": ["Email is already in use."]
+			}`,
 		},
 		{
 			Method: http.MethodPut,
@@ -105,7 +103,7 @@ func TestMembers(t *testing.T) {
 				"is_superuser": false,
 			},
 			ExpectedResponseStatusCode: http.StatusOK,
-			ExpectedResponseJSON:       map[string]interface{}{"Status": "Member updated"},
+			ExpectedResponseJSON:       `{"Status": "Member updated"}`,
 		},
 		{
 			Message: "Only email",
@@ -117,7 +115,7 @@ func TestMembers(t *testing.T) {
 				"is_superuser": false,
 			},
 			ExpectedResponseStatusCode: http.StatusOK,
-			ExpectedResponseJSON:       map[string]interface{}{"Status": "Member updated"},
+			ExpectedResponseJSON:       `{"Status": "Member updated"}`,
 		},
 		{
 			Message: "Empty email",
@@ -129,10 +127,10 @@ func TestMembers(t *testing.T) {
 				"is_superuser": false,
 			},
 			ExpectedResponseStatusCode: http.StatusBadRequest,
-			ExpectedResponseJSON: map[string]interface{}{
+			ExpectedResponseJSON: `{
 				"Status":   "Bad Request",
-				"Messages": []interface{}{"Email must not be empty"},
-			},
+				"Messages": ["Email must not be empty"]
+			}`,
 		},
 		{
 			Message: "Empty name",
@@ -144,10 +142,10 @@ func TestMembers(t *testing.T) {
 				"is_superuser": false,
 			},
 			ExpectedResponseStatusCode: http.StatusBadRequest,
-			ExpectedResponseJSON: map[string]interface{}{
+			ExpectedResponseJSON: `{
 				"Status":   "Bad Request",
-				"Messages": []interface{}{"Name must not be empty."},
-			},
+				"Messages": ["Name must not be empty."]
+			}`,
 		},
 		{
 			Method: http.MethodPut,
@@ -157,7 +155,7 @@ func TestMembers(t *testing.T) {
 				"pass2": "pass1",
 			},
 			ExpectedResponseStatusCode: http.StatusOK,
-			ExpectedResponseJSON:       map[string]interface{}{"Status": "Password updated"},
+			ExpectedResponseJSON:       `{"Status": "Password updated"}`,
 		},
 		{
 			Message: "Empty pass1",
@@ -168,13 +166,13 @@ func TestMembers(t *testing.T) {
 				"pass2": "pass2",
 			},
 			ExpectedResponseStatusCode: http.StatusBadRequest,
-			ExpectedResponseJSON: map[string]interface{}{
+			ExpectedResponseJSON: `{
 				"Status": "Bad Request",
-				"Messages": []interface{}{
+				"Messages": [
 					"Password must have more than 0 characters.",
-					"Passwords don't match.",
-				},
-			},
+					"Passwords don't match."
+				]
+			}`,
 		},
 		{
 			Message: "empty pass2",
@@ -185,13 +183,13 @@ func TestMembers(t *testing.T) {
 				"pass2": "",
 			},
 			ExpectedResponseStatusCode: http.StatusBadRequest,
-			ExpectedResponseJSON: map[string]interface{}{
+			ExpectedResponseJSON: `{
 				"Status": "Bad Request",
-				"Messages": []interface{}{
+				"Messages": [
 					"Password must have more than 0 characters.",
-					"Passwords don't match.",
-				},
-			},
+					"Passwords don't match."
+				]
+			}`,
 		},
 		{
 			Message: "passwords don't match",
@@ -202,39 +200,37 @@ func TestMembers(t *testing.T) {
 				"pass2": "pass2",
 			},
 			ExpectedResponseStatusCode: http.StatusBadRequest,
-			ExpectedResponseJSON: map[string]interface{}{
+			ExpectedResponseJSON: `{
 				"Status": "Bad Request",
-				"Messages": []interface{}{
-					"Passwords don't match.",
-				},
-			},
+				"Messages": [
+					"Passwords don't match."
+				]
+			}`,
 		},
 		{
 			Message:                    "delete success",
 			Method:                     http.MethodDelete,
 			URL:                        "/api/admin/members/1",
 			ExpectedResponseStatusCode: http.StatusOK,
-			ExpectedResponseJSON: map[string]interface{}{
-				"Status": "Member deleted",
-			},
+			ExpectedResponseJSON:       `{"Status": "Member deleted"}`,
 		},
 		{
 			Message:                    "member not found",
 			Method:                     http.MethodDelete,
 			URL:                        "/api/admin/members/0",
 			ExpectedResponseStatusCode: http.StatusBadRequest,
-			ExpectedResponseJSON: map[string]interface{}{
+			ExpectedResponseJSON: `{
 				"Status": "Bad Request",
-				"Messages": []interface{}{
-					"Member not exists.",
-				},
-			},
+				"Messages": [
+					"Member not exists."
+				]
+			}`,
 		},
 	})
 }
 
 func TestUpdateMemberEmailNotUnique(t *testing.T) {
-	env := test_helpers.NewTestEnv()
+	env := test_helpers.NewTestEnv(t)
 	revert := env.Default()
 	defer revert()
 	env.CreateSuperUser()
@@ -254,16 +250,16 @@ func TestUpdateMemberEmailNotUnique(t *testing.T) {
 				"is_superuser": false,
 			},
 			ExpectedResponseStatusCode: http.StatusBadRequest,
-			ExpectedResponseJSON: map[string]interface{}{
+			ExpectedResponseJSON: `{
 				"Status":   "Bad Request",
-				"Messages": []interface{}{"Email is already in use."},
-			},
+				"Messages": ["Email is already in use."]
+			}`,
 		},
 	})
 }
 
 func TestMembersNonAuthorized(t *testing.T) {
-	env := test_helpers.NewTestEnv()
+	env := test_helpers.NewTestEnv(t)
 	revert := env.Default()
 	defer revert()
 	env.API.GetCSRF()
@@ -273,52 +269,52 @@ func TestMembersNonAuthorized(t *testing.T) {
 			Method:                     http.MethodGet,
 			URL:                        "/api/admin/members",
 			ExpectedResponseStatusCode: http.StatusUnauthorized,
-			ExpectedResponseJSON: map[string]interface{}{
+			ExpectedResponseJSON: `{
 				"Status":   "Unauthorized",
-				"Messages": []interface{}{"Session Expired. Log out and log back in."},
-			},
+				"Messages": ["Session Expired. Log out and log back in."]
+			}`,
 		},
 		{
 			Method:                     http.MethodPost,
 			URL:                        "/api/admin/members",
 			ExpectedResponseStatusCode: http.StatusUnauthorized,
-			ExpectedResponseJSON: map[string]interface{}{
+			ExpectedResponseJSON: `{
 				"Status":   "Unauthorized",
-				"Messages": []interface{}{"Session Expired. Log out and log back in."},
-			},
+				"Messages": ["Session Expired. Log out and log back in."]
+			}`,
 		},
 		{
 			Method:                     http.MethodPut,
 			URL:                        "/api/admin/members/1",
 			ExpectedResponseStatusCode: http.StatusUnauthorized,
-			ExpectedResponseJSON: map[string]interface{}{
+			ExpectedResponseJSON: `{
 				"Status":   "Unauthorized",
-				"Messages": []interface{}{"Session Expired. Log out and log back in."},
-			},
+				"Messages": ["Session Expired. Log out and log back in."]
+			}`,
 		},
 		{
 			Method:                     http.MethodPut,
 			URL:                        "/api/admin/members/1/password",
 			ExpectedResponseStatusCode: http.StatusUnauthorized,
-			ExpectedResponseJSON: map[string]interface{}{
+			ExpectedResponseJSON: `{
 				"Status":   "Unauthorized",
-				"Messages": []interface{}{"Session Expired. Log out and log back in."},
-			},
+				"Messages": ["Session Expired. Log out and log back in."]
+			}`,
 		},
 		{
 			Method:                     http.MethodDelete,
 			URL:                        "/api/admin/members/1",
 			ExpectedResponseStatusCode: http.StatusUnauthorized,
-			ExpectedResponseJSON: map[string]interface{}{
+			ExpectedResponseJSON: `{
 				"Status":   "Unauthorized",
-				"Messages": []interface{}{"Session Expired. Log out and log back in."},
-			},
+				"Messages": ["Session Expired. Log out and log back in."]
+			}`,
 		},
 	})
 }
 
 func TestMembersForNonSuperuser(t *testing.T) {
-	env := test_helpers.NewTestEnv()
+	env := test_helpers.NewTestEnv(t)
 	revert := env.Default()
 	defer revert()
 	env.CreateUser()
@@ -330,46 +326,46 @@ func TestMembersForNonSuperuser(t *testing.T) {
 			Method:                     http.MethodGet,
 			URL:                        "/api/admin/members",
 			ExpectedResponseStatusCode: http.StatusForbidden,
-			ExpectedResponseJSON: map[string]interface{}{
-				"Messages": []interface{}{"Allowed only for superuser"},
-				"Status":   "Forbidden",
-			},
+			ExpectedResponseJSON: `{
+				"Messages": ["Allowed only for superuser"],
+				"Status":   "Forbidden"
+			}`,
 		},
 		{
 			Method:                     http.MethodPost,
 			URL:                        "/api/admin/members",
 			ExpectedResponseStatusCode: http.StatusForbidden,
-			ExpectedResponseJSON: map[string]interface{}{
-				"Messages": []interface{}{"Allowed only for superuser"},
-				"Status":   "Forbidden",
-			},
+			ExpectedResponseJSON: `{
+				"Messages": ["Allowed only for superuser"],
+				"Status":   "Forbidden"
+			}`,
 		},
 		{
 			Method:                     http.MethodPut,
 			URL:                        "/api/admin/members/1",
 			ExpectedResponseStatusCode: http.StatusForbidden,
-			ExpectedResponseJSON: map[string]interface{}{
-				"Messages": []interface{}{"Allowed only for superuser"},
-				"Status":   "Forbidden",
-			},
+			ExpectedResponseJSON: `{
+				"Messages": ["Allowed only for superuser"],
+				"Status":   "Forbidden"
+			}`,
 		},
 		{
 			Method:                     http.MethodPut,
 			URL:                        "/api/admin/members/1/password",
 			ExpectedResponseStatusCode: http.StatusForbidden,
-			ExpectedResponseJSON: map[string]interface{}{
-				"Messages": []interface{}{"Allowed only for superuser"},
-				"Status":   "Forbidden",
-			},
+			ExpectedResponseJSON: `{
+				"Messages": ["Allowed only for superuser"],
+				"Status":   "Forbidden"
+			}`,
 		},
 		{
 			Method:                     http.MethodDelete,
 			URL:                        "/api/admin/members/1",
 			ExpectedResponseStatusCode: http.StatusForbidden,
-			ExpectedResponseJSON: map[string]interface{}{
-				"Messages": []interface{}{"Allowed only for superuser"},
-				"Status":   "Forbidden",
-			},
+			ExpectedResponseJSON: `{
+				"Messages": ["Allowed only for superuser"],
+				"Status":   "Forbidden"
+			}`,
 		},
 	})
 }

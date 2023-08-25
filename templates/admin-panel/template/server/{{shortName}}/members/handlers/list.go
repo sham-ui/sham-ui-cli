@@ -3,6 +3,7 @@ package handlers
 import (
 	"database/sql"
 	"fmt"
+	"github.com/go-logr/logr"
 	"net/http"
 	"{{shortName}}/core/handler"
 	"{{shortName}}/core/sessions"
@@ -97,6 +98,6 @@ func (h *listHandler) Process(_ *handler.Context, data interface{}) (interface{}
 	}, nil
 }
 
-func NewListHandler(db *sql.DB, sessionStore *sessions.Store) http.HandlerFunc {
-	return handler.Create(&listHandler{db: db}, handler.WithOnlyForSuperuser(sessionStore))
+func NewListHandler(logger logr.Logger, db *sql.DB, sessionStore *sessions.Store) http.HandlerFunc {
+	return handler.Create(logger, &listHandler{db: db}, handler.WithOnlyForSuperuser(sessionStore))
 }

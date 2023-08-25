@@ -196,10 +196,33 @@ input[type=checkbox] {
     }
 }
 
+pre {
+    display: block;
+    padding: 17px 20px;
+    background: #fbfdff;
+    border: 1px solid #e5e8ec;
+    border-radius: 4px;
+    box-sizing: border-box;
+    overflow-x: auto;
+}
+
 code {
-    font-size: 87.5%;
-    color: #e83e8c;
-    word-break: break-word;
+    font-family: Menlo,Monaco,Consolas,Courier New,Courier,monospace;
+    background: none;
+    font-size: inherit;
+    padding: 0;
+    -moz-tab-size: 4;
+    tab-size: 4;
+    word-break: normal;
+    word-spacing: normal;
+    word-wrap: normal;
+    border: 1px solid #e5e8ec;
+}
+
+pre code {
+    white-space: pre;
+    border: none;
+    background: none;
 }
 
 a > code {

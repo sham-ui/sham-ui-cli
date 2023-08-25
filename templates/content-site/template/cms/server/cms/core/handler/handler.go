@@ -1,7 +1,7 @@
 package handler
 
 import (
-	log "github.com/sirupsen/logrus"
+	"github.com/go-logr/logr"
 	"net/http"
 )
 
@@ -13,15 +13,16 @@ type Interface interface {
 
 type Handler struct {
 	Interface
-	opts handlerOptions
+	opts   handlerOptions
+	logger logr.Logger
 }
 
 func (h *Handler) Handler(w http.ResponseWriter, r *http.Request) {
-	ctx := newContext(w, r, h.opts.sessionStore)
+	ctx := newContext(h.logger, w, r, h.opts.sessionStore)
 	if h.opts.onlyForAuthenticated {
 		session, err := ctx.GetSession()
 		if nil != err {
-			log.Errorf("can't get session: %s", err)
+			h.logger.Error(err, "can't get session")
 			ctx.RespondWithError(http.StatusInternalServerError)
 			return
 		}
@@ -36,24 +37,24 @@ func (h *Handler) Handler(w http.ResponseWriter, r *http.Request) {
 	}
 	data, err := h.Interface.ExtractData(ctx)
 	if nil != err {
-		log.Infof("can't extract data: %s", err)
+		h.logger.V(1).Error(err, "can't extract data")
 		ctx.RespondWithError(http.StatusBadRequest)
 		return
 	}
 	validation, err := h.Interface.Validate(ctx, data)
 	if nil != err {
-		log.Errorf("can't validate data: %s", err)
+		h.logger.V(1).Error(err, "can't validate data")
 		ctx.RespondWithError(http.StatusInternalServerError)
 		return
 	}
 	if !validation.IsValid {
-		log.WithField("errors", validation.Errors).Info("data not valid")
+		h.logger.V(2).Info("data not valid", "errors", validation.Errors)
 		ctx.RespondWithError(http.StatusBadRequest, validation.Errors...)
 		return
 	}
 	response, err := h.Interface.Process(ctx, data)
 	if nil != err {
-		log.Errorf("can't process request: %s", err)
+		h.logger.Error(err, "can't process request")
 		ctx.RespondWithError(http.StatusInternalServerError)
 		return
 	}
@@ -62,10 +63,11 @@ func (h *Handler) Handler(w http.ResponseWriter, r *http.Request) {
 	}
 }
 
-func Create(handler Interface, opts ...Option) http.HandlerFunc {
+func Create(logger logr.Logger, handler Interface, opts ...Option) http.HandlerFunc {
 	h := &Handler{
 		Interface: handler,
 		opts:      defaultHandlerOptions(),
+		logger:    logger,
 	}
 	for _, opt := range opts {
 		opt.apply(&h.opts)

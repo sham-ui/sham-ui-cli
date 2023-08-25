@@ -4,6 +4,7 @@ import (
 	"database/sql"
 	"encoding/json"
 	"fmt"
+	"github.com/go-logr/logr"
 	"net/http"
 	"{{shortName}}/core/handler"
 	"{{shortName}}/core/sessions"
@@ -85,6 +86,6 @@ func (h *signupHandler) Process(_ *handler.Context, data interface{}) (interface
 	}, nil
 }
 
-func NewSignupHandler(db *sql.DB, sessionsStore *sessions.Store) http.HandlerFunc {
-	return handler.Create(&signupHandler{db: db, sessionsStore: sessionsStore})
+func NewSignupHandler(logger logr.Logger, db *sql.DB, sessionsStore *sessions.Store) http.HandlerFunc {
+	return handler.Create(logger, &signupHandler{db: db, sessionsStore: sessionsStore})
 }

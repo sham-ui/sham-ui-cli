@@ -8,7 +8,7 @@ import (
 )
 
 func TestCsrfToken(t *testing.T) {
-	env := test_helpers.NewTestEnv()
+	env := test_helpers.NewTestEnv(t)
 	revert := env.Default()
 	defer revert()
 
@@ -19,18 +19,18 @@ func TestCsrfToken(t *testing.T) {
 }
 
 func TestSessionNotExists(t *testing.T) {
-	env := test_helpers.NewTestEnv()
+	env := test_helpers.NewTestEnv(t)
 	revert := env.Default()
 	defer revert()
 	env.API.GetCSRF()
 
 	resp := env.API.Request("GET", "/api/validsession", nil)
 	asserts.Equals(t, http.StatusUnauthorized, resp.Response.Code, "code")
-	asserts.Equals(t, map[string]interface{}{"Status": "Unauthorized", "Messages": []interface{}{"Session Expired. Log out and log back in."}}, resp.JSON(), "body")
+	asserts.JSONEqualsWithoutSomeKeys(t, nil, `{"Status": "Unauthorized", "Messages": ["Session Expired. Log out and log back in."]}`, resp.Text(), "body")
 }
 
 func TestSessionExists(t *testing.T) {
-	env := test_helpers.NewTestEnv()
+	env := test_helpers.NewTestEnv(t)
 	revert := env.Default()
 	defer revert()
 	env.CreateUser()
@@ -39,11 +39,11 @@ func TestSessionExists(t *testing.T) {
 
 	resp := env.API.Request("GET", "/api/validsession", nil)
 	asserts.Equals(t, http.StatusOK, resp.Response.Code, "code")
-	asserts.Equals(t, map[string]interface{}{"Name": "test", "Email": "email", "IsSuperuser": false}, resp.JSON(), "body")
+	asserts.JSONEqualsWithoutSomeKeys(t, nil, `{"Name": "test", "Email": "email", "IsSuperuser": false}`, resp.Text(), "body")
 }
 
 func TestSuperuserSession(t *testing.T) {
-	env := test_helpers.NewTestEnv()
+	env := test_helpers.NewTestEnv(t)
 	revert := env.Default()
 	defer revert()
 	env.CreateSuperUser()
@@ -52,5 +52,5 @@ func TestSuperuserSession(t *testing.T) {
 
 	resp := env.API.Request("GET", "/api/validsession", nil)
 	asserts.Equals(t, http.StatusOK, resp.Response.Code, "code")
-	asserts.Equals(t, map[string]interface{}{"Name": "test", "Email": "email", "IsSuperuser": true}, resp.JSON(), "body")
+	asserts.JSONEqualsWithoutSomeKeys(t, nil, `{"Name": "test", "Email": "email", "IsSuperuser": true}`, resp.Text(), "body")
 }

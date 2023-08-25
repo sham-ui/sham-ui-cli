@@ -8,6 +8,7 @@ import (
 	"database/sql"
 	"encoding/json"
 	"fmt"
+	"github.com/go-logr/logr"
 	"net/http"
 	"strings"
 )
@@ -67,7 +68,7 @@ func (h *createHandler) Process(_ *handler.Context, data interface{}) (interface
 	}, nil
 }
 
-func NewCreateHandler(db *sql.DB, sessionsStore *sessions.Store) http.HandlerFunc {
+func NewCreateHandler(logger logr.Logger, db *sql.DB, sessionsStore *sessions.Store) http.HandlerFunc {
 	h := &createHandler{categoryRepository: repo.NewCategoryRepository(db)}
-	return handler.Create(h, handler.WithOnlyForAuthenticated(sessionsStore))
+	return handler.Create(logger, h, handler.WithOnlyForAuthenticated(sessionsStore))
 }

@@ -23,8 +23,7 @@ func Migrations(db *sql.DB) []migrations.Migration {
 
 func IsUniqueEmailForMemberID(db *sql.DB, id, email string) (bool, error) {
 	var existingEmail string
-	row := db.QueryRow("SELECT email FROM members WHERE email = $1 AND id != $2", email, id)
-	err := row.Scan(&existingEmail)
+	err := db.QueryRow("SELECT email FROM members WHERE email = $1 AND id != $2", email, id).Scan(&existingEmail)
 	if err == sql.ErrNoRows {
 		return true, nil
 	}
@@ -36,8 +35,7 @@ func IsUniqueEmailForMemberID(db *sql.DB, id, email string) (bool, error) {
 
 func IsUniqueEmail(db *sql.DB, email string) (bool, error) {
 	var existingEmail string
-	row := db.QueryRow("SELECT email FROM members WHERE email = $1", email)
-	err := row.Scan(&existingEmail)
+	err := db.QueryRow("SELECT email FROM members WHERE email = $1", email).Scan(&existingEmail)
 	if err == sql.ErrNoRows {
 		return true, nil
 	}
@@ -49,7 +47,7 @@ func IsUniqueEmail(db *sql.DB, email string) (bool, error) {
 
 // CreateMember creates the new member record
 func CreateMember(db *sql.DB, m *MemberData) error {
-	_, err := db.Query("INSERT INTO members(name, email, password, is_superuser) VALUES ($1,$2, $3, $4)", m.Name, m.Email, m.Password, m.IsSuperuser)
+	_, err := db.Exec("INSERT INTO members(name, email, password, is_superuser) VALUES ($1,$2, $3, $4)", m.Name, m.Email, m.Password, m.IsSuperuser)
 	if nil != err {
 		return fmt.Errorf("insert into members: %s", err)
 	}
@@ -58,25 +56,25 @@ func CreateMember(db *sql.DB, m *MemberData) error {
 
 // UpdateMemberName uses the member ID to update a name
 func UpdateMemberName(db *sql.DB, id string, name string) error {
-	_, err := db.Query("UPDATE members SET name = $2 WHERE id = $1", id, name)
+	_, err := db.Exec("UPDATE members SET name = $2 WHERE id = $1", id, name)
 	return err
 }
 
 // UpdateMemberEmail uses the member ID to update a email
 func UpdateMemberEmail(db *sql.DB, id string, email string) error {
-	_, err := db.Query("UPDATE members SET email = $2 WHERE id = $1", id, email)
+	_, err := db.Exec("UPDATE members SET email = $2 WHERE id = $1", id, email)
 	return err
 }
 
 // UpdateMemberPassword uses the member ID to update a password
 func UpdateMemberPassword(db *sql.DB, id string, password string) error {
-	_, err := db.Query("UPDATE members SET password = $2 WHERE id = $1", id, password)
+	_, err := db.Exec("UPDATE members SET password = $2 WHERE id = $1", id, password)
 	return err
 }
 
 // UpdateMemberData uses the member ID to update a name, email, is_superuser
 func UpdateMemberData(db *sql.DB, m *MemberData) error {
-	_, err := db.Query("UPDATE members SET name = $2, email = $3, is_superuser = $4  WHERE id = $1", m.ID, m.Name, m.Email, m.IsSuperuser)
+	_, err := db.Exec("UPDATE members SET name = $2, email = $3, is_superuser = $4  WHERE id = $1", m.ID, m.Name, m.Email, m.IsSuperuser)
 	if nil != err {
 		return fmt.Errorf("update member: %s", err)
 	}
@@ -86,8 +84,7 @@ func UpdateMemberData(db *sql.DB, m *MemberData) error {
 // HasMemberForID check member for id
 func HasMemberForID(db *sql.DB, id string) (bool, error) {
 	var existingId string
-	row := db.QueryRow("SELECT id FROM members WHERE id = $1", id)
-	err := row.Scan(&existingId)
+	err := db.QueryRow("SELECT id FROM members WHERE id = $1", id).Scan(&existingId)
 	if err == sql.ErrNoRows {
 		return false, nil
 	}
@@ -99,6 +96,6 @@ func HasMemberForID(db *sql.DB, id string) (bool, error) {
 
 // DeleteMember uses the member ID to delete
 func DeleteMember(db *sql.DB, id string) error {
-	_, err := db.Query("DELETE FROM members WHERE id = $1", id)
+	_, err := db.Exec("DELETE FROM members WHERE id = $1", id)
 	return err
 }

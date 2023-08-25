@@ -4,6 +4,7 @@ import (
 	"database/sql"
 	"encoding/json"
 	"fmt"
+	"github.com/go-logr/logr"
 	"github.com/gorilla/mux"
 	"net/http"
 	"{{shortName}}/core/handler"
@@ -65,6 +66,6 @@ func (h *resetPasswordHandler) Process(ctx *handler.Context, data interface{}) (
 	return &resetPasswordResponse{Status: "Password updated"}, nil
 }
 
-func NewResetPasswordHandler(db *sql.DB, sessionsStore *sessions.Store) http.HandlerFunc {
-	return handler.Create(&resetPasswordHandler{db: db}, handler.WithOnlyForSuperuser(sessionsStore))
+func NewResetPasswordHandler(logger logr.Logger, db *sql.DB, sessionsStore *sessions.Store) http.HandlerFunc {
+	return handler.Create(logger, &resetPasswordHandler{db: db}, handler.WithOnlyForSuperuser(sessionsStore))
 }

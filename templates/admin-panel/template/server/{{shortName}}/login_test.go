@@ -8,7 +8,7 @@ import (
 )
 
 func TestLoginInvalidCSRF(t *testing.T) {
-	env := test_helpers.NewTestEnv()
+	env := test_helpers.NewTestEnv(t)
 	revert := env.Default()
 	defer revert()
 
@@ -18,7 +18,7 @@ func TestLoginInvalidCSRF(t *testing.T) {
 }
 
 func TestLoginSuccess(t *testing.T) {
-	env := test_helpers.NewTestEnv()
+	env := test_helpers.NewTestEnv(t)
 	revert := env.Default()
 	defer revert()
 	env.CreateUser()
@@ -29,11 +29,16 @@ func TestLoginSuccess(t *testing.T) {
 		"Password": "password",
 	})
 	asserts.Equals(t, http.StatusOK, resp.Response.Code, "code")
-	asserts.Equals(t, map[string]interface{}{"Status": "OK", "IsSuperuser": false, "Name": "test", "Email": "email"}, resp.JSON(), "body")
+	asserts.JSONEqualsWithoutSomeKeys(t,
+		[]string{},
+		`{"Status": "OK", "IsSuperuser": false, "Name": "test", "Email": "email"}`,
+		resp.Text(),
+		"body",
+	)
 }
 
 func TestLoginIncorrectPassword(t *testing.T) {
-	env := test_helpers.NewTestEnv()
+	env := test_helpers.NewTestEnv(t)
 	revert := env.Default()
 	defer revert()
 	env.CreateUser()
@@ -44,11 +49,17 @@ func TestLoginIncorrectPassword(t *testing.T) {
 		"Password": "incorrectPassword",
 	})
 	asserts.Equals(t, http.StatusBadRequest, resp.Response.Code, "code")
-	asserts.Equals(t, map[string]interface{}{"Status": "Bad Request", "Messages": []interface{}{"Incorrect username or password"}}, resp.JSON(), "body")
+	asserts.JSONEqualsWithoutSomeKeys(
+		t,
+		[]string{},
+		`{"Status": "Bad Request", "Messages": ["Incorrect username or password"]}`,
+		resp.Text(),
+		"body",
+	)
 }
 
 func TestLoginIncorrectEmail(t *testing.T) {
-	env := test_helpers.NewTestEnv()
+	env := test_helpers.NewTestEnv(t)
 	revert := env.Default()
 	defer revert()
 	env.CreateUser()
@@ -59,5 +70,11 @@ func TestLoginIncorrectEmail(t *testing.T) {
 		"Password": "password",
 	})
 	asserts.Equals(t, http.StatusBadRequest, resp.Response.Code, "code")
-	asserts.Equals(t, map[string]interface{}{"Status": "Bad Request"}, resp.JSON(), "body")
+	asserts.JSONEqualsWithoutSomeKeys(
+		t,
+		[]string{},
+		`{"Status": "Bad Request"}`,
+		resp.Text(),
+		"body",
+	)
 }

@@ -69,7 +69,7 @@ func prepareUploadDirs(t *testing.T) {
 }
 
 func TestArticleList(t *testing.T) {
-	env := test_helpers.NewTestEnv()
+	env := test_helpers.NewTestEnv(t)
 	revert := env.Default()
 	defer revert()
 	env.CreateUser()
@@ -172,7 +172,7 @@ func TestArticleList(t *testing.T) {
 }
 
 func TestCreateArticle(t *testing.T) {
-	env := test_helpers.NewTestEnv()
+	env := test_helpers.NewTestEnv(t)
 	revert := env.Default()
 	defer revert()
 	env.CreateUser()
@@ -235,12 +235,12 @@ func TestCreateArticle(t *testing.T) {
 			asserts.Equals(t, true, 0 != articleID, fmt.Sprintf("%s: articleID not 0", testCase.Name))
 			ids = append(ids, tagID)
 		}
+		rows.Close()
 		sort.Ints(ids)
 		asserts.Equals(t, testCase.ExpectedTagIDs, ids, fmt.Sprintf("%s: tags", testCase.Name))
 		if nil != testCase.ExpectedInDBArticle {
 			articleInDB := article{}
-			row := env.DB.DB.QueryRow("select title, slug, category_id, short_body, body, published_at  from article")
-			err = row.Scan(
+			err := env.DB.DB.QueryRow("select title, slug, category_id, short_body, body, published_at  from article").Scan(
 				&articleInDB.Title,
 				&articleInDB.Slug,
 				&articleInDB.CategoryID,
@@ -255,7 +255,7 @@ func TestCreateArticle(t *testing.T) {
 }
 
 func TestUpdateArticle(t *testing.T) {
-	env := test_helpers.NewTestEnv()
+	env := test_helpers.NewTestEnv(t)
 	revert := env.Default()
 	defer revert()
 	env.CreateUser()
@@ -342,12 +342,12 @@ func TestUpdateArticle(t *testing.T) {
 			asserts.Equals(t, true, 0 != articleID, fmt.Sprintf("%s: articleID not 0", testCase.Name))
 			ids = append(ids, tagID)
 		}
+		rows.Close()
 		sort.Ints(ids)
 		asserts.Equals(t, testCase.ExpectedTagIDs, ids, fmt.Sprintf("%s: tags", testCase.Name))
 		if nil != testCase.ExpectedInDBArticle {
 			articleInDB := article{}
-			row := env.DB.DB.QueryRow("select title, slug, category_id, short_body, body, published_at  from article")
-			err = row.Scan(
+			err := env.DB.DB.QueryRow("select title, slug, category_id, short_body, body, published_at  from article").Scan(
 				&articleInDB.Title,
 				&articleInDB.Slug,
 				&articleInDB.CategoryID,
@@ -362,7 +362,7 @@ func TestUpdateArticle(t *testing.T) {
 }
 
 func TestArticleDetail(t *testing.T) {
-	env := test_helpers.NewTestEnv()
+	env := test_helpers.NewTestEnv(t)
 	revert := env.Default()
 	defer revert()
 	env.CreateUser()
@@ -420,7 +420,7 @@ func TestArticleDetail(t *testing.T) {
 }
 
 func TestArticleDelete(t *testing.T) {
-	env := test_helpers.NewTestEnv()
+	env := test_helpers.NewTestEnv(t)
 	revert := env.Default()
 	defer revert()
 	env.CreateUser()
@@ -473,7 +473,7 @@ func TestArticleDelete(t *testing.T) {
 }
 
 func TestArticleUploadImages(t *testing.T) {
-	env := test_helpers.NewTestEnv()
+	env := test_helpers.NewTestEnv(t)
 	revert := env.Default()
 	defer revert()
 	env.CreateUser()
@@ -542,7 +542,7 @@ func TestArticleUploadImages(t *testing.T) {
 }
 
 func TestArticleFetchImages(t *testing.T) {
-	env := test_helpers.NewTestEnv()
+	env := test_helpers.NewTestEnv(t)
 	revert := env.Default()
 	defer revert()
 	env.CreateUser()

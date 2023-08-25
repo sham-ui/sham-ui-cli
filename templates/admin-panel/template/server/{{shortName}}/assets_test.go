@@ -8,7 +8,7 @@ import (
 )
 
 func TestGetSuMemberListBundle(t *testing.T) {
-	env := test_helpers.NewTestEnv()
+	env := test_helpers.NewTestEnv(t)
 	revert := env.Default()
 	defer revert()
 	env.CreateSuperUser()
@@ -21,7 +21,7 @@ func TestGetSuMemberListBundle(t *testing.T) {
 }
 
 func TestGetSuMemberListBundleNonAutorized(t *testing.T) {
-	env := test_helpers.NewTestEnv()
+	env := test_helpers.NewTestEnv(t)
 	revert := env.Default()
 	defer revert()
 	env.API.GetCSRF()
@@ -32,7 +32,7 @@ func TestGetSuMemberListBundleNonAutorized(t *testing.T) {
 }
 
 func TestGetSuMemberListBundleForNonSuperuser(t *testing.T) {
-	env := test_helpers.NewTestEnv()
+	env := test_helpers.NewTestEnv(t)
 	revert := env.Default()
 	defer revert()
 	env.CreateUser()

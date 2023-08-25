@@ -2,6 +2,7 @@ package handlers
 
 import (
 	"fmt"
+	"github.com/go-logr/logr"
 	"io/fs"
 	"net/http"
 	"os"
@@ -40,8 +41,8 @@ type runtimeInfo struct {
 }
 
 type fileInfo struct {
-	Name    string `json:"Name"`
-	Size    int64  `string:"Size"`
+	Name string `json:"Name"`
+	Size int64  `string:"Size"`
 }
 
 type fileInfosSortedByName []fileInfo
@@ -86,8 +87,8 @@ func infoHandler(_ *handler.Context, _ interface{}) (interface{}, error) {
 			return fmt.Errorf("get info: %w", err)
 		}
 		files = append(files, fileInfo{
-			Name:    path,
-			Size:    info.Size(),
+			Name: path,
+			Size: info.Size(),
 		})
 		return nil
 	})
@@ -104,6 +105,6 @@ func infoHandler(_ *handler.Context, _ interface{}) (interface{}, error) {
 	}, nil
 }
 
-func NewInfoHandler(sessionStore *sessions.Store) http.HandlerFunc {
-	return handler.CreateFromProcessFunc(infoHandler, handler.WithOnlyForSuperuser(sessionStore))
+func NewInfoHandler(logger logr.Logger, sessionStore *sessions.Store) http.HandlerFunc {
+	return handler.CreateFromProcessFunc(logger, infoHandler, handler.WithOnlyForSuperuser(sessionStore))
 }

@@ -1,3 +1,4 @@
+import { createRootContext } from 'sham-ui';
 import * as directives from 'sham-ui-directives';
 import hrefto from 'sham-ui-router/lib/href-to';
 import { onFocusIn } from '../directives/on-focus-in';

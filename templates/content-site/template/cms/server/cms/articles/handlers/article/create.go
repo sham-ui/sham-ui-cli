@@ -8,6 +8,7 @@ import (
 	"database/sql"
 	"encoding/json"
 	"fmt"
+	"github.com/go-logr/logr"
 	"net/http"
 	"strings"
 	"time"
@@ -73,7 +74,7 @@ func (h *createHandler) Process(_ *handler.Context, data interface{}) (interface
 		return nil, fmt.Errorf("get or create tags: %s", err)
 	}
 	var articleID int64
-	row := tx.QueryRow("INSERT INTO "+
+	err = tx.QueryRow("INSERT INTO "+
 		"article(title, slug, category_id, short_body, body, published_at) "+
 		"VALUES ($1,$2, $3, $4, $5, $6) RETURNING id",
 		requestData.Title,
@@ -82,8 +83,7 @@ func (h *createHandler) Process(_ *handler.Context, data interface{}) (interface
 		requestData.ShortBody,
 		requestData.Body,
 		requestData.PublishedAt,
-	)
-	err = row.Scan(&articleID)
+	).Scan(&articleID)
 	if nil != err {
 		tx.Rollback()
 		return nil, fmt.Errorf("insert article: %s", err)
@@ -106,11 +106,11 @@ func (h *createHandler) Process(_ *handler.Context, data interface{}) (interface
 	}, nil
 }
 
-func NewCreateHandler(db *sql.DB, sessionsStore *sessions.Store) http.HandlerFunc {
+func NewCreateHandler(logger logr.Logger, db *sql.DB, sessionsStore *sessions.Store) http.HandlerFunc {
 	h := &createHandler{
 		withArticleTags:   withArticleTags{tagsRepository: repo.NewTagRepository(db)},
 		db:                db,
 		articleRepository: repo.NewArticleRepository(db),
 	}
-	return handler.Create(h, handler.WithOnlyForAuthenticated(sessionsStore))
+	return handler.Create(logger, h, handler.WithOnlyForAuthenticated(sessionsStore))
 }

@@ -8,7 +8,7 @@ import (
 )
 
 func TestMembers(t *testing.T) {
-	env := test_helpers.NewTestEnv()
+	env := test_helpers.NewTestEnv(t)
 	revert := env.Default()
 	defer revert()
 	env.CreateSuperUser()
@@ -230,7 +230,7 @@ func TestMembers(t *testing.T) {
 }
 
 func TestUpdateMemberEmailNotUnique(t *testing.T) {
-	env := test_helpers.NewTestEnv()
+	env := test_helpers.NewTestEnv(t)
 	revert := env.Default()
 	defer revert()
 	env.CreateSuperUser()
@@ -259,7 +259,7 @@ func TestUpdateMemberEmailNotUnique(t *testing.T) {
 }
 
 func TestMembersNonAuthorized(t *testing.T) {
-	env := test_helpers.NewTestEnv()
+	env := test_helpers.NewTestEnv(t)
 	revert := env.Default()
 	defer revert()
 	env.API.GetCSRF()
@@ -314,7 +314,7 @@ func TestMembersNonAuthorized(t *testing.T) {
 }
 
 func TestMembersForNonSuperuser(t *testing.T) {
-	env := test_helpers.NewTestEnv()
+	env := test_helpers.NewTestEnv(t)
 	revert := env.Default()
 	defer revert()
 	env.CreateUser()

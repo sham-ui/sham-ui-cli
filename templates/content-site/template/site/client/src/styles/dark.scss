@@ -7,6 +7,7 @@
 
     .post-card-info li,
     .post-single-info li,
+    .post-single-body a:hover,
     .post-single-footer .tags ul li,
     .post-single-footer .tags ul li a:hover {
         color:$font-color;
@@ -94,6 +95,20 @@
     ::placeholder {
         color: $font-color !important;
 
+    }
+
+    pre {
+        background: none
+    }
+
+    code {
+        background: #1d1d1d;
+        border: 1px solid #1d1d1d;
+    }
+
+    pre code {
+        background: none;
+        border: none;
     }
 }
 

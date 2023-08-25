@@ -16,8 +16,7 @@ type CategoryRepository struct {
 
 func (r *CategoryRepository) IsUniqueCategory(slug string) (bool, error) {
 	var existingName string
-	row := r.db.QueryRow("SELECT id FROM category WHERE slug = $1", slug)
-	err := row.Scan(&existingName)
+	err := r.db.QueryRow("SELECT id FROM category WHERE slug = $1", slug).Scan(&existingName)
 	if err == sql.ErrNoRows {
 		return true, nil
 	}
@@ -29,7 +28,7 @@ func (r *CategoryRepository) IsUniqueCategory(slug string) (bool, error) {
 
 // CreateCategory creates the new category record
 func (r *CategoryRepository) CreateCategory(d *Category) error {
-	_, err := r.db.Query("INSERT INTO category(name, slug) VALUES ($1,$2)", d.Name, d.Slug)
+	_, err := r.db.Exec("INSERT INTO category(name, slug) VALUES ($1,$2)", d.Name, d.Slug)
 	if nil != err {
 		return fmt.Errorf("insert into category: %s", err)
 	}
@@ -38,7 +37,7 @@ func (r *CategoryRepository) CreateCategory(d *Category) error {
 
 // UpdateCategory update category record
 func (r *CategoryRepository) UpdateCategory(id string, d *Category) error {
-	_, err := r.db.Query("UPDATE category SET name = $2, slug = $3 WHERE id = $1", id, d.Name, d.Slug)
+	_, err := r.db.Exec("UPDATE category SET name = $2, slug = $3 WHERE id = $1", id, d.Name, d.Slug)
 	if nil != err {
 		return fmt.Errorf("update category: %s", err)
 	}
@@ -47,7 +46,7 @@ func (r *CategoryRepository) UpdateCategory(id string, d *Category) error {
 
 // DeleteCategory delete category record
 func (r *CategoryRepository) DeleteCategory(id string) error {
-	_, err := r.db.Query("DELETE FROM category WHERE id = $1", id)
+	_, err := r.db.Exec("DELETE FROM category WHERE id = $1", id)
 	if nil != err {
 		return fmt.Errorf("delete from category: %s", err)
 	}

@@ -29,7 +29,7 @@ func (r *TagRepository) IsUniqueTag(slug string) (bool, error) {
 
 // CreateTag creates the new tag record
 func (r *TagRepository) CreateTag(d *Tag) error {
-	_, err := r.db.Query("INSERT INTO tag(name, slug) VALUES ($1,$2)", d.Name, d.Slug)
+	_, err := r.db.Exec("INSERT INTO tag(name, slug) VALUES ($1,$2)", d.Name, d.Slug)
 	if nil != err {
 		return fmt.Errorf("insert into tag: %s", err)
 	}
@@ -38,7 +38,7 @@ func (r *TagRepository) CreateTag(d *Tag) error {
 
 // UpdateTag update tag record
 func (r *TagRepository) UpdateTag(id string, d *Tag) error {
-	_, err := r.db.Query("UPDATE tag SET name = $2, slug = $3 WHERE id = $1", id, d.Name, d.Slug)
+	_, err := r.db.Exec("UPDATE tag SET name = $2, slug = $3 WHERE id = $1", id, d.Name, d.Slug)
 	if nil != err {
 		return fmt.Errorf("update tag: %s", err)
 	}
@@ -47,7 +47,7 @@ func (r *TagRepository) UpdateTag(id string, d *Tag) error {
 
 // DeleteTag delete tag record
 func (r *TagRepository) DeleteTag(id string) error {
-	_, err := r.db.Query("DELETE FROM tag WHERE id = $1", id)
+	_, err := r.db.Exec("DELETE FROM tag WHERE id = $1", id)
 	if nil != err {
 		return fmt.Errorf("delete from tag: %s", err)
 	}
@@ -55,13 +55,11 @@ func (r *TagRepository) DeleteTag(id string) error {
 }
 
 func (r *TagRepository) GetOrCreateTag(tx *sql.Tx, tag Tag) (int, error) {
-	row := tx.QueryRow("SELECT id FROM tag WHERE slug = $1", tag.Slug)
 	var id int
-	err := row.Scan(&id)
+	err := tx.QueryRow("SELECT id FROM tag WHERE slug = $1", tag.Slug).Scan(&id)
 	if nil != err {
 		if err == sql.ErrNoRows {
-			row := tx.QueryRow("INSERT INTO tag(name, slug) VALUES ($1,$2) RETURNING id", tag.Name, tag.Slug)
-			err := row.Scan(&id)
+			err := tx.QueryRow("INSERT INTO tag(name, slug) VALUES ($1,$2) RETURNING id", tag.Name, tag.Slug).Scan(&id)
 			if nil != err {
 				return 0, fmt.Errorf("insert tag: %s", err)
 			}

@@ -39,9 +39,6 @@
 			h4{
 				margin-bottom:20px;
 				@include easeInOut(0.3);
-				a:hover{
-					color:$base-color;
-				}
 			}
 			p{
 				margin-bottom:30px;
@@ -67,6 +64,15 @@
 			h5{
 				margin-top:30px;
 				margin-bottom:10px;
+			}
+			a {
+			    color: $base-color;
+			    text-decoration: underline;
+			    @include easeInOut(0.3);
+			    &:hover {
+			        text-decoration: none;
+			        color: $dark-color;
+			    }
 			}
 			.image{
 				margin-top:15px;
@@ -106,6 +112,12 @@
 
 				}
 
+			}
+			ul {
+			    padding-inline-start: 40px;
+                li {
+                    list-style: initial !important;
+                }
 			}
 			.list{
 				margin-bottom: 15px;

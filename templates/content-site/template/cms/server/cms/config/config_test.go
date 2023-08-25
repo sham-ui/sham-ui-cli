@@ -1,20 +1,13 @@
 package config
 
 import (
-	"github.com/sirupsen/logrus"
-	stdIoutil "io/ioutil"
-	"log"
-	stdOS "os"
 	"cms/test_helpers/asserts"
+	"github.com/go-logr/logr/testr"
+	stdOS "os"
 	"path"
 	"strings"
 	"testing"
 )
-
-func disableLogger() {
-	log.SetOutput(stdIoutil.Discard)
-	logrus.SetLevel(logrus.FatalLevel)
-}
 
 type callsStore map[string]*functionCall
 
@@ -76,6 +69,8 @@ func (m mockedOS) Stat(name string) (stdOS.FileInfo, error) {
 	return mockedFileInfo{}, nil
 }
 
+func (m mockedOS) Exit(code int) { stdOS.Exit(code) }
+
 type mockedIOutil struct {
 	calls *functionsCallsStorage
 }
@@ -86,7 +81,6 @@ func (m mockedIOutil) WriteFile(filename string, data []byte, perm stdOS.FileMod
 }
 
 func TestCreateConfigIfNotExists(t *testing.T) {
-	disableLogger()
 	oldOs := os
 	mos := &mockedOS{
 		reportErr: true,
@@ -104,7 +98,7 @@ func TestCreateConfigIfNotExists(t *testing.T) {
 		ioutil = oldIoUtil
 	}()
 
-	LoadConfiguration(configFilename)
+	LoadConfiguration(testr.New(t).V(1), configFilename)
 
 	asserts.Equals(t, 1, mos.calls.For("Stat").Count(), "stat")
 	asserts.Equals(t, 1, moutil.calls.For("WriteFile").Count(), "writeFile")
@@ -113,7 +107,6 @@ func TestCreateConfigIfNotExists(t *testing.T) {
 }
 
 func TestNotCreateConfigIfExists(t *testing.T) {
-	disableLogger()
 	oldOs := os
 	mos := &mockedOS{
 		calls: newMockFunctionCalls(),
@@ -130,16 +123,15 @@ func TestNotCreateConfigIfExists(t *testing.T) {
 		ioutil = oldIoUtil
 	}()
 
-	LoadConfiguration(configFilename)
+	LoadConfiguration(testr.New(t), configFilename)
 
 	asserts.Equals(t, 1, mos.calls.For("Stat").Count(), "stat")
 	asserts.Equals(t, 0, moutil.calls.For("WriteFile").Count(), "write file")
 }
 
 func TestReadConfig(t *testing.T) {
-	disableLogger()
 	configFilename := path.Join("testdata", "config.cfg")
-	LoadConfiguration(configFilename)
+	LoadConfiguration(testr.New(t), configFilename)
 
 	asserts.Equals(t, server{Port: 3001, AllowedDomains: []string{"http://127.0.0.1:3000", "http://localhost:3000"}}, Server, "server")
 	asserts.Equals(t, dataBaseConfig{Host: "127.0.0.1", Port: 5432, Name: "dbname", User: "dbuser", Pass: "dbuserpassword"}, DataBase, "database")
