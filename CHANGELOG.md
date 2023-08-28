@@ -1,4 +1,4 @@
-## master
+## 6.0.0-alpha.4
 * Fix content site template
 * Pass os ENV's to ssr render in content site 
 * Fix SSR restart in content site template
