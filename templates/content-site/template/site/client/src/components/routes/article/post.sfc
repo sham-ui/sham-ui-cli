@@ -55,10 +55,6 @@
             [ $.content ]: '',
             [ $.tags ]: []
         } );
-
-        if ( IS_SSR ) {
-            this.hydratedOptions = {};
-        }
     }
 
     export default Component( Template, Post );

@@ -49,10 +49,6 @@
             [ $.queryString ]: ''
         } );
 
-        if ( IS_SSR ) {
-            this.hydratedOptions = {};
-        }
-
         this$.pageItems = ( limit, total, currentPage, pageArraySize ) => {
             const totalPages = Math.ceil( total / limit );
             let start = Math.floor( pageArraySize  / 2 ) - 1;

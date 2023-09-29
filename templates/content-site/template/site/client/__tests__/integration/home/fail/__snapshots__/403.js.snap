@@ -236,8 +236,7 @@ exports[`ssr & rehydrate 1`] = `
     \\"10\\": {
       \\"O\\": {
         \\"dataLoaded\\": true,
-        \\"errors\\": [\\"Fail load\\"],
-        \\"pathName\\": \\"home.page\\"
+        \\"errors\\": [\\"Fail load\\"]
       },
       \\"C\\": [\\"11\\"],
       \\"N\\": [4]
@@ -274,9 +273,6 @@ exports[`ssr & rehydrate 1`] = `
       ]
     },
     \\"19\\": {
-      \\"O\\": {
-        \\"errors\\": [\\"Fail load\\"]
-      },
       \\"C\\": [\\"20\\"],
       \\"N\\": [1]
     },
@@ -459,8 +455,7 @@ exports[`ssr 1`] = `
         \\"10\\": {
           \\"O\\": {
             \\"dataLoaded\\": true,
-            \\"errors\\": [\\"Fail load\\"],
-            \\"pathName\\": \\"home.page\\"
+            \\"errors\\": [\\"Fail load\\"]
           },
           \\"C\\": [\\"11\\"],
           \\"N\\": [4]
@@ -497,9 +492,6 @@ exports[`ssr 1`] = `
           ]
         },
         \\"19\\": {
-          \\"O\\": {
-            \\"errors\\": [\\"Fail load\\"]
-          },
           \\"C\\": [\\"20\\"],
           \\"N\\": [1]
         },
