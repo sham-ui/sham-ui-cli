@@ -7,7 +7,7 @@
     {% import PageLoadingIndicator from '../PageLoadingIndicator.sht' %}
 
     <Navigation
-        onOpenSearchForm=\{{this$._onOpenSearchForm}}
+        onOpenSearchForm=\{{ () => state$.searchFormVisible = true }}
     />
 
     {% if routerState.pageLoaded %}
@@ -20,7 +20,7 @@
 
     {% if searchFormVisible %}
         <SearchForm
-            onClose=\{{this$._onSearchFormClose}}
+            onClose=\{{ () => state$.searchFormVisible = false }}
         />
     {% endif %}
 </template>
@@ -29,15 +29,9 @@
     import { useStorage } from 'sham-ui-router/lib/storage';
 
     function Layout( options ) {
-        const searchFormVisible = $();
-
-        const state = options( {
-            [ searchFormVisible ]: false
+        options( {
+            [ $.searchFormVisible ]: false
         } );
-
-        this$._onOpenSearchForm = () => state[ searchFormVisible ] = true;
-
-        this$._onSearchFormClose = () => state[ searchFormVisible ] = false;
     }
 
     export default Component( Template, useStorage( $.routerState ), Layout );

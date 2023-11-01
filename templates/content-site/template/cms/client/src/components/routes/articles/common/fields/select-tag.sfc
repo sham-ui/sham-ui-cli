@@ -13,7 +13,7 @@
                 {% for item of this$._filterItems( items, query ) %}
                     <div
                         class="result-item"
-                        :onclick=\{{this$._selectItem.bind( this, item, query )}}
+                        :onclick=\{{() => this$._selectItem( item, query ) }}
                         data-test-item=\{{item.name}}
                     >
                         \{{item.name}}

@@ -11,19 +11,19 @@
         confirmDeleteText=\{{this$.confirmDeleteText}}
         deleteItem=\{{this$.deleteTag}}
     >
-        {% block 'createForm' %}
+        {% createForm %}
             <TagForm
                 save=\{{this$.createTag}}
             />
-        {% endblock %}
+        {% end createForm %}
 
-        {% block 'table' %}
+        {% table %}
             <TagsTable/>
-        {% endblock %}
+        {% end table %}
 
-        {% block 'itemDetail' %}
+        {% itemDetail %}
             <TagDetail/>
-        {% endblock %}
+        {% end itemDetail %}
     </CrudPage>
 </template>
 

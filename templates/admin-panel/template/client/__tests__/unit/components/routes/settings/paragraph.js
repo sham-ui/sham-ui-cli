@@ -14,9 +14,9 @@ it( 'default onUpdate options', () => {
         RoutesSettingsParagraph
     } )`
         <RoutesSettingsParagraph>
-            {% block 'form' %}
+            {% form %}
                 <button data-test-dummy-button>Click me!</button>
-            {% endblock %}
+            {% end form %}
         </RoutesSettingsParagraph>
     `;
     const meta = renderer( Paragraph, {}, {

@@ -9,18 +9,18 @@
             success=\{{this$._loginSuccess}}
             getErrors=\{{this$._getErrors}}
         >
-            {% block 'header' %}
+            {% header %}
                 <Logo/>
-            {% endblock %}
+            {% end header %}
 
-            {% block 'default' %}
+            {% default %}
                 <div class="form-group">
                     <input name="email" type="text" placeholder="Enter your email" autofocus :onChangeUpdate=\{{$.email}}>
                 </div>
                 <div class="form-group">
                     <input name="password" type="password" placeholder="Enter your password" :onChangeUpdate=\{{$.password}}>
                 </div>
-            {% endblock %}
+            {% end default %}
         </FormContainer>
     </div>
 </template>

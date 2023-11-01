@@ -7,11 +7,11 @@
     {% import MembersDetail from './detail.sfc' %}
 
     <Page>
-        {% block 'header' %}
+        {% header %}
             \{{pageTitle}}
-        {% endblock %}
+        {% end header %}
 
-        {% block 'body' %}
+        {% body %}
             <div class="members-page">
                 <ErrorsPanel errors=\{{errors}}/>
 
@@ -19,7 +19,7 @@
                     <button
                         data-test-toggle-create-form
                         class="mg-b-30"
-                        :onclick=\{{this$._toggleCreateForm}}
+                        :onclick=\{{ () => state$.createFormVisible = !createFormVisible }}
                     >
                         \{{
                             createFormVisible ?
@@ -47,9 +47,9 @@
                                 <MembersTable
                                     members=\{{members}}
                                     selectedMember=\{{selectedMember}}
-                                    onSelectMember=\{{this$._selectMember}}
-                                    showErrors=\{{this$._showErrors}}
-                                    refresh=\{{this$.loadData.bind( this, page )}}
+                                    onSelectMember=\{{ member => state$.selectedMember = member }}
+                                    showErrors=\{{ formErrors => state$.errors = formErrors }}
+                                    refresh=\{{ () => this$.loadData( page )}}
                                 />
                             </Pagination>
                         </div>
@@ -60,14 +60,14 @@
                             <div class="panel">
                                 <MembersDetail
                                     member=\{{selectedMember}}
-                                    onUpdateSuccess=\{{this$.loadData.bind( this, page )}}
+                                    onUpdateSuccess=\{{() => this$.loadData( page )}}
                                 />
                             </div>
                         </div>
                     {% endif %}
                 </div>
             </div>
-        {% endblock %}
+        {% end body %}
     </Page>
 </template>
 
@@ -134,16 +134,10 @@
             );
         };
 
-        this$._toggleCreateForm = () => state[ createFormVisible ] = !state[ createFormVisible ];
-
         this$._onCreateMember = () => {
             state[ createFormVisible ] = false;
             this[ loadData ]( state[ page ] );
         };
-
-        this$._showErrors = formErrors => state[ errors ] = formErrors;
-
-        this$._selectMember = member => state[ selectedMember ] = member;
     }
 
     export default Component( Template, RoutesMembersPage );

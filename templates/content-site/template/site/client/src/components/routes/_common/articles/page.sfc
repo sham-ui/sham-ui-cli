@@ -6,7 +6,7 @@
 
     <Page dataLoaded=\{{dataLoaded}}>
         <section class="section pt-55">
-            {% defblock 'header' %}
+            {% defblock header %}
 
             {% if errors.length > 0 %}
                 <ErrorsPanel errors=\{{errors}}/>

@@ -8,22 +8,22 @@
         pageTitle="Categories"
         typeName="category"
         loadItems=\{{this$.loadData}}
-        confirmDeleteText=\{{this$.confirmDeleteText}}
+        confirmDeleteText=\{{ category => 'Are you sure you want to delete category "' + category.name + '"?' }}
         deleteItem=\{{this$.deleteCategory}}
     >
-        {% block 'createForm' %}
+        {% createForm %}
             <CategoryForm
                 save=\{{this$.createCategory}}
             />
-        {% endblock %}
+        {% end createForm %}
 
-        {% block 'table' %}
+        {% table %}
             <CategoriesTable/>
-        {% endblock %}
+        {% end table %}
 
-        {% block 'itemDetail' %}
+        {% itemDetail %}
             <CategoryDetail/>
-        {% endblock %}
+        {% end itemDetail %}
     </CrudPage>
 </template>
 
@@ -36,8 +36,6 @@
         this$.createCategory = ( data ) => this.ctx.DI.resolve( 'store' ).createArticlesCategory(
             data
         );
-
-        this$.confirmDeleteText = ( category ) => `Are you sure you want to delete category "${category.name}"?`;
 
         this$.deleteCategory = ( category ) => this.ctx.DI.resolve( 'store' ).deleteArticleCategory(
             category.id

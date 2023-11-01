@@ -28,7 +28,7 @@
                 <SelectField
                     items=\{{categories}}
                     value=\{{category}}
-                    onChange=\{{this$.setField( $.category )}}
+                    onChange=\{{ value => state$.category = value }}
                 />
             </div>
             <div class="form-group" data-test-field-short-body>
@@ -39,7 +39,7 @@
                 <label>Body:</label>
                 <EditorField
                     value=\{{body}}
-                    onChange=\{{this$.setField( $.body )}}
+                    onChange=\{{ value => state$.body = value }}
                 />
             </div>
             <div class="form-group" data-test-field-tags>
@@ -47,14 +47,14 @@
                 <TagsField
                     all=\{{allTags}}
                     selected=\{{tags}}
-                    onChange=\{{this$.setField( $.tags )}}
+                    onChange=\{{ value => state$.tags = value }}
                 />
             </div>
             <div class="form-group" data-test-field-published-at>
                 <label>Published at:</label>
                 <DateTimePicker
                     value=\{{publishedAt}}
-                    onChange=\{{this$.setField( $.publishedAt )}}
+                    onChange=\{{ value => state$.publishedAt = value }}
                 />
             </div>
         </FormWithConfirmModal>
@@ -64,8 +64,6 @@
 </template>
 
 <script>
-    import { SetField } from 'sham-ui-helpers';
-
     function ArticleForm( options, didMount ) {
         const title = $();
         const category = $();
@@ -133,5 +131,5 @@
         } );
     }
 
-    export default Component( Template, SetField, ArticleForm );
+    export default Component( Template, ArticleForm );
 </script>

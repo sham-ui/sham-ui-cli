@@ -10,11 +10,11 @@
             success=\{{this$._signUpSuccess}}
             getErrors=\{{this$._getErrors}}
         >
-            {% block 'header' %}
+            {% header %}
                 <Logo/>
-            {% endblock %}
+            {% end header %}
 
-            {% block 'default' %}
+            {% default %}
                 <div class="form-group">
                     <input name="name" type="text" placeholder="Enter your username" autofocus :onChangeUpdate=\{{$.name}}>
                 </div>
@@ -27,16 +27,16 @@
                 <div class="form-group">
                     <input name="password2" type="password" placeholder="Confirm your password" :onChangeUpdate=\{{$.password2}}>
                 </div>
-            {% endblock %}
+            {% end default %}
 
-            {% block 'footer' %}
+            {% footer %}
                 <div class="signup-label">
                     Already a member?
                     <a :hrefto=\{{path("login")}}>
                         Sign In
                     </a>
                 </div>
-            {% endblock %}
+            {% end footer %}
         </FormContainer>
     </div>
 </template>

@@ -2,7 +2,7 @@
     {% import path from 'sham-ui-router/lib/params' %}
 
     <div class="dropdown">
-        <a class="link-profile" :onclick=\{{this$.toggleField( $.dropDownVisible )}}>
+        <a class="link-profile" :onclick=\{{ () => state$.dropDownVisible = !dropDownVisible }}>
             <span class="logged-name">
                 \{{sessionData.name}}
             </span>
@@ -25,7 +25,6 @@
 </template>
 
 <script>
-    import { ToggleField } from 'sham-ui-helpers';
     import { useStorage } from '../../../storages/session';
 
     function LayoutAuthenticatedProfile( options ) {
@@ -49,7 +48,6 @@
 
     export default Component(
         Template,
-        ToggleField,
         useStorage( $.sessionData ),
         LayoutAuthenticatedProfile
     );

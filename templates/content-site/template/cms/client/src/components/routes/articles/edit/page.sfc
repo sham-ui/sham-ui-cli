@@ -4,11 +4,11 @@
     {% import ArticleForm from '../common/article-form.sfc' %}
 
     <Page dataLoaded=\{{dataLoaded}}>
-        {% block 'header' %}
+        {% header %}
             \{{pageTitle + ":" + article.title}}
-        {% endblock %}
+        {% end header %}
 
-        {% block 'body' %}
+        {% body %}
             <div class="articles-page">
                 <ErrorsPanel errors=\{{errors}} />
                 <div class="panel">
@@ -24,7 +24,7 @@
                     />
                 </div>
             </div>
-        {% endblock %}
+        {% end body %}
     </Page>
 </template>
 

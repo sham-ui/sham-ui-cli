@@ -17,14 +17,14 @@
                     <td class="actions">
                         <button
                             data-test-update-button=\{{item.id}}
-                            :onclick=\{{selectItem.bind( this, item )}}
+                            :onclick=\{{ () => selectItem( item ) }}
                         >
                             Edit
                         </button>
                         <button
                             data-test-delete-button=\{{item.id}}
                             class="btn-danger"
-                            :onclick=\{{confirmDelete.bind( this, item )}}
+                            :onclick=\{{ () => confirmDelete( item ) }}
                         >
                             Delete
                         </button>

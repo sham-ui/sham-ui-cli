@@ -7,11 +7,11 @@
     {% import MembersDetail from './detail.sfc' %}
 
     <Page>
-        {% block 'header' %}
+        {% header %}
             \{{pageTitle}}
-        {% endblock %}
+        {% end header %}
 
-        {% block 'body' %}
+        {% body %}
             <div class="members-page">
                 <ErrorsPanel errors=\{{errors}}/>
 
@@ -19,7 +19,7 @@
                     <button
                         data-test-toggle-create-form
                         class="mg-b-30"
-                        :onclick=\{{this$.toggleField( $.createFormVisible )}}
+                        :onclick=\{{ () => state$.createFormVisible = !createFormVisible }}
                     >
                         \{{
                             createFormVisible ?
@@ -47,9 +47,9 @@
                                 <MembersTable
                                     members=\{{members}}
                                     selectedMember=\{{selectedMember}}
-                                    onSelectMember=\{{this$.setField( $.selectedMember )}}
-                                    showErrors=\{{this$.setField( $.errors )}}
-                                    refresh=\{{this$.loadData.bind( this, page )}}
+                                    onSelectMember=\{{ x => state$.selectedMember = x }}
+                                    showErrors=\{{x => state$.errors = x }}
+                                    refresh=\{{ () => this$.loadData( page ) }}
                                 />
                             </Pagination>
                         </div>
@@ -60,20 +60,18 @@
                             <div class="panel">
                                 <MembersDetail
                                     member=\{{selectedMember}}
-                                    onUpdateSuccess=\{{this$.loadData.bind( this, page )}}
+                                    onUpdateSuccess=\{{ () => this$.loadData( page ) }}
                                 />
                             </div>
                         </div>
                     {% endif %}
                 </div>
             </div>
-        {% endblock %}
+        {% end body %}
     </Page>
 </template>
 
 <script>
-    import { ToggleField, SetField } from 'sham-ui-helpers';
-
     function RoutesMembersPage( options, didMount ) {
         const pageTitle = $();
         const dataLoaded = $();
@@ -142,5 +140,5 @@
         };
     }
 
-    export default Component( Template, ToggleField, SetField, RoutesMembersPage );
+    export default Component( Template, RoutesMembersPage );
 </script>

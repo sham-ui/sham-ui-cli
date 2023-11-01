@@ -4,7 +4,7 @@
 
     {% if dataLoaded %}
         <div data-test-page-body>
-            {% defblock 'default' %}
+            {% defblock %}
         </div>
     {% else %}
         <WithoutFlushLoader loadingComponent=\{{PageLoadingIndicator}}/>

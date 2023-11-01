@@ -7,7 +7,7 @@ import serve from 'rollup-plugin-serve';
 import { terser } from 'rollup-plugin-terser';
 import nodeResolveWithMacro from 'rollup-plugin-node-resolve-with-sham-ui-macro';
 import shamUICompiler from 'rollup-plugin-sham-ui-templates';
-import copy from 'rollup-plugin-copy'
+import copy from 'rollup-plugin-copy';
 import pkg from './package.json';
 
 const prod = !process.env.ROLLUP_WATCH;

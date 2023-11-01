@@ -8,7 +8,12 @@
             <i class="icon-pencil"></i>
         </a>
         {% if editFormVisible %}
-            {% defblock 'form' this$.dataForForm() %}
+            {% 
+                defblock form 
+                $( {
+                    onUpdateSuccess: () => onUpdateValue( this$.toggleEdit )
+                } ) 
+            %}
         {% endif %}
     </p>
 </template>
@@ -16,30 +21,23 @@
 <script>
     function RoutesSettingsParagraph( options ) {
         const editFormVisible = $();
-        const onUpdateValue = $();
 
         const state = options( {
             [ $.paragraphClassName ]: 'mg-b-0',
             [ $.title ]: '',
             [ $.value ]: '',
             [ editFormVisible ]: false,
-            [ onUpdateValue ]( toggle ) {
+            [ $.onUpdateValue ]( toggle ) {
                 toggle();
             }
         } );
 
+        this$.toggleEdit = () => state[ editFormVisible ] =  !state[ editFormVisible ];
+
         this$.editClick = e => {
             e.stopPropagation();
-            toggleEdit();
+            this$.toggleEdit();
         };
-
-        const toggleEdit = () => state[ editFormVisible ] = !state[ editFormVisible ];
-
-        this$._onUpdateValue = () => state[ onUpdateValue ]( toggleEdit );
-
-        this$.dataForForm = () => ( {
-            [ $.onUpdateSuccess ]: this$._onUpdateValue
-        } );
     }
 
     export default Component( Template, RoutesSettingsParagraph );

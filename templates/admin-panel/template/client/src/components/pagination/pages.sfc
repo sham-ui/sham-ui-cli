@@ -6,7 +6,7 @@
             {% endif %}
             <button
                 data-test-pagination-page=\{{item.page}}
-                :onclick=\{{goToPage.bind( this,  item.page )}}
+                :onclick=\{{() => goToPage( item.page )}}
                 :disabled=\{{item.page === currentPage}}
             >
                 \{{item.page}}

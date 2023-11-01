@@ -6,7 +6,7 @@
             <div class="tag">
                 \{{tag.name}}
                 <span
-                    :onclick=\{{this$._removeTag.bind( this, index )}}
+                    :onclick=\{{ () => this$._removeTag( index ) }}
                     data-test-remove-tag=\{{tag.name}}
                     class="remove"
                     data-test-close-button

@@ -2,7 +2,7 @@
     {% import ModalWindow from '../../ModalWindow.sfc' %}
 
     {%
-        defblock 'default'
+        defblock default
         $( {
             items: items,
             showErrors: showErrors,

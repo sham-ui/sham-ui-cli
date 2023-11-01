@@ -6,11 +6,11 @@
     {% import PasswordForm from './form/password.sfc' %}
 
     <Page>
-        {% block 'header' %}
+        {% header %}
             \{{pageTitle}}
-        {% endblock %}
+        {% end header %}
 
-        {% block 'body' %}
+        {% body %}
             <div class="panel settings">
                 <Paragraph
                     paragraphClassName="mg-b-30"
@@ -18,11 +18,11 @@
                     value=\{{sessionData.name}}
                     onUpdateValue=\{{this$.onUpdateSessionData}}
                 >
-                    {% block 'form' %}
+                    {% form %}
                         <NameForm
                             name=\{{sessionData.name}}
-                />
-                    {% endblock %}
+                        />
+                    {% end form %}
                 </Paragraph>
 
                 <Paragraph
@@ -31,24 +31,24 @@
                     value=\{{sessionData.email}}
                     onUpdateValue=\{{this$.onUpdateSessionData}}
                 >
-                    {% block 'form' %}
+                    {% form %}
                         <EmailForm
                             email1=\{{sessionData.email}}
                             email2=\{{sessionData.email}}
-                />
-                    {% endblock %}
+                        />
+                    {% end form %}
                 </Paragraph>
 
                 <Paragraph
                     title="Password"
                     value="******"
                 >
-                    {% block 'form' %}
+                    {% form %}
                         <PasswordForm/>
-                    {% endblock %}
+                    {% end form %}
                 </Paragraph>
             </div>
-        {% endblock %}
+        {% end body %}
     </Page>
 </template>
 

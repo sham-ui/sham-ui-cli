@@ -1,5 +1,7 @@
 <template>
+{{#if signupEnabled}}
     {% import path from 'sham-ui-router/lib/params' %}
+{{/if}}
     {% import FormContainer from '../../FormContainer.sfc' %}
     {% import Logo from '../../Logo.sht' %}
 
@@ -10,28 +12,28 @@
             success=\{{this$._loginSuccess}}
             getErrors=\{{this$._getErrors}}
         >
-            {% block 'header' %}
+            {% header %}
                 <Logo/>
-            {% endblock %}
+            {% end header %}
 
-            {% block 'default' %}
+            {% default %}
                 <div class="form-group">
                     <input name="email" type="text" placeholder="Enter your email" autofocus :onChangeUpdate=\{{$.email}}>
                 </div>
                 <div class="form-group">
                     <input name="password" type="password" placeholder="Enter your password" :onChangeUpdate=\{{$.password}}>
                 </div>
-            {% endblock %}
+            {% end default %}
             {{#if signupEnabled}}
 
-            {% block 'footer' %}
+            {% footer %}
                 <div class="signup-label">
                     Not yet a member?
                     <a :hrefto=\{{path("signup")}}>
                         Sign Up
                     </a>
                 </div>
-            {% endblock %}
+            {% end footer %}
             {{/if}}
         </FormContainer>
     </div>

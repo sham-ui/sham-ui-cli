@@ -7,11 +7,11 @@
     {% import ArticlesTable from './table.sfc' %}
 
     <Page dataLoaded=\{{dataLoaded}}>
-        {% block 'header' %}
+        {% header %}
             \{{pageTitle}}
-        {% endblock %}
+        {% end header %}
 
-        {% block 'body' %}
+        {% body %}
             <div class="articles-page">
                 <ErrorsPanel errors=\{{errors}}/>
 
@@ -38,21 +38,19 @@
                                 <ArticlesTable
                                     categories=\{{categories}}
                                     articles=\{{items}}
-                                    showErrors=\{{this$.setField( $.errors )}}
-                                    refresh=\{{this$.loadData.bind( this, page )}}
+                                    showErrors=\{{ err => state$.errors = err }}
+                                    refresh=\{{ () => this$.loadData( page ) }}
                                 />
                             </Pagination>
                         </div>
                     </div>
                 </div>
             </div>
-        {% endblock %}
+        {% end body %}
     </Page>
 </template>
 
 <script>
-    import { SetField } from 'sham-ui-helpers';
-
     // Page=1 will result into offset 0, page=2 will result into
     // offset 50 and so on
     const offsetByPage = ( page, limit ) => ( page - 1 ) * limit;
@@ -120,5 +118,5 @@
         };
     }
 
-    export default Component( Template, SetField, RoutesArticlesListPage );
+    export default Component( Template, RoutesArticlesListPage );
 </script>

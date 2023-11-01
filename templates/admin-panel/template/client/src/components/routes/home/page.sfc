@@ -1,15 +1,15 @@
 <template>
     {% import Page from '../../Page.sfc' %}
     <Page>
-        {% block 'header' %}
+        {% header  %}
             \{{pageTitle}}
-        {% endblock %}
+        {% end header %}
 
-        {% block 'body' %}
+        {% body  %}
             <div class="panel">
                 Project description
             </div>
-        {% endblock %}
+        {% end body %}
     </Page>
 </template>
 

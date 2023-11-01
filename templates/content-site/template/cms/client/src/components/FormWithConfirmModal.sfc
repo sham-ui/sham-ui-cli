@@ -9,7 +9,7 @@
         success=\{{onSuccess}}
         getErrors=\{{getErrors}}
     >
-        {% defblock 'default' %}
+        {% defblock %}
     </FormContainer>
 
     {% if modalVisible %}

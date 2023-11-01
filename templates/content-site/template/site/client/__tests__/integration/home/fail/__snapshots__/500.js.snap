@@ -236,7 +236,7 @@ exports[`ssr & rehydrate 1`] = `
     \\"10\\": {
       \\"O\\": {
         \\"dataLoaded\\": true,
-        \\"errors\\": [\\"Не удалось загрузить список статей\\"]
+        \\"errors\\": [\\"Fail load articles list\\"]
       },
       \\"C\\": [\\"11\\"],
       \\"N\\": [4]
@@ -455,7 +455,7 @@ exports[`ssr 1`] = `
         \\"10\\": {
           \\"O\\": {
             \\"dataLoaded\\": true,
-            \\"errors\\": [\\"Не удалось загрузить список статей\\"]
+            \\"errors\\": [\\"Fail load articles list\\"]
           },
           \\"C\\": [\\"11\\"],
           \\"N\\": [4]

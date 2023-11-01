@@ -5,11 +5,11 @@
     {% import AssetsPanel from './assets-panel.sfc' %}
 
     <Page dataLoaded=\{{dataLoaded}}>
-        {% block 'header' %}
+        {% header %}
             \{{pageTitle}}
-        {% endblock %}
+        {% end header %}
 
-        {% block 'body' %}
+        {% body %}
             <div class="server-info">
                 <ErrorsPanel errors=\{{errors}} />
 
@@ -22,7 +22,7 @@
                     files=\{{files}}
                 />
             </div>
-        {% endblock %}
+        {% end body %}
     </Page>
 
 </template>

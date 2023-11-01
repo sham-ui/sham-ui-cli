@@ -21,14 +21,14 @@
                     <td class="actions">
                         <button
                             data-test-update-button=\{{member.ID}}
-                            :onclick=\{{this$.selectMember.bind( this, member )}}
+                            :onclick=\{{() => this$.selectMember( member ) }}
                         >
                             Edit
                         </button>
                         <button
                             data-test-delete-button=\{{member.ID}}
                             class="btn-danger"
-                            :onclick=\{{this$.confirmDelete.bind( this, member )}}
+                            :onclick=\{{ () => this$.confirmDelete( member ) }}
                         >
                             Delete
                         </button>

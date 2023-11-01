@@ -2,13 +2,13 @@
     {% import Page from '{{srcComponentRelativePath}}/Page.sfc' %}
 
     <Page>
-        {% block 'header' %}
+        {% header %}
             \{{pageTitle}}
-        {% endblock %}
+        {% end header %}
 
-        {% block 'body' %}
+        {% body %}
 
-        {% endblock %}
+        {% end body %}
     </Page>
 </template>
 

@@ -1,6 +1,6 @@
 <template>
     {%
-        defblock 'default'
+        defblock default
         $( {
             saveData: saveData,
             onSuccess: onSuccess,

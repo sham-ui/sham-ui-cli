@@ -4,10 +4,10 @@
 
     {% if sessionData.sessionValidated && dataLoaded %}
         <h4 class="page-header">
-            {% defblock 'header' %}
+            {% defblock header %}
         </h4>
         <div class="page-body">
-            {% defblock 'body' %}
+            {% defblock body %}
         </div>
     {% else %}
         <WithoutFlushLoader loadingComponent=\{{PageLoadingIndicator}}/>

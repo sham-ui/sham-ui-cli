@@ -1,6 +1,6 @@
 {
   "name": "sham-ui-cli",
-  "version": "6.0.0-alpha.5",
+  "version": "6.0.0-alpha.6",
   "description": "CLI tools for sham-ui",
   "preferGlobal": true,
   "bin": {

@@ -7,7 +7,7 @@
         getPageTitle=\{{getPageTitle}}
         loadData=\{{loadData}}
     >
-        {% block 'header' %}
+        {% header %}
             <div class="container-fluid">
                 <div class="row">
                     <div class="categorie-title">
@@ -15,7 +15,7 @@
                     </div>
                 </div>
             </div>
-        {% endblock %}
+        {% end header %}
     </ArticlesPage>
 </template>
 

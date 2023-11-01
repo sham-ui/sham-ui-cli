@@ -5,11 +5,11 @@
     {% import ItemsTable from './crud-page/table.sfc' %}
 
     <Page dataLoaded=\{{dataLoaded}}>
-        {% block 'header' %}
+        {% header %}
             \{{pageTitle}}
-        {% endblock %}
+        {% end header %}
 
-        {% block 'body' %}
+        {% body %}
             <div class="crud-page">
                 <ErrorsPanel errors=\{{errors}}/>
 
@@ -17,7 +17,7 @@
                     <button
                         data-test-toggle-create-form
                         class="mg-b-30"
-                        :onclick=\{{this$.toggleField( $.createFormVisible )}}
+                        :onclick=\{{ () => state$.createFormVisible = !createFormVisible }}
                     >
                         \{{ ( createFormVisible ? 'Hide' : 'Show' ) + ' create new ' + typeName + ' form' }}
                     </button>
@@ -27,9 +27,9 @@
                                 typeName=\{{typeName}}
                                 onSuccess=\{{this$._onCreate}}
                             >
-                                {% block 'default' with createFormData %}
-                                    {% defblock 'createForm' createFormData %}
-                                {% endblock %}
+                                {% default with createFormData %}
+                                    {% defblock createForm createFormData %}
+                                {% end default %}
                             </CreateForm>
                         </div>
                     {% endif %}
@@ -42,15 +42,15 @@
                                 typeName=\{{typeName}}
                                 items=\{{items}}
                                 selectedItem=\{{selectedItem}}
-                                onSelectItem=\{{this$.setField( $.selectedItem )}}
-                                showErrors=\{{this$.setField( $.errors )}}
+                                onSelectItem=\{{ item => state$.selectedItem = item }}
+                                showErrors=\{{ err => state$.errors = err}}
                                 refresh=\{{this$.loadData}}
                                 confirmDeleteText=\{{confirmDeleteText}}
                                 deleteItem=\{{deleteItem}}
                             >
-                                {% block 'default' with tableData %}
-                                    {% defblock 'table' tableData %}
-                                {% endblock %}
+                                {% default with tableData %}
+                                    {% defblock table tableData %}
+                                {% end default %}
                             </ItemsTable>
                         </div>
                     </div>
@@ -58,7 +58,7 @@
                     {% if selectedItem %}
                         <div class="item-detail">
                             <div class="panel">
-                                {% defblock 'itemDetail'
+                                {% defblock itemDetail
                                     $( {
                                         item: selectedItem,
                                         onUpdateSuccess: this$.loadData
@@ -69,13 +69,11 @@
                     {% endif %}
                 </div>
             </div>
-        {% endblock %}
+        {% end body %}
     </Page>
 </template>
 
 <script>
-    import { SetField, ToggleField } from 'sham-ui-helpers';
-
     function PagesCrudPage( options, didMount ) {
         const typeName = $();
         const pageTitle = $();
@@ -127,5 +125,5 @@
         };
     }
 
-    export default Component( Template, SetField, ToggleField, PagesCrudPage );
+    export default Component( Template, PagesCrudPage );
 </script>
