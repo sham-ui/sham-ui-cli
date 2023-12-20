@@ -1,38 +1,48 @@
 restore_deps:
-	cd site
-	go mod download
+	go mod download -x
 
 install: restore_deps
 
 build_proto:
-	cd site
-	find ./proto -name '*.proto' | xargs -I {} protoc -I=. -I=${GOPATH}/pkg/mod/ --go-grpc_out=../ --go_out=../ {}
+	docker run --rm -u $(shell id -u ${USER}):$(shell id -g ${USER}) -v $(shell pwd):/site -it $(shell docker build -t site-proto -f proto.Dockerfile -q .)
 
 .ONESHELL:
 build_js:
 	cd ../client/
 	yarn build
-	rm -r ../server/site/assets/files
-	mkdir -p ../server/site/assets/files
-	cp -r dist/* ../server/site/assets/files
-	cp ssr/bundle.js ../server/site/ssr/ssr.js
+	rm -rf ../server/assets/files/
+	mkdir -p ../server/assets/files
+	cp -r dist/* ../server/assets/files
+	cp ssr/bundle.js ../server/ssr/ssr.js
 
-build_386: build_js
-	cd site
-	env GOOS=linux GOARCH=386 go build -o ../bin/linux_386/site site
+build_amd64: build_proto build_js
+	GOOS=linux GOARCH=amd64 go build -x -o ./bin/linux_amd64/app ./cmd/app
 
-build_amd64: build_js
-	cd site
-	env GOOS=linux GOARCH=amd64 go build -o ../bin/linux_amd64/site site
-
-build: build_386 build_amd64
+build: build_amd64
 
 run_test:
-	cd site
-	go test -p 1 -v ./... -cover -coverprofile=coverage.out -coverpkg=./... && echo "Tests finished with success"
+	go test -p 1 -v ./cmd/... ./config/... ./internal/... ./pkg/...  -cover -coverprofile=coverage.out -coverpkg=./... && echo "Tests finished with success"
 
 coverage:
-	cd site
 	go tool cover -html=coverage.out
 
 test: build_js run_test coverage
+
+run_integration_test:
+	go test -p 1 -v ./integration-test/...  && echo "Integrations tests finished with success"
+
+cp_app_to_integration_test:
+	cp bin/linux_amd64/app integration-test/app
+
+integration_test: build cp_app_to_integration_test run_integration_test
+
+lint:
+	golangci-lint run ./...
+
+lint_fix:
+	golangci-lint run --fix ./...
+
+run_amd64:
+	./bin/linux_amd64/app
+
+run: run_amd64

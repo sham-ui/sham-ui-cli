@@ -4,12 +4,13 @@ export default class Store {
 
     constructor( DI ) {
         DI.bind( 'store', this );
-        this._setupAPI( DI.resolve( 'api:url' ) );
+        this._setupAPI( DI.resolve( 'api:url' ), DI.resolve( 'api:headers' ) );
     }
 
-    _setupAPI( baseURL ) {
+    _setupAPI( baseURL, headers ) {
         this.api = new API( {
-            baseURL
+            baseURL,
+            headers
         } );
     }
 

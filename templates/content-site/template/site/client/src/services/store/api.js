@@ -1,9 +1,10 @@
 import axios from 'axios';
 
 export class API {
-    constructor( { baseURL } ) {
+    constructor( { baseURL, headers = {} } ) {
         this.axios = axios.create( {
             baseURL,
+            headers,
             withCredentials: true
         } );
         this.axios.interceptors.response.use(

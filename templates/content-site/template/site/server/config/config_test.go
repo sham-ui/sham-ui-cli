@@ -1,0 +1,72 @@
+package config
+
+import (
+	"os"
+	"path"
+	"site/pkg/tracing"
+	"strings"
+	"testing"
+	"time"
+
+	"site/pkg/asserts"
+
+	"github.com/go-logr/logr/testr"
+)
+
+func TestCreateConfigIfNotExists(t *testing.T) {
+	configPath := path.Join(t.TempDir(), "config.cfg")
+
+	cfg, err := LoadConfiguration(testr.New(t).V(1), configPath)
+	asserts.NoError(t, err)
+	asserts.Equals(t, &Config{
+		Server: Server{
+			Port: 3000,
+		},
+		API: API{
+			Address:     "/tmp/site/cms.sock",
+			DialTimeout: 5 * time.Second,
+		},
+		Tracer: tracing.Config{
+			Endpoint:      "",
+			Path:          "/api/default/v1/traces",
+			Authorization: "cm9vdEBleGFtcGxlLmNvbTpETktERTFKNkJTSE9DTlVa",
+			ServiceName:   "site",
+			Version:       "0.0.1",
+			Environment:   "prod",
+		},
+	}, cfg, "config")
+	content, err := os.ReadFile(configPath)
+	asserts.Equals(t, strings.TrimSpace(defaultGoCfgConfig), string(content), "file content")
+	asserts.NoError(t, err)
+}
+
+func TestReadConfig(t *testing.T) {
+	configPath := path.Join("testdata", "config.cfg")
+	cfg, err := LoadConfiguration(testr.New(t).V(1), configPath)
+	asserts.NoError(t, err)
+	asserts.Equals(t, &Config{
+		Server: Server{
+			Port: 3001,
+		},
+		API: API{
+			Address:     "/tmp/site/cms.sock",
+			DialTimeout: 5 * time.Second,
+		},
+		Tracer: tracing.Config{
+			Endpoint:      "localhost:5080",
+			Path:          "/api/default/v1/traces",
+			Authorization: "cm9vdEBleGFtcGxlLmNvbTpETktERTFKNkJTSE9DTlVa",
+			ServiceName:   "site",
+			Version:       "0.0.1",
+			Environment:   "dev",
+		},
+	}, cfg)
+}
+
+func TestServer(t *testing.T) {
+	s := Server{
+		Port: 1234,
+	}
+	asserts.Equals(t, ":1234", s.Address())
+	asserts.Equals(t, "http://localhost:1234", s.URL())
+}

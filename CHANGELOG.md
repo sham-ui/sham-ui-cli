@@ -1,3 +1,6 @@
+## master
+* Refactoring content-site backend
+
 ## 6.0.0
 * Update dependencies
 * Fix missing dependencies in templates

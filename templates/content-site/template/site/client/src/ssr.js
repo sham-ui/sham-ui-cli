@@ -8,12 +8,14 @@ import mainInitializer from './initializers/main';
  * @param {string} origin Value for router document.location.origin
  * @param {string} href Value for router current location
  * @param {string} cookie Original request cookies
+ * @param {Object<string,string>} headers optional headers
  * @return {Promise<{title: string, html: string, data: string, darkThemeEnabled: boolean}>}
  */
-export function renderAPP( apiURL, origin, href, cookie ) {
+export function renderAPP( apiURL, origin, href, cookie, headers ) {
     const DI = createDI();
     DI
         .bind( 'api:url', apiURL )
+        .bind( 'api:headers', headers )
         .bind( 'location:origin', origin )
         .bind( 'location:href', href )
         .bind( 'document', { // Container for services
@@ -71,7 +73,7 @@ export function toHTML( { data, title, html, darkThemeEnabled, content } ) {
 }
 
 process.on( 'message', function( msg ) {
-    renderAPP( msg.api, msg.origin, msg.url, msg.cookies )
+    renderAPP( msg.api, msg.origin, msg.url, msg.cookies, msg.headers )
         .then(
             data => ( {
                 id: msg.id,

@@ -1,0 +1,11 @@
+*/*/.idea/
+/client/coverage/
+/client/dist/
+/client/node_modules/
+/client/ssr/
+/server/bin/
+/server/config.cfg
+/server/coverage.out
+/server/ssr.js
+/server/assets/files/
+/server/ssr/ssr.js
