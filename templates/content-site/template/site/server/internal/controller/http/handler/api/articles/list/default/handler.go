@@ -11,6 +11,8 @@ import (
 	"github.com/gorilla/mux"
 )
 
+const RouteName = "api.articles.list.default"
+
 type responseData struct {
 	Articles []list.Article `json:"articles"`
 	Meta     list.Meta      `json:"meta"`
@@ -50,6 +52,7 @@ func newHandler(service ArticlesService) *handler {
 
 func Setup(router *mux.Router, service ArticlesService) {
 	router.
+		Name(RouteName).
 		Methods("GET").
 		Path("/articles").
 		Handler(newHandler(service))

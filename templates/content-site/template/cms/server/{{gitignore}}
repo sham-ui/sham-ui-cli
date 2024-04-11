@@ -1,5 +1,4 @@
-pkg/
 /config.cfg
 bin/
 coverage.out
-upload/
+/upload/

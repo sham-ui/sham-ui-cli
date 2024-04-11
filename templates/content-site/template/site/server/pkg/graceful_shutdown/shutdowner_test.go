@@ -28,8 +28,8 @@ func TestShutdowner(t *testing.T) {
 	highShutdown := highTask.On("GracefulShutdown", mock.Anything).Return(nil).Once()
 	highShutdown.NotBefore(mediumShutdown)
 
+	sh.RegistryTask(highTask)
 	sh.RegistryTask(mediumTask)
-	sh.RegistryHighTask(highTask)
 	err := sh.Shutdown(context.Background())
 
 	// Assert
@@ -74,6 +74,20 @@ func TestNotifier(t *testing.T) {
 	go func() {
 		ch <- errors.New("notify error")
 	}()
+
+	sh.Wait()
+}
+
+func TestNotifierFail(t *testing.T) {
+	// Arrange
+	sh := New(testr.New(t))
+
+	// Act
+	task := NewMockTask(t)
+	task.On("GracefulShutdown", mock.Anything).Return(nil).Once()
+	sh.RegistryTask(task)
+
+	sh.FailNotify(errors.New("notify error"), "test notify error")
 
 	sh.Wait()
 }
@@ -155,8 +169,18 @@ func TestWaitInterruptFail(t *testing.T) {
 	asserts.NoError(t, err)
 	output, err := io.ReadAll(&buf)
 	asserts.NoError(t, err)
-	asserts.Equals(t, true, strings.Contains(string(output), `"message":"received signal, app will be shutdown"`), "shutdown because receive signal")
-	asserts.Equals(t, true, strings.Contains(string(output), `"message":"can't graceful shutdown task"`), "output error")
+	asserts.Equals(
+		t,
+		true,
+		strings.Contains(string(output), `"message":"received signal, app will be shutdown"`),
+		"shutdown because receive signal",
+	)
+	asserts.Equals(
+		t,
+		true,
+		strings.Contains(string(output), `"message":"can't graceful shutdown task"`),
+		"output error",
+	)
 	asserts.Equals(t, true, strings.Contains(string(output), `"error":"fail"`), "output error")
 	asserts.Equals(t, true, strings.Contains(string(output), `"message":"finish graceful shutdown"`), "output")
 }
@@ -179,8 +203,18 @@ func TestWaitNotifier(t *testing.T) {
 	asserts.NoError(t, err)
 	output, err := io.ReadAll(&buf)
 	asserts.NoError(t, err)
-	asserts.Equals(t, true, strings.Contains(string(output), `"message":"received notification, app will be shutdown"`), "shutdown because receive notify")
-	asserts.Equals(t, true, strings.Contains(string(output), `"message":"critical error, app will be shutdown"`), "notify error")
+	asserts.Equals(
+		t,
+		true,
+		strings.Contains(string(output), `"message":"received notification, app will be shutdown"`),
+		"shutdown because receive notify",
+	)
+	asserts.Equals(
+		t,
+		true,
+		strings.Contains(string(output), `"message":"critical error, app will be shutdown"`),
+		"notify error",
+	)
 	asserts.Equals(t, true, strings.Contains(string(output), `"error":"notify error"`), "output error")
 	asserts.Equals(t, true, strings.Contains(string(output), `"message":"finish graceful shutdown"`), "output")
 }

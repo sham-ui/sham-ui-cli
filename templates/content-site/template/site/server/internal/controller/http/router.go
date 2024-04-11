@@ -13,7 +13,7 @@ import (
 	metricsHandler "site/internal/controller/http/handler/metrics"
 	ssrHandler "site/internal/controller/http/handler/ssr"
 	"site/internal/controller/http/middleware/context_logger"
-	"site/internal/controller/http/middleware/cors"
+	corsMiddleware "site/internal/controller/http/middleware/cors"
 	mwLogger "site/internal/controller/http/middleware/logger"
 	"site/internal/controller/http/middleware/recovery"
 	"site/internal/controller/http/middleware/tracing"
@@ -27,6 +27,7 @@ import (
 const APIPrefix = "/api"
 
 func newRouter(
+	cors bool,
 	logger logr.Logger,
 	tracerProvider trace.TracerProvider,
 	propagator propagation.TraceContext,
@@ -54,7 +55,10 @@ func newRouter(
 	// API
 	{
 		api := router.PathPrefix(APIPrefix).Subrouter()
-		cors.Setup(api)
+
+		if cors {
+			corsMiddleware.Setup(api)
+		}
 
 		// Articles
 		{

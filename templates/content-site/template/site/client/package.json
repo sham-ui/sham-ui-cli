@@ -58,13 +58,14 @@
   },
   "dependencies": {
     "axios": "^0.19.0",
+    "escape-html": "^1.0.3",
     "sham-ui": "^6.0.0",
     "sham-ui-cube-animation": "^2.2.0",
     "sham-ui-data-storage": "^3.0.0",
     "sham-ui-directives": "^6.0.0",
     "sham-ui-dynamic-component": "^3.0.0",
-    "sham-ui-router": "^6.0.0",
-    "sham-ui-ssr": "^2.0.0",
+    "sham-ui-router": "^6.1.0",
+    "sham-ui-ssr": "^2.1.2",
     "sham-ui-unsafe": "^0.0.1",
     "sham-ui-without-flush-loader": "^3.0.1",
     "systemjs": "^6.10.1"

@@ -11,6 +11,8 @@ import (
 	"github.com/gorilla/mux"
 )
 
+const RouteName = "api.articles.detail"
+
 const slugKey = "slug"
 
 type (
@@ -82,6 +84,7 @@ func newHandler(service ArticlesService) *handler {
 
 func Setup(router *mux.Router, service ArticlesService) {
 	router.
+		Name(RouteName).
 		Methods("GET").
 		Path("/articles/{" + slugKey + "}").
 		Handler(newHandler(service))

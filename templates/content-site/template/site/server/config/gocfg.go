@@ -13,6 +13,7 @@ import (
 const defaultGoCfgConfig = `
 [server]
 port = 3000
+cors = true
 
 [api]
 address = /tmp/site/cms.sock
@@ -32,8 +33,8 @@ const defaultConfigFilePermission = 0o600
 // gocfg is special type for parsing .cfg files.
 type gocfg struct {
 	Server struct {
-		Port    int
-		Swagger bool
+		Port int
+		Cors bool
 	}
 	API struct {
 		Address     string
@@ -53,6 +54,7 @@ func (g gocfg) toConfig() *Config {
 	return &Config{
 		Server: Server{
 			Port: g.Server.Port,
+			Cors: g.Server.Cors,
 		},
 		API: API{
 			Address:     g.API.Address,

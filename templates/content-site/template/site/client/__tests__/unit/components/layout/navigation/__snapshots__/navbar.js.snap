@@ -9,6 +9,7 @@ Object {
       "name": "",
       "pageLoaded": false,
       "params": Object {},
+      "query": "",
       "url": "",
     },
   },

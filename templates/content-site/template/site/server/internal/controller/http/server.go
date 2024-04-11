@@ -77,6 +77,7 @@ func New(
 			Addr:              cfg.Address(),
 			ReadHeaderTimeout: requestHeaderTimeout,
 			Handler: newRouter(
+				cfg.Cors,
 				logger,
 				tracerProvider,
 				propagator,

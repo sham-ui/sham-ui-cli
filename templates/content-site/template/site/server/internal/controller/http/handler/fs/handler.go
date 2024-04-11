@@ -13,6 +13,8 @@ import (
 	"github.com/gorilla/mux"
 )
 
+const RouteName = "fs"
+
 type handler struct {
 	fileSystem  fs.FS
 	fileServer  http.Handler
@@ -89,6 +91,7 @@ func newHandler(fileSystem fs.FS, htmlHandler http.Handler) *handler {
 
 func Setup(router *mux.Router, fileSystem fs.FS, htmlHandler http.Handler) {
 	router.
+		Name(RouteName).
 		PathPrefix("/").
 		Handler(newHandler(fileSystem, htmlHandler))
 }

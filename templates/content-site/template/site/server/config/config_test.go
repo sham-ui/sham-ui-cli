@@ -21,6 +21,7 @@ func TestCreateConfigIfNotExists(t *testing.T) {
 	asserts.Equals(t, &Config{
 		Server: Server{
 			Port: 3000,
+			Cors: true,
 		},
 		API: API{
 			Address:     "/tmp/site/cms.sock",
@@ -47,6 +48,7 @@ func TestReadConfig(t *testing.T) {
 	asserts.Equals(t, &Config{
 		Server: Server{
 			Port: 3001,
+			Cors: true,
 		},
 		API: API{
 			Address:     "/tmp/site/cms.sock",
@@ -66,6 +68,7 @@ func TestReadConfig(t *testing.T) {
 func TestServer(t *testing.T) {
 	s := Server{
 		Port: 1234,
+		Cors: false,
 	}
 	asserts.Equals(t, ":1234", s.Address())
 	asserts.Equals(t, "http://localhost:1234", s.URL())

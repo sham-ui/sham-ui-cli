@@ -12,6 +12,8 @@ import (
 	"github.com/gorilla/mux"
 )
 
+const RouteName = "api.articles.list.tag"
+
 const (
 	tagKey = "tag"
 )
@@ -73,6 +75,7 @@ func newHandler(service ArticlesService) *handler {
 
 func Setup(router *mux.Router, service ArticlesService) {
 	router.
+		Name(RouteName).
 		Methods("GET").
 		Queries("tag", "{"+tagKey+"}").
 		Path("/articles").

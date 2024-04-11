@@ -20,7 +20,7 @@
 </template>
 
 <script>
-    const queryRegExp = new RegExp( '[?&]q=([^&]*)' );
+    const queryRegExp = new RegExp( '&?q=([^&]*)' );
 
     function SearchPage( options ) {
         const query = $();
@@ -32,7 +32,7 @@
             [ query ]: '',
             [ $.getPageTitle ]: () => `Search ${state[ query ]}`,
             [ $.loadData ]: ( offset, limit ) => {
-                const match = queryRegExp.exec( DI( 'location:href' ) );
+                const match = queryRegExp.exec( DI( 'router' ).storage.query );
                 const q = null == match ?
                     '' :
                     decodeURI( match[ 1 ] )

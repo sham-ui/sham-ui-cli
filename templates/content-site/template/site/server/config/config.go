@@ -18,6 +18,7 @@ type (
 	}
 	Server struct {
 		Port int
+		Cors bool
 	}
 	API struct {
 		Address     string

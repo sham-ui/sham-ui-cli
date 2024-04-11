@@ -1,5 +1,7 @@
 ## master
-* Refactoring content-site backend
+* Refactoring content site backend
+* Refactoring admin panel backend
+* Update dependencies
 
 ## 6.0.0
 * Update dependencies

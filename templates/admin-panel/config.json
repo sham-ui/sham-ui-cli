@@ -47,8 +47,7 @@
     }
   },
   "filters": {
-    "server/*/signup_test.go": "signupEnabled",
-    "server/*/members/handlers/signup.go": "signupEnabled",
+    "server/internal/controller/http/handler/api/members/signup/**": "signupEnabled",
     "client/__tests__/integration/redirects/__snapshots__/authenticated-cant-visit-signup.js.snap": "signupEnabled",
     "client/__tests__/integration/redirects/authenticated-cant-visit-signup.js": "signupEnabled",
     "client/__tests__/integration/signin/go-from-sign-up.js": "signupEnabled",

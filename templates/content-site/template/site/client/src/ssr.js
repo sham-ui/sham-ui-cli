@@ -1,3 +1,4 @@
+import escapeHTML from 'escape-html';
 import { createDI, start } from 'sham-ui';
 import { setup as setupHydrator, hydrate } from 'sham-ui-ssr/lib/hydrator';
 import mainInitializer from './initializers/main';
@@ -33,8 +34,8 @@ export function renderAPP( apiURL, origin, href, cookie, headers ) {
             const data = {
                 ...storage.hydrate(),
                 darkThemeEnabled: DI.resolve( 'app:storage' ).darkThemeEnabled,
-                title: doc.title,
-                content: doc.content
+                title: escapeHTML( doc.title ),
+                content: escapeHTML( doc.content )
             };
             DI.resolve( 'router' ).destroy();
             return data;

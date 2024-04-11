@@ -1,21 +1,25 @@
 package assets
 
 import (
+	"bytes"
 	"errors"
 	"net/http"
+	"time"
 
 	"site/internal/controller/http/response"
 	"site/internal/model"
 	"site/pkg/logger"
-	"site/pkg/one_file_fs"
 
 	"github.com/gorilla/mux"
 )
+
+const RouteName = "assets"
 
 const paramKey = "file"
 
 type handler struct {
 	service Service
+	modTime time.Time
 }
 
 func (h *handler) ServeHTTP(rw http.ResponseWriter, r *http.Request) {
@@ -32,19 +36,21 @@ func (h *handler) ServeHTTP(rw http.ResponseWriter, r *http.Request) {
 		log.Error(err, "can't get file")
 		return
 	}
-	http.FileServer(one_file_fs.New(asset.Path, asset.Content)).ServeHTTP(rw, r)
+	http.ServeContent(rw, r, asset.Path, h.modTime, bytes.NewReader(asset.Content))
 	rw.Header().Set("Cache-Control", "public, max-age=7776000")
 }
 
-func newHandler(service Service) *handler {
+func newHandler(service Service, modTime time.Time) *handler {
 	return &handler{
 		service: service,
+		modTime: modTime,
 	}
 }
 
 func Setup(router *mux.Router, service Service) {
 	router.
+		Name(RouteName).
 		Methods("GET").
 		Path("/assets/{" + paramKey + "}").
-		Handler(newHandler(service))
+		Handler(newHandler(service, time.Now()))
 }

@@ -19,7 +19,7 @@ func app() int { //nolint:funlen
 	cfg, err := config.LoadConfiguration(logr, "config.cfg")
 	if err != nil {
 		logr.Error(err, "can't load config")
-		os.Exit(1)
+		return 1
 	}
 	logr.Info("config loaded", "config", cfg)
 
@@ -28,7 +28,7 @@ func app() int { //nolint:funlen
 
 	spanExporter, err := tracing.NewExporter(cfg.Tracer)
 	if err != nil {
-		logr.Error(err, "can't create span exporter")
+		shutdowner.FailNotify(err, "can't create span exporter")
 		return 1
 	}
 	shutdowner.RegistryTask(spanExporter)
@@ -37,14 +37,14 @@ func app() int { //nolint:funlen
 
 	apiClient, err := cms.New(tracerProvider, propagator, cfg.API)
 	if err != nil {
-		logr.Error(err, "can't create cms client")
+		shutdowner.FailNotify(err, "can't create cms client")
 		return 1
 	}
 	logr.Info("cms client created")
 
 	files, err := assets.Files()
 	if err != nil {
-		logr.Error(err, "can't load files")
+		shutdowner.FailNotify(err, "can't load files")
 		return 1
 	}
 
@@ -56,7 +56,7 @@ func app() int { //nolint:funlen
 		ssrFiles.Script,
 	)
 	if err := ssrSrv.Start(); err != nil {
-		logr.Error(err, "can't start ssr server")
+		shutdowner.FailNotify(err, "can't start ssr server")
 		return 1
 	}
 	shutdowner.RegistryTask(ssrSrv)

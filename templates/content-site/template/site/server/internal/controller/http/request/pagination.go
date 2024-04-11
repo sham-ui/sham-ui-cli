@@ -9,7 +9,7 @@ import (
 	"site/pkg/validation"
 )
 
-const scopeName = "http.request,pagination"
+const scopeName = "http.request.pagination"
 
 const (
 	DefaultOffset = 0

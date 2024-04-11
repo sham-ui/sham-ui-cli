@@ -2631,15 +2631,10 @@ caniuse-api@^3.0.0:
     lodash.memoize "^4.1.2"
     lodash.uniq "^4.5.0"
 
-caniuse-lite@^1.0.0, caniuse-lite@^1.0.30001109, caniuse-lite@^1.0.30001219:
-  version "1.0.30001522"
-  resolved "https://registry.npmjs.org/caniuse-lite/-/caniuse-lite-1.0.30001522.tgz"
-  integrity sha512-TKiyTVZxJGhsTszLuzb+6vUZSjVOAhClszBr2Ta2k9IwtNBT/4dzmL6aywt0HCgEZlmwJzXJd8yNiob6HgwTRg==
-
-caniuse-lite@^1.0.30001538:
-  version "1.0.30001540"
-  resolved "https://registry.yarnpkg.com/caniuse-lite/-/caniuse-lite-1.0.30001540.tgz#a316ca4f2ae673ab02ff0ec533334016d56ff658"
-  integrity sha512-9JL38jscuTJBTcuETxm8QLsFr/F6v0CYYTEU6r5+qSM98P2Q0Hmu0eG1dTG5GBUmywU3UlcVOUSIJYY47rdFSw==
+caniuse-lite@^1.0.0, caniuse-lite@^1.0.30001109, caniuse-lite@^1.0.30001219, caniuse-lite@^1.0.30001538:
+  version "1.0.30001599"
+  resolved "https://registry.npmjs.org/caniuse-lite/-/caniuse-lite-1.0.30001599.tgz"
+  integrity sha512-LRAQHZ4yT1+f9LemSMeqdMpMxZcc4RMWdj4tiFe3G8tNkWK+E58g+/tzotb5cU6TbcVJLr4fySiAW7XmxQvZQA==
 
 capture-exit@^1.2.0:
   version "1.2.0"
@@ -9616,10 +9611,10 @@ sham-ui-macro@^3.6.0:
     babel-macros "^1.0.2"
     babel-types "^6.26.0"
 
-sham-ui-router@^6.0.0:
-  version "6.0.0"
-  resolved "https://registry.yarnpkg.com/sham-ui-router/-/sham-ui-router-6.0.0.tgz#896e7e5c5d2fb42a6ea9fb56c212b967b99c6aca"
-  integrity sha512-Fo74o6XAefRcHco864/ttF+XfGmuwrs/OkBkcuyxxvDiwz7DUBO+53++a3xyX1nEA2X6kiRj4/MvvfkIr1OzVg==
+sham-ui-router@^6.1.0:
+  version "6.1.0"
+  resolved "https://registry.yarnpkg.com/sham-ui-router/-/sham-ui-router-6.1.0.tgz#f87e50129ca03729d60af18771777cadf60b0b7e"
+  integrity sha512-AgKvLUUAhHrBJnTABm0Ad/sZGqtdPYq1ala5H7/HaNYR8R4pPVWZ/fbH7BbuiITdkrlWEtIHHQrMTbx/qA96DA==
   dependencies:
     navigo "7.1.2"
     sham-ui "^6.0.0"

@@ -19,11 +19,11 @@ it( 'renders correctly', async() => {
         storage: {
             params: {
                 page: 2
-            }
+            },
+            query: 'q=content'
         },
         generate: () => '/'
     } );
-    DI.bind( 'location:href', 'http://client.example.com/search/1/?q=content' );
 
     const meta = renderer( RoutesSearchPage, {}, {
         DI,

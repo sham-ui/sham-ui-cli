@@ -10,7 +10,7 @@ const DI = createDI();
 setupUnsafe( DI );
 
 DI
-    .bind( 'api:url', 'http://localhost:3002/api/' )
+    .bind( 'api:url', 'http://localhost:3001/api/' )
     .bind( 'location:origin', document.location.origin + '/' )
     .bind( 'location:href', document.location.href )
     .bind( 'document', document )

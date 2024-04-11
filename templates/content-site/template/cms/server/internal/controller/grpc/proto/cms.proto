@@ -1,0 +1,111 @@
+syntax = "proto3";
+
+option go_package = "cms/internal/controller/grpc/proto";
+
+package proto;
+
+import "google/protobuf/timestamp.proto";
+
+service CMS {
+    rpc ArticleList(ArticleListRequest) returns (ArticleListResponse) {};
+    rpc ArticleListForCategory(ArticleListForCategoryRequest) returns (ArticleListForCategoryResponse) {};
+    rpc ArticleListForTag(ArticleListForTagRequest) returns (ArticleListForTagResponse) {};
+    rpc ArticleListForQuery(ArticleListForQueryRequest) returns (ArticleListResponse) {};
+    rpc Article(ArticleRequest) returns (ArticleResponse) {};
+    rpc Asset(AssetRequest) returns (AssetResponse) {};
+}
+
+message ArticleListRequest {
+    int64 Offset = 1;
+    int64 Limit = 2;
+}
+
+message ArticleListForCategoryRequest {
+    int64 Offset = 1;
+    int64 Limit = 2;
+    string CategorySlug = 3;
+}
+
+message ArticleListForTagRequest {
+    int64 Offset = 1;
+    int64 Limit = 2;
+    string TagSlug = 3;
+}
+
+message ArticleListForQueryRequest {
+    int64 Offset = 1;
+    int64 Limit = 2;
+    string Query = 3;
+}
+
+message ArticleRequest {
+    string Slug = 1;
+}
+
+message ArticleListResponse {
+    repeated ArticleListItem Articles = 1;
+    int64 total = 2;
+}
+
+message ArticleListForCategoryResponse {
+    repeated ArticleListItem Articles = 1;
+    int64 Total = 2;
+    string CategoryName = 3;
+}
+
+message ArticleListForTagResponse {
+    repeated ArticleListItem Articles = 1;
+    int64 Total = 2;
+    string TagName = 3;
+}
+
+
+message Category {
+    string Name = 1;
+    string Slug = 2;
+}
+
+message Tag {
+    string Name = 1;
+    string Slug = 2;
+}
+
+message ArticleListItem {
+    string Title = 1;
+    string Slug = 2;
+    Category Category = 3;
+    string Content = 4;
+    google.protobuf.Timestamp PublishedAt = 5;
+}
+
+message Article {
+    string Title = 1;
+    string Slug = 2;
+    Category Category = 3;
+    string ShortContent = 4;
+    string Content = 5;
+    repeated Tag Tags = 6;
+    google.protobuf.Timestamp PublishedAt = 7;
+}
+
+message NotFound {
+
+}
+
+message ArticleResponse {
+    oneof response {
+        Article article = 1;
+        NotFound not_found = 2;
+    }
+}
+
+message AssetRequest {
+    string Path = 1;
+}
+
+message AssetResponse {
+    oneof response {
+        bytes File = 1;
+        NotFound not_found = 2;
+    }
+}

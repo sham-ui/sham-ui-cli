@@ -3,6 +3,8 @@ package cms
 import (
 	"context"
 	"fmt"
+	"net"
+	"site/pkg/net_addr"
 
 	"go.opentelemetry.io/otel/propagation"
 	"go.opentelemetry.io/otel/trace"
@@ -13,7 +15,6 @@ import (
 	"site/config"
 	"site/internal/external_api/cms/proto"
 	"site/internal/model"
-	"site/pkg/dialer"
 
 	"google.golang.org/grpc"
 )
@@ -153,7 +154,13 @@ func New(
 		cfg.Address,
 		grpc.WithBlock(),
 		grpc.WithTransportCredentials(insecure.NewCredentials()),
-		grpc.WithContextDialer(dialer.WithTimeout(cfg.DialTimeout)),
+		grpc.WithContextDialer(func(ctx context.Context, str string) (net.Conn, error) {
+			ctxTimeout, cancel := context.WithTimeout(ctx, cfg.DialTimeout)
+			defer cancel()
+			var d net.Dialer
+			network, addr := net_addr.Resolve(str)
+			return d.DialContext(ctxTimeout, network, addr) //nolint:wrapcheck
+		}),
 		grpc.WithStatsHandler(
 			otelgrpc.NewClientHandler(
 				otelgrpc.WithTracerProvider(tracerProvider),

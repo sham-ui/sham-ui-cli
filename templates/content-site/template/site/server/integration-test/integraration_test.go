@@ -9,6 +9,7 @@ import (
 	"os/exec"
 	"path"
 	"strings"
+	"syscall"
 	"testing"
 	"time"
 
@@ -44,17 +45,15 @@ func runCMS(t *testing.T, cfg *config.Config, m cmsServer) {
 		lis, err = net.Listen("tcp", cfg.API.Address)
 	}
 	asserts.NoError(t, err)
-	asserts.NoError(t, err)
 	srv := grpc.NewServer()
 	t.Cleanup(func() {
 		srv.Stop()
 	})
 	//nolint:exhaustruct
-	proto.RegisterCMSServer(srv, testCmsServer{m: m})
+	proto.RegisterCMSServer(srv, testCmsServer{cmsServer: m})
 	go func() {
 		_ = srv.Serve(lis)
 	}()
-	time.Sleep(500 * time.Millisecond)
 }
 
 func runApp(t *testing.T) *exec.Cmd {
@@ -65,11 +64,22 @@ func runApp(t *testing.T) *exec.Cmd {
 	cmd.Stderr = &buf
 	asserts.NoError(t, cmd.Start())
 	t.Cleanup(func() {
-		_ = cmd.Process.Kill()
-		time.Sleep(500 * time.Millisecond)
+		_ = cmd.Process.Signal(syscall.SIGTERM)
+		_ = cmd.Wait()
 	})
-	time.Sleep(500 * time.Millisecond)
-	return cmd
+
+	timeout := time.After(5 * time.Second)
+	for {
+		select {
+		case <-timeout:
+			t.Fatalf("timeout, expected string not found: %s", buf.String())
+		default:
+			time.Sleep(10 * time.Millisecond)
+			if strings.Contains(buf.String(), "wait signal for interrupt") {
+				return cmd
+			}
+		}
+	}
 }
 
 func TestSmoke(t *testing.T) {
@@ -80,11 +90,30 @@ func TestSmoke(t *testing.T) {
 	// Action
 	runCMS(t, cfg, newMockCmsServer(t))
 	cmd := runApp(t)
-	stdout := (cmd.Stdout).(*bytes.Buffer).Bytes()
+	stdout := (cmd.Stdout).(*bytes.Buffer).String()
 
 	// Assert
-	asserts.Contains(t, string(stdout), "start ssr sub process")
-	asserts.Contains(t, string(stdout), "server started")
+	asserts.Contains(t, stdout, "start ssr sub process")
+	asserts.Contains(t, stdout, "server started")
+}
+
+func TestGracefulShutdown(t *testing.T) {
+	// Arrange
+	cfg, err := config.LoadConfiguration(testr.New(t).V(1), "config.cfg")
+	asserts.NoError(t, err)
+	runCMS(t, cfg, newMockCmsServer(t))
+	cmd := runApp(t)
+
+	// Action
+	err = cmd.Process.Signal(syscall.SIGTERM)
+	asserts.NoError(t, err)
+	err = cmd.Wait()
+	asserts.NoError(t, err)
+	stdout := (cmd.Stdout).(*bytes.Buffer).String()
+
+	// Assert
+	asserts.NotContains(t, stdout, "can't graceful shutdown app")
+	asserts.Contains(t, stdout, "finish graceful shutdown")
 }
 
 func Test_Pages(t *testing.T) {

@@ -2,7 +2,6 @@ package integration
 
 import (
 	"context"
-
 	"site/internal/external_api/cms/proto"
 )
 
@@ -15,4 +14,9 @@ type cmsServer interface {
 	ArticleListForQuery(context.Context, *proto.ArticleListForQueryRequest) (*proto.ArticleListResponse, error)
 	Article(context.Context, *proto.ArticleRequest) (*proto.ArticleResponse, error)
 	Asset(context.Context, *proto.AssetRequest) (*proto.AssetResponse, error)
+}
+
+type testCmsServer struct {
+	proto.UnsafeCMSServer
+	cmsServer
 }

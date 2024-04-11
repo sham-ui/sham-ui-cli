@@ -63,7 +63,7 @@
     "sham-ui-data-storage": "^3.0.0",
     "sham-ui-directives": "^6.0.0",
     "sham-ui-dynamic-component": "^3.0.0",
-    "sham-ui-router": "^6.0.0",
+    "sham-ui-router": "^6.1.0",
     "sham-ui-without-flush-loader": "^3.0.1",
     "suneditor": "^2.42.0",
     "systemjs": "^6.10.1"

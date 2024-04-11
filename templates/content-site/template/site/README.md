@@ -6,8 +6,8 @@
 1. Install [gvm](https://github.com/moovweb/gvm)
 2. Run 
    ```bash
-   gvm install go1.16
-   gvm use go1.16
+   gvm install go1.20.1
+   gvm use go1.20.1
    ```
 3. Go to `server` directory and run:
    ```bash

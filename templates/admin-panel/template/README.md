@@ -6,8 +6,8 @@
 1. Install [gvm](https://github.com/moovweb/gvm)
 2. Run 
    ```bash
-   gvm install go1.15.4
-   gvm use go1.15.4
+   gvm install go1.20.1
+   gvm use go1.20.1
    ```
 3. Go to `server` directory and run:
    ```bash
@@ -44,7 +44,7 @@ Create new linux user
 ```bash
 sudo adduser {{ shortName }}
 ```
-Copy `server/bin/linux_386/{{ shortName }}` to `/home/{{ shortName }}/{{ name }}/{{ shortName }}` on server
+Copy `server/bin/linux_amd64/app` to `/home/{{ shortName }}/{{ name }}/{{ shortName }}` on server
 
 Create DB & DB user:
 ```bash
