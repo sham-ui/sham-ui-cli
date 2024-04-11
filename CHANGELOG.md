@@ -1,4 +1,4 @@
-## master
+## 6.1.0
 * Refactoring content site backend
 * Refactoring admin panel backend
 * Update dependencies
