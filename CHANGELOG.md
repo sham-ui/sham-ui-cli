@@ -1,4 +1,4 @@
-## master
+## 6.1.1
 * Fix session name in admin panel template
 * Fix `goose_test_up` command in admin panel & content site tempaltes
 * Fix `install` command in content site template
