@@ -8,7 +8,13 @@ goose_dev:
 	docker run --rm -h={{ shortName }}-goose-dev -e GOOSE_DRIVER=postgres -e GOOSE_DBSTRING=${GOOSE_DEV} --net=host -u $(shell id -u ${USER}):$(shell id -g ${USER}) -v $(shell pwd):/server -it $(shell docker build -t {{ shortName }}-goose -f goose.Dockerfile -q .)
 
 goose_test_up:
-	docker run --rm -h={{ shortName }}-goose-test -e GOOSE_DRIVER=postgres -e GOOSE_DBSTRING=${GOOSE_TEST} --net=host -u $(shell id -u ${USER}):$(shell id -g ${USER}) -v $(shell pwd):/server -it $(shell docker build -t {{ shortName }}-goose -f goose.Dockerfile -q .) goose -dir /server/migrations up
+	docker run --rm -h={{ shortName }}-goose-test \
+		-e GOOSE_DRIVER=postgres \
+		-e GOOSE_DBSTRING=${GOOSE_TEST} \
+		--net=host \
+		-v $(shell pwd):/server \
+		-it $(shell docker build -t {{ shortName }}-goose -f goose.Dockerfile -q .) \
+		bash -c "cd /server/migrations && go build -o /goose-custom cmd/main.go && /goose-custom up /server/migrations"
 
 .ONESHELL:
 build_js:
