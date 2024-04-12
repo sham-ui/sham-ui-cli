@@ -15,7 +15,7 @@ import (
 const (
 	scopeName = "service.session"
 
-	sessionName = "cms-session"
+	sessionName = "{{ shortName }}-session"
 
 	sessionValueAuthenticated = "authenticated"
 	sessionValueMemberID      = "id"
