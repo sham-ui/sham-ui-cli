@@ -1,4 +1,4 @@
-## master
+## 6.1.2
 * Remove unused dir in content site template
 
 ## 6.1.1
